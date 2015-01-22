@@ -15,7 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Tests", "5.Tests", "{77E2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Utility", "Framework\Ucoin.Utility\Ucoin.Utility.csproj", "{5B31D7E9-F83F-465F-AA90-D25A580E5420}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.RightsManagement.AdminSite", "RightsManagement\Ucoin.RightsManagement.AdminSite\Ucoin.RightsManagement.AdminSite.csproj", "{9480618E-851E-42D9-B930-BD46C242C868}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.Docs", "6.Docs", "{72F1D296-FEB2-4DBC-B965-5DC68B6D6F95}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Site", "Authority\Ucoin.Authority.Site\Ucoin.Authority.Site.csproj", "{F405CFD7-515C-43AC-ABF7-01918373BDFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,15 +32,15 @@ Global
 		{5B31D7E9-F83F-465F-AA90-D25A580E5420}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B31D7E9-F83F-465F-AA90-D25A580E5420}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B31D7E9-F83F-465F-AA90-D25A580E5420}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9480618E-851E-42D9-B930-BD46C242C868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9480618E-851E-42D9-B930-BD46C242C868}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9480618E-851E-42D9-B930-BD46C242C868}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9480618E-851E-42D9-B930-BD46C242C868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F405CFD7-515C-43AC-ABF7-01918373BDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F405CFD7-515C-43AC-ABF7-01918373BDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F405CFD7-515C-43AC-ABF7-01918373BDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F405CFD7-515C-43AC-ABF7-01918373BDFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9480618E-851E-42D9-B930-BD46C242C868} = {39FB9E80-48DA-434D-B8FF-D7B27B5EFECF}
+		{F405CFD7-515C-43AC-ABF7-01918373BDFF} = {39FB9E80-48DA-434D-B8FF-D7B27B5EFECF}
 	EndGlobalSection
 EndGlobal

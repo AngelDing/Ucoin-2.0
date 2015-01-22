@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Ucoin.RightsManagement.AdminSite
+namespace Ucoin.Authority.Site
 {
     public class RouteConfig
     {

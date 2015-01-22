@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Ucoin.RightsManagement.AdminSite
+namespace Ucoin.Authority.Site
 {
     public class BundleConfig
     {

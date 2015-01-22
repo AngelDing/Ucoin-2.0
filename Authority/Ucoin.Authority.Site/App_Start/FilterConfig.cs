@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Ucoin.RightsManagement.AdminSite
+namespace Ucoin.Authority.Site
 {
     public class FilterConfig
     {
