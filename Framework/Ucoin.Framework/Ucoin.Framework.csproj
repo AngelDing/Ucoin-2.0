@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{536E2AC2-BE9C-4CD6-B64C-BF3A719594BE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ucoin.Framework</RootNamespace>
+    <AssemblyName>Ucoin.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompareObjects\Cache.cs" />
+    <Compile Include="CompareObjects\CompareParms.cs" />
+    <Compile Include="CompareObjects\ComparisonConfig.cs" />
+    <Compile Include="CompareObjects\ComparisonResult.cs" />
+    <Compile Include="CompareObjects\Difference.cs" />
+    <Compile Include="CompareObjects\Logic\CompareLogic.cs" />
+    <Compile Include="CompareObjects\Logic\ExcludeLogic.cs" />
+    <Compile Include="CompareObjects\Logic\ICompareLogic.cs" />
+    <Compile Include="CompareObjects\RootComparer.cs" />
+    <Compile Include="CompareObjects\RootComparerFactory.cs" />
+    <Compile Include="CompareObjects\TypeComparers\BaseComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\BaseTypeComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\ClassComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\EnumComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\EnumerableComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\EnumeratorComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\HashSetComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\ListComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\PropertyComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\SimpleTypeComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\StringComparer.cs" />
+    <Compile Include="CompareObjects\TypeComparers\TimespanComparer.cs" />
+    <Compile Include="CompareObjects\TypeHelper.cs" />
+    <Compile Include="Entities\BaseBusinessEntity.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="ValueObjects\BaseValueObject.cs" />
+    <Compile Include="BusinessRule.cs" />
+    <Compile Include="CompareAttribute.cs" />
+    <Compile Include="ValueObjects\DateTimeRange.cs" />
+    <Compile Include="DisposableObject.cs" />
+    <Compile Include="Entities\IAggregateRoot.cs" />
+    <Compile Include="Entities\IDeleteEntity.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\IObjectWithState.cs" />
+    <Compile Include="Entities\IOperateEntity.cs" />
+    <Compile Include="IValidate.cs" />
+    <Compile Include="ValueObjects\Money.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IReadOnlyRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IRepositoryContext.cs" />
+    <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\RepositoryContext.cs" />
+    <Compile Include="Specifications\AndSpecification.cs" />
+    <Compile Include="Specifications\Common\ExpressionBuilder.cs" />
+    <Compile Include="Specifications\Common\ParameterRebinder.cs" />
+    <Compile Include="Specifications\CompositeSpecification.cs" />
+    <Compile Include="Specifications\DirectSpecification.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="Specifications\NotSpecification.cs" />
+    <Compile Include="Specifications\OrSpecification.cs" />
+    <Compile Include="Specifications\Specification.cs" />
+    <Compile Include="Specifications\TrueSpecification.cs" />
+    <Compile Include="UcoinException.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
