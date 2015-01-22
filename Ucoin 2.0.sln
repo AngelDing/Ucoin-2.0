@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.UI", "1.UI", "{39FB9E80-48DA-434D-B8FF-D7B27B5EFECF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Framework", "4.Framework", "{93384C3E-A6B6-4191-A2F7-425D66DE2523}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Models", "2.Models", "{48F0621D-07E4-46BF-90BF-49CB85CF62D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Services", "3.Services", "{2C33AC00-0212-4FA8-818C-5B502BCB4EF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Tests", "5.Tests", "{77E2A99B-F19A-45D2-83A5-2FF165A85916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Utility", "Framework\Ucoin.Utility\Ucoin.Utility.csproj", "{5B31D7E9-F83F-465F-AA90-D25A580E5420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.RightsManagement.AdminSite", "RightsManagement\Ucoin.RightsManagement.AdminSite\Ucoin.RightsManagement.AdminSite.csproj", "{9480618E-851E-42D9-B930-BD46C242C868}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B31D7E9-F83F-465F-AA90-D25A580E5420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B31D7E9-F83F-465F-AA90-D25A580E5420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B31D7E9-F83F-465F-AA90-D25A580E5420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B31D7E9-F83F-465F-AA90-D25A580E5420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9480618E-851E-42D9-B930-BD46C242C868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9480618E-851E-42D9-B930-BD46C242C868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9480618E-851E-42D9-B930-BD46C242C868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9480618E-851E-42D9-B930-BD46C242C868}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9480618E-851E-42D9-B930-BD46C242C868} = {39FB9E80-48DA-434D-B8FF-D7B27B5EFECF}
+	EndGlobalSection
+EndGlobal
