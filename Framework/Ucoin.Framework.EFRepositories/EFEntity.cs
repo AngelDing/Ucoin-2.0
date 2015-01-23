@@ -6,6 +6,7 @@ namespace Ucoin.Framework.Entities
 {
     public class EFEntity<Tkey> : BaseEntity<Tkey>, IObjectWithState, IValidatableObject
     {
+        [CompareIgnore]
         public ObjectStateType State { get; set; }
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

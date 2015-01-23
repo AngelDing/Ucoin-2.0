@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Ucoin.Framework.Entities;
+
+namespace Ucoin.Framework.Test
+{
+    public class EFCustomer : EFEntity<Guid>, IAggregateRoot<Guid>
+    {
+        public string UserName { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Password { get; set; }
+
+        public EFAddress Address { get; set; }
+
+        public string Email { get; set; }
+
+        public int Sequence { get; set; }
+
+        public virtual ICollection<EFNote> Notes { get; set; }
+
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrEmpty(UserName))
+            {
+                yield return new ValidationResult("UserName must have a value", new[] { "UserName" });
+            }
+        }
+    }
+}

@@ -1,0 +1,131 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using Ucoin.Framework.Entities;
+
+namespace Ucoin.Framework.Test
+{
+    public class EFTestContext : DbContext
+    {
+        //设置标识，使用自定义的SaveChanges方法
+        public bool LogChangesDuringSave { get; set; } 
+        public EFTestContext()
+            : this(ConstHelper.EFTestDBName)
+        { 
+        }
+
+        public EFTestContext(string nameOrConnectionString)
+            : base(nameOrConnectionString)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += 
+                (sender, args) =>
+                {
+                    var entity = args.Entity as IObjectWithState;
+                    if (entity != null)
+                    {
+                        entity.State = ObjectStateType.Unchanged;
+                    }
+                };
+
+            //调用SaveChanges方法的时候不验证实体
+            Configuration.ValidateOnSaveEnabled = false; 
+
+            ////關閉策略，如果模型同數據庫不一致，會報錯，某些時候我們需要這些錯誤，好確定如何調整。
+            //Database.SetInitializer<EFTestContext>(null);
+        }
+
+        /// <summary>
+        /// 记录帮助类
+        /// </summary>
+        private void PrintPropertyValues(DbPropertyValues values, IEnumerable<string> propertiesToPrint, int indent = 1)
+        {
+            foreach (var propertyName in propertiesToPrint)
+            {
+                var value = values[propertyName];
+                if (value is DbPropertyValues)
+                {
+                    Console.WriteLine("{0}- Complex Property: {1}", string.Empty.PadLeft(indent), propertyName);
+                    var complexPropertyValues = (DbPropertyValues)value;
+                    PrintPropertyValues(complexPropertyValues, complexPropertyValues.PropertyNames, indent + 1);
+                }
+                else
+                {
+                    Console.WriteLine("{0}- {1}: {2}", string.Empty.PadLeft(indent), propertyName, values[propertyName]);
+                }
+            }
+        }
+        private IEnumerable<string> GetKeyPropertyNames(object entity)
+        {
+            var objectContext = ((IObjectContextAdapter)this).ObjectContext;
+            return objectContext.ObjectStateManager.GetObjectStateEntry(entity).EntityKey.EntityKeyValues.Select(k => k.Key);
+        }
+
+        /// <summary>
+        /// 重写SaveChanges方法
+        /// </summary>
+        public override int SaveChanges()
+        {
+            if (LogChangesDuringSave)
+            {
+                var entries = from e in this.ChangeTracker.Entries()
+                              where e.State != EntityState.Unchanged
+                              select e;   //过滤所有修改了的实体，包括：增加 / 修改 / 删除
+                foreach (var entry in entries)
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            Console.WriteLine("Adding a {0}", entry.Entity.GetType());
+                            PrintPropertyValues(entry.CurrentValues, entry.CurrentValues.PropertyNames);
+                            break;
+                        case EntityState.Deleted:
+                            Console.WriteLine("Deleting a {0}", entry.Entity.GetType());
+                            PrintPropertyValues(entry.OriginalValues, GetKeyPropertyNames(entry.Entity));
+                            break;
+                        case EntityState.Modified:
+                            Console.WriteLine("Modifying a {0}", entry.Entity.GetType());
+                            var modifiedPropertyNames = from n in entry.CurrentValues.PropertyNames
+                                                        where entry.Property(n).IsModified
+                                                        select n;
+                            PrintPropertyValues(entry.CurrentValues, GetKeyPropertyNames(entry.Entity).Concat(modifiedPropertyNames));
+                            break;
+                    }
+                }
+            }
+            return base.SaveChanges();  //返回普通的上下文SaveChanges方法
+        }
+
+        public DbSet<EFCustomer> Customers
+        {
+            get { return Set<EFCustomer>(); }
+        }
+
+        public DbSet<EFNote> Notes
+        {
+            get { return Set<EFNote>(); }
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();//移除复数表名的契约
+            modelBuilder.Entity<EFCustomer>().HasKey(p => p.Id);
+            modelBuilder.Entity<EFCustomer>().Property(
+                p => p.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<EFCustomer>().Property(t => t.Address.City).HasColumnName("City");
+            modelBuilder.Entity<EFCustomer>().Property(t => t.Address.Country).HasColumnName("Country");
+
+            modelBuilder.Entity<EFNote>().HasRequired(c => c.Customer)
+              .WithMany(t => t.Notes).Map(m => m.MapKey("CustomerId"));
+
+            modelBuilder.Entity<EFNote>().HasKey(p => p.Id);
+     
+            base.OnModelCreating(modelBuilder);
+        }
+    }
+}

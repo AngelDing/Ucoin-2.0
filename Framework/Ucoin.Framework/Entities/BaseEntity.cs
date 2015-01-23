@@ -2,6 +2,7 @@
 {
     public abstract class BaseEntity<TKey> : IEntity<TKey>
     {
+        [CompareKey]
         public TKey Id { get; set; }
 
         public override bool Equals(object entity)
@@ -16,8 +17,7 @@
             return this.Id.GetHashCode();
         }
 
-        public static bool operator ==(BaseEntity<TKey> entity1,
-           BaseEntity<TKey> entity2)
+        public static bool operator ==(BaseEntity<TKey> entity1, BaseEntity<TKey> entity2)
         {
             if ((object)entity1 == null && (object)entity2 == null)
             {
@@ -37,8 +37,7 @@
             return false;
         }
 
-        public static bool operator !=(BaseEntity<TKey> entity1,
-            BaseEntity<TKey> entity2)
+        public static bool operator !=(BaseEntity<TKey> entity1, BaseEntity<TKey> entity2)
         {
             return (!(entity1 == entity2));
         }

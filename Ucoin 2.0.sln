@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.MongoReposi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.MongoRepository.Test", "Test\Ucoin.MongoRepository.Test\Ucoin.MongoRepository.Test.csproj", "{CE7E8567-E322-4355-99C5-6D46F220C24F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Test", "Test\Ucoin.Framework.Test\Ucoin.Framework.Test.csproj", "{B79321E2-9C08-42C0-8B98-F868B8B995F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{CE7E8567-E322-4355-99C5-6D46F220C24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE7E8567-E322-4355-99C5-6D46F220C24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7E8567-E322-4355-99C5-6D46F220C24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B79321E2-9C08-42C0-8B98-F868B8B995F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79321E2-9C08-42C0-8B98-F868B8B995F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79321E2-9C08-42C0-8B98-F868B8B995F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79321E2-9C08-42C0-8B98-F868B8B995F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +81,6 @@ Global
 		{2F183B8A-997F-4999-8C70-60D55AB4B80A} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{3D2EA83D-9865-4FD7-97C6-60D60589D65D} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{CE7E8567-E322-4355-99C5-6D46F220C24F} = {77E2A99B-F19A-45D2-83A5-2FF165A85916}
+		{B79321E2-9C08-42C0-8B98-F868B8B995F0} = {77E2A99B-F19A-45D2-83A5-2FF165A85916}
 	EndGlobalSection
 EndGlobal
