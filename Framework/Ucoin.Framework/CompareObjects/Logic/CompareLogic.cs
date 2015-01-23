@@ -11,7 +11,13 @@ namespace Ucoin.Framework.CompareObjects
             Config = new ComparisonConfig();
         }
 
-        public ComparisonResult Compare(object object1, object object2)
+        /// <summary>
+        /// 將變更後的對象同之前的對象進行比較，得出不同之處
+        /// </summary>
+        /// <param name="newObj">新對象</param>
+        /// <param name="preObj">之前舊對象</param>
+        /// <returns></returns>
+        public ComparisonResult Compare(object newObj, object preObj)
         {
             var result = new ComparisonResult(Config);
             result.Watch.Start();
@@ -21,8 +27,8 @@ namespace Ucoin.Framework.CompareObjects
             {
                 Config = Config,
                 Result = result,
-                Object1 = object1,
-                Object2 = object2,
+                Object1 = newObj,
+                Object2 = preObj,
                 BreadCrumb = string.Empty
             };
             rootComparer.Compare(parms);

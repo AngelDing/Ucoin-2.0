@@ -1,5 +1,7 @@
-﻿namespace Ucoin.Framework.Entities
+﻿using System;
+namespace Ucoin.Framework.Entities
 {
+    [Serializable]
     public abstract class BaseEntity<TKey> : IEntity<TKey>
     {
         [CompareKey]

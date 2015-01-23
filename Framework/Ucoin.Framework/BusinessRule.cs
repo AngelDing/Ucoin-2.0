@@ -1,6 +1,8 @@
 ﻿
+using System;
 namespace Ucoin.Framework
 {
+    [Serializable]
     public class BusinessRule
     {
         public BusinessRule(string property, string rule)

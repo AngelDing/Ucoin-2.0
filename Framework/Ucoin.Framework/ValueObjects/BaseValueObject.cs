@@ -9,6 +9,7 @@ namespace Ucoin.Framework.ValueObjects
     /// <summary>
     /// DDD中值對象的基類
     /// </summary>
+    [Serializable]
     public abstract class BaseValueObject : IValidate
     {
         private List<BusinessRule> brokenRules = new List<BusinessRule>();

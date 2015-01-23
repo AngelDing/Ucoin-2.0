@@ -6,11 +6,19 @@ using Ucoin.Framework.EFRepository;
 
 namespace Ucoin.Framework.Test
 {
-    public class CustomerRepository : EFRepository<EFCustomer, Guid>, ICustomerRepository
+    public class CustomerRepository : EFRepository<EFCustomer, int>, ICustomerRepository
     {
         public CustomerRepository()
             : base(new EFRepositoryContext(new EFTestContext()))
         { 
+        }
+
+        public EFCustomer GetCustomFullInfo(int id)
+        {
+            var customer = DbContext.Set<EFCustomer>()
+                .Where(p => p.Id == id)
+                .Include(p => p.Notes).First();
+            return customer;
         }
 
         public EFCustomer GetCustomerByName(string name)

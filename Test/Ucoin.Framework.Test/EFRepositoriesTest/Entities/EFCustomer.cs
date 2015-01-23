@@ -5,7 +5,8 @@ using Ucoin.Framework.Entities;
 
 namespace Ucoin.Framework.Test
 {
-    public class EFCustomer : EFEntity<Guid>, IAggregateRoot<Guid>
+    [Serializable]
+    public class EFCustomer : EFEntity<int>, IAggregateRoot<int>
     {
         public string UserName { get; set; }
 

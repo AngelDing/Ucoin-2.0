@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 
 namespace Ucoin.Framework.Entities
 {
+    [Serializable]
     public class EFEntity<Tkey> : BaseEntity<Tkey>, IObjectWithState, IValidatableObject
     {
         [CompareIgnore]

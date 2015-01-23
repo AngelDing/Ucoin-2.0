@@ -33,7 +33,11 @@ namespace Ucoin.Framework.Test
                 };
 
             //调用SaveChanges方法的时候不验证实体
-            Configuration.ValidateOnSaveEnabled = false; 
+            Configuration.ValidateOnSaveEnabled = false;
+            //禁用延遲加載
+            this.Configuration.LazyLoadingEnabled = false;
+            //禁用代理對象
+            this.Configuration.ProxyCreationEnabled = false;   
 
             ////關閉策略，如果模型同數據庫不一致，會報錯，某些時候我們需要這些錯誤，好確定如何調整。
             //Database.SetInitializer<EFTestContext>(null);

@@ -46,6 +46,7 @@
     <Compile Include="EFHelper.cs" />
     <Compile Include="EFRepository.cs" />
     <Compile Include="EFRepositoryContext.cs" />
+    <Compile Include="IEFRepository.cs" />
     <Compile Include="IEFRepositoryContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

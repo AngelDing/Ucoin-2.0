@@ -1,7 +1,9 @@
-﻿using Ucoin.Framework.ValueObjects;
+﻿using System;
+using Ucoin.Framework.ValueObjects;
 
 namespace Ucoin.Framework.Test
 {
+    [Serializable]
     public class EFAddress : BaseValueObject
     {
         private string country;
@@ -84,7 +86,7 @@ namespace Ucoin.Framework.Test
         {
             return string.Format("{0} {1}, {2}, {3}, {4}", zip, street, city, state, country);
         }
-      
+
         public static bool operator ==(EFAddress a, EFAddress b)
         {
             if ((object)a == null)
@@ -93,7 +95,7 @@ namespace Ucoin.Framework.Test
             }
             return a.Equals(b);
         }
-       
+
         public static bool operator !=(EFAddress a, EFAddress b)
         {
             return !(a == b);

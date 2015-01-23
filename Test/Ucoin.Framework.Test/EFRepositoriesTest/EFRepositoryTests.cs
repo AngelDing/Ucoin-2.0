@@ -6,6 +6,8 @@ using System.Data.Entity;
 using Xunit;
 using FluentAssertions;
 using System.Collections.Generic;
+using Ucoin.Utility;
+using Ucoin.Framework.CompareObjects;
 
 namespace Ucoin.Framework.Test
 {
@@ -60,7 +62,7 @@ namespace Ucoin.Framework.Test
             }
             custList.Count.Should().Be(1);
             custList.First().UserName.Should().Be("daxnet");
-            custList.First().Id.Should().NotBe(Guid.Empty);
+            custList.First().Id.Should().BeGreaterThan(0);
 
             using (var newRepo = new CustomerRepository())
             {
@@ -128,7 +130,7 @@ namespace Ucoin.Framework.Test
             var allList = new List<EFCustomer>();
             var updateList = new List<EFCustomer>();
             var deleteList = new List<EFCustomer>();
-            var guid = Guid.Empty;
+            var cId = 0;
             bool isExists;
             using (var repo = new CustomerRepository())
             {
@@ -137,7 +139,7 @@ namespace Ucoin.Framework.Test
 
                 getByList = repo.GetBy(p => p.UserName.StartsWith("d") && p.Password != "dd").ToList();
                 allList = repo.GetAll().ToList();
-                guid = allList.Find(p => p.UserName == "dd").Id;
+                cId = allList.Find(p => p.UserName == "dd").Id;
 
                 foreach (var c in allList)
                 {
@@ -150,7 +152,7 @@ namespace Ucoin.Framework.Test
 
                 repo.Delete(customers[0]);
                 repo.Context.Commit();
-                repo.Delete(guid);
+                repo.Delete(cId);
                 repo.Context.Commit();
                 repo.Delete(p => p.Password == "bb");
                 repo.Context.Commit();
@@ -162,7 +164,7 @@ namespace Ucoin.Framework.Test
             allList.Count.Should().Be(5);
             foreach (var c in allList)
             {
-                c.Id.Should().NotBe(Guid.Empty);
+                c.Id.Should().BeGreaterThan(0);
             }
             foreach (var c in updateList)
             {
@@ -191,7 +193,31 @@ namespace Ucoin.Framework.Test
 
             custList.Count.Should().Be(1);
             custList.First().UserName.Should().Be("daxnet");
-            custList.First().Id.Should().NotBe(Guid.Empty);
+            custList.First().Id.Should().BeGreaterThan(0);
+        }
+
+        [Fact]
+        public void ef_update_by_auto_compare_test()
+        {
+            InsertNewCustomer();
+            var cInfo = new EFCustomer();
+            using (var repo = new CustomerRepository())
+            {
+                cInfo = repo.GetCustomFullInfo(1);
+            }
+
+            var updateInfo = cInfo.DeepCopy();
+            updateInfo.Email = "jacky@ucoin.com";
+            updateInfo.Notes.Add(new EFNote { NoteText = "CCCC"});
+            updateInfo.Notes.First().NoteText = "DDDD";
+
+            var result = new CompareLogic().Compare(updateInfo, cInfo);
+
+            using (var repo = new CustomerRepository())
+            {
+                repo.FullUpdate(updateInfo, result);
+                repo.Context.Commit();
+            }
         }
     }
 }
