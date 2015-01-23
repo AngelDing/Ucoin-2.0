@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using System;
+using Ucoin.Framework.Entities;
 
 namespace Ucoin.Framework.MongoRepository
 {
@@ -21,6 +22,33 @@ namespace Ucoin.Framework.MongoRepository
             {
                 this.collection = db.GetCollection<T>(collectionName);
             }
+            else
+            {
+                if (typeof(T).IsSubclassOf(typeof(BaseMongoEntity)))
+                {
+                    this.collection = db.GetCollection<T>(GetCollectionName());
+                }
+            }
+        }
+
+        private static string GetCollectionName()
+        {
+            string collectionName;
+            var att = Attribute.GetCustomAttribute(typeof(T), typeof(CollectionNameAttribute));
+            if (att != null)
+            {
+                collectionName = ((CollectionNameAttribute)att).Name;
+            }
+            else
+            {
+                collectionName = typeof(T).Name;
+            }
+
+            if (string.IsNullOrEmpty(collectionName))
+            {
+                throw new ArgumentException("Collection name cannot be empty for this entity");
+            }
+            return collectionName;
         }
 
         private MongoDatabase GetDatabaseFromUrl(MongoUrl url)

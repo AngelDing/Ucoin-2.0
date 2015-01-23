@@ -5,7 +5,7 @@ using System;
 namespace Ucoin.Framework.Entities
 {
     [CollectionName("IdentityEntity")]
-    public class IdentityEntity<T> : CommonMongoEntity
+    public class IdentityEntity<T> : StringKeyMongoEntity
     {
         public string Key
         {

@@ -20,7 +20,7 @@ namespace Ucoin.Framework.MongoRepository.IdGenerators
         public object GenerateId(object container, object document)
         {
             TKey id = default(TKey);
-            var collection = container as MongoCollection<TDocument>;
+            var collection = container as MongoCollection;
             if (null != collection)
             {
                 var mongoDB = collection.Database; 

@@ -7,7 +7,7 @@ using Ucoin.Framework.Entities;
 namespace Ucoin.Framework.Repositories
 {
     public abstract class Repository<T, TKey> : IRepository<T, TKey> 
-        where T : class, IAggregateRoot<TKey>
+        where T : IAggregateRoot<TKey>
     {
         private readonly IRepositoryContext context;
 

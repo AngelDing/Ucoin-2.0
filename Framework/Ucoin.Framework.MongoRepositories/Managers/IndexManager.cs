@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Ucoin.Framework.MongoRepository.Manager
 {
-    public class IndexManager<T> : BaseMongoDB<BsonDocument>, IIndexManager<BsonDocument> where T : class
+    public class IndexManager<T> : BaseMongoDB<T>, IIndexManager<T> where T : class
     {
         public IndexManager(string connectionString)
             : this(connectionString, null)

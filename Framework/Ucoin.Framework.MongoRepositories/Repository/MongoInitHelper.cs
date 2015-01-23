@@ -6,6 +6,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson;
 using Ucoin.Framework.Entities;
 using Ucoin.Framework.MongoRepository.Conventions;
+using Ucoin.Framework.MongoRepository.IdGenerators;
 
 namespace Ucoin.Framework.MongoRepository
 {
@@ -33,13 +34,27 @@ namespace Ucoin.Framework.MongoRepository
 
         private static void RegisterClassMap()
         {
-            BsonClassMap.RegisterClassMap<CommonMongoEntity>(rc =>
+            BsonClassMap.RegisterClassMap<StringKeyMongoEntity>(rc =>
             {
                 rc.AutoMap();
                 rc.SetIdMember(rc.GetMemberMap(c => c.Id));
                 rc.IdMemberMap.SetRepresentation(BsonType.ObjectId);
                 rc.IdMemberMap.SetIdGenerator(StringObjectIdGenerator.Instance);
-            });          
+            });
+
+            BsonClassMap.RegisterClassMap<LongKeyMongoEntity>(rc =>
+            {
+                rc.AutoMap();
+                rc.SetIdMember(rc.GetMemberMap(c => c.Id));
+                rc.IdMemberMap.SetIdGenerator(LongIdGenerator<LongKeyMongoEntity, long>.Instance);
+            });
+
+            BsonClassMap.RegisterClassMap<IntKeyMongoEntity>(rc =>
+            {
+                rc.AutoMap();
+                rc.SetIdMember(rc.GetMemberMap(c => c.Id));
+                rc.IdMemberMap.SetIdGenerator(LongIdGenerator<IntKeyMongoEntity, int>.Instance);
+            });
         }
 
         private static void RegisterConventions()

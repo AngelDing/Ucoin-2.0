@@ -4,7 +4,7 @@ using System;
 
 namespace Ucoin.Framework.Entities
 {
-    public class CommonMongoEntity : BaseMongoEntity, IEntity<string>
+    public class StringKeyMongoEntity : BaseMongoEntity, IAggregateRoot<string>
     {
         public string Id { get; set; }
     }

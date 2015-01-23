@@ -50,8 +50,10 @@
     <Compile Include="BaseMongoDB.cs" />
     <Compile Include="Entities\CollectionNameAttribute.cs" />
     <Compile Include="Entities\BaseMongoEntity.cs" />
-    <Compile Include="Entities\CommonMongoEntity.cs" />
+    <Compile Include="Entities\StringKeyMongoEntity.cs" />
     <Compile Include="Entities\IdentityEntity.cs" />
+    <Compile Include="Entities\IntKeyMongoEntity.cs" />
+    <Compile Include="Entities\LongKeyMongoEntity.cs" />
     <Compile Include="Managers\ConstHelper.cs" />
     <Compile Include="Managers\Contexts\BaseContext.cs" />
     <Compile Include="Managers\Contexts\DataContext.cs" />

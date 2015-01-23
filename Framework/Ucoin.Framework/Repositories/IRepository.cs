@@ -7,7 +7,7 @@ using Ucoin.Framework.Entities;
 namespace Ucoin.Framework.Repositories
 {
     public interface IRepository<T, TKey> : IReadOnlyRepository<T, TKey>, IDisposable 
-        where T : class, IAggregateRoot<TKey>
+        where T : IAggregateRoot<TKey>
     {
         IRepositoryContext Context { get; }
 

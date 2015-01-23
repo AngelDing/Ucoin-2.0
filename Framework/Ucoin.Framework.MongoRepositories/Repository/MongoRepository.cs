@@ -8,56 +8,37 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Ucoin.Framework.Entities;
 using Ucoin.Framework.Specifications;
+using Ucoin.Framework.Repositories;
 
 namespace Ucoin.Framework.MongoRepository
 {
-    /// <summary>
-    /// 由于MongoDB暂不支持事务，且大部分操作是原子性的，故暂不实现UnitOfWork模式
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class MongoRepository<T, TKey> : BaseMongoDB<T>, IMongoRepository<T, TKey>
-        where T : BaseMongoEntity, IEntity<TKey>
+        where T : BaseMongoEntity, IAggregateRoot<TKey>
     {
         //public WriteConcern MongoWriteConcern { get; set; }
 
         public MongoRepository(string connectionString)
-            : base(connectionString, GetCollectionName())
+            : base(connectionString)
         {
         }
 
-        private static string GetCollectionName()
-        {
-            string collectionName;
-            var att = Attribute.GetCustomAttribute(typeof(T), typeof(CollectionNameAttribute));
-            if (att != null)
-            {
-                collectionName = ((CollectionNameAttribute)att).Name;
-            }
-            else
-            {
-                collectionName = typeof(T).Name;
-            }
+        #region IRepositoryContext
 
-            if (string.IsNullOrEmpty(collectionName))
-            {
-                throw new ArgumentException("Collection name cannot be empty for this entity");
-            }
-            return collectionName;
+        /// <summary>
+        /// 由于MongoDB暂不支持事务，且大部分操作是原子性的，故暂不实现UnitOfWork模式
+        /// </summary>
+        public IRepositoryContext Context
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public IQueryable<T> CollectionQueryable
-        {
-            get
-            {
-                return this.Collection.AsQueryable<T>();
-            }
-        }
+        #endregion
 
         #region IReadOnlyRepository
 
         public T GetByKey(TKey id)
         {
-            if (typeof(T).IsSubclassOf(typeof(CommonMongoEntity)))
+            if (typeof(T).IsSubclassOf(typeof(StringKeyMongoEntity)))
             {
                 return this.GetById(new ObjectId(id as string));
             }
@@ -114,7 +95,7 @@ namespace Ucoin.Framework.MongoRepository
 
         public void Delete(TKey id)
         {
-            if (typeof(T).IsSubclassOf(typeof(CommonMongoEntity)))
+            if (typeof(T).IsSubclassOf(typeof(StringKeyMongoEntity)))
             {
                 this.Collection.Remove(Query.EQ("_id", new ObjectId(id as string)));
             }
@@ -147,6 +128,14 @@ namespace Ucoin.Framework.MongoRepository
 
         #region IMongoRepository
 
+        public IQueryable<T> CollectionQueryable
+        {
+            get
+            {
+                return this.Collection.AsQueryable<T>();
+            }
+        }
+
         public void Update(Expression<Func<T, bool>> query, Dictionary<string, object> columnValues)
         {
             if (columnValues == null || columnValues.Count == 0)
@@ -170,7 +159,14 @@ namespace Ucoin.Framework.MongoRepository
             this.Collection.RemoveAll();
         }
 
-        #endregion
+        #endregion             
+
+        #region IDispose
+
+        public void Dispose()
+        {
+            this.Dispose(false);
+        }
 
         /// <summary>
         /// 顯式釋放MongoDB的鏈接，默認不釋放
@@ -189,5 +185,7 @@ namespace Ucoin.Framework.MongoRepository
             //just let the driver take care of the connections (calling Connect is harmless, 
             //but calling Disconnect is bad because it closes all the connections in the connection pool).
         }
+
+        #endregion
     }
 }

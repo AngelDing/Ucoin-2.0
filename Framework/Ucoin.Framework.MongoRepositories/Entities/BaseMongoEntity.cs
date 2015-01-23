@@ -36,7 +36,9 @@ namespace Ucoin.Framework.Entities
             {
                 MemberExpression memberExpression = (MemberExpression)body;
                 var baseType = memberExpression.Type.BaseType;
-                if (baseType == typeof(BaseMongoEntity) || baseType == typeof(CommonMongoEntity))
+                if (baseType == typeof(IntKeyMongoEntity)
+                    || baseType == typeof(StringKeyMongoEntity)
+                    || baseType == typeof(LongKeyMongoEntity))
                 {
                     break;
                 }
@@ -55,6 +57,6 @@ namespace Ucoin.Framework.Entities
 
             keys.Reverse();
             return string.Join(".", keys.ToArray());
-        }
+        }       
     }
 }
