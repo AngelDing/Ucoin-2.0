@@ -56,8 +56,10 @@
     <Compile Include="CompareObjects\TypeComparers\StringComparer.cs" />
     <Compile Include="CompareObjects\TypeComparers\TimespanComparer.cs" />
     <Compile Include="CompareObjects\TypeHelper.cs" />
-    <Compile Include="Entities\BaseBusinessEntity.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\IBusinessEntity.cs" />
+    <Compile Include="Entities\IPartialUpdateEntity.cs" />
+    <Compile Include="Repositories\RepositoryContext.cs" />
     <Compile Include="ValueObjects\BaseValueObject.cs" />
     <Compile Include="BusinessRule.cs" />
     <Compile Include="CompareAttribute.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Repositories\IRepositoryContext.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Repositories\RepositoryContext.cs" />
     <Compile Include="Specifications\AndSpecification.cs" />
     <Compile Include="Specifications\Common\ExpressionBuilder.cs" />
     <Compile Include="Specifications\Common\ParameterRebinder.cs" />

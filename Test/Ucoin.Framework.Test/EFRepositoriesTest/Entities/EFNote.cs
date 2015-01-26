@@ -8,6 +8,8 @@ namespace Ucoin.Framework.Test
     {
         public string NoteText { get; set; }
 
+        public int CustomerId { get; set; }
+
         public EFCustomer Customer { get; set; }
     }
 }

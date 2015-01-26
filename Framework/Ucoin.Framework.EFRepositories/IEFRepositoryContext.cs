@@ -5,6 +5,6 @@ namespace Ucoin.Framework.EFRepository
 {
     public interface IEFRepositoryContext : IRepositoryContext
     {
-        DbContext Context { get; }
+        DbContext DbContext { get; }
     }
 }

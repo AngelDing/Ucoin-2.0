@@ -9,7 +9,7 @@ namespace Ucoin.Framework.Repositories
     public interface IRepository<T, TKey> : IReadOnlyRepository<T, TKey>, IDisposable 
         where T : IAggregateRoot<TKey>
     {
-        IRepositoryContext Context { get; }
+        IRepositoryContext RepoContext { get; }
 
         void Insert(T entity);
 

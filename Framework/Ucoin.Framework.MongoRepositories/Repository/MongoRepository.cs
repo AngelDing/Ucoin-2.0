@@ -27,7 +27,7 @@ namespace Ucoin.Framework.MongoRepository
         /// <summary>
         /// 由于MongoDB暂不支持事务，且大部分操作是原子性的，故暂不实现UnitOfWork模式
         /// </summary>
-        public IRepositoryContext Context
+        public IRepositoryContext RepoContext
         {
             get { throw new NotImplementedException(); }
         }

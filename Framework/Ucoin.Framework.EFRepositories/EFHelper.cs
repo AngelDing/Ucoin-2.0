@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Data.Entity;
 using Ucoin.Framework.Entities;
+using System.Data.Entity.Infrastructure;
 
 namespace Ucoin.Framework.EFRepository
 {
@@ -12,21 +13,33 @@ namespace Ucoin.Framework.EFRepository
         /// </summary>
         /// <typeparam name="TEntity">要操作的实体</typeparam>
         /// <param name="root">根实体</param>
-        private static void ApplyChanges<TEntity>(DbContext context, TEntity root) 
-            where TEntity : class, IObjectWithState
+        public static void ApplyChanges<TEntity>(this DbContext context, TEntity root)
+            where TEntity : BaseEntity
         {
-            using (context)
+            context.Set<TEntity>().Add(root);
+            CheckForEntitiesWithoutStateInterface(context);
+
+            foreach (var entry in context.ChangeTracker.Entries<IObjectWithState>())
             {
-                context.Set<TEntity>().Add(root);
+                var stateInfo = entry.Entity;
+                entry.State = ConvertState(stateInfo.State);
+            }
 
-                CheckForEntitiesWithoutStateInterface(context);   
-
-                foreach (var entry in context.ChangeTracker.Entries<IObjectWithState>())
+            foreach (var entry in context.ChangeTracker.Entries<BaseEntity>())
+            {
+                var entity = entry.Entity;
+                if (entity.IsPartialUpdate)
                 {
-                    var stateInfo = entry.Entity;
-                    entry.State = ConvertState(stateInfo.State);
+                    var type = entity.GetType();
+                    context.Set(type).Attach(entity);
+                    var puEntry = ((IObjectContextAdapter)context).ObjectContext.
+                        ObjectStateManager.GetObjectStateEntry(entity);
+
+                    foreach (var prop in entity.NeedUpdateList.Keys)
+                    {
+                        puEntry.SetModifiedProperty(prop);
+                    }
                 }
-                context.SaveChanges();
             }
         }
 

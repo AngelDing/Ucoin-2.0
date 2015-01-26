@@ -9,23 +9,23 @@ namespace Ucoin.Framework.Repositories
     public abstract class Repository<T, TKey> : IRepository<T, TKey> 
         where T : IAggregateRoot<TKey>
     {
-        private readonly IRepositoryContext context;
+        private readonly IRepositoryContext repoContext;
 
         public Repository(IRepositoryContext context)
         {
-            this.context = context;
+            this.repoContext = context;
         }
 
-        public IRepositoryContext Context
+        public IRepositoryContext RepoContext
         {
-            get { return context; }
+            get { return repoContext; }
         }
 
         #region Abstract Methods
 
         public virtual void Dispose()
         {
-            context.Dispose();
+            repoContext.Dispose();
         }
 
         protected abstract void DoInsert(T entity);

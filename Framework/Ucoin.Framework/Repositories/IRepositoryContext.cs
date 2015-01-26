@@ -1,13 +1,14 @@
 ﻿using System;
+using Ucoin.Framework.Entities;
 
 namespace Ucoin.Framework.Repositories
 {
-    public interface IRepositoryContext : IUnitOfWork, IDisposable
+    public interface IRepositoryContext : IUnitOfWork, IDisposable 
     {
-        void RegisterNew(object obj);
+        void RegisterNew<T>(T entity) where T : BaseEntity;
 
-        void RegisterModified(object obj);
+        void RegisterModified<T>(T entity) where T : BaseEntity;
 
-        void RegisterDeleted(object obj);
+        void RegisterDeleted<T>(T entity) where T : BaseEntity;
     }
 }

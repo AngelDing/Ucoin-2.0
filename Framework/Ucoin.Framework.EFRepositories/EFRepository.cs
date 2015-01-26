@@ -11,22 +11,10 @@ using Ucoin.Framework.CompareObjects;
 namespace Ucoin.Framework.EFRepository
 {
     public class EFRepository<T, Tkey> : Repository<T, Tkey>, IEFRepository<T, Tkey>
-        where T : class, IAggregateRoot<Tkey>
+        where T : EFEntity<Tkey>, IAggregateRoot<Tkey>
     {
         private readonly IEFRepositoryContext efContext;
-        private readonly DbContext db;
-
-        public DbContext DbContext
-        {
-            get
-            {
-                if (db == null)
-                {
-                    throw new ArgumentException("DbContext should not be null!");
-                }
-                return db;
-            }
-        }
+        private readonly DbContext db;       
 
         public EFRepository(IRepositoryContext context)
             : base(context)
@@ -34,9 +22,11 @@ namespace Ucoin.Framework.EFRepository
             if (context is IEFRepositoryContext)
             {
                 this.efContext = context as IEFRepositoryContext;
-                this.db = efContext.Context;
+                this.db = efContext.DbContext;
             }
         }
+
+        #region IRepository
 
         protected override void DoInsert(T entity)
         {
@@ -90,9 +80,13 @@ namespace Ucoin.Framework.EFRepository
             return count != 0;
         }
 
+        #endregion
+
+        #region IReadOnlyRepository
+
         protected override T DoGetByKey(Tkey key)
         {
-            return GetSet().Where(p => (object)p.Id == (object)key).First();
+            return GetSet().FirstOrDefault(p => (object)p.Id == (object)key);
         }
 
         protected override IEnumerable<T> DoGetAll()
@@ -104,14 +98,26 @@ namespace Ucoin.Framework.EFRepository
         {
             return GetSet().Where(predicate);
         }
+
         protected override IEnumerable<T> DoGetBy(ISpecification<T> spec)
         {
             return GetSet().Where(spec.SatisfiedBy());
         }
 
-        private IDbSet<T> GetSet()
+        #endregion
+
+        #region IEFRepository
+
+        public DbContext DbContext
         {
-            return efContext.Context.Set<T>();
+            get
+            {
+                if (db == null)
+                {
+                    throw new ArgumentException("DbContext should not be null!");
+                }
+                return db;
+            }
         }
 
         /// <summary>
@@ -144,6 +150,13 @@ namespace Ucoin.Framework.EFRepository
                     this.DbContext.Entry(e).State = EntityState.Modified;
                 }
             }
+        }
+
+        #endregion 
+
+        private IDbSet<T> GetSet()
+        {
+            return efContext.DbContext.Set<T>();
         }
     }
 }

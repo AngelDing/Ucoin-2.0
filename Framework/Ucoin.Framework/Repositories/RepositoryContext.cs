@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Ucoin.Framework.Entities;
 
 namespace Ucoin.Framework.Repositories
 {
     public abstract class RepositoryContext : DisposableObject, IRepositoryContext
     {
-        private readonly ThreadLocal<List<object>> localNewCollection = new ThreadLocal<List<object>>(() => new List<object>());
-        private readonly ThreadLocal<List<object>> localModifiedCollection = new ThreadLocal<List<object>>(() => new List<object>());
-        private readonly ThreadLocal<List<object>> localDeletedCollection = new ThreadLocal<List<object>>(() => new List<object>());
+        private readonly ThreadLocal<List<IEntity>> localNewCollection = new ThreadLocal<List<IEntity>>(() => new List<IEntity>());
+        private readonly ThreadLocal<List<IEntity>> localModifiedCollection = new ThreadLocal<List<IEntity>>(() => new List<IEntity>());
+        private readonly ThreadLocal<List<IEntity>> localDeletedCollection = new ThreadLocal<List<IEntity>>(() => new List<IEntity>());
 
         protected IEnumerable<object> NewCollection
         {
@@ -42,12 +43,12 @@ namespace Ucoin.Framework.Repositories
             }
         }
 
-        public virtual void RegisterNew(object obj)
+        public virtual void RegisterNew<T>(T obj) where T : BaseEntity
         {
             localNewCollection.Value.Add(obj);
         }
 
-        public virtual void RegisterModified(object obj)
+        public virtual void RegisterModified<T>(T obj) where T : BaseEntity
         {
             if (localDeletedCollection.Value.Contains(obj))
             {
@@ -60,7 +61,7 @@ namespace Ucoin.Framework.Repositories
             }
         }
 
-        public virtual void RegisterDeleted(object obj)
+        public virtual void RegisterDeleted<T>(T obj) where T : BaseEntity
         {
             if (localNewCollection.Value.Contains(obj))
             {

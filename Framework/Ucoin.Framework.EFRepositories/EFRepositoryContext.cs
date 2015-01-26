@@ -5,47 +5,48 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Text;
 using Ucoin.Framework.Repositories;
+using Ucoin.Framework.Entities;
 
 namespace Ucoin.Framework.EFRepository
 {
     public class EFRepositoryContext : RepositoryContext, IEFRepositoryContext
     {
-        private readonly DbContext efContext;
+        private readonly DbContext dbContext;
 
-        public EFRepositoryContext(DbContext efContext)
+        public EFRepositoryContext(DbContext dbContext)
         {
-            this.efContext = efContext;
+            this.dbContext = dbContext;
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                efContext.Dispose();
+                dbContext.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        public DbContext Context
+        public DbContext DbContext
         {
-            get { return this.efContext; }
+            get { return this.dbContext; }
         }
 
         #region IRepositoryContext Members
 
-        public override void RegisterNew(object obj)
+        public override void RegisterNew<T>(T obj)
         {
-            this.efContext.Entry(obj).State = EntityState.Added;
+            this.dbContext.Entry(obj).State = EntityState.Added;
         }
 
-        public override void RegisterModified(object obj)
-        {
-            this.efContext.Entry(obj).State = EntityState.Modified;
+        public override void RegisterModified<T>(T obj)
+        {            
+            this.dbContext.ApplyChanges(obj);
         }
 
-        public override void RegisterDeleted(object obj)
+        public override void RegisterDeleted<T>(T obj)
         {
-            this.efContext.Entry(obj).State = EntityState.Deleted;
+            this.dbContext.Entry(obj).State = EntityState.Deleted;
         }
 
         #endregion
@@ -56,7 +57,7 @@ namespace Ucoin.Framework.EFRepository
         {
             //此處手動進行相關邏輯的校驗，故需要全局關閉SaveChanges時自動的校驗：
             //Configuration.ValidateOnSaveEnabled = false;
-            var errors = efContext.GetValidationErrors();
+            var errors = dbContext.GetValidationErrors();
 
             if (errors.Any())
             {
@@ -64,7 +65,7 @@ namespace Ucoin.Framework.EFRepository
                 throw new EFRepositoryException(errorMsgs);
             }
 
-            efContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         private string GetErrors(IEnumerable<DbEntityValidationResult> results)
