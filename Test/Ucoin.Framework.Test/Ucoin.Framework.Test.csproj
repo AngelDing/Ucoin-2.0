@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="xunit">
@@ -89,6 +90,17 @@
     <Compile Include="EFRepositoriesTest\Repositories\ICustomerRepository.cs" />
     <Compile Include="EFRepositoriesTest\TableInheritance\SchoolContext.cs" />
     <Compile Include="EFRepositoriesTest\TableInheritance\TableInheritanceTest.cs" />
+    <Compile Include="ObjectMapper\BusinessModel\Order.cs" />
+    <Compile Include="ObjectMapper\BusinessModel\OrderItem.cs" />
+    <Compile Include="ObjectMapper\BusinessModel\ReadOnlyRoleCollection.cs" />
+    <Compile Include="ObjectMapper\BusinessModel\Role.cs" />
+    <Compile Include="ObjectMapper\BusinessModel\RoleCollection.cs" />
+    <Compile Include="ObjectMapper\ConverterTest.cs" />
+    <Compile Include="ObjectMapper\DataModel\OrderEntity.cs" />
+    <Compile Include="ObjectMapper\DataModel\OrderItemEntity.cs" />
+    <Compile Include="ObjectMapper\DataModel\RoleEntity.cs" />
+    <Compile Include="ObjectMapper\Helper.cs" />
+    <Compile Include="ObjectMapper\MapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
