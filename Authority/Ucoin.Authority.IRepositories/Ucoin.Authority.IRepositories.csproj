@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1425A984-4B1D-40F4-A4E0-1757B7E6E506}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ucoin.Authority.IRepositories</RootNamespace>
+    <AssemblyName>Ucoin.Authority.IRepositories</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IGroupRepositroy.cs" />
+    <Compile Include="IResourceRepositroy.cs" />
+    <Compile Include="IDelegateRepositroy.cs" />
+    <Compile Include="IRoleRepositroy.cs" />
+    <Compile Include="IUserRepositroy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.EFRepository.csproj">
+      <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
+      <Name>Ucoin.Framework.EFRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Authority.Entities\Ucoin.Authority.Entities.csproj">
+      <Project>{9cd0a57a-8705-4074-9c00-7bf54bda882a}</Project>
+      <Name>Ucoin.Authority.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

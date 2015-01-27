@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{032F3EB8-F1EB-4D5A-B393-97E30B3AE1E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ucoin.Authority.Repositories</RootNamespace>
+    <AssemblyName>Ucoin.Authority.Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DelegateRepositroy.cs" />
+    <Compile Include="GroupRepositroy.cs" />
+    <Compile Include="ResourceRepositroy.cs" />
+    <Compile Include="RoleRepositroy.cs" />
+    <Compile Include="UserRepositroy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.EFRepository.csproj">
+      <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
+      <Name>Ucoin.Framework.EFRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Authority.EFData\Ucoin.Authority.EFData.csproj">
+      <Project>{1523b79a-6760-4ec4-9518-8e6279720be9}</Project>
+      <Name>Ucoin.Authority.EFData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Authority.Entities\Ucoin.Authority.Entities.csproj">
+      <Project>{9cd0a57a-8705-4074-9c00-7bf54bda882a}</Project>
+      <Name>Ucoin.Authority.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Authority.IRepositories\Ucoin.Authority.IRepositories.csproj">
+      <Project>{1425a984-4b1d-40f4-a4e0-1757b7e6e506}</Project>
+      <Name>Ucoin.Authority.IRepositories</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
