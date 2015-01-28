@@ -9,11 +9,17 @@ namespace Ucoin.Framework.Entities
     public abstract class BaseEntity : IEntity, IPartialUpdateEntity
     {
         private Dictionary<string, object> updateList = new Dictionary<string, object>();
+        [CompareIgnore]
         public Dictionary<string, object> NeedUpdateList
         {
             get
             {
                 return updateList;
+            }
+            set
+            {
+                //用於自動比較后的指定字段更新
+                updateList = value;
             }
         }
 
@@ -38,13 +44,30 @@ namespace Ucoin.Framework.Entities
             var propStr = GetUpdateKey(express);
 
             updateList.Add(propStr, val);
+            //用於EF的局部更新，此方法不影響MongoDB的局部更新
+            SetPropertyValue(this, propStr, val);
+        }
 
-            var type = this.GetType();
-            var pd = TypeDescriptor.GetProperties(type).Cast<PropertyDescriptor>()
-                .Where(i => i.DisplayName == propStr).FirstOrDefault();
-            if (pd != null)
+        /// <summary>
+        /// 根據屬性字符串獲取PropertyDescriptor實例，如果傳入的是值對象的屬性，需要先找到值對象，再找到屬性對象
+        /// </summary>
+        /// <param name="type">類型</param>
+        /// <param name="propStr">屬性字符串，默認是實體的屬性，如果傳入的是值對象的屬性，需按以下格式傳入：值對象類名.屬性名</param>
+        /// <param name="val">要賦予的值</param>
+        private void SetPropertyValue(object data, string propStr, object val)
+        {
+            var pdStrList = propStr.Split('.');
+            var type = data.GetType();
+            var pdList = TypeDescriptor.GetProperties(type).Cast<PropertyDescriptor>().ToList();
+            var pd = pdList.Where(i => i.DisplayName == pdStrList[0]).FirstOrDefault();
+            if (pdStrList.Length == 1)
             {
-                pd.SetValue(this, val);
+                pd.SetValue(data, val);
+            }
+            else
+            {
+                var childData = pd.GetValue(data);
+                SetPropertyValue(childData, pdStrList[1], val);
             }
         }
 

@@ -18,7 +18,7 @@
             {
                 base.AddBrokenRule(MoneyBusinessRules.CurrencyISOCodeError);
             }
-            //TODO:判斷currency是否是系統支持的三字碼
+            //TODO: 判斷currency是否是系統支持的三字碼
         }
     }
 

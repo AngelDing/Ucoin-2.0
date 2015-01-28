@@ -37,7 +37,10 @@ namespace Ucoin.Framework.EFRepository
 
                     foreach (var prop in entity.NeedUpdateList.Keys)
                     {
-                        puEntry.SetModifiedProperty(prop);
+                        var pList = prop.Split('.');
+                        //指定屬性更新，如果屬性是值對象，則會更新整個值對象對應的字段
+                        //TODO: 是否有方法可以更新指定值對象的指定字段值？
+                        puEntry.SetModifiedProperty(pList[0]);
                     }
                 }
             }

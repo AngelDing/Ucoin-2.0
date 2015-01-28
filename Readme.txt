@@ -25,3 +25,4 @@ https://objectmapper.codeplex.com/
 4. Ucoin.Framework.ServiceLocator爲什麽要獨立成一個項目？
    -》之前也想放在Ucoin.Framework項目中，但是默認實現是基於Unity的，這樣Ucoin.Framework需要引用第三的Unity組件，爲了保持Ucoin.Framework
    的公用性，最好不要引用第三方組件，如果ServiceLocator實現依賴于其他的IOC組件，則需要添加更多的第三方組件，故獨立出一個單獨的項目。
+

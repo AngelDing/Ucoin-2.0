@@ -43,16 +43,31 @@ namespace Ucoin.Framework.Entities
         /// <returns></returns>
         public override string GetUpdateKey(LambdaExpression expression)
         {
-            var prop = string.Empty;
+            var keys = new List<string>();
             var body = expression.Body;
-           
-            if (body != null)
+            while (body.NodeType == ExpressionType.MemberAccess)
             {
                 MemberExpression memberExpression = (MemberExpression)body;
-                prop = memberExpression.Member.Name;
+                var baseType = memberExpression.Type.BaseType;
+                if (baseType == this.GetType().BaseType)
+                {
+                    break;
+                }
+                keys.Add(memberExpression.Member.Name);
+
+                var insideExpress = memberExpression.Expression;
+                if (insideExpress != null && insideExpress.NodeType == ExpressionType.MemberAccess)
+                {
+                    body = insideExpress;
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            return prop;
+            keys.Reverse();
+            return string.Join(".", keys.ToArray());
         }
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

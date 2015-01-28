@@ -59,7 +59,6 @@ namespace Ucoin.Framework.Test
             using (var newRepo = new CustomerRepository())
             {
                 custList = newRepo.GetAll().ToList();
-                custList.First().Notes.First().NoteText.Should().Be("AA");    //延遲加載
             }
             custList.Count.Should().Be(1);
             custList.First().UserName.Should().Be("daxnet");
@@ -150,7 +149,8 @@ namespace Ucoin.Framework.Test
 
                 foreach (var c in allList)
                 {
-                    c.UserName = c.UserName + "123";
+                    //c.UserName = c.UserName + "123";
+                    c.SetUpdate(() => c.UserName, c.UserName + "123");
                 }
                 repo.Update(allList);
                 repo.RepoContext.Commit();
@@ -216,8 +216,13 @@ namespace Ucoin.Framework.Test
 
             var updateInfo = cInfo.DeepCopy();
             updateInfo.Email = "jacky@ucoin.com";
-            updateInfo.Notes.Add(new EFNote { NoteText = "CCCC"});
+            updateInfo.Phone = null;
+            updateInfo.Address.City = "SZ";
             updateInfo.Notes.First().NoteText = "DDDD";
+            var newNotes = updateInfo.Notes.ToList();
+            newNotes.RemoveAll(p => p.Id == 2);
+            updateInfo.Notes = newNotes;
+            updateInfo.Notes.Add(new EFNote { NoteText = "CCCC" });
 
             var result = new CompareLogic().Compare(updateInfo, cInfo);
 
@@ -226,7 +231,51 @@ namespace Ucoin.Framework.Test
                 repo.FullUpdate(updateInfo, result);
                 repo.RepoContext.Commit();
             }
+            using (var repo = new CustomerRepository())
+            {
+                var newInfo = repo.GetCustomFullInfo(1);
+                newInfo.Email.Should().Be("jacky@ucoin.com");
+                newInfo.Notes.Count().Should().Be(2);
+            }
         }
+
+        [Fact]
+        public void ef_update_by_auto_compare_by_list_test()
+        {
+            //InsertNewCustomer();
+            //InsertNewCustomer();
+
+            //var cInfo = new EFCustomer();
+            //using (var repo = new CustomerRepository())
+            //{
+            //    cInfo = repo.GetCustomFullInfo(1);
+            //}
+
+            //var updateInfo = cInfo.DeepCopy();
+            //updateInfo.Email = "jacky@ucoin.com";
+            //updateInfo.Phone = null;
+            //updateInfo.Address.City = "SZ";
+            //updateInfo.Notes.First().NoteText = "DDDD";
+            //var newNotes = updateInfo.Notes.ToList();
+            //newNotes.RemoveAll(p => p.Id == 2);
+            //updateInfo.Notes = newNotes;
+            //updateInfo.Notes.Add(new EFNote { NoteText = "CCCC" });
+
+            //var result = new CompareLogic().Compare(updateInfo, cInfo);
+
+            //using (var repo = new CustomerRepository())
+            //{
+            //    repo.FullUpdate(updateInfo, result);
+            //    repo.RepoContext.Commit();
+            //}
+            //using (var repo = new CustomerRepository())
+            //{
+            //    var newInfo = repo.GetCustomFullInfo(1);
+            //    newInfo.Email.Should().Be("jacky@ucoin.com");
+            //    newInfo.Notes.Count().Should().Be(2);
+            //}
+        }
+
 
         [Fact]
         public void ef_update_by_manual_compare_test()
@@ -239,6 +288,8 @@ namespace Ucoin.Framework.Test
             }
 
             cInfo.Email = "jacky@ucoin.com";
+            cInfo.Address.City = "SZ";
+            cInfo.Address.Zip = "000000000";
             cInfo.State = ObjectStateType.Modified;
             cInfo.Notes.First().NoteText = "DDDD";
             cInfo.Notes.First().State = ObjectStateType.Modified;
@@ -256,6 +307,9 @@ namespace Ucoin.Framework.Test
                 cInfo = repo.GetCustomFullInfo(1);
             }
             cInfo.Email.Should().Be("jacky@ucoin.com");
+            var address = cInfo.Address;
+            address.City.Should().Be("SZ");
+            address.Zip.Should().Be("000000000");
             cInfo.Notes.Count.Should().Be(2);
             cInfo.Notes.Last().NoteText.Should().Be("CCCC");
             cInfo.Notes.First().NoteText.Should().Be("DDDD");
@@ -271,7 +325,10 @@ namespace Ucoin.Framework.Test
                 cInfo = repo.GetCustomFullInfo(1);
             }
 
+            cInfo.SetUpdate(() => cInfo.Address.City, "SZ");
+            cInfo.SetUpdate(() => cInfo.Address.Zip, "000000000");
             cInfo.SetUpdate(() => cInfo.Email, "jacky@ucoin.com");
+            
             var firstNote = cInfo.Notes.First();
             firstNote.SetUpdate(() => firstNote.NoteText, "DDDD");
             
@@ -286,6 +343,9 @@ namespace Ucoin.Framework.Test
                 cInfo = repo.GetCustomFullInfo(1);
             }
             cInfo.Email.Should().Be("jacky@ucoin.com");
+            var address = cInfo.Address;
+            address.City.Should().Be("SZ");
+            address.Zip.Should().Be("000000000");
             cInfo.Notes.Count.Should().Be(2);
             cInfo.Notes.Last().NoteText.Should().Be("BB");
             cInfo.Notes.First().NoteText.Should().Be("DDDD");
@@ -307,6 +367,14 @@ namespace Ucoin.Framework.Test
                 cInfo.Should().BeNull();
                 notes.Count.Should().Be(0);
             }
+
+            using (var repo = new CustomerRepository())
+            {
+                var notes = repo.GetNoteList();
+                var cInfo = repo.GetByKey(1);
+                cInfo.Should().BeNull();
+                notes.Count.Should().Be(0);
+            }
         }
 
         [Fact]
@@ -316,12 +384,13 @@ namespace Ucoin.Framework.Test
             using (var repo = new CustomerRepository())
             {
                 var cInfo = repo.GetByKey(1);
-
                 repo.Delete(cInfo);
                 repo.RepoContext.Commit();
-
+            }
+            using (var repo = new CustomerRepository())
+            {
+                var cInfo = repo.GetByKey(1);
                 var notes = repo.GetNoteList();
-                cInfo = repo.GetByKey(1);
                 cInfo.Should().BeNull();
                 notes.Count.Should().Be(0);
             }

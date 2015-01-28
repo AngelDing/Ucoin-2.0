@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.Docs", "6.Docs", "{72F1D296-FEB2-4DBC-B965-5DC68B6D6F95}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.txt = Readme.txt
+		ToDoList.txt = ToDoList.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Site", "Authority\Ucoin.Authority.Site\Ucoin.Authority.Site.csproj", "{F405CFD7-515C-43AC-ABF7-01918373BDFF}"
@@ -45,6 +46,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.ObjectMapper", "Framework\Ucoin.Framework.ObjectMapper\Ucoin.Framework.ObjectMapper.csproj", "{310B8117-9AE9-4477-A735-D23ACE185140}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.ServiceLocator", "Framework\Ucoin.Framework.ServiceLocator\Ucoin.Framework.ServiceLocator.csproj", "{EE23E806-83FE-459A-9050-95A327E28792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.ObjectMapper.Test", "Test\Ucoin.ObjectMapper.Test\Ucoin.ObjectMapper.Test.csproj", "{C6DCD4F1-7074-4E8A-B3D6-E7DE43497D7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +107,10 @@ Global
 		{EE23E806-83FE-459A-9050-95A327E28792}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE23E806-83FE-459A-9050-95A327E28792}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE23E806-83FE-459A-9050-95A327E28792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6DCD4F1-7074-4E8A-B3D6-E7DE43497D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DCD4F1-7074-4E8A-B3D6-E7DE43497D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DCD4F1-7074-4E8A-B3D6-E7DE43497D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DCD4F1-7074-4E8A-B3D6-E7DE43497D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,5 +128,6 @@ Global
 		{1523B79A-6760-4EC4-9518-8E6279720BE9} = {E689422A-4A8C-42C4-A8A0-55D52A959997}
 		{310B8117-9AE9-4477-A735-D23ACE185140} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{EE23E806-83FE-459A-9050-95A327E28792} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
+		{C6DCD4F1-7074-4E8A-B3D6-E7DE43497D7E} = {77E2A99B-F19A-45D2-83A5-2FF165A85916}
 	EndGlobalSection
 EndGlobal

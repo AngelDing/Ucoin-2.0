@@ -123,10 +123,11 @@ namespace Ucoin.Framework.EFRepository
         /// <summary>
         /// 更新聚合實體，同時新增，修改或者刪除相關聯有變動的子表信息
         /// </summary>
-        /// <param name="entity">聚合實體</param>
+        /// <param nameproperty="entity">聚合實體</param>
         /// <param name="compareResult">新舊對象比較結果</param>
         public void FullUpdate(T entity, ComparisonResult compareResult)
         {
+            //entity.NeedUpdateList = compareResult.GetDifferentPropertys();
             this.Update(entity);
 
             foreach (var add in compareResult.NeedAddList.Keys)
@@ -143,13 +144,21 @@ namespace Ucoin.Framework.EFRepository
                     this.DbContext.Entry(e).State = EntityState.Deleted;
                 }
             }
-            foreach (var update in compareResult.NeedUpdateList.Keys)
+            foreach (var updateList in compareResult.NeedUpdateList.Values)
             {
-                foreach (var e in compareResult.NeedUpdateList[update])
+                foreach(var update in updateList)
                 {
-                    this.DbContext.Entry(e).State = EntityState.Modified;
-                }
+                    this.DbContext.ApplyChanges(update as BaseEntity);
+                    //this.Update(update);
+                }                
             }
+            //foreach (var update in compareResult.NeedUpdateList.Keys)
+            //{
+            //    foreach (var e in compareResult.NeedUpdateList[update])
+            //    {
+            //        this.DbContext.Entry(e).State = EntityState.Modified;
+            //    }
+            //}
         }
 
         #endregion 
