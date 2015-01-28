@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.EFData", "Authority\Ucoin.Authority.EFData\Ucoin.Authority.EFData.csproj", "{1523B79A-6760-4EC4-9518-8E6279720BE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.ObjectMapper", "Framework\Ucoin.Framework.ObjectMapper\Ucoin.Framework.ObjectMapper.csproj", "{310B8117-9AE9-4477-A735-D23ACE185140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{1523B79A-6760-4EC4-9518-8E6279720BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1523B79A-6760-4EC4-9518-8E6279720BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1523B79A-6760-4EC4-9518-8E6279720BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310B8117-9AE9-4477-A735-D23ACE185140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310B8117-9AE9-4477-A735-D23ACE185140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310B8117-9AE9-4477-A735-D23ACE185140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310B8117-9AE9-4477-A735-D23ACE185140}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +113,6 @@ Global
 		{1425A984-4B1D-40F4-A4E0-1757B7E6E506} = {48F0621D-07E4-46BF-90BF-49CB85CF62D6}
 		{032F3EB8-F1EB-4D5A-B393-97E30B3AE1E9} = {E689422A-4A8C-42C4-A8A0-55D52A959997}
 		{1523B79A-6760-4EC4-9518-8E6279720BE9} = {E689422A-4A8C-42C4-A8A0-55D52A959997}
+		{310B8117-9AE9-4477-A735-D23ACE185140} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 	EndGlobalSection
 EndGlobal

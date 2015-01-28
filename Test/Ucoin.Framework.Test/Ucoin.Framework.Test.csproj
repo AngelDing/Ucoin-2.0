@@ -108,6 +108,10 @@
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.EFRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.ObjectMapper\Ucoin.Framework.ObjectMapper.csproj">
+      <Project>{310b8117-9ae9-4477-a735-d23ace185140}</Project>
+      <Name>Ucoin.Framework.ObjectMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
       <Name>Ucoin.Framework</Name>
