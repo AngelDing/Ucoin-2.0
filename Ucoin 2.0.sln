@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.EFData", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.ObjectMapper", "Framework\Ucoin.Framework.ObjectMapper\Ucoin.Framework.ObjectMapper.csproj", "{310B8117-9AE9-4477-A735-D23ACE185140}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.ServiceLocator", "Framework\Ucoin.Framework.ServiceLocator\Ucoin.Framework.ServiceLocator.csproj", "{EE23E806-83FE-459A-9050-95A327E28792}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{310B8117-9AE9-4477-A735-D23ACE185140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{310B8117-9AE9-4477-A735-D23ACE185140}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{310B8117-9AE9-4477-A735-D23ACE185140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE23E806-83FE-459A-9050-95A327E28792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE23E806-83FE-459A-9050-95A327E28792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE23E806-83FE-459A-9050-95A327E28792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE23E806-83FE-459A-9050-95A327E28792}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,5 +120,6 @@ Global
 		{032F3EB8-F1EB-4D5A-B393-97E30B3AE1E9} = {E689422A-4A8C-42C4-A8A0-55D52A959997}
 		{1523B79A-6760-4EC4-9518-8E6279720BE9} = {E689422A-4A8C-42C4-A8A0-55D52A959997}
 		{310B8117-9AE9-4477-A735-D23ACE185140} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
+		{EE23E806-83FE-459A-9050-95A327E28792} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 	EndGlobalSection
 EndGlobal
