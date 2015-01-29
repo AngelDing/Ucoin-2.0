@@ -10,6 +10,7 @@ namespace Ucoin.Framework.Test
 
         public int CustomerId { get; set; }
 
+        [CompareIgnore]
         public EFCustomer Customer { get; set; }
     }
 }

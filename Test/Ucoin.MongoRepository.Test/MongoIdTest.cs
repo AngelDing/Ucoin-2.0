@@ -71,7 +71,8 @@ namespace Ucoin.MongoRepository.Test
 
             var list = repo.GetAll().ToList();
             list.Count.Should().Be(count);
-            list.Last().Id.Should().Be(count);
+            var maxId = list.Max(p => p.Id);
+            maxId.Should().Be(count);
         }
     }
 }

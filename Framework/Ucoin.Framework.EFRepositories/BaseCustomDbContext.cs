@@ -21,7 +21,7 @@ namespace Ucoin.Framework.EFRepository
                     var entity = args.Entity as IObjectWithState;
                     if (entity != null)
                     {
-                        entity.State = ObjectStateType.Unchanged;
+                        entity.ObjectState = ObjectStateType.Unchanged;
                     }
                 };
 

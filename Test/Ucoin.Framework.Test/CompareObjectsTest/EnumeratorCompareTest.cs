@@ -59,18 +59,18 @@ namespace Ucoin.Framework.Test
 
             var msg = result.DifferencesString;
 
-            var addList = result.NeedAddList;
-            addList.Count.Should().Be(1);
-            var type = typeof(HashSetClass);
-            addList.ContainsKey(type).Should().Be(true);
-            addList[type].Count.Should().Be(1);
+            //var addList = result.NeedAddList;
+            //addList.Count.Should().Be(1);
+            //var type = typeof(HashSetClass);
+            //addList.ContainsKey(type).Should().Be(true);
+            //addList[type].Count.Should().Be(1);
 
-            var updateList = result.NeedUpdateList;
-            updateList.Count.Should().Be(1);
+            //var updateList = result.NeedUpdateList;
+            //updateList.Count.Should().Be(1);
 
-            var deleteList = result.NeedDeleteList;
-            deleteList.ContainsKey(type).Should().BeTrue();
-            deleteList[type].Count.Should().Be(1);
+            //var deleteList = result.NeedDeleteList;
+            //deleteList.ContainsKey(type).Should().BeTrue();
+            //deleteList[type].Count.Should().Be(1);
 
             result.Differences.Count.Should().Be(5);
         }

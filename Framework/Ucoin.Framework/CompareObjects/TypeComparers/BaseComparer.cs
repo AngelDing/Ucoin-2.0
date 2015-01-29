@@ -46,41 +46,41 @@ namespace Ucoin.Framework.CompareObjects
             result.Differences.Add(difference);
         }
 
-        protected void AddNewObject(ComparisonResult result, Type type, IObjectWithState obj)
-        {
-            if (result.NeedAddList.ContainsKey(type))
-            {
-                result.NeedAddList[type].Add(obj);
-            }
-            else
-            {
-                result.NeedAddList[type] = new List<IObjectWithState> { obj };
-            }
-        }
+        //protected void AddNewObject(ComparisonResult result, Type type, IObjectWithState obj)
+        //{
+        //    if (result.NeedAddList.ContainsKey(type))
+        //    {
+        //        result.NeedAddList[type].Add(obj);
+        //    }
+        //    else
+        //    {
+        //        result.NeedAddList[type] = new List<IObjectWithState> { obj };
+        //    }
+        //}
 
-        protected void AddUpdateObject(ComparisonResult result, Type type, IObjectWithState obj)
-        {
-            if (result.NeedUpdateList.ContainsKey(type))
-            {
-                result.NeedUpdateList[type].Add(obj);
-            }
-            else
-            {
-                result.NeedUpdateList[type] = new List<IObjectWithState> { obj };
-            }
-        }
+        //protected void AddUpdateObject(ComparisonResult result, Type type, IObjectWithState obj)
+        //{
+        //    if (result.NeedUpdateList.ContainsKey(type))
+        //    {
+        //        result.NeedUpdateList[type].Add(obj);
+        //    }
+        //    else
+        //    {
+        //        result.NeedUpdateList[type] = new List<IObjectWithState> { obj };
+        //    }
+        //}
 
-        protected void AddDeleteObject(ComparisonResult result, Type type, IObjectWithState obj)
-        {
-            if (result.NeedDeleteList.ContainsKey(type))
-            {
-                result.NeedDeleteList[type].Add(obj);
-            }
-            else
-            {
-                result.NeedDeleteList[type] = new List<IObjectWithState> { obj };
-            }
-        }
+        //protected void AddDeleteObject(ComparisonResult result, Type type, IObjectWithState obj)
+        //{
+        //    if (result.NeedDeleteList.ContainsKey(type))
+        //    {
+        //        result.NeedDeleteList[type].Add(obj);
+        //    }
+        //    else
+        //    {
+        //        result.NeedDeleteList[type] = new List<IObjectWithState> { obj };
+        //    }
+        //}
 
         protected string NiceString(object obj)
         {

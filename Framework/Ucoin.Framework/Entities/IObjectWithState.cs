@@ -3,7 +3,7 @@
     public interface IObjectWithState
     {
         [CompareIgnore]
-        ObjectStateType State { get; set; }
+        ObjectStateType ObjectState { get; set; }
     }
 
     public enum ObjectStateType

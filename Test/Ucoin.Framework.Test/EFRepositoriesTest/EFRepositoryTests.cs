@@ -212,6 +212,7 @@ namespace Ucoin.Framework.Test
             using (var repo = new CustomerRepository())
             {
                 cInfo = repo.GetCustomFullInfo(1);
+                cInfo.Notes = cInfo.Notes.ToList();
             }
 
             var updateInfo = cInfo.DeepCopy();
@@ -228,7 +229,7 @@ namespace Ucoin.Framework.Test
 
             using (var repo = new CustomerRepository())
             {
-                repo.FullUpdate(updateInfo, result);
+                repo.Update(updateInfo);
                 repo.RepoContext.Commit();
             }
             using (var repo = new CustomerRepository())
@@ -290,11 +291,11 @@ namespace Ucoin.Framework.Test
             cInfo.Email = "jacky@ucoin.com";
             cInfo.Address.City = "SZ";
             cInfo.Address.Zip = "000000000";
-            cInfo.State = ObjectStateType.Modified;
+            cInfo.ObjectState = ObjectStateType.Modified;
             cInfo.Notes.First().NoteText = "DDDD";
-            cInfo.Notes.First().State = ObjectStateType.Modified;
-            cInfo.Notes.Last().State = ObjectStateType.Deleted;
-            cInfo.Notes.Add(new EFNote { NoteText = "CCCC", State = ObjectStateType.Added });
+            cInfo.Notes.First().ObjectState = ObjectStateType.Modified;
+            cInfo.Notes.Last().ObjectState = ObjectStateType.Deleted;
+            cInfo.Notes.Add(new EFNote { NoteText = "CCCC", ObjectState = ObjectStateType.Added });
 
             using (var repo = new CustomerRepository())
             {

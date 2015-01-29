@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Ucoin.Framework.Entities
 {
     [Serializable]
-    public class EFEntity<Tkey> : BaseEntity<Tkey>, IObjectWithState, IValidatableObject
+    public class EFEntity<Tkey> : BaseEntity<Tkey>, IValidatableObject
     {
         public EFEntity()
         {
@@ -18,22 +18,22 @@ namespace Ucoin.Framework.Entities
         /// <summary>
         /// 實體所處的操作狀態
         /// </summary>
-        [CompareIgnore]
         [NotMapped]
-        public ObjectStateType State { get; set; }
+        [CompareIgnore]
+        public override ObjectStateType ObjectState { get; set; }
 
         /// <summary>
         /// 是否局部更新
         /// </summary>
-        [CompareIgnore]
         [NotMapped]
+        [CompareIgnore]
         public override bool IsPartialUpdate { get; set; }
 
         public override void SetUpdate<T>(Expression<Func<T>> express, object val)
         {
             base.SetUpdate<T>(express, val);
             this.IsPartialUpdate = true;
-            this.State = ObjectStateType.Modified;
+            this.ObjectState = ObjectStateType.Modified;
         }
 
         /// <summary>

@@ -93,12 +93,12 @@ namespace Ucoin.Framework.CompareObjects
 
                         if (areEqual == true)
                         {
-                            object1.State = ObjectStateType.Unchanged;
+                            object1.ObjectState = ObjectStateType.Unchanged;
                         }
                         else
                         {
-                            object1.State = ObjectStateType.Modified;
-                            AddUpdateObject(compareParms.Result, type, object1);
+                            object1.ObjectState = ObjectStateType.Modified;
+                            //AddUpdateObject(compareParms.Result, type, object1);
                         }
                         #endregion
                         isMatch = true;
@@ -107,8 +107,8 @@ namespace Ucoin.Framework.CompareObjects
                 }
                 if (isMatch == false)
                 {
-                    object1.State = ObjectStateType.Added;
-                    AddNewObject(compareParms.Result, type, object1);
+                    object1.ObjectState = ObjectStateType.Added;
+                    //AddNewObject(compareParms.Result, type, object1);
                 }
             }
         }
@@ -150,8 +150,8 @@ namespace Ucoin.Framework.CompareObjects
                 }
                 if (isMatch == false)
                 {
-                    object2.State = ObjectStateType.Deleted;
-                    AddDeleteObject(compareParms.Result, type, object2);
+                    object2.ObjectState = ObjectStateType.Deleted;
+                    //AddDeleteObject(compareParms.Result, type, object2);
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -10,11 +11,13 @@ namespace Ucoin.Framework.CompareObjects
     {
         public ComparisonConfig Config { get; private set; }
 
-        public Dictionary<Type, List<IObjectWithState>> NeedAddList { get; set; }
+        //public Dictionary<Type, List<IObjectWithState>> NeedAddList { get; set; }
 
-        public Dictionary<Type, List<IObjectWithState>> NeedUpdateList { get; set; }
+        //public Dictionary<Type, List<IObjectWithState>> NeedUpdateList { get; set; }
 
-        public Dictionary<Type, List<IObjectWithState>> NeedDeleteList { get; set; }
+        //public Dictionary<Type, List<IObjectWithState>> NeedDeleteList { get; set; }
+
+        //public Dictionary<Type, List<UpdatedPropertyInfo>> UpdatePropertyList { get; set; }
 
         public List<Difference> Differences { get; set; }
 
@@ -26,9 +29,10 @@ namespace Ucoin.Framework.CompareObjects
         {
             Config = config;
             Differences = new List<Difference>();
-            NeedAddList = new Dictionary<Type, List<IObjectWithState>>();
-            NeedUpdateList = new Dictionary<Type, List<IObjectWithState>>();
-            NeedDeleteList = new Dictionary<Type, List<IObjectWithState>>();
+            //NeedAddList = new Dictionary<Type, List<IObjectWithState>>();
+            //NeedUpdateList = new Dictionary<Type, List<IObjectWithState>>();
+            //NeedDeleteList = new Dictionary<Type, List<IObjectWithState>>();
+            //UpdatePropertyList = new Dictionary<Type, List<UpdatedPropertyInfo>>();
             Parents = new Dictionary<int, int>();
             Watch = new Stopwatch();
         }        
@@ -55,25 +59,25 @@ namespace Ucoin.Framework.CompareObjects
                     sb.AppendLine(item.ToString());
                 }
 
-                if (NeedAddList.Count > 0)
-                {
-                    sb.AppendLine("-----Added Info-----");
-                }
-                foreach (var item in NeedAddList)
-                {
-                    //TODO: Add info format
-                    sb.AppendLine("TODO: Add");
-                }
+                //if (NeedAddList.Count > 0)
+                //{
+                //    sb.AppendLine("-----Added Info-----");
+                //}
+                //foreach (var item in NeedAddList)
+                //{
+                //    
+                //    sb.AppendLine("TODO: Add");
+                //}
 
-                if (NeedDeleteList.Count > 0)
-                {
-                    sb.AppendLine("-----Deleted Info-----");
-                }
-                foreach (var item in NeedDeleteList)
-                {
-                    //TODO: Delete info format
-                    sb.AppendLine("TODO: Delete");
-                }
+                //if (NeedDeleteList.Count > 0)
+                //{
+                //    sb.AppendLine("-----Deleted Info-----");
+                //}
+                //foreach (var item in NeedDeleteList)
+                //{
+                //    
+                //    sb.AppendLine("TODO: Delete");
+                //}
 
                 return sb.ToString();
             }
@@ -83,8 +87,7 @@ namespace Ucoin.Framework.CompareObjects
         {
             get 
             {
-                return Differences.Count == 0 && NeedAddList.Count == 0
-                    && NeedUpdateList.Count == 0 && NeedDeleteList.Count == 0; 
+                return Differences.Count == 0; 
             }
         }
 
@@ -119,5 +122,31 @@ namespace Ucoin.Framework.CompareObjects
                 }
             }
         }
+
+        //public Dictionary<string, object> GetDifferentPropertys(Type type, object id)
+        //{
+        //    var diffList = new Dictionary<string, object>();
+        //    if (UpdatePropertyList.ContainsKey(type))
+        //    {
+        //        var updateList = UpdatePropertyList[type];
+        //        var propInfo = updateList.FirstOrDefault(p => p.Id.ToString() == id.ToString());
+        //        if (propInfo != null)
+        //        {
+        //            foreach (var p in propInfo.PropertyList)
+        //            {
+        //                //只需要知道是哪個屬性改變，不需要知道其改變后的值
+        //                diffList.Add(p, null);
+        //            }
+        //        }
+        //    }
+        //    return diffList;
+        //}
     }
+
+    //public class UpdatedPropertyInfo
+    //{
+    //    public object Id { get; set; }
+
+    //    public List<string> PropertyList { get; set; }
+    //}
 }

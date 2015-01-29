@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Ucoin.Framework.Entities
 {
     [Serializable]
-    public abstract class BaseEntity : IEntity, IPartialUpdateEntity
+    public abstract class BaseEntity : IEntity, IPartialUpdateEntity, IObjectWithState
     {
         private Dictionary<string, object> updateList = new Dictionary<string, object>();
         [CompareIgnore]
@@ -22,6 +22,11 @@ namespace Ucoin.Framework.Entities
                 updateList = value;
             }
         }
+
+        /// <summary>
+        /// 實體所處的操作狀態
+        /// </summary>
+        public virtual ObjectStateType ObjectState { get; set; }
 
         /// <summary>
         /// 是否局部更新
