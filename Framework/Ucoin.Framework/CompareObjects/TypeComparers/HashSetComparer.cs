@@ -11,6 +11,7 @@ namespace Ucoin.Framework.CompareObjects
 
         public override bool IsTypeMatch(Type type1, Type type2)
         {
+            //TODO:如果type2是IList，則需將type2轉成HashSet來比較
             return TypeHelper.IsHashSet(type1) && TypeHelper.IsHashSet(type2);
         }
 

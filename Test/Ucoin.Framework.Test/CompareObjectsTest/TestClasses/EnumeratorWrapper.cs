@@ -11,7 +11,6 @@ namespace Ucoin.Framework.Test
         {
             HashSetCollection = new HashSet<HashSetClass>();
             ListCollection = new List<ListSetClass>();
-            EnumerableCollection = new List<EnumerableSetClass>();
         }
 
         public int StatusId { get; set; }
@@ -25,15 +24,9 @@ namespace Ucoin.Framework.Test
         public ICollection<HashSetClass> HashSetCollection { get; set; }
 
         public IList<ListSetClass> ListCollection { get; set; }
-
-        public IEnumerable<EnumerableSetClass> EnumerableCollection { get; set; }
     }
 
     public class ListSetClass : EFEntity<long>
-    {
-    }
-
-    public class EnumerableSetClass : EFEntity<long>
     {
     }
 

@@ -23,6 +23,11 @@ namespace Ucoin.Framework.Test
             get { return Set<EFNote>(); }
         }
 
+        public DbSet<ChildNote> Childs
+        {
+            get { return Set<ChildNote>(); }
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();//移除复数表名的契约
@@ -34,9 +39,12 @@ namespace Ucoin.Framework.Test
             modelBuilder.Entity<EFCustomer>().Property(t => t.Address.Country).HasColumnName("Country");
 
             modelBuilder.Entity<EFNote>().HasRequired(c => c.Customer)
-              .WithMany(t => t.Notes).HasForeignKey(p => p.CustomerId);  //Map(m => m.MapKey("CustomerId"));
-
+              .WithMany(t => t.Notes).HasForeignKey(p => p.CustomerId);         
             modelBuilder.Entity<EFNote>().HasKey(p => p.Id);
+
+            modelBuilder.Entity<ChildNote>().HasRequired(c => c.EFNote)
+            .WithMany(t => t.Childs).HasForeignKey(p => p.NoteId);
+            modelBuilder.Entity<ChildNote>().HasKey(p => p.Id);
      
             base.OnModelCreating(modelBuilder);
         }

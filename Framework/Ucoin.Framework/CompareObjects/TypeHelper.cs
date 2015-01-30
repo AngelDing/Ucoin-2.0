@@ -86,26 +86,6 @@ namespace Ucoin.Framework.CompareObjects
             return (typeof(IList).IsAssignableFrom(type));
         }
 
-        public static bool IsIDictionary(Type type)
-        {
-            if (type == null)
-            {
-                return false;
-            }
-
-            return (typeof(IDictionary).IsAssignableFrom(type));
-        }
-
-        public static bool IsEnumerable(Type type)
-        {
-            if (type == null)
-            {
-                return false;
-            }
-
-            return type.ReflectedType != null && type.ReflectedType == typeof(Enumerable);
-        }
-
         public static bool IsHashSet(Type type)
         {
             if (type == null)
@@ -114,6 +94,11 @@ namespace Ucoin.Framework.CompareObjects
             }
 
             return type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(HashSet<>));
+        }
+
+        public static bool IsCollection(Type type)
+        {
+            return IsIList(type) || IsHashSet(type);
         }
     }
 }

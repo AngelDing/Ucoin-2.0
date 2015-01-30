@@ -53,7 +53,8 @@ namespace Ucoin.Framework.Test
         [Fact]
         public void ef_save_aggregate_root_test()
         {
-            InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
 
             var custList = new List<EFCustomer>();           
             using (var newRepo = new CustomerRepository())
@@ -71,10 +72,8 @@ namespace Ucoin.Framework.Test
             }
         }
 
-        private void InsertNewCustomer()
+        private void InsertNewCustomer(EFCustomer customer)
         {
-            var customer = GetCustomerInfo();
-
             using (var custRepo = new CustomerRepository())
             {
                 var actual = custRepo.GetAll().ToList().Count;
@@ -184,7 +183,8 @@ namespace Ucoin.Framework.Test
         [Fact]
         public void ef_spec_test()
         {
-            InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
 
             var custList = new List<EFCustomer>();
             var cQuery = new CustomerQueryCriteria
@@ -205,9 +205,10 @@ namespace Ucoin.Framework.Test
 
         #region Update
         [Fact]
-        public void ef_update_by_auto_compare_test()
+        public void ef_update_by_auto_compare_by_ilist_test()
         {
-            InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
             var cInfo = new EFCustomer();
             using (var repo = new CustomerRepository())
             {
@@ -241,47 +242,47 @@ namespace Ucoin.Framework.Test
         }
 
         [Fact]
-        public void ef_update_by_auto_compare_by_list_test()
+        public void ef_update_by_auto_compare_by_hashset_test()
         {
-            //InsertNewCustomer();
-            //InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
+            var cInfo = new EFCustomer();
+            using (var repo = new CustomerRepository())
+            {
+                cInfo = repo.GetCustomFullInfo(1);
+            }
 
-            //var cInfo = new EFCustomer();
-            //using (var repo = new CustomerRepository())
-            //{
-            //    cInfo = repo.GetCustomFullInfo(1);
-            //}
+            var updateInfo = cInfo.DeepCopy();
+            updateInfo.Email = "jacky@ucoin.com";
+            updateInfo.Phone = null;
+            updateInfo.Address.City = "SZ";
+            updateInfo.Notes.First().NoteText = "DDDD";
+            var newNotes = updateInfo.Notes;
+            var note = newNotes.Last();
+            newNotes.Remove(note);
+            updateInfo.Notes = newNotes;
+            updateInfo.Notes.Add(new EFNote { NoteText = "CCCC" });
 
-            //var updateInfo = cInfo.DeepCopy();
-            //updateInfo.Email = "jacky@ucoin.com";
-            //updateInfo.Phone = null;
-            //updateInfo.Address.City = "SZ";
-            //updateInfo.Notes.First().NoteText = "DDDD";
-            //var newNotes = updateInfo.Notes.ToList();
-            //newNotes.RemoveAll(p => p.Id == 2);
-            //updateInfo.Notes = newNotes;
-            //updateInfo.Notes.Add(new EFNote { NoteText = "CCCC" });
+            var result = new CompareLogic().Compare(updateInfo, cInfo);
 
-            //var result = new CompareLogic().Compare(updateInfo, cInfo);
-
-            //using (var repo = new CustomerRepository())
-            //{
-            //    repo.FullUpdate(updateInfo, result);
-            //    repo.RepoContext.Commit();
-            //}
-            //using (var repo = new CustomerRepository())
-            //{
-            //    var newInfo = repo.GetCustomFullInfo(1);
-            //    newInfo.Email.Should().Be("jacky@ucoin.com");
-            //    newInfo.Notes.Count().Should().Be(2);
-            //}
-        }
-
+            using (var repo = new CustomerRepository())
+            {
+                repo.Update(updateInfo);
+                repo.RepoContext.Commit();
+            }
+            using (var repo = new CustomerRepository())
+            {
+                var newInfo = repo.GetCustomFullInfo(1);
+                newInfo.Email.Should().Be("jacky@ucoin.com");
+                newInfo.Notes.Count().Should().Be(2);
+            }
+        }        
 
         [Fact]
         public void ef_update_by_manual_compare_test()
         {
-            InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
             var cInfo = new EFCustomer();
             using (var repo = new CustomerRepository())
             {
@@ -319,7 +320,8 @@ namespace Ucoin.Framework.Test
         [Fact]
         public void ef_update_by_partial_test()
         {
-            InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
             var cInfo = new EFCustomer();
             using (var repo = new CustomerRepository())
             {
@@ -351,6 +353,78 @@ namespace Ucoin.Framework.Test
             cInfo.Notes.Last().NoteText.Should().Be("BB");
             cInfo.Notes.First().NoteText.Should().Be("DDDD");
         }
+
+        [Fact]
+        public void ef_update_by_auto_complex_compare_test()
+        {
+            var customer = GetComplexCustomerInfo();
+            InsertNewCustomer(customer);
+
+            var cInfo = new EFCustomer();
+            using (var repo = new CustomerRepository())
+            {
+                cInfo = repo.GetCustomFullInfo(1);
+            }
+
+            var updateInfo = cInfo.DeepCopy();
+            updateInfo.Email = "jacky@ucoin.com";
+            updateInfo.Phone = null;
+            updateInfo.Address.City = "SZ";
+            updateInfo.Notes.First().NoteText = "DDDD";
+            var newNotes = updateInfo.Notes;
+            var note = newNotes.First();
+            newNotes.Remove(note);
+            updateInfo.Notes = newNotes;
+            var childList = updateInfo.Notes.First().Childs;
+            var cNote = childList.First();
+            childList.Remove(cNote);
+            childList.First().Title = "MMM";
+            childList.Add(new ChildNote { Title = "ZZZ" });          
+            updateInfo.Notes.Add(new EFNote { NoteText = "CCCC" });
+
+            var result = new CompareLogic().Compare(updateInfo, cInfo);
+
+            using (var repo = new CustomerRepository())
+            {
+                repo.Update(updateInfo);
+                repo.RepoContext.Commit();
+            }
+            using (var repo = new CustomerRepository())
+            {
+                var newInfo = repo.GetCustomFullInfo(1);
+                newInfo.Email.Should().Be("jacky@ucoin.com");
+                newInfo.Notes.Count().Should().Be(2);
+                var newChilds = newInfo.Notes.First().Childs;
+                newChilds.Count.Should().Be(2);
+                newChilds.First().Title.Should().Be("MMM");
+                newChilds.Last().Title.Should().Be("ZZZ");
+            }
+        }
+
+        private EFCustomer GetComplexCustomerInfo()
+        {
+            var customer = new EFCustomer
+            {
+                Address = new EFAddress("China", "SH", "SH", "A street", "12345"),
+                UserName = "daxnet",
+                Phone = "111111",
+                Password = "123456",
+                Notes = new List<EFNote> 
+                { 
+                    new EFNote { NoteText = "AA" }, 
+                    new EFNote
+                    { 
+                        NoteText = "BB",
+                        Childs = new List<ChildNote>
+                        {
+                            new ChildNote{Title = "XXX"}, 
+                            new ChildNote{Title = "YYY"}
+                        }
+                    } 
+                }
+            };
+            return customer;
+        }
         #endregion
 
         #region Delete
@@ -358,7 +432,8 @@ namespace Ucoin.Framework.Test
         [Fact]
         public void ef_delete_by_key_test()
         {
-            InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
             using (var repo = new CustomerRepository())
             {
                 repo.Delete(1);
@@ -381,7 +456,8 @@ namespace Ucoin.Framework.Test
         [Fact]
         public void ef_delete_by_entity_test()
         {
-            InsertNewCustomer();
+            var customer = GetCustomerInfo();
+            InsertNewCustomer(customer);
             using (var repo = new CustomerRepository())
             {
                 var cInfo = repo.GetByKey(1);

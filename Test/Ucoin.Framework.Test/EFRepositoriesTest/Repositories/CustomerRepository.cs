@@ -17,7 +17,9 @@ namespace Ucoin.Framework.Test
         {
             var customer = DbContext.Set<EFCustomer>()
                 .Where(p => p.Id == id)
-                .Include(p => p.Notes).First();
+                .Include(p => p.Notes)
+                .Include(p => p.Notes.FirstOrDefault().Childs)
+                .FirstOrDefault();
             return customer;
         }
 

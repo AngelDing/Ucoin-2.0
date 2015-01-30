@@ -8,6 +8,10 @@ namespace Ucoin.Framework.Test
     [Serializable]
     public class EFCustomer : EFEntity<int>, IAggregateRoot<int>
     {
+        public EFCustomer()
+        {
+            Notes = new HashSet<EFNote>();
+        }
         public string UserName { get; set; }
 
         public string Phone { get; set; }

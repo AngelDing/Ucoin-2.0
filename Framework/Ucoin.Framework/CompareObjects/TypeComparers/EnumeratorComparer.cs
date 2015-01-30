@@ -41,6 +41,75 @@ namespace Ucoin.Framework.CompareObjects
             Type type = null;
             GenerateAddAndUpdateDifference(ref type);
             GenerateDeleteDifference(type);
+
+            if (deleteList.Count > 0)
+            {
+                var newObj = ConvertEnumerableToList(compareParms.Object1) as IList;
+                foreach (var obj in deleteList)
+                {
+                    ReInitDeleteObject(obj);
+                    if (compareParms.Object1 is IEnumerable)
+                    {                       
+                        newObj.Add(obj);                        
+                    }
+                }
+                compareParms.Object1 = newObj;
+                GenerateNewParentObject(newObj);
+            }            
+        }
+
+        private void GenerateNewParentObject(IList newObj)
+        {
+            var cType = newObj.GetType();
+            var pType = compareParms.ParentObject1.GetType();
+            var propList = Cache.GetPropertyInfo(pType);
+            foreach (var p in propList)
+            {
+                if (ExcludeLogic.ShouldExcludeMember(compareParms.Config, p))
+                {
+                    continue;
+                }
+                var value = p.GetValue(compareParms.ParentObject1);
+                if (value == null || TypeHelper.IsCollection(value.GetType()) == false)
+                {
+                    continue;
+                }
+                var newValue = ConvertEnumerableToList(value);
+                if (newValue.GetType() == cType)
+                {
+                    p.SetValue(compareParms.ParentObject1, newObj);
+                    break;
+                }
+            }
+        }
+
+        private object ConvertEnumerableToList(object source)
+        {
+            var type = source.GetType();
+
+            if (type.IsArray)
+                return source;
+
+            var genArgs = type.GetGenericArguments();
+            var toList = typeof(Enumerable).GetMethod("ToList");
+            var constructedToList = toList.MakeGenericMethod(genArgs[0]);
+            var resultList = constructedToList.Invoke(null, new[] { source });
+
+            return resultList;
+        }
+
+        private void ReInitDeleteObject(object obj)
+        {
+            var type = obj.GetType();
+            var properties = Cache.GetPropertyInfo(type);
+            foreach (var pInfo in properties)
+            {
+                var value = pInfo.GetValue(obj);
+                if (value is BaseEntity)
+                {
+                    pInfo.SetValue(obj, null);
+                }
+            }
         }
 
         private void GenerateAddAndUpdateDifference(ref Type type)
@@ -113,6 +182,7 @@ namespace Ucoin.Framework.CompareObjects
             }
         }
 
+        private List<object> deleteList = new List<object>();
         private void GenerateDeleteDifference(Type type)
         {
             IEnumerator enumerator2 = ((IEnumerable)compareParms.Object2).GetEnumerator();
@@ -151,6 +221,7 @@ namespace Ucoin.Framework.CompareObjects
                 if (isMatch == false)
                 {
                     object2.ObjectState = ObjectStateType.Deleted;
+                    deleteList.Add(object2);                    
                     //AddDeleteObject(compareParms.Result, type, object2);
                 }
             }

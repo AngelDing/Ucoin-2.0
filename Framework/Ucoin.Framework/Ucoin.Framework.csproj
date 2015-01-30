@@ -47,7 +47,6 @@
     <Compile Include="CompareObjects\TypeComparers\BaseTypeComparer.cs" />
     <Compile Include="CompareObjects\TypeComparers\ClassComparer.cs" />
     <Compile Include="CompareObjects\TypeComparers\EnumComparer.cs" />
-    <Compile Include="CompareObjects\TypeComparers\EnumerableComparer.cs" />
     <Compile Include="CompareObjects\TypeComparers\EnumeratorComparer.cs" />
     <Compile Include="CompareObjects\TypeComparers\HashSetComparer.cs" />
     <Compile Include="CompareObjects\TypeComparers\ListComparer.cs" />

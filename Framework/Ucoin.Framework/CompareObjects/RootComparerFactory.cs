@@ -28,7 +28,6 @@ namespace Ucoin.Framework.CompareObjects
             rootComparer = new RootComparer();
 
             rootComparer.TypeComparers = new List<BaseTypeComparer>();
-            rootComparer.TypeComparers.Add(new EnumerableComparer(rootComparer));
             rootComparer.TypeComparers.Add(new HashSetComparer(rootComparer));
             rootComparer.TypeComparers.Add(new ListComparer(rootComparer));
             rootComparer.TypeComparers.Add(new EnumComparer(rootComparer));
