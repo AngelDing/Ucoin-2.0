@@ -64,7 +64,7 @@ namespace Ucoin.Framework.Test
             }
 
             watch.Stop();
-            watch.ElapsedMilliseconds.Should().BeLessThan(2 * 1000);
+            watch.ElapsedMilliseconds.Should().BeLessThan(3 * 1000);
         }
     }
 }

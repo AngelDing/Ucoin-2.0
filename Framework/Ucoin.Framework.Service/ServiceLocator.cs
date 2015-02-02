@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity.Configuration;
 using System;
 using System.Configuration;
 
-namespace Ucoin.Framework.ServiceLocator
+namespace Ucoin.Framework.Service
 {
     /// <summary>
     /// Represents the Service Locator.

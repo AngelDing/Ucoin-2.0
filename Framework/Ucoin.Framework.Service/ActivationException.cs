@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ucoin.Framework.ServiceLocator
+namespace Ucoin.Framework.Service
 {
     /// <summary>
     /// The standard exception thrown when a ServiceLocator has an error in resolving an object.

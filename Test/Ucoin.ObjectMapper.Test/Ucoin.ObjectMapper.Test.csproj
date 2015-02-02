@@ -35,6 +35,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EmitMapper">
+      <HintPath>..\..\packages\EmitMapper.1.0.0\lib\EmitMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="NLite">
+      <HintPath>..\..\packages\NLite.0.9.6\lib\net40\NLite.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="xunit">
@@ -59,8 +73,18 @@
     <Compile Include="DataModel\OrderEntity.cs" />
     <Compile Include="DataModel\OrderItemEntity.cs" />
     <Compile Include="DataModel\RoleEntity.cs" />
+    <Compile Include="Performace\FlatteringConfig.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Performace\ModelDto.cs" />
+    <Compile Include="Performace\ModelObject.cs" />
+    <Compile Include="Performace\MapperBase.cs" />
     <Compile Include="MapperTest.cs" />
+    <Compile Include="Performace\FlatterPerformaceSpec.cs" />
+    <Compile Include="Performace\IObjectToObjectMapper.cs" />
+    <Compile Include="MapperPerformaceTest.cs" />
+    <Compile Include="Performace\PerformanceSpecBase.cs" />
+    <Compile Include="Performace\SimplePerformanceSpec.cs" />
+    <Compile Include="Performace\SpecBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +92,13 @@
       <Project>{310b8117-9ae9-4477-a735-d23ace185140}</Project>
       <Name>Ucoin.Framework.ObjectMapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -89,6 +120,7 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

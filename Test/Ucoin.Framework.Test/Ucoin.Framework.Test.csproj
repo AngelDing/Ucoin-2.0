@@ -109,9 +109,9 @@
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.EFRepository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.ServiceLocator\Ucoin.Framework.ServiceLocator.csproj">
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
       <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>
-      <Name>Ucoin.Framework.ServiceLocator</Name>
+      <Name>Ucoin.Framework.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>

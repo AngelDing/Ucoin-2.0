@@ -33,6 +33,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeTimer.cs" />
     <Compile Include="CompareObjects\Cache.cs" />
     <Compile Include="CompareObjects\CompareParms.cs" />
     <Compile Include="CompareObjects\ComparisonConfig.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\IBusinessEntity.cs" />
     <Compile Include="Entities\IPartialUpdateEntity.cs" />
+    <Compile Include="IModel.cs" />
     <Compile Include="Repositories\RepositoryContext.cs" />
     <Compile Include="ValueObjects\BaseValueObject.cs" />
     <Compile Include="BusinessRule.cs" />

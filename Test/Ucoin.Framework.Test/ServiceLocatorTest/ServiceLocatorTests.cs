@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Configuration;
 using Ucoin.Framework;
+using Ucoin.Framework.Service;
 using Xunit;
 
 namespace Ucoin.Framework.ServiceLocator.Test
@@ -13,7 +14,7 @@ namespace Ucoin.Framework.ServiceLocator.Test
         [Fact]
         public void service_locator_get_instance_test()
         {
-            ILogger instance = ServiceLocator.GetService<ILogger>();
+            ILogger instance = Ucoin.Framework.Service.ServiceLocator.GetService<ILogger>();
             Assert.NotNull(instance);
         }
 
@@ -22,20 +23,20 @@ namespace Ucoin.Framework.ServiceLocator.Test
         {
             Assert.Throws<ActivationException>(delegate
             {
-                ServiceLocator.GetService<IDictionary>();
+                Ucoin.Framework.Service.ServiceLocator.GetService<IDictionary>();
             });
         }
 
         [Fact]
         public void service_locator_get_instance_by_manual_register_test()
         {
-            var container = ServiceLocator.GetUnityContainer();
+            var container = Ucoin.Framework.Service.ServiceLocator.GetUnityContainer();
             if (container.IsRegistered<IUnregisteredLogger>() == false)
             {
                 container.RegisterType<IUnregisteredLogger, AdvancedLogger>();
             }
 
-            var instance = ServiceLocator.GetService<IUnregisteredLogger>();
+            var instance = Ucoin.Framework.Service.ServiceLocator.GetService<IUnregisteredLogger>();
             Assert.NotNull(instance);
         }
     }
