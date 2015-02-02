@@ -13,17 +13,17 @@ namespace Ucoin.Framework.Test
             this.LogChangesDuringSave = true;
         }
 
-        public DbSet<EFCustomer> Customers
+        public DbSet<EFCustomer> EFCustomer
         {
             get { return Set<EFCustomer>(); }
         }
 
-        public DbSet<EFNote> Notes
+        public DbSet<EFNote> EFNote
         {
             get { return Set<EFNote>(); }
         }
 
-        public DbSet<ChildNote> Childs
+        public DbSet<ChildNote> ChildNote
         {
             get { return Set<ChildNote>(); }
         }
@@ -38,12 +38,12 @@ namespace Ucoin.Framework.Test
             modelBuilder.Entity<EFCustomer>().Property(t => t.Address.City).HasColumnName("City");
             modelBuilder.Entity<EFCustomer>().Property(t => t.Address.Country).HasColumnName("Country");
 
-            modelBuilder.Entity<EFNote>().HasRequired(c => c.Customer)
-              .WithMany(t => t.Notes).HasForeignKey(p => p.CustomerId);         
+            modelBuilder.Entity<EFNote>().HasRequired(c => c.EFCustomer)
+              .WithMany(t => t.EFNote).HasForeignKey(p => p.CustomerId);         
             modelBuilder.Entity<EFNote>().HasKey(p => p.Id);
 
             modelBuilder.Entity<ChildNote>().HasRequired(c => c.EFNote)
-            .WithMany(t => t.Childs).HasForeignKey(p => p.NoteId);
+            .WithMany(t => t.ChildNote).HasForeignKey(p => p.NoteId);
             modelBuilder.Entity<ChildNote>().HasKey(p => p.Id);
      
             base.OnModelCreating(modelBuilder);

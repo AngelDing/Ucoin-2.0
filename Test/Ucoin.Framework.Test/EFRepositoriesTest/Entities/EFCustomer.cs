@@ -10,7 +10,7 @@ namespace Ucoin.Framework.Test
     {
         public EFCustomer()
         {
-            Notes = new HashSet<EFNote>();
+            EFNote = new HashSet<EFNote>();
         }
         public string UserName { get; set; }
 
@@ -24,7 +24,7 @@ namespace Ucoin.Framework.Test
 
         public int Sequence { get; set; }
 
-        public virtual ICollection<EFNote> Notes { get; set; }
+        public virtual ICollection<EFNote> EFNote { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

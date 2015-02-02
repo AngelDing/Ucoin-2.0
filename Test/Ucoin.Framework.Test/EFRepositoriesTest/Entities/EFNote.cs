@@ -9,17 +9,17 @@ namespace Ucoin.Framework.Test
     {
         public EFNote()
         {
-            Childs = new HashSet<ChildNote>();
+            ChildNote = new HashSet<ChildNote>();
         }
 
         public string NoteText { get; set; }
 
         public int CustomerId { get; set; }
 
-        public virtual ICollection<ChildNote> Childs { get; set; }
+        public virtual ICollection<ChildNote> ChildNote { get; set; }
 
         [CompareIgnore]
-        public virtual EFCustomer Customer { get; set; }
+        public virtual EFCustomer EFCustomer { get; set; }
     }
 
     [Serializable]

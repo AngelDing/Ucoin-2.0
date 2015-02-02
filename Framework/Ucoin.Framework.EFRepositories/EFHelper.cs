@@ -3,11 +3,61 @@ using System.Linq;
 using System.Data.Entity;
 using Ucoin.Framework.Entities;
 using System.Data.Entity.Infrastructure;
+using System.Linq.Expressions;
 
 namespace Ucoin.Framework.EFRepository
 {
     public static class EFHelper
     {
+        /// <summary>
+        /// 当EF自动代理类关闭时，在结果集中包含直接被查询对象的指定导航属性的数据, 此方法用於以下include操作：
+        /// IQueryable.IncludeExpand(p => p.A)
+        /// .IncludeExpand(p => p.A.FirstOrDefault().B)
+        /// EF 6自帶的多級加載用法為：
+        /// IQueryable.Include(p => p.A.Select(b => b.B))
+        /// </summary>
+        /// <typeparam name="T">被查询对象的类型</typeparam>
+        /// <param name="query">原始查询集</param>
+        /// <param name="exp">指定导航属性的属性表达式，可以包含First、FirstOrDefault等Lambda方法</param>
+        /// <returns>返回包含指定导航属性数据的查询集</returns>
+        public static IQueryable<T> IncludeExpand<T>(this IQueryable<T> query, Expression<Func<T, dynamic>> exp)
+            where T : class
+        {
+            return query.Include(GetStrForInclude(exp));
+        }
+
+        private static string GetStrForInclude<T>(Expression<Func<T, dynamic>> exp)
+            where T : class
+        {
+            string str = string.Empty;
+            Expression expression = exp.Body;
+            if (!(expression is MemberExpression))
+            {
+                throw new ArgumentException("Must be 'MemberExpression'.");
+            }
+            while (expression is MemberExpression || expression is MethodCallExpression)
+            {
+                var memberExp = expression as MemberExpression;
+                if (memberExp != null)
+                {
+                    str = string.Concat(memberExp.Member.Name, ".", str);
+                    expression = memberExp.Expression;
+                }
+                else
+                {
+                    var callExp = expression as MethodCallExpression;
+                    if (callExp == null || callExp.Arguments == null || callExp.Arguments.Count == 0)
+                    {
+                        throw new ArgumentException("Not a right format expression.");
+                    }
+                    expression = callExp.Arguments[0];
+                }
+            }
+            //if (!string.IsNullOrEmpty(str)) 
+            //    str = str.Substring(str.Split('.')[0].Length).TrimStart('.').TrimEnd('.');
+            return str.TrimEnd('.');
+        }
+
         /// <summary>
         /// 通用的转换实体状态方法
         /// </summary>
