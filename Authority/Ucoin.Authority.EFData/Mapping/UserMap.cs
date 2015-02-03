@@ -8,7 +8,7 @@ namespace Ucoin.Authority.EFData.Mapping
     {
         public UserMap()
         {
-            this.ToTable("Category");
+            this.ToTable("User");
             this.HasKey(c => c.Id);
             //this.Property(c => c.Name).IsRequired().HasMaxLength(400);
             //this.Property(c => c.UpdatedOnUtc).IsOptional();

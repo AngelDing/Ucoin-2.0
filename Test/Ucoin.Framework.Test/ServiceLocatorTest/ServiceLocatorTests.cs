@@ -10,14 +10,7 @@ using Xunit;
 namespace Ucoin.Framework.ServiceLocator.Test
 {
     public class ServiceLocatorTests
-    {
-        [Fact]
-        public void service_locator_get_instance_test()
-        {
-            ILogger instance = Ucoin.Framework.Service.ServiceLocator.GetService<ILogger>();
-            Assert.NotNull(instance);
-        }
-
+    {     
         [Fact]
         public void service_locator_activation_exception_test()
         {
@@ -25,6 +18,13 @@ namespace Ucoin.Framework.ServiceLocator.Test
             {
                 Ucoin.Framework.Service.ServiceLocator.GetService<IDictionary>();
             });
+        }
+
+        [Fact]
+        public void service_locator_get_instance_test()
+        {
+            ILogger instance = Ucoin.Framework.Service.ServiceLocator.GetService<ILogger>();
+            Assert.NotNull(instance);
         }
 
         [Fact]

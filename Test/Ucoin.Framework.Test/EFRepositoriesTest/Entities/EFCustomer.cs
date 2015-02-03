@@ -26,7 +26,7 @@ namespace Ucoin.Framework.Test
 
         public virtual ICollection<EFNote> EFNote { get; set; }
 
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
         {
             if (string.IsNullOrEmpty(UserName))
             {
