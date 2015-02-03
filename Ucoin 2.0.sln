@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Service", "Framework\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj", "{EE23E806-83FE-459A-9050-95A327E28792}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Web", "Framework\Ucoin.Framework.Web\Ucoin.Framework.Web.csproj", "{6169A1C5-9511-428F-8B90-1D5AE5A3682E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{EE23E806-83FE-459A-9050-95A327E28792}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE23E806-83FE-459A-9050-95A327E28792}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE23E806-83FE-459A-9050-95A327E28792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6169A1C5-9511-428F-8B90-1D5AE5A3682E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6169A1C5-9511-428F-8B90-1D5AE5A3682E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6169A1C5-9511-428F-8B90-1D5AE5A3682E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6169A1C5-9511-428F-8B90-1D5AE5A3682E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,5 +149,6 @@ Global
 		{72E3CDAE-0762-41FA-9D70-F0EAA3A32F7B} = {2C33AC00-0212-4FA8-818C-5B502BCB4EF7}
 		{4DCEC664-2B67-4059-AB2D-DE6ED9E87835} = {2C33AC00-0212-4FA8-818C-5B502BCB4EF7}
 		{EE23E806-83FE-459A-9050-95A327E28792} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
+		{6169A1C5-9511-428F-8B90-1D5AE5A3682E} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 	EndGlobalSection
 EndGlobal

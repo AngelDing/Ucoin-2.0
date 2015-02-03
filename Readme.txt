@@ -26,3 +26,30 @@ https://objectmapper.codeplex.com/
    -》之前也想放在Ucoin.Framework項目中，但是默認實現是基於Unity的，這樣Ucoin.Framework需要引用第三的Unity組件，爲了保持Ucoin.Framework
    的公用性，最好不要引用第三方組件，如果ServiceLocator實現依賴于其他的IOC組件，則需要添加更多的第三方組件，故獨立出一個單獨的項目。
 
+5. MVC分頁：頁面腳本添加： @Html.DoPagingPost(false);，列表前添加：
+	<!--分頁-->
+	<div class="toolbar">
+		<div class="button">
+			<input id="btnSearch" type="submit" value=" Export to Excel "
+				   onclick="btnExport('@Url.Action("ExportSettlementApplyList", "Report")')" />
+			<input id="btnPrint" type="submit" value=" 列 印 "
+				   onclick="btnPrint('@Url.Action("SettlementApplyListPrintView", "Report")')" />
+		</div>
+		<div class="paging">
+			@Html.PageLinks(
+				new PagingInfo
+				{
+					CurrentPage = Model.SettlementApplyRQ.PageIndex,
+					ItemsPerPage = Model.SettlementApplyRQ.PageSize,
+					TotalItems = Model.SettlementApplyRS.TotalCount,
+					PageSizeName = "SettlementApplyRQ_PageSize",
+					IsAjaxPost = true
+				},
+				null,
+				(x) => x.ToString(),
+				null,
+				true,
+				"SettlementApplyRQ_PageIndex",
+				PagingMode.Hybird)
+		</div>
+	</div>

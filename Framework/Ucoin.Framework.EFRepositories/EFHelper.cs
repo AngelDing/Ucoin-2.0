@@ -4,6 +4,7 @@ using System.Data.Entity;
 using Ucoin.Framework.Entities;
 using System.Data.Entity.Infrastructure;
 using System.Linq.Expressions;
+using Ucoin.Framework.Paging;
 
 namespace Ucoin.Framework.EFRepository
 {
@@ -24,6 +25,59 @@ namespace Ucoin.Framework.EFRepository
             where T : class
         {
             return query.Include(GetStrForInclude(exp));
+        }
+
+        /// <summary>
+        /// 集合翻页
+        /// </summary>
+        /// <typeparam name="T">source 中的元素的类型</typeparam>
+        /// <param name="source">要翻页的IEnumerable</param>
+        /// <param name="totalCount">輸出總記錄數</param>
+        /// <param name="pageIndex">页索引</param>
+        /// <param name="pageSize">页面大小</param>
+        /// <returns>指定页子集合</returns>
+        public static IQueryable<T> Paging<T>(this IQueryable<T> source, out int totalCount, int pageIndex = 1, int pageSize = 20)
+        {
+            totalCount = source.Count();
+            if (pageIndex <= 0)
+            {
+                pageIndex = 1;
+            }
+            if (pageSize <= 0)
+            {
+                pageSize = 20;
+            }
+            var entities = source.Skip(((pageIndex - 1) * pageSize) < totalCount
+                ? ((pageIndex - 1) * pageSize) 
+                : totalCount - (totalCount % pageSize))
+                .Take(pageSize);
+            return entities;
+        }
+
+        /// <summary>
+        /// 集合翻页
+        /// </summary>
+        /// <typeparam name="T">source 中的元素的类型</typeparam>
+        /// <param name="source">要翻页的IEnumerable</param>
+        /// <param name="pageIndex">页索引</param>
+        /// <param name="pageSize">页面大小</param>
+        /// <returns>指定页子集合</returns>
+        public static PagingResult<T> Paging<T>(this IQueryable<T> source, int pageIndex = 1, int pageSize = 20)
+        {
+            var totalCount = source.Count();
+            if (pageIndex <= 0)
+            {
+                pageIndex = 1;
+            }
+            if (pageSize <= 0)
+            {
+                pageSize = 20;
+            }
+            var entities = source.Skip(((pageIndex - 1) * pageSize) < totalCount 
+                ? ((pageIndex - 1) * pageSize) 
+                : totalCount - (totalCount % pageSize))
+                .Take(pageSize);
+            return new PagingResult<T>(totalCount, pageIndex, pageSize, entities);
         }
 
         private static string GetStrForInclude<T>(Expression<Func<T, dynamic>> exp)

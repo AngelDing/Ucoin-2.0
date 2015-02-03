@@ -3,10 +3,11 @@ using System.Reflection;
 using System.Linq;
 using System.Data.Entity.ModelConfiguration;
 using System;
+using Ucoin.Framework.EFRepository;
 
 namespace Ucoin.Authority.EFData
 {
-    public sealed class AuthorityDbContext : DbContext
+    public sealed class AuthorityDbContext : BaseCustomDbContext
     {
         public AuthorityDbContext()
             : base("name=AuthorityDB")

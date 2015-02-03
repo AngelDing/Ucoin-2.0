@@ -1,5 +1,5 @@
 ﻿
-namespace Ucoin.Framework
+namespace Ucoin.Framework.Models
 {
     /// <summary>
     /// 用於標示：ViewModel，DTO等
