@@ -8,7 +8,7 @@ using Ucoin.Framework.Entities;
 using Ucoin.Framework.Repositories;
 using Ucoin.Framework.Specifications;
 
-namespace Ucoin.Framework.MongoRepository
+namespace Ucoin.Framework.MongoDb.Repositories
 {
     public interface IMongoRepository<T, TKey> : IRepository<T, TKey>
         where T : IAggregateRoot<TKey>

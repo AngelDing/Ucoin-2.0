@@ -1,5 +1,5 @@
 ﻿using System;
-using Ucoin.Framework.Entities;
+using Ucoin.Framework.MongoDb.Entities;
 
 namespace Ucoin.MongoRepository.Test
 {

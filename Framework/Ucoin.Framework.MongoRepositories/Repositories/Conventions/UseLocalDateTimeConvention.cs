@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Options;
 
-namespace Ucoin.Framework.MongoRepository.Conventions
+namespace Ucoin.Framework.MongoDb.Repositories.Conventions
 {
     public class UseLocalDateTimeConvention : IMemberMapConvention
     {

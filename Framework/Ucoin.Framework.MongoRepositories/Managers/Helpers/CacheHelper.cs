@@ -2,7 +2,7 @@
 using System.Linq;
 using System;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public static class CacheHelper
     {

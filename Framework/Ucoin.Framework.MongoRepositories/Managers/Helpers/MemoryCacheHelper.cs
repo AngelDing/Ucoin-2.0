@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Runtime.Caching;
-namespace Ucoin.Framework.MongoRepository.Manager
+
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public class MemoryCacheHelper
     {

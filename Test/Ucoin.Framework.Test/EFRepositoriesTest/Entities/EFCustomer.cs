@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Ucoin.Framework.Entities;
+using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Framework.Test
 {
     [Serializable]
-    public class EFCustomer : EFEntity<int>, IAggregateRoot<int>
+    public class EFCustomer : EfEntity<int>, IAggregateRoot<int>
     {
         public EFCustomer()
         {

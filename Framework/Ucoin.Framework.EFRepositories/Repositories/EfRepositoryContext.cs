@@ -7,13 +7,13 @@ using System.Text;
 using Ucoin.Framework.Repositories;
 using Ucoin.Framework.Entities;
 
-namespace Ucoin.Framework.EFRepository
+namespace Ucoin.Framework.SqlDb.Repositories
 {
-    public class EFRepositoryContext : RepositoryContext, IEFRepositoryContext
+    public class EfRepositoryContext : RepositoryContext, IEfRepositoryContext
     {
         private readonly DbContext dbContext;
 
-        public EFRepositoryContext(DbContext dbContext)
+        public EfRepositoryContext(DbContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -62,7 +62,7 @@ namespace Ucoin.Framework.EFRepository
             if (errors.Any())
             {
                 var errorMsgs = GetErrors(errors);
-                throw new EFRepositoryException(errorMsgs);
+                throw new EfRepositoryException(errorMsgs);
             }
 
             dbContext.SaveChanges();

@@ -105,9 +105,9 @@
     <Compile Include="ServiceLocatorTest\SimpleLogger.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.EFRepository.csproj">
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
-      <Name>Ucoin.Framework.EFRepository</Name>
+      <Name>Ucoin.Framework.SqlDb</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
       <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>

@@ -1,7 +1,7 @@
-﻿
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using System.Collections.Generic;
-namespace Ucoin.Framework.MongoRepository.Manager
+
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public class BaseContext
     {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public static class UnityHelper
     {

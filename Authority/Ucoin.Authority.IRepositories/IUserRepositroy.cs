@@ -1,10 +1,9 @@
-﻿
-using Ucoin.Authority.Entities;
-using Ucoin.Framework.EFRepository;
+﻿using Ucoin.Authority.Entities;
+using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.IRepositories
 {
-    public interface IUserRepositroy : IEFRepository<User, int>
+    public interface IUserRepositroy : IEfRepository<User, int>
     {
     }
 }

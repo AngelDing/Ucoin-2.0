@@ -1,9 +1,9 @@
 ﻿using Ucoin.Authority.Entities;
-using Ucoin.Framework.EFRepository;
+using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.IRepositories
 {
-    public interface IDelegateRepositroy : IEFRepository<Delegate, int>
+    public interface IDelegateRepositroy : IEfRepository<Delegate, int>
     {
     }
 }

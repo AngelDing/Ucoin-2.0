@@ -4,7 +4,7 @@ using MongoDB.Driver.Builders;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public class IndexManager<T> : BaseMongoDB<T>, IIndexManager<T> where T : class
     {

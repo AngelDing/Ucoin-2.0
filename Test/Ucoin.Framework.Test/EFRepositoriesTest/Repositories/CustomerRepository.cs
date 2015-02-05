@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Data.Entity;
 using System.Collections.Generic;
-using Ucoin.Framework.EFRepository;
+using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Framework.Test
 {
-    public class CustomerRepository : EFRepository<EFCustomer, int>, ICustomerRepository
+    public class CustomerRepository : EfRepository<EFCustomer, int>, ICustomerRepository
     {
         public CustomerRepository()
-            : base(new EFRepositoryContext(new EFTestContext()))
+            : base(new EfRepositoryContext(new EFTestContext()))
         { 
         }
 

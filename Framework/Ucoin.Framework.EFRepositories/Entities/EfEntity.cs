@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq.Expressions;
+using Ucoin.Framework.Entities;
 
-namespace Ucoin.Framework.Entities
+namespace Ucoin.Framework.SqlDb.Entities
 {
     [Serializable]
-    public abstract class EFEntity<Tkey> : BaseEntity<Tkey>, IValidatableObject
+    public abstract class EfEntity<Tkey> : BaseEntity<Tkey>, IValidatableObject
     {
-        public EFEntity()
+        public EfEntity()
         {
             IsPartialUpdate = false;
         }

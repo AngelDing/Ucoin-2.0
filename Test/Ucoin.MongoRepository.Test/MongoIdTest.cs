@@ -2,8 +2,6 @@
 using Xunit;
 using FluentAssertions;
 using MongoDB.Bson.Serialization;
-using Ucoin.Framework.MongoRepository;
-using Ucoin.Framework.MongoRepository.IdGenerators;
 using System.Threading.Tasks;
 using System;
 

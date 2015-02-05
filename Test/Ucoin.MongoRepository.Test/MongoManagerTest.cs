@@ -5,8 +5,8 @@ using System.Linq;
 using System;
 using MongoDB.Driver;
 using Newtonsoft.Json;
-using Ucoin.Framework.MongoRepository.Manager;
 using System.Configuration;
+using Ucoin.Framework.MongoDb.Managers;
 
 namespace Ucoin.MongoRepository.Test
 {

@@ -3,9 +3,9 @@ using System.Data.Entity;
 using Ucoin.Framework.CompareObjects;
 using Ucoin.Framework.Entities;
 
-namespace Ucoin.Framework.EFRepository
+namespace Ucoin.Framework.SqlDb.Repositories
 {
-    public interface IEFRepository<T, TKey> where T : IAggregateRoot<TKey>
+    public interface IEfRepository<T, TKey> where T : IAggregateRoot<TKey>
     {
         DbContext DbContext { get; }
     }

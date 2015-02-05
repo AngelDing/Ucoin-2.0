@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ucoin.Framework.Entities
+namespace Ucoin.Framework.MongoDb.Entities
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class CollectionNameAttribute : Attribute

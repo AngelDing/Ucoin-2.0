@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System.Collections.Generic;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public interface IIndexManager<T>
         where T : class

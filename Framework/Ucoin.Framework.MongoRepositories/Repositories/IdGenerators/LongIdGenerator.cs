@@ -6,9 +6,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
-using Ucoin.Framework.Entities;
+using Ucoin.Framework.MongoDb.Entities;
 
-namespace Ucoin.Framework.MongoRepository.IdGenerators
+namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
 {
     public class LongIdGenerator<TDocument, TKey> : IIdGenerator where TDocument : class
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public class DataContext : BaseContext
     {

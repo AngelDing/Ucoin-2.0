@@ -1,8 +1,8 @@
-﻿using Ucoin.Framework.EFRepository;
+﻿using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.EFData
 {
-    public class AuthorityRepositoryContext : EFRepositoryContext, IAuthorityRepositoryContext
+    public class AuthorityRepositoryContext : EfRepositoryContext, IAuthorityRepositoryContext
     {
         public AuthorityRepositoryContext()
             : base(new AuthorityDbContext())

@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Ucoin.Framework.Entities;
 
-namespace Ucoin.Framework.EFRepository
+namespace Ucoin.Framework.SqlDb
 {
     public class BaseCustomDbContext : DbContext
     {

@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Linq;
 using System.Data.Entity.ModelConfiguration;
 using System;
-using Ucoin.Framework.EFRepository;
+using Ucoin.Framework.SqlDb;
 
 namespace Ucoin.Authority.EFData
 {

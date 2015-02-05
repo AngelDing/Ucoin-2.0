@@ -53,3 +53,8 @@ https://objectmapper.codeplex.com/
 				PagingMode.Hybird)
 		</div>
 	</div>
+
+6. Log採用MongoDb存儲，分為以下幾種log：
+   A. AppLog記錄各程序運行時的一些信息，分debug，info，error，trace等；
+   B. ErrorLog記錄系統未捕獲的異常信息，為mvc， api， wcf等；
+   C. PerfLog記錄訪問mvc， api， wcf相關方法所化的時間等；

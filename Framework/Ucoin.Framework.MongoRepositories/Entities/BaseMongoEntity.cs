@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Ucoin.Framework.Entities;
 
-namespace Ucoin.Framework.Entities
+namespace Ucoin.Framework.MongoDb.Entities
 {
     [Serializable]
     public abstract class BaseMongoEntity : BaseEntity, IEntity

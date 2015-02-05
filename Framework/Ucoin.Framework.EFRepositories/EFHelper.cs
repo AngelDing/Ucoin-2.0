@@ -6,9 +6,9 @@ using System.Data.Entity.Infrastructure;
 using System.Linq.Expressions;
 using Ucoin.Framework.Paging;
 
-namespace Ucoin.Framework.EFRepository
+namespace Ucoin.Framework.SqlDb
 {
-    public static class EFHelper
+    public static class EfHelper
     {
         /// <summary>
         /// 当EF自动代理类关闭时，在结果集中包含直接被查询对象的指定导航属性的数据, 此方法用於以下include操作：

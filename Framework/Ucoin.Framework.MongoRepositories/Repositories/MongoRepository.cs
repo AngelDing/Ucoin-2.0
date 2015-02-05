@@ -6,11 +6,12 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Ucoin.Framework.Entities;
 using Ucoin.Framework.Specifications;
 using Ucoin.Framework.Repositories;
+using Ucoin.Framework.MongoDb.Entities;
+using Ucoin.Framework.Entities;
 
-namespace Ucoin.Framework.MongoRepository
+namespace Ucoin.Framework.MongoDb.Repositories
 {
     public class MongoRepository<T, TKey> : BaseMongoDB<T>, IMongoRepository<T, TKey>
         where T : BaseMongoEntity, IAggregateRoot<TKey>

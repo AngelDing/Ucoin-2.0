@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Ucoin.Framework;
-using Ucoin.Framework.Entities;
+using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Framework.Test
 {
-    public class EnumeratorWrapper : EFEntity<long>
+    public class EnumeratorWrapper : EfEntity<long>
     {
         public EnumeratorWrapper()
         {
@@ -32,7 +32,7 @@ namespace Ucoin.Framework.Test
         }
     }
 
-    public class ListSetClass : EFEntity<long>
+    public class ListSetClass : EfEntity<long>
     {
         public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
         {
@@ -40,7 +40,7 @@ namespace Ucoin.Framework.Test
         }
     }
 
-    public class HashSetClass : EFEntity<int>
+    public class HashSetClass : EfEntity<int>
     {
         public string Name { get; set; }
 

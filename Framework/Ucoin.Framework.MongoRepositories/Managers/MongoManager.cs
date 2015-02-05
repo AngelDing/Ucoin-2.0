@@ -4,7 +4,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public class MongoManager : BaseMongoDB<BsonDocument>, IMongoManager
     {

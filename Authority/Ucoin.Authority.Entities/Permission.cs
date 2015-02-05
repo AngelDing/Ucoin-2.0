@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Ucoin.Framework.Entities;
+using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Authority.Entities
 {
-    public class Permission : EFEntity<int>
+    public class Permission : EfEntity<int>
     {
         public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
         {

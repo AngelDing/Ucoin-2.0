@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Configuration;
 using Ucoin.Framework.Entities;
-using Ucoin.Framework.MongoRepository;
-using Ucoin.Framework.MongoRepository.Manager;
+using Ucoin.Framework.MongoDb.Entities;
+using Ucoin.Framework.MongoDb.Managers;
+using Ucoin.Framework.MongoDb.Repositories;
+
 
 namespace Ucoin.MongoRepository.Test
 {

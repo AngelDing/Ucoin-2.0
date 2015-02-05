@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace Ucoin.Framework.Entities
+namespace Ucoin.Framework.MongoDb.Entities
 {
     [CollectionName("IdentityEntity")]
     public class IdentityEntity<T> : StringKeyMongoEntity

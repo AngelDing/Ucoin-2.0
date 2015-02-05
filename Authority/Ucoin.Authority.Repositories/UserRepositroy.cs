@@ -1,12 +1,11 @@
 ﻿using Ucoin.Authority.EFData;
 using Ucoin.Authority.Entities;
 using Ucoin.Authority.IRepositories;
-using Ucoin.Framework.EFRepository;
-using Ucoin.Framework.Repositories;
+using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.Repositories
 {
-    public class UserRepositroy : EFRepository<User, int>, IUserRepositroy
+    public class UserRepositroy : EfRepository<User, int>, IUserRepositroy
     {
         public UserRepositroy(IAuthorityRepositoryContext context)
             : base(context)

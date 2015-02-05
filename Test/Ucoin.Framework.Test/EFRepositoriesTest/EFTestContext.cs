@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Ucoin.Framework.EFRepository;
+using Ucoin.Framework.SqlDb;
 
 namespace Ucoin.Framework.Test
 {

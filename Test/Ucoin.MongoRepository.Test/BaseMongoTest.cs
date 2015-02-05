@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System;
 using System.Configuration;
-using Ucoin.Framework.MongoRepository;
+using Ucoin.Framework.MongoDb.Repositories;
 
 namespace Ucoin.MongoRepository.Test
 {

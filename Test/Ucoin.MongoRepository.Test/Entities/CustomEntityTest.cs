@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System;
-using Ucoin.Framework.Entities;
-using Ucoin.Framework.MongoRepository.IdGenerators;
+using Ucoin.Framework.MongoDb.Entities;
 
 namespace Ucoin.MongoRepository.Test
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
-namespace Ucoin.Framework.MongoRepository.Manager
+
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public static class ConstHelper
     {

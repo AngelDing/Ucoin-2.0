@@ -7,21 +7,22 @@ using Ucoin.Framework.Repositories;
 using Ucoin.Framework.Entities;
 using Ucoin.Framework.Specifications;
 using Ucoin.Framework.CompareObjects;
+using Ucoin.Framework.SqlDb.Entities;
 
-namespace Ucoin.Framework.EFRepository
+namespace Ucoin.Framework.SqlDb.Repositories
 {
-    public class EFRepository<T, Tkey> : Repository<T, Tkey>, IEFRepository<T, Tkey>
-        where T : EFEntity<Tkey>, IAggregateRoot<Tkey>
+    public class EfRepository<T, Tkey> : Repository<T, Tkey>, IEfRepository<T, Tkey>
+        where T : EfEntity<Tkey>, IAggregateRoot<Tkey>
     {
-        private readonly IEFRepositoryContext efContext;
+        private readonly IEfRepositoryContext efContext;
         private readonly DbContext db;       
 
-        public EFRepository(IRepositoryContext context)
+        public EfRepository(IRepositoryContext context)
             : base(context)
         {
-            if (context is IEFRepositoryContext)
+            if (context is IEfRepositoryContext)
             {
-                this.efContext = context as IEFRepositoryContext;
+                this.efContext = context as IEfRepositoryContext;
                 this.db = efContext.DbContext;
             }
         }

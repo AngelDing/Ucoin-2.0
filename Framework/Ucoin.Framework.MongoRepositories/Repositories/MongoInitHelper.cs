@@ -4,11 +4,11 @@ using System.Linq.Expressions;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson;
-using Ucoin.Framework.Entities;
-using Ucoin.Framework.MongoRepository.Conventions;
-using Ucoin.Framework.MongoRepository.IdGenerators;
+using Ucoin.Framework.MongoDb.Entities;
+using Ucoin.Framework.MongoDb.Repositories.Conventions;
+using Ucoin.Framework.MongoDb.Repositories.IdGenerators;
 
-namespace Ucoin.Framework.MongoRepository
+namespace Ucoin.Framework.MongoDb.Repositories
 {
     public static class MongoInitHelper
     {

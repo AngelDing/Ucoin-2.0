@@ -1,7 +1,7 @@
 ﻿
 using MongoDB.Bson;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public class FieldModel : BaseModel, IModel
     {

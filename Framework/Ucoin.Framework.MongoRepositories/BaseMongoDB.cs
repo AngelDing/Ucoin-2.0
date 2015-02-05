@@ -1,8 +1,8 @@
 ﻿using MongoDB.Driver;
 using System;
-using Ucoin.Framework.Entities;
+using Ucoin.Framework.MongoDb.Entities;
 
-namespace Ucoin.Framework.MongoRepository
+namespace Ucoin.Framework.MongoDb
 {
     public class BaseMongoDB<T> where T : class
     {

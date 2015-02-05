@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ucoin.Framework.MongoRepository.Manager
+namespace Ucoin.Framework.MongoDb.Managers
 {
     public class ProfileModel
     {
