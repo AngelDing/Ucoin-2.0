@@ -34,7 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppLog.cs" />
+    <Compile Include="BaseLog.cs" />
     <Compile Include="ErrorLog.cs" />
+    <Compile Include="LogLevelType.cs" />
     <Compile Include="PerfLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
