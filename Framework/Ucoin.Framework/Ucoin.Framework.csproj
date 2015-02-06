@@ -59,6 +59,11 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\IBusinessEntity.cs" />
     <Compile Include="Entities\IPartialUpdateEntity.cs" />
+    <Compile Include="Log\AppCodeType.cs" />
+    <Compile Include="Log\LogCategoryType.cs" />
+    <Compile Include="Log\LogLevelType.cs" />
+    <Compile Include="Log\LogModel.cs" />
+    <Compile Include="Log\LogPriority.cs" />
     <Compile Include="Models\BasePagingModel.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Paging\IPaging.cs" />

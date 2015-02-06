@@ -3,14 +3,14 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Diagnostics;
 //using Ucoin.ServiceModel.Runtime;
-using Common.Logging;
+//using Common.Logging;
 using Ucoin.ServiceModel.Server.Runtime;
 
 namespace Ucoin.ServiceModel.Server
 {
     public class EnterpriseService : ServiceBase
     {
-        private readonly ILog log = LogManager.GetLogger(typeof(EnterpriseService));
+        //private readonly ILog log = LogManager.GetLogger(typeof(EnterpriseService));
 
         private IEventListener Listener
         {
@@ -86,7 +86,7 @@ namespace Ucoin.ServiceModel.Server
 
         protected override void OnStart(string[] args)
         {
-            log.Info("service starting");
+            //log.Info("service starting");
 
             new ServiceConsole().StartServices(
                 Listener,
@@ -94,23 +94,23 @@ namespace Ucoin.ServiceModel.Server
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("start error:" + ex.Message);
-                    log.Error("service started has error:" + ex.Message, ex);
+                    //log.Error("service started has error:" + ex.Message, ex);
                     Console.ForegroundColor = ConsoleColor.Green;
                 });
 
-            log.Info("service started");
+            //log.Info("service started");
         }
 
         protected override void OnStop()
         {
             base.OnStop();
-            log.Info("service stoped");
+            //log.Info("service stoped");
         }
 
         protected override void OnPause()
         {
             base.OnPause();
-            log.Info("service paused");
+            //log.Info("service paused");
         }
     }
 }
