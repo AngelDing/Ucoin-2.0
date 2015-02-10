@@ -6,7 +6,7 @@ using System.Web.Mvc.Html;
 using System.Web.Mvc;
 using System.Linq.Expressions;
 using System.Text;
-using Ucoin.Utility;
+using Ucoin.Framework.Utility;
 
 namespace Ucoin.Framework.Web.Extensions
 {

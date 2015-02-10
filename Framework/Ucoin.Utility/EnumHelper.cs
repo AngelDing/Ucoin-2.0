@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Ucoin.Utility
+namespace Ucoin.Framework.Utility
 {
     public static class EnumHelper
     {

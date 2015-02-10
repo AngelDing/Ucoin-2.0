@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Ucoin.Utility
+namespace Ucoin.Framework.Utility
 {
     public static class ObjectCopierHelper
     {

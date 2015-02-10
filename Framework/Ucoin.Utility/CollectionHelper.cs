@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ucoin.Utility
+namespace Ucoin.Framework.Utility
 {
     public static class CollectionHelper
     {

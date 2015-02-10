@@ -1,6 +1,6 @@
 ﻿using Ucoin.Framework.Models;
 
-namespace Ucoin.Framework.Log
+namespace Ucoin.Framework.Logging
 {
     public class LogModel : IModel
     {

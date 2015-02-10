@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Applications", "2.Applica
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "8.Tests", "8.Tests", "{77E2A99B-F19A-45D2-83A5-2FF165A85916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Utility", "Framework\Ucoin.Utility\Ucoin.Utility.csproj", "{5B31D7E9-F83F-465F-AA90-D25A580E5420}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Utility", "Framework\Ucoin.Utility\Ucoin.Framework.Utility.csproj", "{5B31D7E9-F83F-465F-AA90-D25A580E5420}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.Docs", "7.Docs", "{72F1D296-FEB2-4DBC-B965-5DC68B6D6F95}"
 	ProjectSection(SolutionItems) = preProject
@@ -73,7 +73,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Log.Services", "Log\U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.EntLib", "Framework\Ucoin.Framework.EntLib\Ucoin.Framework.EntLib.csproj", "{ABF64F1E-8459-4FDE-BC87-EF84A819EAD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Log", "Framework\Ucoin.Framework.Log\Ucoin.Framework.Log.csproj", "{1C70A165-5326-41A9-84FD-2FDB51819401}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Logging", "Framework\Ucoin.Framework.Log\Ucoin.Framework.Logging.csproj", "{1C70A165-5326-41A9-84FD-2FDB51819401}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -749,6 +749,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{5B31D7E9-F83F-465F-AA90-D25A580E5420} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{F405CFD7-515C-43AC-ABF7-01918373BDFF} = {39FB9E80-48DA-434D-B8FF-D7B27B5EFECF}
 		{536E2AC2-BE9C-4CD6-B64C-BF3A719594BE} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{2F183B8A-997F-4999-8C70-60D55AB4B80A} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}

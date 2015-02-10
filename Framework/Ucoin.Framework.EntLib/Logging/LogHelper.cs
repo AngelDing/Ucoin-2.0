@@ -1,5 +1,5 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Logging;
-using Ucoin.Utility;
+using Ucoin.Framework.Utility;
 
 namespace Ucoin.Framework.EntLib.Logging
 {

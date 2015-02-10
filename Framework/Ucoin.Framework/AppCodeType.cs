@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Ucoin.Framework.Log
+namespace Ucoin.Framework
 {
     public enum AppCodeType : byte
     {

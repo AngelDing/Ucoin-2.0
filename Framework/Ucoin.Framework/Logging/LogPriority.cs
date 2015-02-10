@@ -1,5 +1,5 @@
 ﻿
-namespace Ucoin.Framework.Log
+namespace Ucoin.Framework.Logging
 {
     public static class LogPriority
     {
