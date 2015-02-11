@@ -15,14 +15,15 @@ namespace Ucoin.Framework.Logging.Simple
 
         private static LogArgumentEntity InitLogArgumentEntity(NameValueCollection properties)
         {
-            var argEntity = new LogArgumentEntity
+            var argEntity = new LogArgumentEntity();
+            if (properties != null)
             {
-                Level = properties.GetValue("level").ToEnum(LogLevel.All),
-                ShowDateTime = properties.GetValue("showDateTime").ToBool(true),
-                ShowLogName = properties.GetValue("showLogName").ToBool(true),
-                ShowLevel = properties.GetValue("showLevel").ToBool(true),
-                DateTimeFormat = properties.GetValue("dateTimeFormat", string.Empty)
-            };
+                argEntity.Level = properties.GetValue("level").ToEnum(LogLevel.All);
+                argEntity.ShowDateTime = properties.GetValue("showDateTime").ToBool(true);
+                argEntity.ShowLogName = properties.GetValue("showLogName").ToBool(true);
+                argEntity.ShowLevel = properties.GetValue("showLevel").ToBool(true);
+                argEntity.DateTimeFormat = properties.GetValue("dateTimeFormat", string.Empty);
+            }
             return argEntity;
         }
 

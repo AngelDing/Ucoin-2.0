@@ -1,12 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ucoin.Framework.Logging.Configuration;
+using Ucoin.Framework.Utility;
 
 namespace Ucoin.Framework.Logging.Simple
 {
-    class TraceLoggerAdapter
+    public class TraceLoggerAdapter : BaseSimpleLoggerAdapter
     {
+        public bool UseTraceSource { get; set; }
+
+        public TraceLoggerAdapter()
+            : base((NameValueCollection)null)
+        {
+            UseTraceSource = false;
+        }
+
+        public TraceLoggerAdapter(NameValueCollection properties)
+            : base(properties)
+        {
+            UseTraceSource = properties["useTraceSource"].ToBool(false);
+        }
+
+        public TraceLoggerAdapter(LogArgumentEntity argEntity, bool isUseTraceSource)
+            : base(argEntity)
+        {
+            UseTraceSource = isUseTraceSource;
+        }
+
+        protected override ILogger CreateLogger(LogArgumentEntity argEntity)
+        {
+            ILogger log = new TraceLogger(UseTraceSource, argEntity);
+            return log;
+        }
     }
 }
