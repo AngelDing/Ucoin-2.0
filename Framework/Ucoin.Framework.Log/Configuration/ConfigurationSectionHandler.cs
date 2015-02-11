@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Xml;
 using Ucoin.Framework.Logging.Simple;

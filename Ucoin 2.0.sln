@@ -75,6 +75,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.EntLib", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Logging", "Framework\Ucoin.Framework.Log\Ucoin.Framework.Logging.csproj", "{1C70A165-5326-41A9-84FD-2FDB51819401}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Logging.Test", "Test\Ucoin.Logging.Test\Ucoin.Logging.Test.csproj", "{09F7D388-BCE8-410C-9948-420848CF78FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9.Demos", "9.Demos", "{109C238D-75A3-4BD7-B313-F03E89633E16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Logging.Demo", "Demo\Ucoin.Logging.Demo\Ucoin.Logging.Demo.csproj", "{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -744,6 +750,56 @@ Global
 		{1C70A165-5326-41A9-84FD-2FDB51819401}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1C70A165-5326-41A9-84FD-2FDB51819401}.Test|Mixed Platforms.Build.0 = Release|Any CPU
 		{1C70A165-5326-41A9-84FD-2FDB51819401}.Test|x86.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.License|Any CPU.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.License|Any CPU.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.License|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.License|Mixed Platforms.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.License|x86.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.NUnit|Any CPU.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.NUnit|Any CPU.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.NUnit|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.NUnit|Mixed Platforms.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.NUnit|x86.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Release|x86.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Test|Any CPU.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Test|Mixed Platforms.Build.0 = Release|Any CPU
+		{09F7D388-BCE8-410C-9948-420848CF78FC}.Test|x86.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.License|Any CPU.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.License|Any CPU.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.License|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.License|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.License|x86.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.NUnit|Any CPU.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.NUnit|Any CPU.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.NUnit|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.NUnit|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.NUnit|x86.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Test|Any CPU.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Test|Mixed Platforms.Build.0 = Release|Any CPU
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}.Test|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -775,6 +831,8 @@ Global
 		{5263E7FD-F1F7-42B5-8D1D-08F237013AC0} = {2C33AC00-0212-4FA8-818C-5B502BCB4EF7}
 		{ABF64F1E-8459-4FDE-BC87-EF84A819EAD5} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{1C70A165-5326-41A9-84FD-2FDB51819401} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
+		{09F7D388-BCE8-410C-9948-420848CF78FC} = {77E2A99B-F19A-45D2-83A5-2FF165A85916}
+		{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3} = {109C238D-75A3-4BD7-B313-F03E89633E16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Caching.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.ServiceBus.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Configuration.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.WCF.6.0.1304.0\lib\NET45

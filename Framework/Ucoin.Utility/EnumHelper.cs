@@ -114,20 +114,31 @@ namespace Ucoin.Framework.Utility
         public static T ToEnum<T>(this object value)
             where T : struct
         {
-            //var res = value.ToEnum(typeof(T));
-            //return res == null ? default(T) : (T)res;  
-
-            // value.ToEnum(typeof(T))   調用此方法，如果數目很大的時候，會導致GetFields方法得到的結果順序會有變化，MSDN原話(GetFields 方法不按特定的顺序返回字段，例如按字母顺序或声明顺序。 您的代码一定不能依赖于字段的返回顺序，因为该顺序可以改变。)
-            T res;
-            Enum.TryParse<T>(value.ToString(), out res);
-            if (Enum.IsDefined(typeof(T), res))
+            T t;
+            bool flag = Enum.TryParse<T>(value.ToString(), true, out t);
+            if (flag && Enum.IsDefined(typeof(T), t))
             {
-                return ((res));
+                return t;
             }
             else
             {
                 return default(T);
             }
         }
+
+        public static T ToEnum<T>(this string value, T defaultValue) 
+            where T : struct
+        {
+            T t;
+            bool flag = Enum.TryParse<T>(value, true, out t);
+            if (flag && Enum.IsDefined(typeof(T), t))
+            {
+                return t;
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }       
     }
 }

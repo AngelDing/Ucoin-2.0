@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using Ucoin.Framework.Logging.Configuration;
 
 namespace Ucoin.Framework.Logging.Simple
@@ -17,6 +18,12 @@ namespace Ucoin.Framework.Logging.Simple
         {
         }
 
+        public ConsoleOutLoggerAdapter(NameValueCollection properties, bool useColor)
+            : this(properties)
+        {
+            this.useColor = useColor;
+        }
+
 
         public ConsoleOutLoggerAdapter(LogArgumentEntity argEntity)
             : base(argEntity)
@@ -28,7 +35,7 @@ namespace Ucoin.Framework.Logging.Simple
             : this(argEntity)
         {
             this.useColor = useColor;
-        }
+        }       
 
         protected override ILogger CreateLogger(LogArgumentEntity argEntity)
         {

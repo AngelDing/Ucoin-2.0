@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using Ucoin.Framework.Logging.Configuration;
 using Ucoin.Framework.Utility;
 
@@ -18,11 +19,11 @@ namespace Ucoin.Framework.Logging.Simple
             var argEntity = new LogArgumentEntity();
             if (properties != null)
             {
-                argEntity.Level = properties.GetValue("level").ToEnum(LogLevel.All);
-                argEntity.ShowDateTime = properties.GetValue("showDateTime").ToBool(true);
-                argEntity.ShowLogName = properties.GetValue("showLogName").ToBool(true);
-                argEntity.ShowLevel = properties.GetValue("showLevel").ToBool(true);
-                argEntity.DateTimeFormat = properties.GetValue("dateTimeFormat", string.Empty);
+                argEntity.Level = properties.Get("level").ToEnum(LogLevel.All);
+                argEntity.ShowDateTime = properties.Get("showDateTime").ToBool(true);
+                argEntity.ShowLogName = properties.Get("showLogName").ToBool(true);
+                argEntity.ShowLevel = properties.Get("showLevel").ToBool(true);
+                argEntity.DateTimeFormat = properties.Get("dateTimeFormat");
             }
             return argEntity;
         }
