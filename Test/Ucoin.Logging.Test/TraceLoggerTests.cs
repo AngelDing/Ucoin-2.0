@@ -11,6 +11,11 @@ namespace Ucoin.Logging.Test
 {
     public class TraceLoggerTests
     {
+        public TraceLoggerTests()
+        {
+            LogManager.Reset();
+        }
+
         [Fact]
         public void logging_uses_trace_source_by_direct_test()
         {

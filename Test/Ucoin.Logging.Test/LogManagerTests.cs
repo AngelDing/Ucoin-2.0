@@ -82,7 +82,7 @@ namespace Ucoin.Logging.Test
         }
 
         [Fact]
-        public void ConfigureFromStandaloneConfig()
+        public void logging_configure_from_standalone_config_test()
         {
             const string xml =
                 @"<?xml version='1.0' encoding='UTF-8' ?>
@@ -96,7 +96,7 @@ namespace Ucoin.Logging.Test
 
 
         [Fact]
-        public void InvalidAdapterType()
+        public void logging_invalid_adapter_type_test()
         {
             const string xml =
                 @"<?xml version='1.0' encoding='UTF-8' ?>
@@ -108,7 +108,7 @@ namespace Ucoin.Logging.Test
         }
 
         [Fact]
-        public void AdapterDoesNotImplementInterface()
+        public void logging_adapter_not_implement_interface_test()
         {
             const string xml =
                 @"<?xml version='1.0' encoding='UTF-8' ?>
@@ -116,11 +116,11 @@ namespace Ucoin.Logging.Test
                   <loggerAdapter type='Ucoin.Logging.Test.StandaloneConfigurationReader, Ucoin.Logging.Test'>
                   </loggerAdapter>
                 </logging>";
-            Assert.Throws<ConfigurationException>(delegate { GetLog(xml); });
+            Assert.Throws<ArgumentOutOfRangeException>(delegate { GetLog(xml); });
         }
 
         [Fact]
-        public void AdapterDoesNotHaveCorrectCtors()
+        public void logging_adapter_not_have_correct_ctors_test()
         {
             const string xml =
                 @"<?xml version='1.0' encoding='UTF-8' ?>
@@ -132,7 +132,7 @@ namespace Ucoin.Logging.Test
         }
 
         [Fact]
-        public void AdapterDoesNotHaveCorrectCtorsWithArgs()
+        public void logging_adapter_not_have_correct_ctors_with_args_test()
         {
             const string xml =
                 @"<?xml version='1.0' encoding='UTF-8' ?>
@@ -145,7 +145,7 @@ namespace Ucoin.Logging.Test
         }
 
         [Fact]
-        public void InvalidXmlSection()
+        public void logging_invalid_xml_section_test()
         {
             const string xml =
                 @"<?xml version='1.0' encoding='UTF-8' ?>
