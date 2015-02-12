@@ -19,3 +19,4 @@ namespace Ucoin.Framework.Logging.Simple
         }
     }
 }
+ 

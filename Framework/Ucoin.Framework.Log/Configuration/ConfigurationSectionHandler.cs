@@ -123,7 +123,7 @@ namespace Ucoin.Framework.Logging.Configuration
                 else
                 {
                     factoryType = Type.GetType(typeString, true, false);
-                }
+                } 
             }
             catch (Exception e)
             {

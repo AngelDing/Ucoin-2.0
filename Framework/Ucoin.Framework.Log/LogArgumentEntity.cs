@@ -3,6 +3,13 @@ namespace Ucoin.Framework.Logging
 {
     public class LogArgumentEntity
     {
+        public LogArgumentEntity()
+        {
+            ShowDateTime = true;
+            ShowLevel = true;
+            ShowLogName = true;
+        }
+
         public string LogName { get; set; }
 
         public LogLevel Level { get; set; }
@@ -24,3 +31,4 @@ namespace Ucoin.Framework.Logging
         }
     } 
 }
+ 

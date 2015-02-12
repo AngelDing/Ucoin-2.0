@@ -41,6 +41,9 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.XML" />
@@ -58,14 +61,19 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BaseSimpleLoggerTests.cs" />
     <Compile Include="CapturingLoggerTests.cs" />
+    <Compile Include="ConfigurationSectionHandlerTests.cs" />
     <Compile Include="LoggingTraceListenerTests.cs" />
+    <Compile Include="LogManagerTests.cs" />
     <Compile Include="TestUtil\CapturingLogger.cs" />
     <Compile Include="TestUtil\CapturingLoggerAdapter.cs" />
     <Compile Include="TestUtil\CapturingLoggerEvent.cs" />
     <Compile Include="TestUtil\CapturingTraceListener.cs" />
     <Compile Include="DefaultConfigurationReaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestUtil\MissingCtorFactoryAdapter.cs" />
+    <Compile Include="TestUtil\StandaloneConfigurationReader.cs" />
     <Compile Include="TestUtil\TraceEventArgs.cs" />
     <Compile Include="TraceLoggerTests.cs" />
   </ItemGroup>
@@ -81,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

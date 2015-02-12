@@ -10,3 +10,4 @@ namespace Ucoin.Framework.Logging.Configuration
         }
     }
 }
+ 

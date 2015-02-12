@@ -23,7 +23,7 @@ namespace Ucoin.Framework.Logging.Simple
 
         internal static String Format(Exception exception, IFormatProvider formatProvider)
         {
-            if (exception == null)
+            if (exception == null) 
                 return null;
 
             // push all inner exceptions onto stack

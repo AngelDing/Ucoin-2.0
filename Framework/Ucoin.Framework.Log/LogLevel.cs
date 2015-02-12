@@ -17,5 +17,5 @@ namespace Ucoin.Framework.Logging
         Fatal = 6,
 
         Off  = 7,
-    } 
+    }  
 }

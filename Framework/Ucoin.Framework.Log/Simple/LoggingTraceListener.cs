@@ -229,7 +229,7 @@ namespace Ucoin.Framework.Logging.Simple
             if ((this.Filter == null) || this.Filter.ShouldTrace(eventCache, source, eventType, id, message, args, null, null))
             {
                 Log(eventType, source, id, message, args);
-            }
+            } 
         } 
 
         public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, params object[] data)

@@ -14,3 +14,4 @@ namespace Ucoin.Framework.Logging
         ILogger GetLogger(string name);
     } 
 }
+ 

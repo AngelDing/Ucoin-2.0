@@ -15,7 +15,7 @@ namespace Ucoin.Framework.Logging
         bool IsInfoEnabled { get; }
          
         bool IsWarnEnabled { get; }
-
+         
         void Trace<T>(T message);
 
         void Trace(string format, params object[] args);

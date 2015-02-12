@@ -3,6 +3,7 @@ using FluentAssertions;
 using Ucoin.Framework.Logging;
 using Ucoin.Framework.Logging.Simple;
 using System.Diagnostics;
+using System.Collections.Specialized;
 
 namespace Ucoin.Logging.Test
 {
@@ -14,7 +15,7 @@ namespace Ucoin.Logging.Test
         }
 
         [Fact]
-        public void LogsUsingCommonLogging()
+        public void logging_trace_listener_test()
         {
             var adapter = new CapturingLoggerAdapter();
             LogManager.Adapter = adapter;
@@ -45,7 +46,7 @@ namespace Ucoin.Logging.Test
         }
 
         [Fact]
-        public void AcceptsNullCategory()
+        public void logging_trace_listener_null_category_test()
         {
             var adapter = new CapturingLoggerAdapter();
             LogManager.Adapter = adapter;
@@ -53,10 +54,69 @@ namespace Ucoin.Logging.Test
 
             listener.DefaultTraceEventType = TraceEventType.Warning;
             listener.Write("some message", null);
-            Assert.AreEqual(string.Format("{0}.{1}", listener.Name, ""), adapter.LastEvent.Source.Name);
-            Assert.AreEqual(LogLevel.Warn, adapter.LastEvent.Level);
-            Assert.AreEqual("some message", adapter.LastEvent.RenderedMessage);
-            Assert.AreEqual(null, adapter.LastEvent.Exception);
+
+            var logName = adapter.LastEvent.Source.ArgumentEntity.LogName;
+            var exceptName =string.Format("{0}.{1}", listener.Name, ""); 
+            logName.Should().Be(exceptName);
+            adapter.LastEvent.Level.Should().Be(LogLevel.Warn);
+            adapter.LastEvent.RenderedMessage.Should().Be("some message");
+            adapter.LastEvent.Exception.Should().BeNull();
+        }        
+
+        [Fact]
+        public void logging_not_log_below_filter_level_test()
+        {
+            var adapter = new CapturingLoggerAdapter();
+            LogManager.Adapter = adapter;
+
+            var listener = new LoggingTraceListener();
+            listener.Filter = new EventTypeFilter(SourceLevels.Warning);
+            adapter.Clear();
+            listener.TraceEvent(null, "sourceName", TraceEventType.Information, -1, "format {0}", "Information");
+            adapter.LastEvent.Should().BeNull();
+
+            AssertExpectedLogLevel(listener, TraceEventType.Warning, LogLevel.Warn);
+            AssertExpectedLogLevel(listener, TraceEventType.Error, LogLevel.Error);
+        }
+
+        [Fact]
+        public void logging_trace_listener_default_settings_test()
+        {
+            var listener = new LoggingTraceListener();
+
+            AssertDefaultSettings(listener);
+        }
+
+        [Fact]
+        public void logging_trace_listener_processes_properties_test()
+        {
+            var props = new NameValueCollection();
+            props["Name"] = "TestName";
+            props["DefaultTraceEventType"] = TraceEventType.Information.ToString().ToLower();
+            props["LoggerNameFormat"] = "{0}-{1}";
+            var listener = new LoggingTraceListener(props);
+
+            listener.Name.Should().Be("TestName");
+            listener.DefaultTraceEventType.Should().Be(TraceEventType.Information);
+            listener.LoggerNameFormat.Should().Be("{0}-{1}");
+        }
+
+        [Fact]
+        public void logging_trace_listener_processes_initialize_data_test()
+        {
+            // null results in default settings
+            var listener = new LoggingTraceListener((string)null);
+            AssertDefaultSettings(listener);
+
+            // string.Empty results in default settings
+            listener = new LoggingTraceListener(string.Empty);
+            AssertDefaultSettings(listener);
+
+            // values are trimmed and case-insensitive, empty values ignored
+            listener = new LoggingTraceListener("; DefaultTraceeventtype   =warninG; loggernameFORMAT= {listenerName}-{sourceName}\t; Name =  TestName\t; ");
+            listener.Name.Should().Be("TestName");
+            listener.DefaultTraceEventType.Should().Be(TraceEventType.Warning);
+            listener.LoggerNameFormat.Should().Be("{listenerName}-{sourceName}");
         }
 
         private void AssertExpectedLogLevel(LoggingTraceListener listener, TraceEventType eType, LogLevel level)
@@ -72,71 +132,11 @@ namespace Ucoin.Logging.Test
             adapter.LastEvent.Exception.Should().BeNull();
         }
 
-        //[Test]
-        //public void DoesNotLogBelowFilterLevel()
-        //{
-        //    CapturingLoggerFactoryAdapter factoryAdapter = new CapturingLoggerFactoryAdapter();
-        //    LogManager.Adapter = factoryAdapter;
-
-        //    CommonLoggingTraceListener l = new CommonLoggingTraceListener();
-        //    l.Filter = new EventTypeFilter(SourceLevels.Warning);
-        //    factoryAdapter.ClearLastEvent();
-        //    l.TraceEvent(null, "sourceName", TraceEventType.Information, -1, "format {0}", "Information");
-        //    Assert.AreEqual(null, factoryAdapter.LastEvent);
-
-        //    AssertExpectedLogLevel(l, TraceEventType.Warning, LogLevel.Warn);
-        //    AssertExpectedLogLevel(l, TraceEventType.Error, LogLevel.Error);
-        //}
-
-        //[Test]
-        //public void DefaultSettings()
-        //{
-        //    CommonLoggingTraceListener l = new CommonLoggingTraceListener();
-
-        //    AssertDefaultSettings(l);
-        //}
-
-        //[Test]
-        //public void ProcessesProperties()
-        //{
-        //    CommonLoggingTraceListener l;
-
-        //    NameValueCollection props = new NameValueCollection();
-        //    props["Name"] = "TestName";
-        //    props["DefaultTraceEventType"] = TraceEventType.Information.ToString().ToLower();
-        //    props["LoggerNameFormat"] = "{0}-{1}";
-        //    l = new CommonLoggingTraceListener(props);
-
-        //    Assert.AreEqual("TestName", l.Name);
-        //    Assert.AreEqual(TraceEventType.Information, l.DefaultTraceEventType);
-        //    Assert.AreEqual("{0}-{1}", l.LoggerNameFormat);
-        //}
-
-        //[Test]
-        //public void ProcessesInitializeData()
-        //{
-        //    CommonLoggingTraceListener l;
-
-        //    // null results in default settings
-        //    l = new CommonLoggingTraceListener((string)null);
-        //    AssertDefaultSettings(l);
-
-        //    // string.Empty results in default settings
-        //    l = new CommonLoggingTraceListener(string.Empty);
-        //    AssertDefaultSettings(l);
-
-        //    // values are trimmed and case-insensitive, empty values ignored
-        //    l = new CommonLoggingTraceListener("; DefaultTraceeventtype   =warninG; loggernameFORMAT= {listenerName}-{sourceName}\t; Name =  TestName\t; ");
-        //    Assert.AreEqual("TestName", l.Name);
-        //    Assert.AreEqual(TraceEventType.Warning, l.DefaultTraceEventType);
-        //    Assert.AreEqual("{listenerName}-{sourceName}", l.LoggerNameFormat);
-        //}
-
-        //private void AssertDefaultSettings(CommonLoggingTraceListener l)
-        //{
-        //    Assert.AreEqual("Diagnostics", l.Name);
-        //    Assert.AreEqual(TraceEventType.Verbose, l.DefaultTraceEventType);
-        //    Assert.AreEqual("{listenerName}.{sourceName}", l.LoggerNameFormat);
-        //}
+        private void AssertDefaultSettings(LoggingTraceListener listener)
+        {
+            listener.Name.Should().Be("Diagnostics");
+            listener.DefaultTraceEventType.Should().Be(TraceEventType.Verbose);
+            listener.LoggerNameFormat.Should().Be("{listenerName}.{sourceName}");
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace Ucoin.Framework.Logging.Configuration
 
         public NameValueCollection Properties
         {
-            get { return properties; }
+            get { return properties; } 
         }
     }
 }

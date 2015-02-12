@@ -19,7 +19,7 @@ namespace Ucoin.Framework.Logging.Simple
         public DebugLoggerAdapter(LogArgumentEntity argEntity)
             : base(argEntity)
         {
-        }
+        } 
 
         /// <summary>
         /// Creates a new <see cref="DebugOutLogger"/> instance.

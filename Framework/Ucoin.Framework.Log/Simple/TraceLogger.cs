@@ -21,7 +21,7 @@ namespace Ucoin.Framework.Logging.Simple
             private readonly TraceLogger outer;
             private readonly LogLevel level;
             private readonly object message;
-            private readonly Exception ex;
+            private readonly Exception ex; 
 
             public FormatOutputMessage(TraceLogger outer, LogLevel level, object message, Exception ex)
             {

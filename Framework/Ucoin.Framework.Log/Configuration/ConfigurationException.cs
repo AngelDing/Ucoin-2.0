@@ -18,6 +18,6 @@ namespace Ucoin.Framework.Logging.Configuration
         public ConfigurationException(string message, Exception rootCause)
             : base(message, rootCause)
         {
-        }
+        } 
     }
 }

@@ -34,7 +34,7 @@ namespace Ucoin.Framework.Logging
             } 
         }
 
-        public void Debug<T>(T message)
+        public void Debug<T>(T message) 
         {
             if (IsDebugEnabled)
             {

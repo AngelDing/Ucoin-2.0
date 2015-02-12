@@ -73,7 +73,7 @@ namespace Ucoin.Framework.Logging
                         }
                     }
                 }
-                return adapter; 
+                return adapter;
             }
             set
             {
@@ -137,19 +137,34 @@ namespace Ucoin.Framework.Logging
             if (sectionResult is LogSetting)
             {
                 var setting = (LogSetting)sectionResult;
-                if (setting.Properties != null && setting.Properties.Count > 0)
+                try
                 {
-                    object[] args = { setting.Properties };
-                    adapter = (ILoggerAdapter)Activator.CreateInstance(setting.FactoryAdapterType, args);
+                    if (setting.Properties != null && setting.Properties.Count > 0)
+                    {
+                        object[] args = { setting.Properties };
+                        adapter = (ILoggerAdapter)Activator.CreateInstance(setting.FactoryAdapterType, args);
+                    }
+                    else
+                    {
+                        adapter = (ILoggerAdapter)Activator.CreateInstance(setting.FactoryAdapterType);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    adapter = (ILoggerAdapter)Activator.CreateInstance(setting.FactoryAdapterType);
+                    var errorMsg = string.Format(
+                        @"Unable to create instance of type {0}.Possible explanation is lack of zero arg and single arg Common.Logging.Configuration.NameValueCollection constructors.",
+                        setting.FactoryAdapterType.FullName);
+                    throw new ConfigurationException(errorMsg, ex);
                 }
             }
             else
             {
-                return adapter = GetDefaultFactory();
+                var msg = string.Format(
+                    "ConfigurationReader {0} returned unknown settings instance of type {1}",
+                    ConfigurationReader.GetType().FullName,
+                    sectionResult.GetType().FullName
+                );
+                throw new ConfigurationException(msg);
             }
             return adapter;
         }
