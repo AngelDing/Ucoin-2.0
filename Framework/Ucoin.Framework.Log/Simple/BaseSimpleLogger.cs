@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-
+ 
 namespace Ucoin.Framework.Logging.Simple
 {
     public abstract class BaseSimpleLogger : BaseLogger

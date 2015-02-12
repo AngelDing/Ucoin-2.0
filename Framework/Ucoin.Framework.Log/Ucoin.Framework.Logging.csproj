@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1C70A165-5326-41A9-84FD-2FDB51819401}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ucoin.Framework.Logging</RootNamespace>
+    <AssemblyName>Ucoin.Framework.Logging</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseLogger.cs" />
+    <Compile Include="BaseLoggerAdapter.cs" />
+    <Compile Include="Configuration\ConfigurationException.cs" />
+    <Compile Include="Configuration\ConfigurationSectionHandler.cs" />
+    <Compile Include="Configuration\DefaultConfigurationReader.cs" />
+    <Compile Include="Configuration\IConfigurationReader.cs" />
+    <Compile Include="Simple\DebugLoggerAdapter.cs" />
+    <Compile Include="Simple\DebugOutLogger.cs" />
+    <Compile Include="Simple\ExceptionFormatter.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="ILoggerAdapter.cs" />
+    <Compile Include="LogArgumentEntity.cs" />
+    <Compile Include="LogLevel.cs" />
+    <Compile Include="LogManager.cs" />
+    <Compile Include="Configuration\LogSetting.cs" />
+    <Compile Include="Simple\BaseSimpleLogger.cs" />
+    <Compile Include="Simple\BaseSimpleLoggerAdapter.cs" />
+    <Compile Include="Simple\ConsoleOutLogger.cs" />
+    <Compile Include="Simple\ConsoleOutLoggerAdapter.cs" />
+    <Compile Include="Simple\LoggingTraceListener.cs" />
+    <Compile Include="Simple\NoOpLogger.cs" />
+    <Compile Include="Simple\NoOpLoggerAdapter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simple\TraceLogger.cs" />
+    <Compile Include="Simple\TraceLoggerAdapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Utility\Ucoin.Framework.Utility.csproj">
+      <Project>{5b31d7e9-f83f-465f-aa90-d25a580e5420}</Project>
+      <Name>Ucoin.Framework.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

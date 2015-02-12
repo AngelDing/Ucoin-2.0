@@ -13,7 +13,7 @@ namespace Ucoin.Framework.Logging
             cacheLoggers = new ConcurrentDictionary<string, ILogger>();
         }
 
-        #region Implementation of ILoggerAdapter
+        #region Implementation of ILoggerAdapter 
 
         /// <summary>
         /// 由指定类型获取<see cref="ILog"/>日志实例

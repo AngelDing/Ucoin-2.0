@@ -15,5 +15,5 @@ namespace Ucoin.Framework.Logging.Simple
         {
             return nopLogger;
         }
-    }
+    } 
 }

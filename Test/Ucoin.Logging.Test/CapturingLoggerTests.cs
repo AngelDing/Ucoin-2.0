@@ -66,8 +66,8 @@ namespace Ucoin.Logging.Test
             testLogger.LoggerEvents[1].MessageObject.Should().Be("message2");
 
             testLogger.Clear();
-            adapter.LastEvent.Should().BeNull();
-            adapter.LoggerEvents.Count.Should().Be(0);
+            testLogger.LastEvent.Should().BeNull();
+            testLogger.LoggerEvents.Count.Should().Be(0);
         }
 
         [Fact]

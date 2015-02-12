@@ -5,6 +5,7 @@ using Ucoin.Framework.Utility;
 namespace Ucoin.Framework.Logging.Simple
 {
     public class TraceLoggerAdapter : BaseSimpleLoggerAdapter
+
     {
         public bool UseTraceSource { get; set; }
 

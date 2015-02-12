@@ -59,6 +59,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CapturingLoggerTests.cs" />
+    <Compile Include="LoggingTraceListenerTests.cs" />
     <Compile Include="TestUtil\CapturingLogger.cs" />
     <Compile Include="TestUtil\CapturingLoggerAdapter.cs" />
     <Compile Include="TestUtil\CapturingLoggerEvent.cs" />

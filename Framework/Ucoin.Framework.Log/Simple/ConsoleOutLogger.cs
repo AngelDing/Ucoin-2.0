@@ -52,6 +52,6 @@ namespace Ucoin.Framework.Logging.Simple
             }
 
             Console.Out.WriteLine(sb.ToString());
-        }
+        } 
     }
 }

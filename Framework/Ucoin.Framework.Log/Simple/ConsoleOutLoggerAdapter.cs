@@ -16,7 +16,7 @@ namespace Ucoin.Framework.Logging.Simple
         public ConsoleOutLoggerAdapter(NameValueCollection properties)
             : base(properties)
         {
-        }
+        } 
 
         public ConsoleOutLoggerAdapter(NameValueCollection properties, bool useColor)
             : this(properties)

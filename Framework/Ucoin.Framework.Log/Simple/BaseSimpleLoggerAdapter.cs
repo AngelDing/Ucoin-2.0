@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using Ucoin.Framework.Logging.Configuration;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Utility; 
 
 namespace Ucoin.Framework.Logging.Simple
 {

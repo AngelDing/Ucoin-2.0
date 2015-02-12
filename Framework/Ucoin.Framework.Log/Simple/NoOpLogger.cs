@@ -27,7 +27,7 @@ namespace Ucoin.Framework.Logging.Simple
         }
 
         public void Debug<T>(T message)
-        {
+        { 
         }
 
         public void Debug(string format, params object[] args)
