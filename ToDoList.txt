@@ -3,3 +3,5 @@
 2. 企業庫6.0需要熟悉：Unity，Validation，Interception，Exception Handling，Transient Fault Handling
 
 3. SCMP：Log管理，監控管理：Sql，Redis，服務器等，MongoDB，RabbitMQ等
+
+4. Logging實現NLog，log4Net，EntLib Logging的適配；
