@@ -41,6 +41,14 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -64,6 +72,10 @@
     <Compile Include="BaseSimpleLoggerTests.cs" />
     <Compile Include="CapturingLoggerTests.cs" />
     <Compile Include="ConfigurationSectionHandlerTests.cs" />
+    <Compile Include="EntLib\EntlibTraceListenerTests.cs" />
+    <Compile Include="EntLib\EntLibLoggerAdapterTests.cs" />
+    <Compile Include="EntLib\EntLibTests.cs" />
+    <Compile Include="EntLib\SeverityFilterTests.cs" />
     <Compile Include="LoggingTraceListenerTests.cs" />
     <Compile Include="LogManagerTests.cs" />
     <Compile Include="TestUtil\CapturingLogger.cs" />
@@ -78,6 +90,10 @@
     <Compile Include="TraceLoggerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Logging.EntLib\Ucoin.Framework.Logging.EntLib.csproj">
+      <Project>{ba4126c0-b452-44bd-a1fe-e5c3ed33e2a4}</Project>
+      <Name>Ucoin.Framework.Logging.EntLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Log\Ucoin.Framework.Logging.csproj">
       <Project>{1c70a165-5326-41a9-84fd-2fdb51819401}</Project>
       <Name>Ucoin.Framework.Logging</Name>

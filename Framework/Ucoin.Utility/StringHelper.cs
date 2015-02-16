@@ -16,8 +16,21 @@ namespace Ucoin.Framework.Utility
             {
                 return defaultValue;
             }
-        }
+        }      
 
         #endregion
+
+        public static int ToInt(this string str, int defaultValue)
+        {
+            int i;
+            if (int.TryParse(str, out i))
+            {
+                return i;
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
     }
 }
