@@ -53,7 +53,7 @@
     <Compile Include="CustomTraceListenerData.cs" />
     <Compile Include="EntLibLogger.cs" />
     <Compile Include="EntLibLoggerAdapter.cs" />
-    <Compile Include="LoggerSettings.cs" />
+    <Compile Include="MongoDbTraceListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeverityFilter.cs" />
   </ItemGroup>

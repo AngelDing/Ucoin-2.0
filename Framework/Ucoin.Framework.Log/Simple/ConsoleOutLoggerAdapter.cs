@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using Ucoin.Framework.Logging.Configuration;
+using Ucoin.Framework.Utility;
 
 namespace Ucoin.Framework.Logging.Simple
 {
@@ -16,14 +17,12 @@ namespace Ucoin.Framework.Logging.Simple
         public ConsoleOutLoggerAdapter(NameValueCollection properties)
             : base(properties)
         {
+            var useColorStr = properties.Get("useColor");
+            if (string.IsNullOrEmpty(useColorStr) == false)
+            {
+                this.useColor = useColorStr.ToBool(false);
+            }
         } 
-
-        public ConsoleOutLoggerAdapter(NameValueCollection properties, bool useColor)
-            : this(properties)
-        {
-            this.useColor = useColor;
-        }
-
 
         public ConsoleOutLoggerAdapter(LogArgumentEntity argEntity)
             : base(argEntity)

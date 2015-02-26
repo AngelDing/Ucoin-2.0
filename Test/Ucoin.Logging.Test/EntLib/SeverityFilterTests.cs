@@ -1,46 +1,47 @@
-﻿//using System;
-//using Common.Logging.Configuration;
-//using System.Diagnostics;
-//using NUnit.Framework;
+﻿using System;
+using System.Diagnostics;
+using Ucoin.Framework.Logging.EntLib;
+using Xunit;
+using FluentAssertions;
+using System.Collections.Specialized;
 
-//namespace Common.Logging.EntLib
-//{
-//    [TestFixture]
-//    public class SeverityFilterTests
-//    {
-//        [Test]
-//        public void DefaultSettings()
-//        {
-//            SeverityFilter sf = new SeverityFilter(null);
-//            Assert.AreEqual("Severity Filter", sf.Name);
-//            Assert.AreEqual(Int32.MaxValue, sf.SeverityMask);            
-//        }
+namespace Ucoin.Logging.Test.EntLib
+{
+    public class SeverityFilterTests
+    {
+        [Fact]
+        public void logging_entlib_default_settings_test()
+        {
+            var sf = new SeverityFilter(null);
+            sf.Name.Should().Be("Severity Filter");
+            sf.SeverityMask.Should().Be(Int32.MaxValue);
+        }
 
-//        [Test]
-//        public void SetsProperties()
-//        {
-//            SeverityFilter sf = new SeverityFilter("name", 10);
-//            Assert.AreEqual("name", sf.Name);
-//            Assert.AreEqual(10, sf.SeverityMask);
+        [Fact]
+        public void logging_entlib_set_properties_test()
+        {
+            var sf = new SeverityFilter("name", 4);
+            sf.Name.Should().Be("name");
+            sf.SeverityMask.Should().Be(4);
 
-//            NameValueCollection props = new NameValueCollection();
-//            props["Name"] = "name";
-//            props["SeverityMask"] = "10";
-//            sf = new SeverityFilter(props);
-//            Assert.AreEqual("name", sf.Name);
-//            Assert.AreEqual(10, sf.SeverityMask);
-//        }
+            var props = new NameValueCollection();
+            props["Name"] = "name";
+            props["SeverityMask"] = "4";
+            sf = new SeverityFilter(props);
+            sf.Name.Should().Be("name");
+            sf.SeverityMask.Should().Be(4);
+        }
 
-//        [Test]
-//        public void FiltersByMask()
-//        {
-//            SeverityFilter sf = new SeverityFilter("name", 6);
-//            Assert.IsTrue(sf.ShouldLog((TraceEventType) 0));
-//            Assert.IsFalse(sf.ShouldLog((TraceEventType) 1));
-//            Assert.IsTrue(sf.ShouldLog((TraceEventType) 2));
-//            Assert.IsTrue(sf.ShouldLog((TraceEventType) 4));
-//            Assert.IsFalse(sf.ShouldLog((TraceEventType) 7));
-//            Assert.IsFalse(sf.ShouldLog((TraceEventType) 255));
-//        }
-//    }
-//}
+        [Fact]
+        public void logging_entlib_filter_by_mask_test()
+        {
+            var sf = new SeverityFilter("name", 6);
+            sf.ShouldLog((TraceEventType)0).Should().BeTrue();
+            sf.ShouldLog((TraceEventType)1).Should().BeFalse();
+            sf.ShouldLog((TraceEventType)2).Should().BeTrue();
+            sf.ShouldLog((TraceEventType)4).Should().BeTrue();
+            sf.ShouldLog((TraceEventType)7).Should().BeFalse();
+            sf.ShouldLog((TraceEventType)255).Should().BeFalse();
+        }
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using Ucoin.Framework.Logging;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
 
 namespace Ucoin.Logging.Demo
 {
@@ -7,10 +8,8 @@ namespace Ucoin.Logging.Demo
     {
         static void Main(string[] args)
         {
-            var adapter = new ConsoleOutLoggerDemo().GetLoggerFactoryAdapter();
-            LogManager.Adapter = adapter;
-
-            var logger = LogManager.GetLogger("console");
+            EntLibLoggerInit();
+            var logger = LogManager.GetLogger("Demo Test");
             logger.Debug("debug");
             logger.Trace("trace");
             logger.Info("info");
@@ -19,6 +18,12 @@ namespace Ucoin.Logging.Demo
             logger.Fatal("fatal");
 
             Console.ReadLine();
+        }
+
+        //採用EntLibLogger時需要初始化
+        private static void EntLibLoggerInit()
+        {
+             Logger.SetLogWriter(new LogWriterFactory().Create());
         }
     }
 }

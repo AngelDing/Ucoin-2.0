@@ -9,17 +9,11 @@ using Microsoft.Practices.EnterpriseLibrary.Logging;
 
 namespace Ucoin.Framework.Logging.EntLib
 {
-    /// <summary>
-    /// Filters <see cref="LogEntry"/>s by severity (see <see cref="TraceEventType"/>).
-    /// </summary>
     [ConfigurationElementType(typeof(CustomLogFilterData))]
     public class SeverityFilter : LogFilter
     {
         private int severityMask = Int32.MaxValue;
 
-        /// <summary>
-        /// Bitmask to identify severity levels that should be logged.
-        /// </summary>
         public int SeverityMask
         {
             get { return severityMask; }
@@ -43,7 +37,10 @@ namespace Ucoin.Framework.Logging.EntLib
         public SeverityFilter(NameValueCollection attributes)
             : base((attributes != null && attributes["name"] != null) ? attributes["name"] : "Severity Filter")
         {
-            //this.severityMask = attributes.Get("SeverityMask").ToInt(this.severityMask);
+            if (attributes != null)
+            {
+                this.severityMask = attributes.Get("SeverityMask").ToInt(this.severityMask);
+            }
         }
 
         public override bool Filter(LogEntry log)

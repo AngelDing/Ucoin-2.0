@@ -5,3 +5,5 @@
 3. SCMP：Log管理，監控管理：Sql，Redis，服務器等，MongoDB，RabbitMQ等
 
 4. Logging實現NLog，log4Net，EntLib Logging的適配；
+
+5. 如何將LogLevel同EntLib Logging的TraceEventType對應上，即只要配置LogLevel即可；

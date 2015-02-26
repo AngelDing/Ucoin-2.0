@@ -11,7 +11,7 @@ namespace Ucoin.Framework.Logging.EntLib
             public TraceLevelLogEntry(string category, TraceEventType severity)
             {
                 Categories.Add(category);
-                Severity = severity;               
+                Severity = severity;    
             }
         }
 
@@ -22,7 +22,7 @@ namespace Ucoin.Framework.Logging.EntLib
         private readonly LogEntry CriticalLogEntry;
 
         private readonly string category;
-        private readonly LoggerSettings settings;
+
         private readonly LogWriter logWriter;
 
         public string Category
@@ -30,21 +30,15 @@ namespace Ucoin.Framework.Logging.EntLib
             get { return category; }
         }
 
-        public LoggerSettings Settings
-        {
-            get { return settings; }
-        }
-
         public LogWriter LogWriter
         {
             get { return logWriter; }
         }
 
-        public EntLibLogger(string category, LogWriter logWriter, LoggerSettings settings)
+        public EntLibLogger(string category, LogWriter logWriter)
         {
             this.category = category;
             this.logWriter = logWriter;
-            this.settings = settings;
 
             VerboseLogEntry = new TraceLevelLogEntry(category, TraceEventType.Verbose);
             InformationLogEntry = new TraceLevelLogEntry(category, TraceEventType.Information);
@@ -138,7 +132,6 @@ namespace Ucoin.Framework.Logging.EntLib
         {
             LogEntry log = new LogEntry();
             log.Categories.Add(category);
-            log.Priority = settings.priority;
             log.Severity = traceEventType;
             return log;
         }
@@ -154,23 +147,23 @@ namespace Ucoin.Framework.Logging.EntLib
 
         protected virtual void AddExceptionInfo(LogEntry log, Exception exception)
         {
-            if (exception != null && settings.exceptionFormat != null)
-            {
-                string errorMessage = settings.exceptionFormat
-                    .Replace("$(exception.message)", exception.Message)
-                    .Replace("$(exception.source)", exception.Source)
-                    .Replace("$(exception.targetsite)", (exception.TargetSite==null)?string.Empty:exception.TargetSite.ToString())
-                    .Replace("$(exception.stacktrace)", exception.StackTrace)
-                    ;
-                //                StringBuilder sb = new StringBuilder(128);
-                //                sb.Append("Exception[ ");
-                //                sb.Append("message = ").Append(exception.Message).Append(separator);
-                //                sb.Append("source = ").Append(exception.Source).Append(separator);
-                //                sb.Append("targetsite = ").Append(exception.TargetSite).Append(separator);
-                //                sb.Append("stacktrace = ").Append(exception.StackTrace).Append("]");
-                //                return sb.ToString();
-                log.AddErrorMessage(errorMessage);
-            }
+            //if (exception != null && settings.ExceptionFormat != null)
+            //{
+            //    string errorMessage = settings.ExceptionFormat
+            //        .Replace("$(exception.message)", exception.Message)
+            //        .Replace("$(exception.source)", exception.Source)
+            //        .Replace("$(exception.targetsite)", (exception.TargetSite==null)?string.Empty:exception.TargetSite.ToString())
+            //        .Replace("$(exception.stacktrace)", exception.StackTrace)
+            //        ;
+            //    //                StringBuilder sb = new StringBuilder(128);
+            //    //                sb.Append("Exception[ ");
+            //    //                sb.Append("message = ").Append(exception.Message).Append(separator);
+            //    //                sb.Append("source = ").Append(exception.Source).Append(separator);
+            //    //                sb.Append("targetsite = ").Append(exception.TargetSite).Append(separator);
+            //    //                sb.Append("stacktrace = ").Append(exception.StackTrace).Append("]");
+            //    //                return sb.ToString();
+            //    log.AddErrorMessage(errorMessage);
+            //}
         }
     }
 }

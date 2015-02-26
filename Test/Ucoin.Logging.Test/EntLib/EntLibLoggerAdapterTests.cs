@@ -5,6 +5,8 @@ using Microsoft.Practices.EnterpriseLibrary.Logging.Filters;
 using Xunit;
 using FluentAssertions;
 using Ucoin.Framework.Logging.EntLib;
+using System.Collections.Specialized;
+using Ucoin.Framework.Logging;
 
 namespace Ucoin.Logging.Test.EntLib
 {
@@ -22,102 +24,103 @@ namespace Ucoin.Logging.Test.EntLib
             adapter.DefaultPriority.Should().Be(LoggerSettings.DEFAULTPRIORITY);
         }
 
-        //[Test]
-        //public void InitWithProperties()
-        //{
-        //    NameValueCollection props = new NameValueCollection();
-        //    props["exceptionFormat"] = "$(exception.message)";
-        //    props["priority"] = "10";
-        //    EntLibLoggerFactoryAdapter a = new EntLibLoggerFactoryAdapter(props);
-        //    Assert.AreEqual("$(exception.message)", a.ExceptionFormat);
-        //    Assert.AreEqual(10, a.DefaultPriority);
-        //}
+        [Fact]
+        public void logging_entlib_init_with_properties_test()
+        {
+            var props = new NameValueCollection();
+            props["exceptionFormat"] = "$(exception.message)";
+            props["priority"] = "4";
+            var a = new EntLibLoggerAdapter(props);
+            a.ExceptionFormat.Should().Be("$(exception.message)");
+            a.DefaultPriority.Should().Be(4);
+        }
 
-        //[Test]
-        //public void CachesLoggers()
-        //{
-        //    SeverityFilter severityFilter = new SeverityFilter(null, TraceEventType.Critical | TraceEventType.Error);
-        //    TestEntLibLoggerFactoryAdapter a = CreateTestEntLibLoggerFactoryAdapter(severityFilter);
+        [Fact]
+        public void logging_entlib_caches_loggers_test()
+        {
+            var severityFilter = new SeverityFilter(null, TraceEventType.Critical | TraceEventType.Error);
+            var a = CreateTestEntLibLoggerAdapter(severityFilter);
 
-        //    ILog log = a.GetLogger(this.GetType());
-        //    Assert.AreSame(log, a.GetLogger(this.GetType()));
-        //}
+            var log = a.GetLogger(this.GetType());
+            a.GetLogger(this.GetType()).Should().Be(log);
+        }
 
-        //[Test]
-        //public void LogsMessage()
-        //{
-        //    SeverityFilter severityFilter = new SeverityFilter(null, TraceEventType.Critical | TraceEventType.Error);
-        //    TestEntLibLoggerFactoryAdapter a = CreateTestEntLibLoggerFactoryAdapter(severityFilter);
-        //    Exception ex = new Exception("errormessage");
+        [Fact]
+        public void logging_entlib_log_message_test()
+        {
+            var severityFilter = new SeverityFilter(null, TraceEventType.Critical | TraceEventType.Error);
+            var a = CreateTestEntLibLoggerAdapter(severityFilter);
+            var ex = new Exception("errormessage");
 
-        //    ILog log = a.GetLogger(this.GetType());
+            var log = a.GetLogger(this.GetType());
 
-        //    // not logged due to severity filter 
-        //    a.LastLogEntry = null;
-        //    log.Trace("Message1", ex);
-        //    Assert.IsNull(a.LastLogEntry);
+            // not logged due to severity filter 
+            a.LastLogEntry = null;
+            log.Trace("Message1", ex);
+            a.LastLogEntry.Should().BeNull();
 
-        //    // logged, passes severity filter
-        //    a.LastLogEntry = null;
-        //    log.Error("Message2", ex);
-        //    Assert.AreEqual(TraceEventType.Error, a.LastLogEntry.Severity);
-        //    Assert.AreEqual("Message2", a.LastLogEntry.Message);
-        //    Assert.AreEqual(a.DefaultPriority, a.LastLogEntry.Priority);
-        //    Assert.AreEqual(1, a.LastLogEntry.Categories.Count);
-        //    Assert.AreEqual(this.GetType().FullName, a.LastLogEntry.CategoriesStrings[0]);
-        //    Assert.AreEqual("Exception[ message = errormessage, source = , targetsite = , stacktrace =  ]", a.LastLogEntry.ErrorMessages.Trim());
-        //}
+            // logged, passes severity filter
+            a.LastLogEntry = null;
+            log.Error("Message2", ex);
+            a.LastLogEntry.Severity.Should().Be(TraceEventType.Error);
+            a.LastLogEntry.Message.Should().Be("Message2");
+            a.LastLogEntry.Priority.Should().Be(a.DefaultPriority);
+            a.LastLogEntry.Categories.Count.Should().Be(1);
+            a.LastLogEntry.CategoriesStrings[0].Should().Be(this.GetType().FullName);
+            var exceptString = "Exception[ message = errormessage, source = , targetsite = , stacktrace =  ]";
+            a.LastLogEntry.ErrorMessages.Trim().Should().Be(exceptString);
+        }
 
-        //#region TestEntLibLoggerFactoryAdapter
+        #region TestEntLibLoggerAdapter
 
-        //private static TestEntLibLoggerFactoryAdapter CreateTestEntLibLoggerFactoryAdapter(ILogFilter filter)
-        //{
-        //    LogWriter logWriter = new LogWriter(
-        //        new ILogFilter[] { filter }
-        //        , new LogSource[] { new LogSource("logSource") }
-        //        , new LogSource("defaultLogSource")
-        //        , new LogSource("notProcessedLogSource")
-        //        , new LogSource("errorsLogSource")
-        //        , "DefaultCategory"
-        //        , true
-        //        , true
-        //        );
+        private static TestEntLibLoggerAdapter CreateTestEntLibLoggerAdapter(ILogFilter filter)
+        {
+            LogWriter logWriter = new LogWriter(
+                new ILogFilter[] { filter }
+                , new LogSource[] { new LogSource("logSource") }
+                , new LogSource("defaultLogSource")
+                , new LogSource("notProcessedLogSource")
+                , new LogSource("errorsLogSource")
+                , "DefaultCategory"
+                , true
+                , true
+                );
 
-        //    return new TestEntLibLoggerFactoryAdapter(5, EntLibLoggerSettings.DEFAULTEXCEPTIONFORMAT, logWriter);
-        //}
+            return new TestEntLibLoggerAdapter(logWriter);
+        }
 
-        //private class TestEntLibLoggerFactoryAdapter : EntLibLoggerFactoryAdapter
-        //{
-        //    public LogEntry LastLogEntry;
+        private class TestEntLibLoggerAdapter : EntLibLoggerAdapter
+        {
+            public LogEntry LastLogEntry;
 
-        //    public TestEntLibLoggerFactoryAdapter(int defaultPriority, string exceptionFormat, LogWriter logWriter)
-        //        : base(defaultPriority, exceptionFormat, logWriter)
-        //    {
-        //    }
+            public TestEntLibLoggerAdapter(LogWriter logWriter)
+                : base(logWriter)
+            {
+            }
 
-        //    protected override ILog CreateLogger(string name, LogWriter logWriter, EntLibLoggerSettings settings)
-        //    {
-        //        return new TestEntLibLogger(this, name, logWriter, settings);
-        //    }
+            protected override ILogger CreateLogger(string name, LogWriter logWriter)
+            {
+                return new TestEntLibLogger(this, name, logWriter);
+            }
 
-        //    private class TestEntLibLogger : EntLibLogger
-        //    {
-        //        private readonly TestEntLibLoggerFactoryAdapter owner;
+            private class TestEntLibLogger : EntLibLogger
+            {
+                private readonly TestEntLibLoggerAdapter owner;
 
-        //        public TestEntLibLogger(TestEntLibLoggerFactoryAdapter owner, string category, LogWriter logWriter, EntLibLoggerSettings settings)
-        //            : base(category, logWriter, settings)
-        //        {
-        //            this.owner = owner;
-        //        }
+                public TestEntLibLogger(TestEntLibLoggerAdapter owner, string category, LogWriter logWriter)
+                    : base(category, logWriter)
+                {
+                    this.owner = owner;
+                }
 
-        //        protected override void WriteLog(LogEntry log)
-        //        {
-        //            owner.LastLogEntry = log;
-        //            base.WriteLog(log);
-        //        }
-        //    }
-        //}
+                protected override void WriteLog(LogEntry log)
+                {
+                    owner.LastLogEntry = log;
+                    base.WriteLog(log);
+                }
+            }
+        }
 
-        //#endregion
+        #endregion
     }
 }

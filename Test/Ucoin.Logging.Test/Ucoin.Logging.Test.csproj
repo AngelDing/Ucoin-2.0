@@ -74,7 +74,6 @@
     <Compile Include="ConfigurationSectionHandlerTests.cs" />
     <Compile Include="EntLib\EntlibTraceListenerTests.cs" />
     <Compile Include="EntLib\EntLibLoggerAdapterTests.cs" />
-    <Compile Include="EntLib\EntLibTests.cs" />
     <Compile Include="EntLib\SeverityFilterTests.cs" />
     <Compile Include="LoggingTraceListenerTests.cs" />
     <Compile Include="LogManagerTests.cs" />
