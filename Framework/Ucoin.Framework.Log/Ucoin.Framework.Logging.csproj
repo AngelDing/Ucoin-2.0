@@ -42,6 +42,7 @@
     <Compile Include="Configuration\DefaultConfigurationReader.cs" />
     <Compile Include="Configuration\IConfigurationReader.cs" />
     <Compile Include="LogCategoryType.cs" />
+    <Compile Include="LogHelper.cs" />
     <Compile Include="LogModel.cs" />
     <Compile Include="Simple\DebugLoggerAdapter.cs" />
     <Compile Include="Simple\DebugOutLogger.cs" />

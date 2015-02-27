@@ -18,6 +18,7 @@ namespace Ucoin.Framework.Logging.EntLib
 
         public override void Write(object obj)
         {
+            throw new Exception("Error");
             //var log = obj as LogEntry;
             //var logService = ServiceLocator.GetService<ILogService>();
 

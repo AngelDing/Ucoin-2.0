@@ -98,7 +98,19 @@ namespace Ucoin.Framework.Logging.EntLib
 
         private void PopulateLogEntry(LogEntry log, object message, Exception ex)
         {
-            log.Message = (message == null ? null : message.ToString());
+            if (message == null)
+            {
+                return;
+            }
+            if (message is LogModel)
+            {
+                var logModel = message as LogModel;
+                if (logModel != null)
+                {
+                    log.ExtendedProperties.Add(typeof(LogModel).Name, logModel);
+                }
+            }
+            log.Message =  message.ToString();
             if (ex != null)
             {
                 AddExceptionInfo(log, ex);

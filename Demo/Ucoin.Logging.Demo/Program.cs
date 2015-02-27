@@ -1,6 +1,7 @@
 ﻿using System;
 using Ucoin.Framework.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
+using Ucoin.Framework;
 
 namespace Ucoin.Logging.Demo
 {
@@ -8,21 +9,16 @@ namespace Ucoin.Logging.Demo
     {
         static void Main(string[] args)
         {
-            var logger = LogManager.GetLogger("Demo Test");
+            var logModel = new LogModel() 
+            {
+                Message = "test",
+                LogLevelType = LogLevelType.Info,
+                Detail = "CXXXXX",
+                Source = "Offline",
+                AppCodeType = AppCodeType.Authority
+            };
 
-            logger.Debug("debug");
-            logger.Trace("trace");
-            logger.Info("info");
-            logger.Warn("warn");
-            try
-            {
-                throw new Exception("XXXXXX");
-            }
-            catch (Exception ex)
-            {
-                logger.Error("error", ex);
-            }
-            logger.Fatal("fatal");
+            LogHelper.Log(logModel);
 
             Console.ReadLine();
         }
