@@ -40,6 +40,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Log\Ucoin.Framework.Logging.csproj">
+      <Project>{1c70a165-5326-41a9-84fd-2fdb51819401}</Project>
+      <Name>Ucoin.Framework.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
       <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
       <Name>Ucoin.Framework.MongoDb</Name>

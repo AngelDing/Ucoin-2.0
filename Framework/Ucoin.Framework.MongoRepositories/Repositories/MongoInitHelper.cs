@@ -7,6 +7,7 @@ using MongoDB.Bson;
 using Ucoin.Framework.MongoDb.Entities;
 using Ucoin.Framework.MongoDb.Repositories.Conventions;
 using Ucoin.Framework.MongoDb.Repositories.IdGenerators;
+using Ucoin.Framework.Entities;
 
 namespace Ucoin.Framework.MongoDb.Repositories
 {
@@ -34,6 +35,14 @@ namespace Ucoin.Framework.MongoDb.Repositories
 
         private static void RegisterClassMap()
         {
+            BsonClassMap.RegisterClassMap<BaseEntity>(rc =>
+            {
+                rc.AutoMap();              
+                rc.UnmapProperty(c => c.ObjectState);
+                rc.UnmapProperty(c => c.NeedUpdateList);
+                rc.UnmapProperty(c => c.IsPartialUpdate);
+            });
+
             BsonClassMap.RegisterClassMap<StringKeyMongoEntity>(rc =>
             {
                 rc.AutoMap();

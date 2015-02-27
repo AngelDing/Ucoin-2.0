@@ -1,9 +1,13 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners;
+﻿using System;
+using System.Linq;
+using System.Diagnostics;
+using Ucoin.Log.IServices;
+using Ucoin.Framework.Service;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
+using Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Logging;
-using System.Diagnostics;
-using System;
+using Ucoin.Log.Entities;
 
 namespace Ucoin.Framework.Logging.EntLib
 {
@@ -18,19 +22,56 @@ namespace Ucoin.Framework.Logging.EntLib
 
         public override void Write(object obj)
         {
-            throw new Exception("Error");
-            //var log = obj as LogEntry;
-            //var logService = ServiceLocator.GetService<ILogService>();
+            var log = obj as LogEntry;
+            if (log == null)
+            {
+                return;
+            }
 
-            ////TODO : 將LogEntry轉換為相應的MongoDb Log Entity
-            //if (log.Categories.Contains(LogCategoryType.AppLog.GetDescription()))
-            //{
-            //    logService.LogAppInfo(null);
-            //}
-            //else if (log.Categories.Contains(LogCategoryType.ErrorLog.GetDescription()))
-            //{
-            //    logService.LogErrorInfo(null);
-            //}
+            var logService = ServiceLocator.GetService<ILogService>(); //採用WCF訪問Log服務
+
+            var appLog = GenerateAppLog(log);
+            if (appLog.LogLevelType == LogLevelType.Error || appLog.LogLevelType == LogLevelType.Fatal)
+            {
+                var errorLog = GenerateErrorLog(appLog, log);
+                logService.LogErrorInfo(errorLog);
+            }
+            else
+            {
+                logService.LogAppInfo(appLog);
+            }
+        }
+
+        private ErrorLog GenerateErrorLog(AppLog appLog, LogEntry log)
+        {
+            var errorLog = appLog.ToEntity<AppLog, ErrorLog>();
+            errorLog.AppDomainName = log.AppDomainName;
+            errorLog.ErrorMessages = log.ErrorMessages;
+            errorLog.MachineName = log.MachineName;
+            errorLog.Priority = log.Priority;
+            errorLog.ProcessId = log.ProcessId;
+            errorLog.ProcessName = log.ProcessName;
+            errorLog.Win32ThreadId = log.Win32ThreadId;
+            errorLog.ManagedThreadName = log.ManagedThreadName;
+            return errorLog;
+        }
+
+        private AppLog GenerateAppLog(LogEntry log)
+        {
+            var appLog = new AppLog();          
+
+            if (log.ExtendedProperties.ContainsKey(typeof(LogModel).Name))
+            {
+                var logModel = log.ExtendedProperties[typeof(LogModel).Name] as LogModel;
+                if (logModel != null)
+                {
+                    appLog = logModel.ToEntity<LogModel, AppLog>();
+                }
+            }
+            appLog.TimeStamp = log.TimeStamp;
+            appLog.Category = log.Categories.FirstOrDefault();
+
+            return appLog;
         }
 
         public override void Write(string message)

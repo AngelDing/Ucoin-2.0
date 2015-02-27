@@ -9,8 +9,8 @@ namespace Ucoin.Framework.Logging
         {
             Task.Factory.StartNew(() =>
             {
-                RealLog(model);
-            });
+                RealLog(model);   
+            }); 
         }
 
         private static void RealLog(LogModel model)

@@ -15,7 +15,7 @@ namespace Ucoin.Framework.Logging
 
         public LogLevelType LogLevelType { get; set; }
 
-        public string Detail { get; set; }
+        public string Detail { get; set; } 
 
         public string Source { get; set; }
 

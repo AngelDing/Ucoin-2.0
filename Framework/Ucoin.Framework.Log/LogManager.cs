@@ -13,7 +13,7 @@ namespace Ucoin.Framework.Logging
         private static ILoggerAdapter adapter;
         private static readonly object lockObj = new object();
 
-        static LogManager()
+        static LogManager() 
         {
             Reset();
         }

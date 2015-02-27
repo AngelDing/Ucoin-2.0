@@ -1,6 +1,6 @@
 namespace Ucoin.Framework.Logging
 {
-    public enum LogLevelType
+    public enum LogLevelType : byte
     {
         All   = 0,
 

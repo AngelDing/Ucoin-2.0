@@ -11,6 +11,6 @@ namespace Ucoin.Framework.Logging
         ErrorLog = 2,
 
         [Description("PerfLog")]
-        PerfLog = 3
+        PerfLog = 3 
     }
 }
