@@ -11,25 +11,25 @@ namespace Ucoin.Framework.Logging.EntLib
 {
     public static class LoggerHelper
     {
-        public static TraceEventType GetTraceEventType(LogLevel logLevel)
+        public static TraceEventType GetTraceEventType(LogLevelType logLevel)
         {
             switch (logLevel)
             {
-                case LogLevel.All:                   
-                case LogLevel.Trace:
-                case LogLevel.Debug:
+                case LogLevelType.All:                   
+                case LogLevelType.Trace:
+                case LogLevelType.Debug:
                     return TraceEventType.Verbose | TraceEventType.Information | TraceEventType.Warning
                        | TraceEventType.Error | TraceEventType.Critical;
-                case LogLevel.Info:
+                case LogLevelType.Info:
                     return TraceEventType.Information | TraceEventType.Warning
                        | TraceEventType.Error | TraceEventType.Critical;
-                case LogLevel.Warn:
+                case LogLevelType.Warn:
                     return TraceEventType.Warning | TraceEventType.Error | TraceEventType.Critical;
-                case LogLevel.Error:
+                case LogLevelType.Error:
                     return TraceEventType.Error | TraceEventType.Critical;
-                case LogLevel.Fatal:
+                case LogLevelType.Fatal:
                     return TraceEventType.Critical;
-                case LogLevel.Off:
+                case LogLevelType.Off:
                     return 0;
                 default:
                     throw new ArgumentOutOfRangeException("logLevel", logLevel, "unknown log level");

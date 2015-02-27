@@ -12,7 +12,7 @@ namespace Ucoin.Framework.Logging
 
         public string LogName { get; set; }
 
-        public LogLevel Level { get; set; }
+        public LogLevelType Level { get; set; }
 
         public bool ShowLevel { get; set; }
 

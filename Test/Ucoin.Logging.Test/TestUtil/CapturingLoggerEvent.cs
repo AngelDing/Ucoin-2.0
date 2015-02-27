@@ -7,7 +7,7 @@ namespace Ucoin.Logging.Test
     {
         public readonly CapturingLogger Source;
 
-        public readonly LogLevel Level;
+        public readonly LogLevelType Level;
 
         public readonly object MessageObject;
 
@@ -18,7 +18,7 @@ namespace Ucoin.Logging.Test
             get { return MessageObject.ToString(); }
         }
 
-        public CapturingLoggerEvent(CapturingLogger source, LogLevel level, object msg, Exception ex)
+        public CapturingLoggerEvent(CapturingLogger source, LogLevelType level, object msg, Exception ex)
         {
             Source = source;
             Level = level;

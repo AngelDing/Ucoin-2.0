@@ -53,7 +53,7 @@ namespace Ucoin.Logging.Test
             var argEntity = new LogArgumentEntity
             {
                 LogName = logName,
-                Level = LogLevel.All,
+                Level = LogLevelType.All,
                 ShowDateTime = true,
                 ShowLevel = true,
                 ShowLogName = true,
@@ -63,7 +63,7 @@ namespace Ucoin.Logging.Test
         }
 
 
-        protected override void Write(LogLevel level, object message, Exception exception)
+        protected override void Write(LogLevelType level, object message, Exception exception)
         {
             CapturingLoggerEvent ev = new CapturingLoggerEvent(this, level, message, exception);
             AddEvent(ev);

@@ -15,7 +15,7 @@ namespace Ucoin.Logging.Test
                 : base(argEntiy)
             { }
 
-            protected override void Write(LogLevel level, object message, Exception exception)
+            protected override void Write(LogLevelType level, object message, Exception exception)
             {
                 throw new NotImplementedException();
             }
@@ -44,7 +44,7 @@ namespace Ucoin.Logging.Test
             logger.ArgumentEntity.ShowLevel.Should().BeTrue();
             logger.ArgumentEntity.HasDateTimeFormat.Should().BeFalse();
             logger.ArgumentEntity.DateTimeFormat.Should().BeNullOrEmpty();
-            logger.ArgumentEntity.Level.Should().Be(LogLevel.All);
+            logger.ArgumentEntity.Level.Should().Be(LogLevelType.All);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Ucoin.Logging.Test
             logger.ArgumentEntity.ShowLevel.Should().BeFalse();
             logger.ArgumentEntity.HasDateTimeFormat.Should().BeTrue();
             logger.ArgumentEntity.DateTimeFormat.Should().Be("MM");
-            logger.ArgumentEntity.Level.Should().Be(LogLevel.Info);
+            logger.ArgumentEntity.Level.Should().Be(LogLevelType.Info);
         }
     }
 }

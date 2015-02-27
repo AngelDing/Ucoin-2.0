@@ -18,7 +18,7 @@ namespace Ucoin.Framework.Logging.Simple
             argumentEntity = argEntity;
         }
 
-        protected virtual void FormatOutput(StringBuilder stringBuilder, LogLevel level, object message, Exception e)
+        protected virtual void FormatOutput(StringBuilder stringBuilder, LogLevelType level, object message, Exception e)
         {
             if (stringBuilder == null)
             {
@@ -56,7 +56,7 @@ namespace Ucoin.Framework.Logging.Simple
             }
         }
 
-        protected virtual bool IsLevelEnabled(LogLevel level)
+        protected virtual bool IsLevelEnabled(LogLevelType level)
         {
             int iLevel = (int)level;
             int iCurrentLogLevel = (int)ArgumentEntity.Level;
@@ -67,32 +67,32 @@ namespace Ucoin.Framework.Logging.Simple
 
         public override bool IsTraceEnabled
         {
-            get { return IsLevelEnabled(LogLevel.Trace); }
+            get { return IsLevelEnabled(LogLevelType.Trace); }
         }
 
         public override bool IsDebugEnabled
         {
-            get { return IsLevelEnabled(LogLevel.Debug); }
+            get { return IsLevelEnabled(LogLevelType.Debug); }
         }
 
         public override bool IsInfoEnabled
         {
-            get { return IsLevelEnabled(LogLevel.Info); }
+            get { return IsLevelEnabled(LogLevelType.Info); }
         }
 
         public override bool IsWarnEnabled
         {
-            get { return IsLevelEnabled(LogLevel.Warn); }
+            get { return IsLevelEnabled(LogLevelType.Warn); }
         }
 
         public override bool IsErrorEnabled
         {
-            get { return IsLevelEnabled(LogLevel.Error); }
+            get { return IsLevelEnabled(LogLevelType.Error); }
         }
 
         public override bool IsFatalEnabled
         {
-            get { return IsLevelEnabled(LogLevel.Fatal); }
+            get { return IsLevelEnabled(LogLevelType.Fatal); }
         }
 
         #endregion

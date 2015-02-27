@@ -13,11 +13,7 @@ namespace Ucoin.Framework.Logging.EntLib
         public override void TraceData(TraceEventCache eventCache,
            string source, TraceEventType eventType, int id, object data)
         {
-            if (data is LogEntry)
-            {                
-                this.Write(data as LogEntry);
-            }
-            //throw new Exception("test");
+            this.Write(data);
         }
 
         public override void Write(object obj)
@@ -34,18 +30,16 @@ namespace Ucoin.Framework.Logging.EntLib
             //{
             //    logService.LogErrorInfo(null);
             //}
-            //else if (log.Categories.Contains(LogCategoryType.PerfLog.GetDescription()))
-            //{
-            //    logService.LogPerfInfo(null);
-            //}
         }
 
         public override void Write(string message)
         {
+            // no operation
         }
 
         public override void WriteLine(string message)
         {
+            // no operation
         }
     }
 }

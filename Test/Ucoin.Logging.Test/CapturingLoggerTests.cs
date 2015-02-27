@@ -12,12 +12,12 @@ namespace Ucoin.Logging.Test
         {
             var adapter = new CapturingLoggerAdapter();
             var testLogger = (CapturingLogger)adapter.GetLogger("test");
-            testLogger.ArgumentEntity.Level.Should().Be(LogLevel.All);
+            testLogger.ArgumentEntity.Level.Should().Be(LogLevelType.All);
 
             testLogger.Trace("message1");
             testLogger.LoggerEvents.Count.Should().Be(1);
 
-            testLogger.ArgumentEntity.Level = LogLevel.Debug;
+            testLogger.ArgumentEntity.Level = LogLevelType.Debug;
             testLogger.Trace("message2");
             testLogger.LastEvent.MessageObject.Should().Be("message1");
         }

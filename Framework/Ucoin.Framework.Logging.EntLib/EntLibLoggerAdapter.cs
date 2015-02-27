@@ -13,7 +13,7 @@ namespace Ucoin.Framework.Logging.EntLib
         public EntLibLoggerAdapter(NameValueCollection properties)
             : base()
         {
-            var logLevel = properties.Get("level").ToEnum(LogLevel.All);
+            var logLevel = properties.Get("level").ToEnum(LogLevelType.All);
             var traceEventType = LoggerHelper.GetTraceEventType(logLevel);
             var filter = new SeverityFilter(traceEventType);
 

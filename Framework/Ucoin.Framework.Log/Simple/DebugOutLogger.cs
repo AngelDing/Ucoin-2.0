@@ -11,7 +11,7 @@ namespace Ucoin.Framework.Logging.Simple
         {
         } 
 
-        protected override void Write(LogLevel level, object message, Exception e)
+        protected override void Write(LogLevelType level, object message, Exception e)
         {
             var sb = new StringBuilder();
             FormatOutput(sb, level, message, e);

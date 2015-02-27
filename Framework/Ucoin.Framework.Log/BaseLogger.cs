@@ -22,7 +22,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsTraceEnabled)
             {
-                Write(LogLevel.Trace, message, null);
+                Write(LogLevelType.Trace, message, null);
             }
         }
 
@@ -30,7 +30,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsTraceEnabled)
             {
-                Write(LogLevel.Trace, string.Format(format, args), null);
+                Write(LogLevelType.Trace, string.Format(format, args), null);
             } 
         }
 
@@ -38,7 +38,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsDebugEnabled)
             {
-                Write(LogLevel.Debug, message, null);
+                Write(LogLevelType.Debug, message, null);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsDebugEnabled)
             {
-                Write(LogLevel.Debug, string.Format(format, args), null);
+                Write(LogLevelType.Debug, string.Format(format, args), null);
             }
         }
 
@@ -54,7 +54,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsInfoEnabled)
             {
-                Write(LogLevel.Info, message, null);
+                Write(LogLevelType.Info, message, null);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsInfoEnabled)
             {
-                Write(LogLevel.Info, string.Format(format, args), null);
+                Write(LogLevelType.Info, string.Format(format, args), null);
             }
         }
 
@@ -70,7 +70,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsWarnEnabled)
             {
-                Write(LogLevel.Warn, message, null);
+                Write(LogLevelType.Warn, message, null);
             }
         }
 
@@ -78,7 +78,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsWarnEnabled)
             {
-                Write(LogLevel.Warn, string.Format(format, args), null);
+                Write(LogLevelType.Warn, string.Format(format, args), null);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsErrorEnabled)
             {
-                Write(LogLevel.Error, message, null);
+                Write(LogLevelType.Error, message, null);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsErrorEnabled)
             {
-                Write(LogLevel.Error, string.Format(format, args), null);
+                Write(LogLevelType.Error, string.Format(format, args), null);
             }
         }
 
@@ -102,7 +102,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsErrorEnabled)
             {
-                Write(LogLevel.Error, message, exception);
+                Write(LogLevelType.Error, message, exception);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsErrorEnabled)
             {
-                Write(LogLevel.Error, string.Format(format, args), exception);
+                Write(LogLevelType.Error, string.Format(format, args), exception);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsFatalEnabled)
             {
-                Write(LogLevel.Fatal, message, null);
+                Write(LogLevelType.Fatal, message, null);
             }
         }
 
@@ -126,7 +126,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsFatalEnabled)
             {
-                Write(LogLevel.Fatal, string.Format(format, args), null);
+                Write(LogLevelType.Fatal, string.Format(format, args), null);
             }
         }
 
@@ -134,7 +134,7 @@ namespace Ucoin.Framework.Logging
         {
             if (IsFatalEnabled)
             {
-                Write(LogLevel.Fatal, message, exception);
+                Write(LogLevelType.Fatal, message, exception);
             }
         }
 
@@ -142,12 +142,12 @@ namespace Ucoin.Framework.Logging
         {
             if (IsFatalEnabled)
             {
-                Write(LogLevel.Fatal, string.Format(format, args), exception);
+                Write(LogLevelType.Fatal, string.Format(format, args), exception);
             }
         }
 
         #endregion
 
-        protected abstract void Write(LogLevel level, object message, Exception exception);
+        protected abstract void Write(LogLevelType level, object message, Exception exception);
     }
 }

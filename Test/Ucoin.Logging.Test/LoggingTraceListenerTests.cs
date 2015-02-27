@@ -23,16 +23,16 @@ namespace Ucoin.Logging.Test
             var listener = new LoggingTraceListener();
             listener.DefaultTraceEventType = (TraceEventType)0xFFFF;
 
-            AssertExpectedLogLevel(listener, TraceEventType.Start, LogLevel.Trace);
-            AssertExpectedLogLevel(listener, TraceEventType.Stop, LogLevel.Trace);
-            AssertExpectedLogLevel(listener, TraceEventType.Suspend, LogLevel.Trace);
-            AssertExpectedLogLevel(listener, TraceEventType.Resume, LogLevel.Trace);
-            AssertExpectedLogLevel(listener, TraceEventType.Transfer, LogLevel.Trace);
-            AssertExpectedLogLevel(listener, TraceEventType.Verbose, LogLevel.Debug);
-            AssertExpectedLogLevel(listener, TraceEventType.Information, LogLevel.Info);
-            AssertExpectedLogLevel(listener, TraceEventType.Warning, LogLevel.Warn);
-            AssertExpectedLogLevel(listener, TraceEventType.Error, LogLevel.Error);
-            AssertExpectedLogLevel(listener, TraceEventType.Critical, LogLevel.Fatal);
+            AssertExpectedLogLevel(listener, TraceEventType.Start, LogLevelType.Trace);
+            AssertExpectedLogLevel(listener, TraceEventType.Stop, LogLevelType.Trace);
+            AssertExpectedLogLevel(listener, TraceEventType.Suspend, LogLevelType.Trace);
+            AssertExpectedLogLevel(listener, TraceEventType.Resume, LogLevelType.Trace);
+            AssertExpectedLogLevel(listener, TraceEventType.Transfer, LogLevelType.Trace);
+            AssertExpectedLogLevel(listener, TraceEventType.Verbose, LogLevelType.Debug);
+            AssertExpectedLogLevel(listener, TraceEventType.Information, LogLevelType.Info);
+            AssertExpectedLogLevel(listener, TraceEventType.Warning, LogLevelType.Warn);
+            AssertExpectedLogLevel(listener, TraceEventType.Error, LogLevelType.Error);
+            AssertExpectedLogLevel(listener, TraceEventType.Critical, LogLevelType.Fatal);
 
             adapter.Clear();
             listener.DefaultTraceEventType = TraceEventType.Warning;
@@ -40,7 +40,7 @@ namespace Ucoin.Logging.Test
             var logName = adapter.LastEvent.Source.ArgumentEntity.LogName;
 
             logName.Should().Be(string.Format("{0}.{1}", listener.Name, "some category"));
-            adapter.LastEvent.Level.Should().Be(LogLevel.Warn);
+            adapter.LastEvent.Level.Should().Be(LogLevelType.Warn);
             adapter.LastEvent.RenderedMessage.Should().Be("some message");
             adapter.LastEvent.Exception.Should().BeNull();
         }
@@ -58,7 +58,7 @@ namespace Ucoin.Logging.Test
             var logName = adapter.LastEvent.Source.ArgumentEntity.LogName;
             var exceptName =string.Format("{0}.{1}", listener.Name, ""); 
             logName.Should().Be(exceptName);
-            adapter.LastEvent.Level.Should().Be(LogLevel.Warn);
+            adapter.LastEvent.Level.Should().Be(LogLevelType.Warn);
             adapter.LastEvent.RenderedMessage.Should().Be("some message");
             adapter.LastEvent.Exception.Should().BeNull();
         }        
@@ -75,8 +75,8 @@ namespace Ucoin.Logging.Test
             listener.TraceEvent(null, "sourceName", TraceEventType.Information, -1, "format {0}", "Information");
             adapter.LastEvent.Should().BeNull();
 
-            AssertExpectedLogLevel(listener, TraceEventType.Warning, LogLevel.Warn);
-            AssertExpectedLogLevel(listener, TraceEventType.Error, LogLevel.Error);
+            AssertExpectedLogLevel(listener, TraceEventType.Warning, LogLevelType.Warn);
+            AssertExpectedLogLevel(listener, TraceEventType.Error, LogLevelType.Error);
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace Ucoin.Logging.Test
             listener.LoggerNameFormat.Should().Be("{listenerName}-{sourceName}");
         }
 
-        private void AssertExpectedLogLevel(LoggingTraceListener listener, TraceEventType eType, LogLevel level)
+        private void AssertExpectedLogLevel(LoggingTraceListener listener, TraceEventType eType, LogLevelType level)
         {
             var adapter = (CapturingLoggerAdapter)LogManager.Adapter;
             adapter.Clear();

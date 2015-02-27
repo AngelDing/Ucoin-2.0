@@ -83,7 +83,7 @@ namespace Ucoin.Framework.Logging.EntLib
 
         #endregion
 
-        protected override void Write(LogLevel logLevel, object message, Exception exception)
+        protected override void Write(LogLevelType logLevel, object message, Exception exception)
         {
             var traceEventType = LoggerHelper.GetTraceEventType(logLevel);
             var log = new TraceLevelLogEntry(category, traceEventType);

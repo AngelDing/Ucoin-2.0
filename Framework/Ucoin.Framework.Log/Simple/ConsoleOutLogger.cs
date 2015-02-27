@@ -6,15 +6,15 @@ namespace Ucoin.Framework.Logging.Simple
 {
     public class ConsoleOutLogger : BaseSimpleLogger
     {
-        private static readonly Dictionary<LogLevel, ConsoleColor> colors =
-            new Dictionary<LogLevel, ConsoleColor>
+        private static readonly Dictionary<LogLevelType, ConsoleColor> colors =
+            new Dictionary<LogLevelType, ConsoleColor>
             {
-                { LogLevel.Fatal, ConsoleColor.Red },
-                { LogLevel.Error, ConsoleColor.Yellow },
-                { LogLevel.Warn, ConsoleColor.Magenta },
-                { LogLevel.Info, ConsoleColor.White },
-                { LogLevel.Debug, ConsoleColor.Gray },
-                { LogLevel.Trace, ConsoleColor.DarkGray },
+                { LogLevelType.Fatal, ConsoleColor.Red },
+                { LogLevelType.Error, ConsoleColor.Yellow },
+                { LogLevelType.Warn, ConsoleColor.Magenta },
+                { LogLevelType.Info, ConsoleColor.White },
+                { LogLevelType.Debug, ConsoleColor.Gray },
+                { LogLevelType.Trace, ConsoleColor.DarkGray },
             };
 
         private readonly bool useColor;
@@ -30,7 +30,7 @@ namespace Ucoin.Framework.Logging.Simple
             this.useColor = useColor;
         }
 
-        protected override void Write(LogLevel level, object message, Exception ex)
+        protected override void Write(LogLevelType level, object message, Exception ex)
         {
             StringBuilder sb = new StringBuilder();
             FormatOutput(sb, level, message, ex);

@@ -41,13 +41,15 @@
     <Compile Include="Configuration\ConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\DefaultConfigurationReader.cs" />
     <Compile Include="Configuration\IConfigurationReader.cs" />
+    <Compile Include="LogCategoryType.cs" />
+    <Compile Include="LogModel.cs" />
     <Compile Include="Simple\DebugLoggerAdapter.cs" />
     <Compile Include="Simple\DebugOutLogger.cs" />
     <Compile Include="Simple\ExceptionFormatter.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="ILoggerAdapter.cs" />
     <Compile Include="LogArgumentEntity.cs" />
-    <Compile Include="LogLevel.cs" />
+    <Compile Include="LogLevelType.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="Configuration\LogSetting.cs" />
     <Compile Include="Simple\BaseSimpleLogger.cs" />

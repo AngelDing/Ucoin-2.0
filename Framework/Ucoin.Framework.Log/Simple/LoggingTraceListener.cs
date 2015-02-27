@@ -81,29 +81,29 @@ namespace Ucoin.Framework.Logging.Simple
             source = this.LoggerNameFormat.Replace(
                 "{listenerName}", this.Name).Replace("{sourceName}", "" + source);
             var log = LogManager.GetLogger(source);
-            LogLevel logLevel = MapLogLevel(eventType);
+            LogLevelType logLevel = MapLogLevel(eventType);
 
             switch (logLevel)
             {
-                case LogLevel.Trace:
+                case LogLevelType.Trace:
                     log.Trace(format, args);
                     break;
-                case LogLevel.Debug:
+                case LogLevelType.Debug:
                     log.Debug(format, args);
                     break;
-                case LogLevel.Info:
+                case LogLevelType.Info:
                     log.Info(format, args);
                     break;
-                case LogLevel.Warn:
+                case LogLevelType.Warn:
                     log.Warn(format, args);
                     break;
-                case LogLevel.Error:
+                case LogLevelType.Error:
                     log.Error(format, args);
                     break;
-                case LogLevel.Fatal:
+                case LogLevelType.Fatal:
                     log.Fatal(format, args);
                     break;
-                case LogLevel.Off:
+                case LogLevelType.Off:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(
@@ -264,7 +264,7 @@ namespace Ucoin.Framework.Logging.Simple
             return fmt.ToString();
         }
 
-        private LogLevel MapLogLevel(TraceEventType eventType)
+        private LogLevelType MapLogLevel(TraceEventType eventType)
         {
             switch (eventType)
             {
@@ -273,19 +273,19 @@ namespace Ucoin.Framework.Logging.Simple
                 case TraceEventType.Suspend:
                 case TraceEventType.Resume:
                 case TraceEventType.Transfer:
-                    return LogLevel.Trace;
+                    return LogLevelType.Trace;
                 case TraceEventType.Verbose:
-                    return LogLevel.Debug;
+                    return LogLevelType.Debug;
                 case TraceEventType.Information:
-                    return LogLevel.Info;
+                    return LogLevelType.Info;
                 case TraceEventType.Warning:
-                    return LogLevel.Warn;
+                    return LogLevelType.Warn;
                 case TraceEventType.Error:
-                    return LogLevel.Error;
+                    return LogLevelType.Error;
                 case TraceEventType.Critical:
-                    return LogLevel.Fatal;
+                    return LogLevelType.Fatal;
                 default:
-                    return LogLevel.Trace;
+                    return LogLevelType.Trace;
             }
         }
     }

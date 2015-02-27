@@ -19,7 +19,7 @@ namespace Ucoin.Framework.Logging.Simple
             var argEntity = new LogArgumentEntity();
             if (properties != null)
             {
-                argEntity.Level = properties.Get("level").ToEnum(LogLevel.All);
+                argEntity.Level = properties.Get("level").ToEnum(LogLevelType.All);
                 argEntity.ShowDateTime = properties.Get("showDateTime").ToBool(true);
                 argEntity.ShowLogName = properties.Get("showLogName").ToBool(true);
                 argEntity.ShowLevel = properties.Get("showLevel").ToBool(true);
