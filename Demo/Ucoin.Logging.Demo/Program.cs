@@ -8,22 +8,23 @@ namespace Ucoin.Logging.Demo
     {
         static void Main(string[] args)
         {
-            EntLibLoggerInit();
             var logger = LogManager.GetLogger("Demo Test");
+
             logger.Debug("debug");
             logger.Trace("trace");
             logger.Info("info");
             logger.Warn("warn");
-            logger.Error("error");
+            try
+            {
+                throw new Exception("XXXXXX");
+            }
+            catch (Exception ex)
+            {
+                logger.Error("error", ex);
+            }
             logger.Fatal("fatal");
 
             Console.ReadLine();
-        }
-
-        //採用EntLibLogger時需要初始化
-        private static void EntLibLoggerInit()
-        {
-             Logger.SetLogWriter(new LogWriterFactory().Create());
         }
     }
 }

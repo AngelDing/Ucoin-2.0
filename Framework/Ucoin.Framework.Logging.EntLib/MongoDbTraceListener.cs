@@ -8,7 +8,7 @@ using System;
 namespace Ucoin.Framework.Logging.EntLib
 {
     [ConfigurationElementType(typeof(CustomTraceListenerData))]
-    public class MongoDbTraceListener : Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.CustomTraceListener
+    public class MongoDbTraceListener : CustomTraceListener
     {
         public override void TraceData(TraceEventCache eventCache,
            string source, TraceEventType eventType, int id, object data)
@@ -17,7 +17,7 @@ namespace Ucoin.Framework.Logging.EntLib
             {                
                 this.Write(data as LogEntry);
             }
-            throw new Exception("test");
+            //throw new Exception("test");
         }
 
         public override void Write(object obj)

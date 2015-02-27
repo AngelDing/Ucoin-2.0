@@ -1,86 +1,26 @@
 using Microsoft.Practices.EnterpriseLibrary.Logging;
+using Microsoft.Practices.EnterpriseLibrary.Logging.Filters;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using Ucoin.Framework.Utility;
 
 namespace Ucoin.Framework.Logging.EntLib
 {
     public class EntLibLoggerAdapter : BaseLoggerAdapter
     {
-        //private readonly LoggerSettings settings;
-        private LogWriter logWriter;
-
-        //public int DefaultPriority
-        //{
-        //    get { return settings.LogPriority; }
-        //}
-
-        //public string ExceptionFormat
-        //{
-        //    get { return settings.ExceptionFormat; }
-        //}
-
-        public LogWriter LogWriter
-        {
-            get
-            {
-                if (logWriter == null)
-                {
-                    lock (this)
-                    {
-                        if (logWriter == null)
-                        {
-                            logWriter = Logger.Writer;
-                        }
-                    }
-                }
-                return logWriter;
-            }
-        }
-
-
-        public EntLibLoggerAdapter()
-            : this(null)
-        {
-        }
-
-        public EntLibLoggerAdapter(LogWriter writer)
-            : base()
-        {
-            //if (string.IsNullOrEmpty(exceptionFormat))
-            //{
-            //    exceptionFormat = LoggerSettings.DEFAULTEXCEPTIONFORMAT;
-            //}
-            //settings = new LoggerSettings(defaultPriority, exceptionFormat);
-            logWriter = writer;
-        }
+        public LogWriter LogWriter { get; private set; }
 
         public EntLibLoggerAdapter(NameValueCollection properties)
             : base()
         {
-            //if (properties == null)
-            //{
-            //    settings = new LoggerSettings(
-            //        LoggerSettings.DEFAULTPRIORITY,
-            //        LoggerSettings.DEFAULTEXCEPTIONFORMAT);
-            //}
-            //else
-            //{
-            //    var priority = properties.Get("priority").ToInt(LoggerSettings.DEFAULTPRIORITY);
-            //    var format = properties.Get("exceptionFormat");
-            //    if (string.IsNullOrEmpty(format))
-            //    {
-            //        format = LoggerSettings.DEFAULTEXCEPTIONFORMAT;
-            //    }
-            //    settings = new LoggerSettings(priority, format);
-            //}
+            var logLevel = properties.Get("level").ToEnum(LogLevel.All);
+            var traceEventType = LoggerHelper.GetTraceEventType(logLevel);
+            var filter = new SeverityFilter(traceEventType);
+
+            LogWriter = LoggerHelper.BuildLogWriter(filter);
         }
 
         protected override ILogger CreateLogger(string name)
-        {
-            return CreateLogger(name, LogWriter);
-        }
-
-        protected virtual ILogger CreateLogger(string name, LogWriter logWriter)
         {
             return new EntLibLogger(name, LogWriter);
         }
