@@ -7,3 +7,5 @@
 4. Logging實現NLog，log4Net適配；
 
 5. EntLib Logging寫Log到MongoDb；
+
+6. 第三方組件的版本管理需要優化；

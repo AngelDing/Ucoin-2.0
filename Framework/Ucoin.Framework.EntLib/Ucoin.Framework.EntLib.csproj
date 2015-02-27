@@ -30,50 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logging\LogHelper.cs" />
-    <Compile Include="Logging\MongoDbTraceListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Log\Ucoin.Log.Entities\Ucoin.Log.Entities.csproj">
-      <Project>{bf78438d-e4aa-4b61-831b-cc5506249fa2}</Project>
-      <Name>Ucoin.Log.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Log\Ucoin.Log.IServices\Ucoin.Log.IServices.csproj">
-      <Project>{4edb00af-78b4-4933-b164-c50a2fc53952}</Project>
-      <Name>Ucoin.Log.IServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
-      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
-      <Name>Ucoin.Framework.MongoDb</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
-      <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>
-      <Name>Ucoin.Framework.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
-      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
-      <Name>Ucoin.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ucoin.Utility\Ucoin.Framework.Utility.csproj">
-      <Project>{5b31d7e9-f83f-465f-aa90-d25a580e5420}</Project>
-      <Name>Ucoin.Framework.Utility</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
