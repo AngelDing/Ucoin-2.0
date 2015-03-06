@@ -1,11 +1,15 @@
-1. 完善wcf封裝，加入性能統計相關，單元測試，升級企業庫6.0等等；
+1. 完善wcf封裝，加入性能統計相關，單元測試，升級企業庫6.0等等；（暫緩）
 
-2. 企業庫6.0需要熟悉：Unity，Validation，Interception，Exception Handling，Transient Fault Handling
+2. 企業庫6.0需要熟悉：Unity，Validation，Interception，Exception Handling，Transient Fault Handling（逐步）
 
 3. SCMP：Log管理，監控管理：Sql，Redis，服務器等，MongoDB，RabbitMQ等
 
-4. Logging實現NLog，log4Net適配；
+4. Logging實現NLog，log4Net適配；(暫緩)
 
-5. EntLib Logging寫Log到MongoDb；
+5. EntLib Logging寫Log到MongoDb；(Done)
 
-6. 第三方組件的版本管理需要優化；
+6. 第三方組件的版本管理需要優化；（後續）
+
+7. Metrics.NET性能度量完善（優先級中,2015-3-6,）
+
+8. Knockout Js 學習（優先級高，用於新項目）
