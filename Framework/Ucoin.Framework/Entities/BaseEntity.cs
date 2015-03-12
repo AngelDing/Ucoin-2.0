@@ -3,10 +3,12 @@ using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.ComponentModel.DataAnnotations;
+
 namespace Ucoin.Framework.Entities
 {
     [Serializable]
-    public abstract class BaseEntity : IEntity, IPartialUpdateEntity, IObjectWithState
+    public abstract class BaseEntity : IEntity, IPartialUpdateEntity, IObjectWithState, IValidatableObject
     {
         private Dictionary<string, object> updateList = new Dictionary<string, object>();
         [CompareIgnore]
@@ -74,6 +76,16 @@ namespace Ucoin.Framework.Entities
                 var childData = pd.GetValue(data);
                 SetPropertyValue(childData, pdStrList[1], val);
             }
+        }
+
+        /// <summary>
+        /// 實現IValidatableObject接口，強制每個Entity實現相關邏輯校驗
+        /// </summary>
+        /// <param name="validationContext"></param>
+        /// <returns></returns>
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            return null; // throw new NotImplementedException();
         }
 
         public abstract string GetUpdateKey(LambdaExpression expression);

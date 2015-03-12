@@ -21,11 +21,6 @@ namespace Ucoin.Framework.Test
 
         [CompareIgnore]
         public virtual EFCustomer EFCustomer { get; set; }
-
-        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
-        {
-            return null;
-        }
     }
 
     [Serializable]
@@ -37,10 +32,5 @@ namespace Ucoin.Framework.Test
 
         [CompareIgnore]
         public virtual EFNote EFNote { get; set; }
-
-        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
-        {
-            return null;
-        }
     }
 }

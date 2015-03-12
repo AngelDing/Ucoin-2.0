@@ -8,9 +8,5 @@ namespace Ucoin.Authority.Entities
 {
     public class Permission : EfEntity<int>
     {
-        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

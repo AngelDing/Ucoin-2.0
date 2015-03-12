@@ -34,6 +34,7 @@ namespace Ucoin.Logging.Test
         [Fact]
         public void logging_uses_trace_source_by_adapter_test()
         {
+            Trace.Refresh();
             var props = new NameValueCollection();
             props["USETRACESOURCE"] = "TRUE";
             var adapter = new TraceLoggerAdapter(props);

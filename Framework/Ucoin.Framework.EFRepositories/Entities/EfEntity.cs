@@ -9,14 +9,12 @@ using Ucoin.Framework.Entities;
 namespace Ucoin.Framework.SqlDb.Entities
 {
     [Serializable]
-    public abstract class EfEntity<Tkey> : BaseEntity<Tkey>, IValidatableObject
+    public abstract class EfEntity<Tkey> : BaseEntity<Tkey>
     {
         public EfEntity()
         {
             IsPartialUpdate = false;
-        }
-
-        public abstract IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext);
+        }       
 
         /// <summary>
         /// 實體所處的操作狀態
@@ -71,16 +69,6 @@ namespace Ucoin.Framework.SqlDb.Entities
 
             keys.Reverse();
             return string.Join(".", keys.ToArray());
-        }
-
-        /// <summary>
-        /// 實現IValidatableObject接口，強制每個Entity實現相關邏輯校驗
-        /// </summary>
-        /// <param name="validationContext"></param>
-        /// <returns></returns>
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            return DoValidate(validationContext);
-        }
+        }        
     }
 }

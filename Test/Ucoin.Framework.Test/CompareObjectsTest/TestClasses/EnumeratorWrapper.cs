@@ -25,19 +25,10 @@ namespace Ucoin.Framework.Test
         public ICollection<HashSetClass> HashSetCollection { get; set; }
 
         public IList<ListSetClass> ListCollection { get; set; }
-
-        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
-        {
-            return null;
-        }
     }
 
     public class ListSetClass : EfEntity<long>
     {
-        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
-        {
-            return null;
-        }
     }
 
     public class HashSetClass : EfEntity<int>
@@ -48,10 +39,5 @@ namespace Ucoin.Framework.Test
 
         [CompareIgnore]
         public EnumeratorWrapper HashSetWrapper { get; set; }
-
-        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
-        {
-            return null;
-        }
     }
 }

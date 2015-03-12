@@ -6,7 +6,7 @@ using Ucoin.Framework.Entities;
 namespace Ucoin.Framework.MongoDb.Entities
 {
     [Serializable]
-    public abstract class BaseMongoEntity : BaseEntity, IEntity
+    public abstract class BaseMongoEntity : BaseEntity
     {
         public override string GetUpdateKey(LambdaExpression expression)
         {

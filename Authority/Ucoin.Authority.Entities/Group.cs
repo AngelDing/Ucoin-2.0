@@ -8,9 +8,5 @@ namespace Ucoin.Authority.Entities
 {
     public class Group : EfEntity<int>, IAggregateRoot<int>
     {
-        public override IEnumerable<ValidationResult> DoValidate(ValidationContext validationContext)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
