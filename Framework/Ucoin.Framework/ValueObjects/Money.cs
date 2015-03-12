@@ -1,4 +1,6 @@
-﻿namespace Ucoin.Framework.ValueObjects
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+namespace Ucoin.Framework.ValueObjects
 {
     public class Money : BaseValueObject
     {
@@ -12,18 +14,18 @@
             Currency = threeLetterISOCode;
         }
 
-        public override void Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            var validationResults = new List<ValidationResult>();
             if (Currency != null || Currency.Length != 3)
             {
-                base.AddBrokenRule(MoneyBusinessRules.CurrencyISOCodeError);
+                //TODO: Message可放入資源文件中維護
+                validationResults.Add(new ValidationResult("The currency ISO code must be 3 letters in length.",
+                                                         new string[] { "Currency" }));
+                //base.AddBrokenRule(MoneyBusinessRules.CurrencyISOCodeError);
             }
-        }
-    }
 
-    public class MoneyBusinessRules
-    {
-        public static readonly BusinessRule CurrencyISOCodeError =
-           new BusinessRule("Currency", "The currency ISO code must be 3 letters in length.");      
+            return validationResults;
+        }
     }
 }

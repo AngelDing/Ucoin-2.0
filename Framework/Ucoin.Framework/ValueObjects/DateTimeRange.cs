@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ucoin.Framework.ValueObjects
 {
@@ -16,18 +18,17 @@ namespace Ucoin.Framework.ValueObjects
             base.ThrowExceptionIfInvalid();
         }
 
-        public override void Validate()
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            var validationResults = new List<ValidationResult>();
             if (StartDateTime > EndDateTime)
             {
-                base.AddBrokenRule(DateTimeRangeBusinessRules.DateTimeError);
+                //TODO: Message可放入資源文件中維護
+                validationResults.Add(new ValidationResult("StartDateTime must be before EndDateTime.",
+                                                         new string[] { "StartDateTime" }));
             }
-        }
-    }
 
-    public class DateTimeRangeBusinessRules
-    {
-        public static readonly BusinessRule DateTimeError =
-            new BusinessRule("StartDateTime", "StartDateTime must be before EndDateTime.");        
+            return validationResults;
+        }
     }
 }
