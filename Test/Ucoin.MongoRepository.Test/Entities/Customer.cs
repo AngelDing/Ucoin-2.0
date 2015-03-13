@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using Ucoin.Framework.MongoDb.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ucoin.MongoRepository.Test
 {
@@ -26,6 +27,14 @@ namespace Ucoin.MongoRepository.Test
         public IList<Order> Orders { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrEmpty(FirstName))
+            {
+                yield return new ValidationResult("FirstName must have a value", new[] { "FirstName" });
+            }
+        }
     }
 
     public class Address

@@ -13,7 +13,7 @@ namespace Ucoin.Framework.Validator
     /// </summary>
     public class EntityValidator : IValidator
     {
-        private List<string> validationErrors = new List<string>();
+        private List<string> validationErrors;
         
         public bool IsValid<TEntity>(TEntity item) where TEntity : class
         {
@@ -49,8 +49,13 @@ namespace Ucoin.Framework.Validator
                 var validationContext = new ValidationContext(item, null, null);
 
                 var validationResults = ((IValidatableObject)item).Validate(validationContext);
-
-                validationErrors.AddRange(validationResults.Select(vr => vr.ErrorMessage));
+                if (validationResults != null)
+                {
+                    foreach (var vr in validationResults)
+                    {
+                        validationErrors.Add(string.Join(",", vr.MemberNames) + ":" + vr.ErrorMessage);
+                    }
+                }
             }
         }
 
