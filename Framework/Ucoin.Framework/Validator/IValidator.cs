@@ -21,9 +21,7 @@ namespace Ucoin.Framework.Validator
         /// Return the collection of errors if entity state is not valid
         /// </summary>
         /// <typeparam name="TEntity">The type of entity</typeparam>
-        /// <param name="item">The instance with validation errors</param>
         /// <returns>A collection of validation errors</returns>
-        IEnumerable<String> GetInvalidMessages<TEntity>(TEntity item)
-            where TEntity : class;
+        IEnumerable<String> GetInvalidMessages();
     }
 }

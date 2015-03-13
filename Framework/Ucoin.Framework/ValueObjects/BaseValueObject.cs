@@ -23,7 +23,7 @@ namespace Ucoin.Framework.ValueObjects
             var validator = new EntityValidator();
             if (!validator.IsValid(this))
             {
-                throw new UcoinValidationException(validator.GetInvalidMessages(this));
+                throw new UcoinValidationException(validator.GetInvalidMessages());
             }
         }
 

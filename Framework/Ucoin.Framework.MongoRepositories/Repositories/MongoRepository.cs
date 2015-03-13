@@ -10,6 +10,7 @@ using Ucoin.Framework.Specifications;
 using Ucoin.Framework.Repositories;
 using Ucoin.Framework.MongoDb.Entities;
 using Ucoin.Framework.Entities;
+using Ucoin.Framework.Validator;
 
 namespace Ucoin.Framework.MongoDb.Repositories
 {
@@ -73,21 +74,25 @@ namespace Ucoin.Framework.MongoDb.Repositories
 
         public virtual void Insert(T entity)
         {
+            Validate(entity);
             this.Collection.Insert<T>(entity);
         }
 
         public void Insert(IEnumerable<T> entities)
         {
+            Validate(entities);
             this.Collection.InsertBatch<T>(entities);
         }
 
         public void Update(T entity)
         {
+            Validate(entity);
             this.Collection.Save<T>(entity);
         }
 
         public void Update(IEnumerable<T> entities)
         {
+            Validate(entities);
             foreach (T entity in entities)
             {
                 this.Collection.Save<T>(entity);
@@ -188,5 +193,31 @@ namespace Ucoin.Framework.MongoDb.Repositories
         }
 
         #endregion
+
+        private void Validate(T entity)
+        {
+            var validator = new EntityValidator();
+            if (validator.IsValid(entity) == false)
+            {
+                throw new UcoinValidationException(validator.GetInvalidMessages());
+            }
+        }
+
+        private void Validate(IEnumerable<T> entities)
+        {
+            var validator = new EntityValidator();
+            var errorList = new List<string>();
+            foreach (var e in entities)
+            {
+                if (validator.IsValid(e) == false)
+                {
+                    errorList.AddRange(validator.GetInvalidMessages());
+                }
+            }
+            if (errorList.Any())
+            {
+                throw new UcoinValidationException(errorList);
+            }
+        }
     }
 }

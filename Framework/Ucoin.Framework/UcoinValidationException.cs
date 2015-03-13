@@ -1,37 +1,33 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 namespace Ucoin.Framework
 {
     public class UcoinValidationException  : UcoinException
     {
-        #region Properties
+        private IEnumerable<string> validationErrors;
 
-        IEnumerable<string> _validationErrors;
-        /// <summary>
-        /// Get or set the validation errors messages
-        /// </summary>
         public IEnumerable<string> ValidationErrors
         {
             get
             {
-                return _validationErrors;
+                return validationErrors;
             }
         }
 
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Create new instance of Application validation errors exception
-        /// </summary>
-        /// <param name="validationErrors">The collection of validation errors</param>
         public UcoinValidationException(IEnumerable<string> validationErrors)
-            : base("Invalid type,XXXXX")
+            : base(GetErrorMessage(validationErrors))
         {
-            _validationErrors = validationErrors;
+            this.validationErrors = validationErrors;
         }
 
-        #endregion
+        private static string GetErrorMessage(IEnumerable<string> validationErrors)
+        {
+            var msg = string.Empty;
+            foreach (var error in validationErrors)
+            {
+                msg = msg + error + ";";
+            }
+            return msg;
+        }
     }
 }

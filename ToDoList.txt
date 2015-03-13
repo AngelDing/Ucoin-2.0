@@ -4,12 +4,12 @@
 
 3. SCMP：Log管理，監控管理：Sql，Redis，服務器等，MongoDB，RabbitMQ等
 
-4. Logging實現NLog，log4Net適配；(暫緩)
+4. Logging實現NLog，log4Net適配；(暫緩，目前已實現EntLib Logging寫入MongoDB，是否還有必要實現其他適配器？) 
 
 5. EntLib Logging寫Log到MongoDb；(Done)
 
 6. 第三方組件的版本管理需要優化；（後續）
 
-7. Metrics.NET性能度量完善（優先級中,2015-3-6,）
+7. Metrics.NET性能度量完善（優先級中,2015-3-6）
 
-8. Knockout Js 學習（優先級高，用於新項目）
+8. IValidator是注入EntityValidator？還是直接創建？目前是直接創建，兩者優缺點？

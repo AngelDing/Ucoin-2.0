@@ -13,6 +13,28 @@ namespace Ucoin.Framework.Validator
     /// </summary>
     public class EntityValidator : IValidator
     {
+        private List<string> validationErrors = new List<string>();
+        
+        public bool IsValid<TEntity>(TEntity item) where TEntity : class
+        {
+            if (item == null)
+            {
+                return false;
+            }
+
+            validationErrors = new List<string>();
+
+            SetValidatableObjectErrors(item);
+            SetValidationAttributeErrors(item);
+
+            return !validationErrors.Any();
+        }
+
+        public IEnumerable<string> GetInvalidMessages()
+        {
+            return validationErrors;
+        }
+
         #region Private Methods
 
         /// <summary>
@@ -20,8 +42,7 @@ namespace Ucoin.Framework.Validator
         /// </summary>
         /// <typeparam name="TEntity">The typeof entity</typeparam>
         /// <param name="item">The item to validate</param>
-        /// <param name="errors">A collection of current errors</param>
-        void SetValidatableObjectErrors<TEntity>(TEntity item, List<string> errors) where TEntity : class
+        private void SetValidatableObjectErrors<TEntity>(TEntity item) where TEntity : class
         {
             if (typeof(IValidatableObject).IsAssignableFrom(typeof(TEntity)))
             {
@@ -29,7 +50,7 @@ namespace Ucoin.Framework.Validator
 
                 var validationResults = ((IValidatableObject)item).Validate(validationContext);
 
-                errors.AddRange(validationResults.Select(vr => vr.ErrorMessage));
+                validationErrors.AddRange(validationResults.Select(vr => vr.ErrorMessage));
             }
         }
 
@@ -38,8 +59,7 @@ namespace Ucoin.Framework.Validator
         /// </summary>
         /// <typeparam name="TEntity">The type of entity</typeparam>
         /// <param name="item">The entity to validate</param>
-        /// <param name="errors">A collection of current errors</param>
-        void SetValidationAttributeErrors<TEntity>(TEntity item, List<string> errors) where TEntity : class
+        private void SetValidationAttributeErrors<TEntity>(TEntity item) where TEntity : class
         {
             var result = from property in TypeDescriptor.GetProperties(item).Cast<PropertyDescriptor>()
                          from attribute in property.Attributes.OfType<ValidationAttribute>()
@@ -48,54 +68,12 @@ namespace Ucoin.Framework.Validator
 
             if (result != null && result.Any())
             {
-                errors.AddRange(result);
+                validationErrors.AddRange(result);
             }
         }
 
         #endregion
 
-        #region IEntityValidator Members
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public bool IsValid<TEntity>(TEntity item) where TEntity : class
-        {
-            if (item == null)
-            {
-                return false;
-            }
-
-            var validationErrors = new List<string>();
-
-            SetValidatableObjectErrors(item, validationErrors);
-            SetValidationAttributeErrors(item, validationErrors);
-
-            return !validationErrors.Any();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public IEnumerable<string> GetInvalidMessages<TEntity>(TEntity item) where TEntity : class
-        {
-            if (item == null)
-                return null;
-
-            var validationErrors = new List<string>();
-
-            SetValidatableObjectErrors(item, validationErrors);
-            SetValidationAttributeErrors(item, validationErrors);
-
-            return validationErrors;
-        }
-
-        #endregion
     }
 }
