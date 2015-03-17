@@ -13,3 +13,5 @@
 7. Metrics.NET性能度量完善（優先級中,2015-3-6）
 
 8. IValidator是注入EntityValidator？還是直接創建？目前是直接創建，兩者優缺點？
+
+9. 生成不同類型的IPerfLog到MongoDB中去；
