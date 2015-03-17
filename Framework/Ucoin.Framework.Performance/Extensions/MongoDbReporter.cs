@@ -23,7 +23,7 @@ namespace Ucoin.Framework.Performance
             logService.LogPerfInfo(perfLog);
         }
 
-        private PerfLog GetLogEvent(string logger, DateTime timestamp, string metricType, string metricName, IEnumerable<CSVReport.Value> values)
+        private BasePerfLog GetLogEvent(string logger, DateTime timestamp, string metricType, string metricName, IEnumerable<CSVReport.Value> values)
         {
             var logEvent = GetValues(timestamp, values);
             var MetricType = CleanFileName(metricType);

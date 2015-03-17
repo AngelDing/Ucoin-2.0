@@ -36,8 +36,17 @@
   <ItemGroup>
     <Compile Include="AppLog.cs" />
     <Compile Include="BaseLog.cs" />
+    <Compile Include="PerfLog\BasePerfLog.cs" />
     <Compile Include="ErrorLog.cs" />
-    <Compile Include="PerfLog.cs" />
+    <Compile Include="PerfLog\AppPerfLog.cs" />
+    <Compile Include="PerfLog\CounterValue.cs" />
+    <Compile Include="PerfLog\ErrorsMeter.cs" />
+    <Compile Include="PerfLog\GaugeValue.cs" />
+    <Compile Include="PerfLog\HistogramValue.cs" />
+    <Compile Include="PerfLog\IMetricValue.cs" />
+    <Compile Include="PerfLog\MeterValue.cs" />
+    <Compile Include="PerfLog\SysPerfLog.cs" />
+    <Compile Include="PerfLog\TimerValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
