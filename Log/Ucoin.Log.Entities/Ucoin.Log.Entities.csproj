@@ -44,6 +44,7 @@
     <Compile Include="PerfLog\GaugeValue.cs" />
     <Compile Include="PerfLog\HistogramValue.cs" />
     <Compile Include="PerfLog\IMetricValue.cs" />
+    <Compile Include="PerfLog\IPerfLog.cs" />
     <Compile Include="PerfLog\MeterValue.cs" />
     <Compile Include="PerfLog\SysPerfLog.cs" />
     <Compile Include="PerfLog\TimerValue.cs" />

@@ -17,25 +17,27 @@ namespace Ucoin.Framework.Performance
         public override void AppendLine(DateTime timestamp, string metricType, string metricName, IEnumerable<CSVReport.Value> values)
         {
             var loggerName = string.Format("Metrics.CSV.{0}.{1}", metricType, metricName);
-            var perfLog = GetLogEvent(loggerName, timestamp, metricType, metricName, values);
-
+            var perfLog = GetPerfLog(loggerName, timestamp, metricType, metricName, values);
             var logService = ServiceLocator.GetService<ILogService>();
             logService.LogPerfInfo(perfLog);
         }
 
-        private BasePerfLog GetLogEvent(string logger, DateTime timestamp, string metricType, string metricName, IEnumerable<CSVReport.Value> values)
+        private IPerfLog GetPerfLog(string logger, DateTime timestamp, string metricType, 
+            string metricName, IEnumerable<CSVReport.Value> values)
         {
-            var logEvent = GetValues(timestamp, values);
-            var MetricType = CleanFileName(metricType);
-            var MetricName = CleanFileName(metricName);
-            var Date = timestamp.ToString("u");
-            var Ticks = timestamp.Ticks.ToString("D");
-            foreach (var value in values)
-            {
-                var k = value.Name;
-                var v = value.FormattedValue;
-            }
+            //TODO: 生成不同類型的IPerfLog
             return null;
+
+            //var logEvent = GetValues(timestamp, values);
+            //var MetricType = CleanFileName(metricType);
+            //var MetricName = CleanFileName(metricName);
+            //var Date = timestamp.ToString("u");
+            //var Ticks = timestamp.Ticks.ToString("D");
+            //foreach (var value in values)
+            //{
+            //    var k = value.Name;
+            //    var v = value.FormattedValue;
+            //}          
         }
 
         protected virtual string CleanFileName(string name)

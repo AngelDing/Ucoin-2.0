@@ -3,7 +3,7 @@ using Ucoin.Framework.MongoDb.Entities;
 
 namespace Ucoin.Log.Entities
 {
-    public class BasePerfLog : StringKeyMongoEntity
+    public class BasePerfLog : StringKeyMongoEntity, IPerfLog
     {
         public string Unit { get; set; }
 

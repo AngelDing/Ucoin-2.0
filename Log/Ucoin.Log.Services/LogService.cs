@@ -33,12 +33,12 @@ namespace Ucoin.Log.Services
             }
         }
 
-        public void LogPerfInfo(BasePerfLog log)
+        public void LogPerfInfo(IPerfLog log)
         {
             try
             {
                 var logRepo = new UcoinLogMongoDb<BasePerfLog>();
-                logRepo.Insert(log);
+                //logRepo.Insert(log);
             }
             catch (Exception ex)
             {

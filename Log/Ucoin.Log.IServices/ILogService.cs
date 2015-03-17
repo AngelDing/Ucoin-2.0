@@ -21,6 +21,6 @@ namespace Ucoin.Log.IServices
         /// 性能日誌
         /// </summary>
         /// <param name="log"></param>
-        void LogPerfInfo(BasePerfLog log);
+        void LogPerfInfo(IPerfLog log);
     }
 }
