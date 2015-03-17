@@ -1,7 +1,8 @@
 ﻿
 namespace Ucoin.Log.Entities
 {
-    public class ErrorsMeter : MeterValue
+    public class ErrorsMeter : BasePerfLog
     {
+        public MeterValue MeterValue { get; set; }
     }
 }
