@@ -34,6 +34,7 @@
       <HintPath>..\..\packages\Metrics.NET.0.2.15\lib\net45\Metrics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
@@ -50,6 +51,8 @@
     <Compile Include="ActionInfo.cs" />
     <Compile Include="ConfigInfo.cs" />
     <Compile Include="DoNotTrackPerformanceAttribute.cs" />
+    <Compile Include="Extensions\MetricExtensions.cs" />
+    <Compile Include="Extensions\MongoDbReporter.cs" />
     <Compile Include="InstanceNameRegistry.cs" />
     <Compile Include="Metrics\ActiveRequestsMetric.cs" />
     <Compile Include="Metrics\DeltaCallsMetric.cs" />
@@ -67,6 +70,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Log\Ucoin.Log.Entities\Ucoin.Log.Entities.csproj">
+      <Project>{bf78438d-e4aa-4b61-831b-cc5506249fa2}</Project>
+      <Name>Ucoin.Log.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Log\Ucoin.Log.IServices\Ucoin.Log.IServices.csproj">
+      <Project>{4edb00af-78b4-4933-b164-c50a2fc53952}</Project>
+      <Name>Ucoin.Log.IServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
+      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
+      <Name>Ucoin.Framework.MongoDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
+      <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>
+      <Name>Ucoin.Framework.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
