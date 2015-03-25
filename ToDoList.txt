@@ -15,3 +15,5 @@
 8. IValidator是注入EntityValidator？還是直接創建？目前是直接創建，兩者優缺點？
 
 9. 生成不同類型的IPerfLog到MongoDB中去；
+
+10. 擴展EntityFramework，可以生成改動日誌，可以批量插入，修改，刪除，修改自EntityFramework.Extended開源項目；
