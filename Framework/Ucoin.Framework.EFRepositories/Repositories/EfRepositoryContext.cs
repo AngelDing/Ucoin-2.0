@@ -24,7 +24,7 @@ namespace Ucoin.Framework.SqlDb.Repositories
             {
                 dbContext.Dispose();
             }
-            base.Dispose(disposing);
+            base.OnDispose(disposing);
         }
 
         public DbContext DbContext
