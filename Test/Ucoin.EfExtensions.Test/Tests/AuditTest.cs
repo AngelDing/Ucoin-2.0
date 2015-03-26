@@ -243,8 +243,6 @@ namespace Ucoin.EfExtensions.Test
 
             var deleteLog = audit.CreateLog();
             Assert.NotNull(deleteLog);
-
-            db.SaveChanges();
         }
 
         [Fact]

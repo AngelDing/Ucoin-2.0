@@ -28,7 +28,8 @@ namespace Ucoin.Logging.Test
             CapturingTraceListener.Events.Clear();
             ts.TraceEvent(TraceEventType.Information, 0, "message");
             CapturingTraceListener.Events[0].EventType.Should().Be(TraceEventType.Information);
-            CapturingTraceListener.Events[0].FormattedMessage.Should().Be("message");    
+            CapturingTraceListener.Events[0].FormattedMessage.Should().Be("message");
+            Trace.Refresh();
         }
 
         [Fact]
@@ -47,6 +48,7 @@ namespace Ucoin.Logging.Test
             var capEvent = CapturingTraceListener.Events[0];
             capEvent.EventType.Should().Be(TraceEventType.Warning);
             capEvent.FormattedMessage.Should().Be("[WARN]  TraceLoggerTests - info arg");
+            Trace.Refresh();
         }
     }
 }

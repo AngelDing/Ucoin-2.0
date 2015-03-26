@@ -75,7 +75,7 @@ namespace Ucoin.EfExtensions.Test
                 .Where(p => p.EmailAddress.EndsWith(emailDomain))
                 .Future();
 
-            string search = "Earth";
+            string search = "Summary: 635629835524182369";
             var q2 = db.Tasks
                 .Where(t => t.Summary.Contains(search))
                 .FutureCount();
@@ -109,7 +109,7 @@ namespace Ucoin.EfExtensions.Test
                 .Where(p => p.EmailAddress.EndsWith(emailDomain))
                 .Future();
 
-            string search = "Earth";
+            string search = "Summary: 635629835524182369";
             var q2 = db.Tasks
                 .Where(t => t.Summary.Contains(search))
                 .FutureCount();
@@ -143,7 +143,7 @@ namespace Ucoin.EfExtensions.Test
                 .Where(p => p.EmailAddress.EndsWith(emailDomain))
                 .FutureFirstOrDefault();
 
-            string search = "Earth";
+            string search = "Summary: 635629835524182369";
             var q2 = db.Tasks
                 .Where(t => t.Summary.Contains(search))
                 .FutureCount();
@@ -184,7 +184,7 @@ namespace Ucoin.EfExtensions.Test
                 .Where(p => p.EmailAddress.EndsWith(emailDomain))
                 .FutureFirstOrDefault();
 
-            string search = "Earth";
+            string search = "Summary: 635629835524182369";
             var q2 = db.Tasks
                 .Where(t => t.Summary.Contains(search))
                 .FutureCount();

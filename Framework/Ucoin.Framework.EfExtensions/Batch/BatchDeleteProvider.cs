@@ -62,10 +62,10 @@ namespace Ucoin.Framework.EfExtensions.Batch
                 var sqlBuilder = new StringBuilder(innerSelect.Length * 2);
 
                 sqlBuilder.Append("DELETE ");
-                sqlBuilder.Append(entityMap.TableName);
+                sqlBuilder.Append("[" + entityMap.TableName + "]");
                 sqlBuilder.AppendLine();
 
-                sqlBuilder.AppendFormat("FROM {0} AS j0 INNER JOIN (", entityMap.TableName);
+                sqlBuilder.AppendFormat("FROM {0} AS j0 INNER JOIN (", "[" + entityMap.TableName + "]");
                 sqlBuilder.AppendLine();
                 sqlBuilder.AppendLine(innerSelect);
                 sqlBuilder.Append(") AS j1 ON (");
