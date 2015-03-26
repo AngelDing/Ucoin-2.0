@@ -225,8 +225,6 @@ namespace Ucoin.EfExtensions.Test
             var log = audit.CreateLog();
             Assert.NotNull(log);
 
-
-
             db.SaveChanges();
 
             log.Refresh();

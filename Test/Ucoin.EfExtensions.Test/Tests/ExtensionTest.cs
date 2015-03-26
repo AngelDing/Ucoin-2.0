@@ -19,9 +19,8 @@ namespace Ucoin.EfExtensions.Test
             {
                 string emailDomain = "@test.com";
 
-                int count = db.Users
-                    .Where(u => u.EmailAddress.EndsWith(emailDomain))
-                    .Update(u => new User { IsApproved = false, LastActivityDate = DateTime.Now });
+                var query =  db.Users.Where(u => u.EmailAddress.Contains(emailDomain));
+                int count = query.Update(u => new User { IsApproved = false, LastActivityDate = DateTime.Now });
 
                 count = db.Users
                     .Where(u => u.EmailAddress.EndsWith(emailDomain))
