@@ -1,26 +1,106 @@
 ﻿using System;
-using System.Runtime.ConstrainedExecution;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Ucoin.Framework.Utility;
 
 namespace Ucoin.Framework
 {
-    public abstract class DisposableObject : CriticalFinalizerObject, IDisposable
+    public abstract class DisposableObject : IDisposable
     {
-        ~DisposableObject()
+        private bool _disposed = false;
+
+        public virtual bool IsDisposed
         {
-            this.Dispose(false);
+            [DebuggerStepThrough]
+            get { return _disposed; }
         }
 
-        protected abstract void Dispose(bool disposing);
-
-        protected void ExplicitDispose()
+        [DebuggerStepThrough]
+        protected void CheckDisposed()
         {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+            if (IsDisposed)
+            {
+                throw ErrorHelper.ObjectDisposed(GetType().FullName);
+            }
         }
-       
+
+        [DebuggerStepThrough]
+        protected void CheckDisposed(string errorMessage)
+        {
+            if (IsDisposed)
+            {
+                throw ErrorHelper.ObjectDisposed(GetType().FullName, errorMessage);
+            }
+        }
+
+        [DebuggerStepThrough]
         public void Dispose()
         {
-            this.ExplicitDispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                OnDispose(disposing);
+            }
+            _disposed = true;
+        }
+
+        protected abstract void OnDispose(bool disposing);
+
+        protected static void DisposeEnumerable(IEnumerable enumerable)
+        {
+            if (enumerable != null && !enumerable.GetEnumerator().MoveNext())
+            {
+                foreach (object obj2 in enumerable)
+                {
+                    DisposeMember(obj2);
+                }
+                DisposeMember(enumerable);
+            }
+        }
+
+        protected static void DisposeDictionary<K, V>(IDictionary<K, V> dictionary)
+        {
+            if (dictionary != null)
+            {
+                foreach (KeyValuePair<K, V> pair in dictionary)
+                {
+                    DisposeMember(pair.Value);
+                }
+                DisposeMember(dictionary);
+            }
+        }
+
+        protected static void DisposeDictionary(IDictionary dictionary)
+        {
+            if (dictionary != null)
+            {
+                foreach (IDictionaryEnumerator pair in dictionary)
+                {
+                    DisposeMember(pair.Value);
+                }
+                DisposeMember(dictionary);
+            }
+        }
+
+        protected static void DisposeMember(object member)
+        {
+            IDisposable disposable = member as IDisposable;
+            if (disposable != null)
+            {
+                disposable.Dispose();
+            }
+        }
+
+        ~DisposableObject()
+        {
+            Dispose(false);
+        }
+
     }
 }

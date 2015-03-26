@@ -18,7 +18,7 @@ namespace Ucoin.Framework.SqlDb.Repositories
             this.dbContext = dbContext;
         }
 
-        protected override void Dispose(bool disposing)
+        protected override void OnDispose(bool disposing)
         {
             if (disposing)
             {

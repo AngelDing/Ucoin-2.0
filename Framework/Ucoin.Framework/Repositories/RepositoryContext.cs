@@ -33,7 +33,7 @@ namespace Ucoin.Framework.Repositories
             this.localDeletedCollection.Value.Clear();
         }
 
-        protected override void Dispose(bool disposing)
+        protected override void OnDispose(bool disposing)
         {
             if (disposing)
             {

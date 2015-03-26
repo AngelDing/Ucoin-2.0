@@ -34,6 +34,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionDisposable.cs" />
     <Compile Include="CodeTimer.cs" />
     <Compile Include="CompareObjects\Cache.cs" />
     <Compile Include="CompareObjects\CompareParms.cs" />
@@ -66,6 +67,21 @@
     <Compile Include="Paging\IPaging.cs" />
     <Compile Include="Paging\IPagingResult.cs" />
     <Compile Include="Paging\PagingResult.cs" />
+    <Compile Include="Reflection\DelegateFactory.cs" />
+    <Compile Include="Reflection\DynamicProxy.cs" />
+    <Compile Include="Reflection\FieldAccessor.cs" />
+    <Compile Include="Reflection\ILGeneratorExtensions.cs" />
+    <Compile Include="Reflection\IMemberAccessor.cs" />
+    <Compile Include="Reflection\IMemberInfo.cs" />
+    <Compile Include="Reflection\IMethodAccessor.cs" />
+    <Compile Include="Reflection\LateBinder.cs" />
+    <Compile Include="Reflection\MemberAccessor.cs" />
+    <Compile Include="Reflection\MethodAccessor.cs" />
+    <Compile Include="Reflection\ObjectCloner.cs" />
+    <Compile Include="Reflection\ObjectCopier.cs" />
+    <Compile Include="Reflection\PropertyAccessor.cs" />
+    <Compile Include="Reflection\ReflectionHelper.cs" />
+    <Compile Include="Reflection\TypeAccessor.cs" />
     <Compile Include="Repositories\RepositoryContext.cs" />
     <Compile Include="Result\BaseResult.cs" />
     <Compile Include="Result\BaseResult`1.cs" />
@@ -74,6 +90,10 @@
     <Compile Include="Result\ResultExtensions.cs" />
     <Compile Include="Result\ResultStatusType.cs" />
     <Compile Include="Result\SuccessfullyResult.cs" />
+    <Compile Include="Threading\LockExtensions.cs" />
+    <Compile Include="Threading\ReadLockDisposable.cs" />
+    <Compile Include="Threading\UpgradeableReadLockDisposable.cs" />
+    <Compile Include="Threading\WriteLockDisposable.cs" />
     <Compile Include="UcoinValidationException.cs" />
     <Compile Include="Validator\EntityValidator.cs" />
     <Compile Include="Validator\IValidator.cs" />
@@ -105,7 +125,12 @@
     <Compile Include="Specifications\TrueSpecification.cs" />
     <Compile Include="UcoinException.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Ucoin.Utility\Ucoin.Framework.Utility.csproj">
+      <Project>{5b31d7e9-f83f-465f-aa90-d25a580e5420}</Project>
+      <Name>Ucoin.Framework.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

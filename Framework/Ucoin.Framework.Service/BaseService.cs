@@ -28,7 +28,7 @@ namespace Ucoin.Framework.Service
             get { return this.context; }
         }
 
-        protected override void Dispose(bool disposing)
+        protected override void OnDispose(bool disposing)
         {
         }
     }

@@ -40,7 +40,7 @@ namespace Ucoin.Framework.Test
             }
         }
 
-        protected override void Dispose(bool disposing)
+        protected override void OnDispose(bool disposing)
         {
             using (var context = new EFTestContext())
             {
