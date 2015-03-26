@@ -60,11 +60,11 @@ namespace Ucoin.Framework.Utility
         //    return new ArgumentOutOfRangeException(argName, String.Format(CultureInfo.CurrentCulture, message, args));
         //}
 
-        //[DebuggerStepThrough]
-        //public static Exception Argument(string argName, string message, params object[] args)
-        //{
-        //    return new ArgumentException(String.Format(CultureInfo.CurrentCulture, message, args), argName);
-        //}
+        [DebuggerStepThrough]
+        public static Exception Argument(string argName, string message, params object[] args)
+        {
+            return new ArgumentException(String.Format(CultureInfo.CurrentCulture, message, args), argName);
+        }
 
         //[DebuggerStepThrough]
         //public static Exception Argument<T>(Func<T> arg, string message, params object[] args)

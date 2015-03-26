@@ -89,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.EfExtension
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Framework.Cache", "Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj", "{F01BD9F0-4404-4F33-90F2-DBD9FF35F9C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.EfExtensions.Test", "Test\Ucoin.EfExtensions.Test\Ucoin.EfExtensions.Test.csproj", "{5F746888-8A3F-4932-9472-713F33C99EB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -908,6 +910,31 @@ Global
 		{F01BD9F0-4404-4F33-90F2-DBD9FF35F9C1}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F01BD9F0-4404-4F33-90F2-DBD9FF35F9C1}.Test|Mixed Platforms.Build.0 = Release|Any CPU
 		{F01BD9F0-4404-4F33-90F2-DBD9FF35F9C1}.Test|x86.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.License|Any CPU.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.License|Any CPU.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.License|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.License|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.License|x86.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.NUnit|Any CPU.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.NUnit|Any CPU.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.NUnit|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.NUnit|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.NUnit|x86.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Test|Any CPU.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Test|Mixed Platforms.Build.0 = Release|Any CPU
+		{5F746888-8A3F-4932-9472-713F33C99EB4}.Test|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -945,6 +972,7 @@ Global
 		{59A4217E-6F65-4CA2-95A7-051A2DEF4053} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{EAD977B4-8C2C-470B-A49E-506640DA81A4} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
 		{F01BD9F0-4404-4F33-90F2-DBD9FF35F9C1} = {93384C3E-A6B6-4191-A2F7-425D66DE2523}
+		{5F746888-8A3F-4932-9472-713F33C99EB4} = {77E2A99B-F19A-45D2-83A5-2FF165A85916}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Caching.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.ServiceBus.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.TransientFaultHandling.Configuration.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.WCF.6.0.1304.0\lib\NET45
