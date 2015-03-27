@@ -66,7 +66,7 @@ namespace Ucoin.Framework.EfExtensions.Batch
                 var sqlBuilder = new StringBuilder(innerSelect.Length * 2);
 
                 sqlBuilder.Append("UPDATE ");
-                sqlBuilder.Append("[" + entityMap.TableName + "]");
+                sqlBuilder.Append(entityMap.TableFullName);
                 sqlBuilder.AppendLine(" SET ");
 
                 var memberInitExpression = updateExpression.Body as MemberInitExpression;
@@ -186,7 +186,7 @@ namespace Ucoin.Framework.EfExtensions.Batch
                 }
 
                 sqlBuilder.AppendLine(" ");
-                sqlBuilder.AppendFormat("FROM {0} AS j0 INNER JOIN (", "[" + entityMap.TableName + "]");
+                sqlBuilder.AppendFormat("FROM {0} AS j0 INNER JOIN (", entityMap.TableFullName);
                 sqlBuilder.AppendLine();
                 sqlBuilder.AppendLine(innerSelect);
                 sqlBuilder.Append(") AS j1 ON (");
