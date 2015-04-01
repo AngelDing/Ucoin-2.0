@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Ucoin.Framework.Utility;
 using Ucoin.Framework.Logging.Configuration;
 using Ucoin.Framework.Logging.Simple;
 

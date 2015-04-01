@@ -6,10 +6,10 @@ using System.Data.Entity;
 using Xunit;
 using FluentAssertions;
 using System.Collections.Generic;
-using Ucoin.Framework.Utility;
 using Ucoin.Framework.CompareObjects;
 using Ucoin.Framework.Entities;
 using System.Diagnostics;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Framework.Test
 {

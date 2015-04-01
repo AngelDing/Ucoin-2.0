@@ -2,7 +2,7 @@ using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Filters;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Extensions;
 
 namespace Ucoin.Framework.Logging.EntLib
 {

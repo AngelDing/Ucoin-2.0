@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Ucoin.Framework.Logging;
 using Ucoin.Framework.Logging.Simple;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Logging.Test
 {
@@ -44,7 +44,7 @@ namespace Ucoin.Logging.Test
         public CapturingLogger(CapturingLoggerAdapter owner, string logName)
             : base(InitLogArgumentEntity(logName))
         {
-            owner.CheckNotNull("owner");
+            GuardHelper.ArgumentNotNull(() => owner);
             Owner = owner;
         }
 

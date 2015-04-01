@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Framework.Logging
 {
@@ -22,13 +22,13 @@ namespace Ucoin.Framework.Logging
         /// <returns></returns>
         public ILogger GetLogger(Type type)
         {
-            type.CheckNotNull("type");
+            GuardHelper.ArgumentNotNull(() => type);
             return GetLoggerInternal(type.FullName);
         }
 
         public ILogger GetLogger(string name)
         {
-            name.CheckNotNullOrEmpty("name");
+            GuardHelper.ArgumentNotEmpty(() => name);
             return GetLoggerInternal(name);
         }
 

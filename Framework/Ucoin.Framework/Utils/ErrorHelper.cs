@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Diagnostics;
 
-namespace Ucoin.Framework.Utility
+namespace Ucoin.Framework.Utils
 {
     public static class ErrorHelper
     {

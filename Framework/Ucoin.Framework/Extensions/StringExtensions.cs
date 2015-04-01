@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 
-namespace Ucoin.Framework.Utility
+namespace Ucoin.Framework.Extensions
 {
-    public static class StringHelper
+    public static class StringExtensions
     {
         #region To Bool
         public static bool ToBool(this string str, bool defaultValue)
@@ -134,17 +135,12 @@ namespace Ucoin.Framework.Utility
             //    return (string.IsNullOrEmpty(value)) ? null : value;
             //}
 
-            ///// <summary>
-            ///// Formats a string to an invariant culture
-            ///// </summary>
-            ///// <param name="formatString">The format string.</param>
-            ///// <param name="objects">The objects.</param>
-            ///// <returns></returns>
-            //[DebuggerStepThrough]
-            //public static string FormatInvariant(this string format, params object[] objects)
-            //{
-            //    return string.Format(CultureInfo.InvariantCulture, format, objects);
-            //}
+
+            [DebuggerStepThrough]
+            public static string FormatInvariant(this string format, params object[] objects)
+            {
+                return string.Format(CultureInfo.InvariantCulture, format, objects);
+            }
 
             ///// <summary>
             ///// Formats a string to the current culture.

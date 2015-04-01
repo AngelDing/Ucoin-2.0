@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Extensions;
 
 namespace Ucoin.Framework.Logging
 {

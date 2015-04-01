@@ -55,9 +55,9 @@
     <EmbeddedResource Include="Paging\DoPagingPost.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ucoin.Utility\Ucoin.Framework.Utility.csproj">
-      <Project>{5b31d7e9-f83f-465f-aa90-d25a580e5420}</Project>
-      <Name>Ucoin.Framework.Utility</Name>
+    <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

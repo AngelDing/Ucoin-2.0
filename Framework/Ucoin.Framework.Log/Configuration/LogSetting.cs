@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Framework.Logging.Configuration
 {
@@ -11,10 +11,10 @@ namespace Ucoin.Framework.Logging.Configuration
 
         public LogSetting(Type type, NameValueCollection nvList)
         {
-            type.CheckNotNull("type");
+            GuardHelper.ArgumentNotNull(() => type);
             var msg = string.Format("Type {0} does not implement {1}", 
                 type.AssemblyQualifiedName, typeof(ILoggerAdapter).FullName);
-            type.CheckIsAssignable<ILoggerAdapter>("type",msg);
+            GuardHelper.InheritsFrom<ILoggerAdapter>(type, msg);
             
             factoryAdapterType = type;
             properties = nvList;

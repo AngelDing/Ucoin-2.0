@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Utils;
 using Ucoin.Framework.Threading;
 
 namespace Ucoin.Framework.Cache

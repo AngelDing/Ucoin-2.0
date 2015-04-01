@@ -62,6 +62,9 @@
     <Compile Include="Entities\IBusinessEntity.cs" />
     <Compile Include="Entities\IPartialUpdateEntity.cs" />
     <Compile Include="AppCodeType.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\BasePagingModel.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Paging\IPaging.cs" />
@@ -95,6 +98,10 @@
     <Compile Include="Threading\UpgradeableReadLockDisposable.cs" />
     <Compile Include="Threading\WriteLockDisposable.cs" />
     <Compile Include="UcoinValidationException.cs" />
+    <Compile Include="Utils\RandomHelper.cs" />
+    <Compile Include="Utils\ErrorHelper.cs" />
+    <Compile Include="Utils\GuardHelper.cs" />
+    <Compile Include="Utils\ObjectCopierHelper.cs" />
     <Compile Include="Validator\EntityValidator.cs" />
     <Compile Include="Validator\IValidator.cs" />
     <Compile Include="ValueObjects\BaseValueObject.cs" />
@@ -125,12 +132,7 @@
     <Compile Include="Specifications\TrueSpecification.cs" />
     <Compile Include="UcoinException.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ucoin.Utility\Ucoin.Framework.Utility.csproj">
-      <Project>{5b31d7e9-f83f-465f-aa90-d25a580e5420}</Project>
-      <Name>Ucoin.Framework.Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

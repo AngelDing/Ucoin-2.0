@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Extensions;
 
 namespace Ucoin.Framework.Cache
 {    

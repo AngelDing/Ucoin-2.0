@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Framework
 {

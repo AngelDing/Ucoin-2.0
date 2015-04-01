@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Ucoin.Framework.Utility
+namespace Ucoin.Framework.Extensions
 {
-    public static class EnumHelper
+    public static class EnumExtensions
     {
         /// <summary>
         /// 尝试将值类型变量转换为指定枚举类型，并获取枚举变量值的 Description 、 DisplayName 或 Display(Name= 特性值

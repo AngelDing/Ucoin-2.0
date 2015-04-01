@@ -6,7 +6,7 @@ using System.Web.Mvc.Html;
 using System.Web.Mvc;
 using System.Linq.Expressions;
 using System.Text;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Extensions;
 
 namespace Ucoin.Framework.Web.Extensions
 {
@@ -274,11 +274,11 @@ namespace Ucoin.Framework.Web.Extensions
                     Value = mi.Invoke(null, new object[] { p }).ToString()
                 }).ToList();
 
-            if (lstExcludeValue.HasValue())
+            if (lstExcludeValue.HasItems())
             {
                 items.RemoveAll(p => lstExcludeValue.Contains(p.Value));
             }
-            if (lstOnlyIncludeValue.HasValue())
+            if (lstOnlyIncludeValue.HasItems())
             {
                 items.RemoveAll(p => !lstOnlyIncludeValue.Contains(p.Value));
             }

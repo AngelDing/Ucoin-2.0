@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Text;
-using Ucoin.Framework.Utility;
+using Ucoin.Framework.Extensions;
 
 namespace Ucoin.Framework.Logging.Simple
 {
