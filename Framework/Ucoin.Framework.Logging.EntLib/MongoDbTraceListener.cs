@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Diagnostics;
 using Ucoin.Log.IServices;
-using Ucoin.Framework.Service;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Ucoin.Log.Entities;
+using Ucoin.Framework.ServiceLocation;
+using Ucoin.Framework.Service;
 
 namespace Ucoin.Framework.Logging.EntLib
 {
@@ -28,7 +29,7 @@ namespace Ucoin.Framework.Logging.EntLib
                 return;
             }
 
-            var logService = ServiceLocator.GetService<ILogService>(); //採用WCF訪問Log服務
+            var logService = ServiceLocator.Current.GetInstance<ILogService>(); //採用WCF訪問Log服務
 
             var appLog = GenerateAppLog(log);
             if (appLog.LogLevelType == LogLevelType.Error || appLog.LogLevelType == LogLevelType.Fatal)

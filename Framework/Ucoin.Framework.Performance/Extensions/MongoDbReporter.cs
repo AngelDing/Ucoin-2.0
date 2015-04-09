@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Ucoin.Framework.Service;
+using Ucoin.Framework.ServiceLocation;
 using Ucoin.Log.Entities;
 using Ucoin.Log.IServices;
 
@@ -18,7 +19,7 @@ namespace Ucoin.Framework.Performance
         {
             var loggerName = string.Format("Metrics.CSV.{0}.{1}", metricType, metricName);
             var perfLog = GetPerfLog(loggerName, timestamp, metricType, metricName, values);
-            var logService = ServiceLocator.GetService<ILogService>();
+            var logService = ServiceLocator.Current.GetInstance<ILogService>();
             logService.LogPerfInfo(perfLog);
         }
 

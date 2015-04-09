@@ -59,6 +59,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
     <Reference Include="System.XML" />
@@ -109,10 +110,13 @@
     <Compile Include="ReflectionTest\DelegateFactoryTest.cs" />
     <Compile Include="ReflectionTest\DynamicProxyTest.cs" />
     <Compile Include="ReflectionTest\ReflectionHelperTest.cs" />
-    <Compile Include="ServiceLocatorTest\AdvancedLogger.cs" />
-    <Compile Include="ServiceLocatorTest\ILogger.cs" />
+    <Compile Include="ServiceLocatorTest\ServiceLocatorFixtureTests.cs" />
+    <Compile Include="ServiceLocatorTest\Components\AdvancedLogger.cs" />
+    <Compile Include="ServiceLocatorTest\Components\ILogger.cs" />
+    <Compile Include="ServiceLocatorTest\Components\MockServiceLocator.cs" />
     <Compile Include="ServiceLocatorTest\ServiceLocatorTests.cs" />
-    <Compile Include="ServiceLocatorTest\SimpleLogger.cs" />
+    <Compile Include="ServiceLocatorTest\Components\SimpleLogger.cs" />
+    <Compile Include="ServiceLocatorTest\UnityServiceLocatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
@@ -122,6 +126,10 @@
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.SqlDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.ServiceLocation\Ucoin.Framework.ServiceLocation.csproj">
+      <Project>{7fd70353-b6a3-4d53-bed4-2aad1177fc7d}</Project>
+      <Name>Ucoin.Framework.ServiceLocation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
       <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>

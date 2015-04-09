@@ -1,6 +1,6 @@
 using System;
 
-namespace Ucoin.Framework.ServiceLocator.Test
+namespace Ucoin.Framework.ServiceLocation.Test
 {
     public class SimpleLogger : ILogger
     {

@@ -74,6 +74,10 @@
       <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
       <Name>Ucoin.Framework.MongoDb</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Framework.ServiceLocation\Ucoin.Framework.ServiceLocation.csproj">
+      <Project>{7fd70353-b6a3-4d53-bed4-2aad1177fc7d}</Project>
+      <Name>Ucoin.Framework.ServiceLocation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
       <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>
       <Name>Ucoin.Framework.Service</Name>

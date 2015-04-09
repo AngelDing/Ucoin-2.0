@@ -1,8 +1,8 @@
 using System;
 
-namespace Ucoin.Framework.ServiceLocator.Test
+namespace Ucoin.Framework.ServiceLocation.Test
 {
-    public class AdvancedLogger : IUnregisteredLogger
+    public class AdvancedLogger : ILogger
     {
         public void Log(string msg)
         {
