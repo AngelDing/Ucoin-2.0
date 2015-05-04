@@ -6,6 +6,8 @@ using System.Data.Entity.Validation;
 using System.Text;
 using Ucoin.Framework.Repositories;
 using Ucoin.Framework.Entities;
+using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
+using System.Diagnostics;
 
 namespace Ucoin.Framework.SqlDb.Repositories
 {
@@ -13,9 +15,10 @@ namespace Ucoin.Framework.SqlDb.Repositories
     {
         private readonly DbContext dbContext;
 
+
         public EfRepositoryContext(DbContext dbContext)
         {
-            this.dbContext = dbContext;
+            this.dbContext = dbContext;            
         }
 
         protected override void OnDispose(bool disposing)
@@ -65,7 +68,18 @@ namespace Ucoin.Framework.SqlDb.Repositories
                 throw new EfRepositoryException(errorMsgs);
             }
 
-            dbContext.SaveChanges();
+            RetryPolicy<SqlDatabaseTransientErrorDetectionStrategy> retryPolicy;
+            var incremental = new Incremental(5, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1.5))
+            {
+                FastFirstRetry = true
+            };
+            retryPolicy = new RetryPolicy<SqlDatabaseTransientErrorDetectionStrategy>(incremental);
+
+            retryPolicy.Retrying += (s, e) =>
+                Trace.TraceWarning("An error occurred in attempt number {1} to access the database in ConferenceService: {0}",
+                e.LastException.Message, e.CurrentRetryCount);
+
+            retryPolicy.ExecuteAction(() => dbContext.SaveChanges());
         }
 
         private string GetErrors(IEnumerable<DbEntityValidationResult> results)

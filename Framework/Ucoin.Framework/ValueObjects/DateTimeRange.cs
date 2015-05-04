@@ -6,8 +6,12 @@ namespace Ucoin.Framework.ValueObjects
 {
     public class DateTimeRange : BaseValueObject
     {
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        [Display(Name = "Start Date")]
         public DateTime StartDateTime { get; private set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        [Display(Name = "End Date")]
         public DateTime EndDateTime { get; private set; }
 
         public DateTimeRange(DateTime start, DateTime end)

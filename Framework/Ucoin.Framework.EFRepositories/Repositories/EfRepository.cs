@@ -8,6 +8,8 @@ using Ucoin.Framework.Entities;
 using Ucoin.Framework.Specifications;
 using Ucoin.Framework.CompareObjects;
 using Ucoin.Framework.SqlDb.Entities;
+using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
+using System.Diagnostics;
 
 namespace Ucoin.Framework.SqlDb.Repositories
 {
@@ -15,7 +17,8 @@ namespace Ucoin.Framework.SqlDb.Repositories
         where T : EfEntity<Tkey>, IAggregateRoot<Tkey>
     {
         private readonly IEfRepositoryContext efContext;
-        private readonly DbContext db;       
+        private readonly DbContext db;
+        protected RetryPolicy<SqlDatabaseTransientErrorDetectionStrategy> RetryPolicy { get; private set; }
 
         public EfRepository(IRepositoryContext context)
             : base(context)
@@ -25,6 +28,16 @@ namespace Ucoin.Framework.SqlDb.Repositories
                 this.efContext = context as IEfRepositoryContext;
                 this.db = efContext.DbContext;
             }
+
+            var incremental = new Incremental(5, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1.5))
+            {
+                FastFirstRetry = true
+            };
+            this.RetryPolicy = new RetryPolicy<SqlDatabaseTransientErrorDetectionStrategy>(incremental);
+
+            this.RetryPolicy.Retrying += (s, e) =>
+                Trace.TraceWarning("An error occurred in attempt number {1} to access the database in ConferenceService: {0}",
+                e.LastException.Message, e.CurrentRetryCount);
         }
 
         #region IRepository
@@ -77,7 +90,7 @@ namespace Ucoin.Framework.SqlDb.Repositories
 
         protected override bool DoExists(Expression<Func<T, bool>> predicate)
         {
-            var count = GetSet().Count(predicate);
+            var count = this.RetryPolicy.ExecuteAction(() => GetSet().Count(predicate));
             return count != 0;
         }
 
@@ -87,22 +100,23 @@ namespace Ucoin.Framework.SqlDb.Repositories
 
         protected override T DoGetByKey(Tkey key)
         {
-            return GetSet().FirstOrDefault(p => (object)p.Id == (object)key);
+            return this.RetryPolicy.ExecuteAction(
+                () => GetSet().FirstOrDefault(p => (object)p.Id == (object)key));
         }
 
         protected override IEnumerable<T> DoGetAll()
         {
-            return GetSet();
+            return this.RetryPolicy.ExecuteAction(() => GetSet());
         }
 
         protected override IEnumerable<T> DoGetBy(Expression<Func<T, bool>> predicate)
         {
-            return GetSet().Where(predicate);
+            return this.RetryPolicy.ExecuteAction(() => GetSet().Where(predicate));
         }
 
         protected override IEnumerable<T> DoGetBy(ISpecification<T> spec)
         {
-            return GetSet().Where(spec.SatisfiedBy());
+            return this.RetryPolicy.ExecuteAction(() => GetSet().Where(spec.SatisfiedBy()));
         }
 
         #endregion
