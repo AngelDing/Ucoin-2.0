@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Data.Entity;
 using System.Collections.Generic;
 using Ucoin.Conference.EfData;
 using Ucoin.Conference.Entities;
 using Ucoin.Framework.SqlDb.Repositories;
+using System.Linq.Expressions;
 
 namespace Ucoin.Conference.Repositories
 {
@@ -22,6 +24,13 @@ namespace Ucoin.Conference.Repositories
             return this.RetryPolicy.ExecuteAction(() => db.Orders.Include("Seats.SeatInfo")
                .Where(x => x.ConferenceId == conferenceId)
                .ToList());
+        }
+
+
+        public Order FindOrder(Expression<Func<Order, bool>> lookup)
+        {
+            return this.RetryPolicy.ExecuteAction(() => 
+                db.Orders.Include(x => x.Seats).FirstOrDefault(lookup));
         }
     }
 }

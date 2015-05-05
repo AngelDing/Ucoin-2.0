@@ -62,6 +62,12 @@
     <Compile Include="Entities\IBusinessEntity.cs" />
     <Compile Include="Entities\IPartialUpdateEntity.cs" />
     <Compile Include="AppCodeType.cs" />
+    <Compile Include="EventSourcing\EventSourced.cs" />
+    <Compile Include="EventSourcing\IEventSourced.cs" />
+    <Compile Include="EventSourcing\IEventSourcedRepository.cs" />
+    <Compile Include="EventSourcing\IMementoOriginator.cs" />
+    <Compile Include="EventSourcing\IVersionedEvent.cs" />
+    <Compile Include="EventSourcing\VersionedEvent.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

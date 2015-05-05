@@ -24,7 +24,7 @@ namespace Ucoin.Conference.Services
 
         public ConferenceService(
             IEventBus eventBus,
-            IRepositoryContext context,
+            IConferenceRepositoryContext context,
             IConferenceRepository conferenceRepository,
             IOrderRepository orderRepository,
             ISeatTypeRepository seatTypeRepository)

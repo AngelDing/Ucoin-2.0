@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -44,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Extensions\MvcExtensions.cs" />
     <Compile Include="Extensions\SelectExtensions.cs" />
+    <Compile Include="MaintenanceMode.cs" />
+    <Compile Include="MaintenanceModeAttribute.cs" />
     <Compile Include="Paging\PageHelper.cs" />
     <Compile Include="Paging\PagingInfo.cs" />
     <Compile Include="Paging\PagingMode.cs" />
