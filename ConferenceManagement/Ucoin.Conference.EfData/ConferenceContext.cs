@@ -8,7 +8,7 @@ namespace Ucoin.Conference.EfData
         public const string SchemaName = "ConferenceManagement";
 
         public ConferenceContext()
-            : base("ConferenceManagement")
+            : base("Conference")
         {
         }
 
@@ -29,6 +29,8 @@ namespace Ucoin.Conference.EfData
 
             modelBuilder.Entity<ConferenceInfo>().ToTable("Conferences", SchemaName);
             modelBuilder.Entity<ConferenceInfo>().HasMany(x => x.Seats).WithRequired();
+            modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.StartDateTime).HasColumnName("StartDate");
+            modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.EndDateTime).HasColumnName("EndDate");
             modelBuilder.Entity<SeatType>().ToTable("SeatTypes", SchemaName);
             modelBuilder.Entity<Order>().ToTable("Orders", SchemaName);
             modelBuilder.Entity<OrderSeat>().ToTable("OrderSeats", SchemaName);

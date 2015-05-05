@@ -1,4 +1,4 @@
-﻿@model Conference.ConferenceInfo
+﻿@model Ucoin.Conference.Entities.ConferenceInfo
 
 @{
     ViewBag.Title = "Create Conference";
@@ -128,12 +128,12 @@
                                 </select>
                             </div>*@
                             <div class="form__fieldset">
-                                @Html.LabelFor(model => model.StartDate, "Start date:*")
-                                @Html.Hidden("StartDate", Model != null ? Model.StartDate.ToString("yyyy/MM/dd") : null, new { @class="inline-datepicker" })
+                                @Html.LabelFor(model => model.BookableDateRange.StartDateTime, "Start date:*")
+                                @Html.Hidden("StartDate", Model != null ? Model.BookableDateRange.StartDateTime.ToString("yyyy/MM/dd") : null, new { @class = "inline-datepicker" })
                             </div>
                             <div class="form__fieldset">
-                                @Html.LabelFor(model => model.EndDate, "End date:*")
-                                @Html.Hidden("EndDate",  Model != null ? Model.EndDate.ToString("yyyy/MM/dd") : null, new { @class="inline-datepicker" })
+                                @Html.LabelFor(model => model.BookableDateRange.EndDateTime, "End date:*")
+                                @Html.Hidden("EndDate", Model != null ? Model.BookableDateRange.EndDateTime.ToString("yyyy/MM/dd") : null, new { @class = "inline-datepicker" })
                             </div>
                             <div class="g-clear"></div>
                         </div>

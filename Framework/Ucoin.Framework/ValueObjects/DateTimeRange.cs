@@ -14,6 +14,13 @@ namespace Ucoin.Framework.ValueObjects
         [Display(Name = "End Date")]
         public DateTime EndDateTime { get; private set; }
 
+        /// <summary>
+        /// 用於EF的數據構造
+        /// </summary>
+        private DateTimeRange()
+        {
+        }
+
         public DateTimeRange(DateTime start, DateTime end)
         {
             StartDateTime = start;

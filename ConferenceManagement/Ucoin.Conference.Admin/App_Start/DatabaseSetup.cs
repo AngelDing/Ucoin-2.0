@@ -2,6 +2,7 @@
 namespace Ucoin.Conference.Admin
 {
     using System.Data.Entity;
+    using Ucoin.Conference.EfData;
 
     /// <summary>
     /// Initializes the EF infrastructure.
@@ -10,9 +11,7 @@ namespace Ucoin.Conference.Admin
     {
         public static void Initialize()
         {
-            //Database.DefaultConnectionFactory = new ServiceConfigurationSettingConnectionFactory(Database.DefaultConnectionFactory);
-
-            //Database.SetInitializer<ConferenceContext>(null);
+            Database.SetInitializer<ConferenceContext>(null);
         }
     }
 }
