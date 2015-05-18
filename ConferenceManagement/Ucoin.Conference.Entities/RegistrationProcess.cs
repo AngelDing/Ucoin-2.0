@@ -4,7 +4,7 @@ using Ucoin.Framework.Entities;
 using Ucoin.Framework.SqlDb.Entities;
 using Ucoin.Framework.Utils;
 
-namespace Ucoin.Conference.Entities.Registration
+namespace Ucoin.Conference.Entities
 {
     public class RegistrationProcess : EfEntity<Guid>, IAggregateRoot<Guid>
     {

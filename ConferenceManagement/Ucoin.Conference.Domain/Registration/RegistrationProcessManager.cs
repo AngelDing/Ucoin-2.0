@@ -9,7 +9,7 @@ namespace Ucoin.Conference.Domain
     using System.ComponentModel.DataAnnotations.Schema;
     using Ucoin.Framework.Processes;
     using Ucoin.Framework.Messaging;
-    using Ucoin.Conference.Entities.Registration;
+    using Ucoin.Conference.Entities;
     using Ucoin.Conference.Contracts.Events.Registration;
     using Ucoin.Conference.Contracts.Events.Payments;
     using Ucoin.Conference.Contracts.Commands.Registration;

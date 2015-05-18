@@ -1,7 +1,5 @@
 ﻿using System.Data.Entity;
 using Ucoin.Conference.Entities;
-using Ucoin.Conference.Entities.Payments;
-using Ucoin.Conference.Entities.Registration;
 using Ucoin.Framework.SqlDb.Processes;
 
 namespace Ucoin.Conference.EfData

@@ -4,7 +4,7 @@
     using System.Diagnostics;
     using System.Linq;
     using Ucoin.Conference.Contracts.Commands.Payments;
-    using Ucoin.Conference.Entities.Payments;
+    using Ucoin.Conference.Entities;
     using Ucoin.Conference.Repositories;
     using Ucoin.Framework.Messaging.Handling;
     using Ucoin.Framework.Repositories;

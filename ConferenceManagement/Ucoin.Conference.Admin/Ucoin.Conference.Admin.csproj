@@ -162,6 +162,10 @@
       <Project>{ed8d3cea-b211-4a5a-a981-23fdb31243d4}</Project>
       <Name>Ucoin.Conference.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.IRepositories\Ucoin.Conference.IRepositories.csproj">
+      <Project>{04b78d1b-a939-4434-b871-0bb376e8abde}</Project>
+      <Name>Ucoin.Conference.IRepositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Conference.Repositories\Ucoin.Conference.Repositories.csproj">
       <Project>{5f3fad69-a0aa-46b8-9d27-f7529582b669}</Project>
       <Name>Ucoin.Conference.Repositories</Name>

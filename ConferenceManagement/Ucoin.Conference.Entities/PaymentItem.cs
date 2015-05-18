@@ -2,7 +2,7 @@
 using Ucoin.Framework.SqlDb.Entities;
 using Ucoin.Framework.Utils;
 
-namespace Ucoin.Conference.Entities.Payments
+namespace Ucoin.Conference.Entities
 {
     public class PaymentItem : EfEntity<Guid>
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Ucoin.Framework.Entities;
 using Ucoin.Framework.SqlDb.Entities;
 
-namespace Ucoin.Conference.Entities.Payments
+namespace Ucoin.Conference.Entities
 {
     public class Payment : EfEntity<Guid>, IAggregateRoot<Guid>
     {

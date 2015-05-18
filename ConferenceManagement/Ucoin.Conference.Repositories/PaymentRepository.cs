@@ -1,16 +1,15 @@
 ﻿using System;
 using Ucoin.Conference.EfData;
-using Ucoin.Conference.Entities.Registration;
+using Ucoin.Conference.Entities;
 using Ucoin.Framework.SqlDb.Repositories;
-
 
 namespace Ucoin.Conference.Repositories
 {
-    public class RegistrationProcessRepository : EfRepository<RegistrationProcess, Guid>, IRegistrationProcessRepository
+    public class PaymentRepository : EfRepository<Payment, Guid>, IPaymentRepository
     {
         private readonly ConferenceContext db;
 
-        public RegistrationProcessRepository(IConferenceRepositoryContext context)
+        public PaymentRepository(IConferenceRepositoryContext context)
             : base(context)
         {
             this.db = DbContext as ConferenceContext;

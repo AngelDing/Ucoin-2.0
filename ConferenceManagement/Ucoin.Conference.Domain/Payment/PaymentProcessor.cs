@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Ucoin.Conference.Contracts.Events.Payments;
-    using Ucoin.Conference.Entities.Payments;
+    using Ucoin.Conference.Entities;
     using Ucoin.Framework.Messaging;
 
     /// <summary>

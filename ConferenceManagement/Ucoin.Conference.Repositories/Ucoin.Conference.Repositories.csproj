@@ -44,16 +44,11 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPaymentRepository.cs" />
-    <Compile Include="IRegistrationProcessRepository.cs" />
-    <Compile Include="Impl\PaymentRepository.cs" />
-    <Compile Include="Impl\RegistrationProcessRepository.cs" />
-    <Compile Include="Impl\SeatTypeRepository.cs" />
-    <Compile Include="ISeatTypeRepository.cs" />
-    <Compile Include="Impl\OrderRepository.cs" />
-    <Compile Include="Impl\ConferenceRepository.cs" />
-    <Compile Include="IOrderRepository.cs" />
-    <Compile Include="IConferenceRepository.cs" />
+    <Compile Include="PaymentRepository.cs" />
+    <Compile Include="RegistrationProcessRepository.cs" />
+    <Compile Include="SeatTypeRepository.cs" />
+    <Compile Include="OrderRepository.cs" />
+    <Compile Include="ConferenceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +71,10 @@
     <ProjectReference Include="..\Ucoin.Conference.Entities\Ucoin.Conference.Entities.csproj">
       <Project>{ed8d3cea-b211-4a5a-a981-23fdb31243d4}</Project>
       <Name>Ucoin.Conference.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.IRepositories\Ucoin.Conference.IRepositories.csproj">
+      <Project>{04b78d1b-a939-4434-b871-0bb376e8abde}</Project>
+      <Name>Ucoin.Conference.IRepositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
