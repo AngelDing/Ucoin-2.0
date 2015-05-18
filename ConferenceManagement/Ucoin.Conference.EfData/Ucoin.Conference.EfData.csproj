@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ConferenceContext.cs" />
     <Compile Include="ConferenceRepositoryContext.cs" />
+    <Compile Include="DatabaseInitializer.cs" />
     <Compile Include="IConferenceRepositoryContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

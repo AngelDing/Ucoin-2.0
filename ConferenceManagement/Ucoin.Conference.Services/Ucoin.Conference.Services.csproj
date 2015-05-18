@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="ConferenceService.cs" />
     <Compile Include="IConferenceService.cs" />
-    <Compile Include="OrderEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,10 +77,6 @@
     <ProjectReference Include="..\Ucoin.Conference.Repositories\Ucoin.Conference.Repositories.csproj">
       <Project>{5f3fad69-a0aa-46b8-9d27-f7529582b669}</Project>
       <Name>Ucoin.Conference.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ucoin.Registration.Contracts\Ucoin.Registration.Contracts.csproj">
-      <Project>{4af697d8-cc22-4619-8282-33d5520e6ff1}</Project>
-      <Name>Ucoin.Registration.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

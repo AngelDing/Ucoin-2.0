@@ -73,6 +73,32 @@ namespace Ucoin.Framework.EfExtensions
             return future;
         }
 
+        public static FutureCount FutureCount<TEntity>(this IQueryable<TEntity> source, ObjectQuery<TEntity> sourceQuery)
+           where TEntity : class
+        {
+            if (source == null)
+            {
+                return new FutureCount(0);
+            }
+
+            // create count expression
+            var expression = Expression.Call(
+              typeof(Queryable),
+              "Count",
+              new[] { source.ElementType },
+              source.Expression);
+
+            // create query from expression using internal ObjectQueryProvider
+            ObjectQuery countQuery = sourceQuery.CreateQuery(expression, typeof(int));
+            if (countQuery == null)
+                throw new ArgumentException("The source query must be of type ObjectQuery or DbQuery.", "source");
+
+            var futureContext = GetFutureContext(sourceQuery);
+            var future = new FutureCount(countQuery, futureContext.ExecuteFutureQueries);
+            futureContext.AddQuery(future);
+            return future;
+        }
+
         /// <summary>
         /// Provides for defering the execution of the <paramref name="source" /> query to a batch of future queries.
         /// </summary>

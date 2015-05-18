@@ -45,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventBus.cs" />
+    <Compile Include="IPaymentRepository.cs" />
+    <Compile Include="IRegistrationProcessRepository.cs" />
+    <Compile Include="PaymentRepository.cs" />
+    <Compile Include="RegistrationProcessRepository.cs" />
     <Compile Include="SeatTypeRepository.cs" />
     <Compile Include="ISeatTypeRepository.cs" />
     <Compile Include="OrderRepository.cs" />

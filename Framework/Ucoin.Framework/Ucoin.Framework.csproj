@@ -30,11 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionDisposable.cs" />
+    <Compile Include="BlobStorage\IBlobStorage.cs" />
     <Compile Include="CodeTimer.cs" />
     <Compile Include="CompareObjects\Cache.cs" />
     <Compile Include="CompareObjects\CompareParms.cs" />
@@ -68,9 +73,14 @@
     <Compile Include="EventSourcing\IMementoOriginator.cs" />
     <Compile Include="EventSourcing\IVersionedEvent.cs" />
     <Compile Include="EventSourcing\VersionedEvent.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="MessageLog\EventLogExtensions.cs" />
+    <Compile Include="MessageLog\IEventLogReader.cs" />
+    <Compile Include="MessageLog\QueryCriteria.cs" />
     <Compile Include="Messaging\CommandBusExtensions.cs" />
     <Compile Include="Messaging\Envelope.cs" />
     <Compile Include="Messaging\EventBusExtensions.cs" />
@@ -85,11 +95,17 @@
     <Compile Include="Messaging\IEventBus.cs" />
     <Compile Include="Messaging\IEventPublisher.cs" />
     <Compile Include="Messaging\IMessageSessionProvider.cs" />
+    <Compile Include="Metadata\IMetadataProvider.cs" />
+    <Compile Include="Metadata\StandardMetadata.cs" />
+    <Compile Include="Metadata\StandardMetadataProvider.cs" />
     <Compile Include="Models\BasePagingModel.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Paging\IPaging.cs" />
     <Compile Include="Paging\IPagingResult.cs" />
     <Compile Include="Paging\PagingResult.cs" />
+    <Compile Include="Processes\IProcessManager.cs" />
+    <Compile Include="Processes\IProcessManagerDataContext.cs" />
+    <Compile Include="Processes\IProcessor.cs" />
     <Compile Include="Reflection\DelegateFactory.cs" />
     <Compile Include="Reflection\DynamicProxy.cs" />
     <Compile Include="Reflection\FieldAccessor.cs" />
@@ -113,6 +129,9 @@
     <Compile Include="Result\ResultExtensions.cs" />
     <Compile Include="Result\ResultStatusType.cs" />
     <Compile Include="Result\SuccessfullyResult.cs" />
+    <Compile Include="Serialization\ITextSerializer.cs" />
+    <Compile Include="Serialization\JsonTextSerializer.cs" />
+    <Compile Include="Serialization\TextSerializerExtensions.cs" />
     <Compile Include="Threading\LockExtensions.cs" />
     <Compile Include="Threading\ReadLockDisposable.cs" />
     <Compile Include="Threading\UpgradeableReadLockDisposable.cs" />

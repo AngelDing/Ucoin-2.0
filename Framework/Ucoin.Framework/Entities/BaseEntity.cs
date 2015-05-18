@@ -85,7 +85,7 @@ namespace Ucoin.Framework.Entities
         /// <returns></returns>
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            return null; // throw new NotImplementedException();
+            return Enumerable.Empty<ValidationResult>();
         }
 
         public abstract string GetUpdateKey(LambdaExpression expression);
