@@ -44,15 +44,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventBus.cs" />
     <Compile Include="IPaymentRepository.cs" />
     <Compile Include="IRegistrationProcessRepository.cs" />
-    <Compile Include="PaymentRepository.cs" />
-    <Compile Include="RegistrationProcessRepository.cs" />
-    <Compile Include="SeatTypeRepository.cs" />
+    <Compile Include="Impl\PaymentRepository.cs" />
+    <Compile Include="Impl\RegistrationProcessRepository.cs" />
+    <Compile Include="Impl\SeatTypeRepository.cs" />
     <Compile Include="ISeatTypeRepository.cs" />
-    <Compile Include="OrderRepository.cs" />
-    <Compile Include="ConferenceRepository.cs" />
+    <Compile Include="Impl\OrderRepository.cs" />
+    <Compile Include="Impl\ConferenceRepository.cs" />
     <Compile Include="IOrderRepository.cs" />
     <Compile Include="IConferenceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

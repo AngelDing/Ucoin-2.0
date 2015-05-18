@@ -3,6 +3,7 @@ using Ucoin.Conference.EfData;
 using Ucoin.Conference.Repositories;
 using Ucoin.Conference.Services;
 using Ucoin.Framework.Messaging;
+using Ucoin.Framework.SqlDb.Messaging;
 
 namespace Ucoin.Conference.Admin.Resolver
 {
