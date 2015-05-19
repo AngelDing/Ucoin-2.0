@@ -3,6 +3,7 @@ namespace Ucoin.Conference.Contracts.Events.Registration
 {
     using System;
     using Ucoin.Framework.EventSourcing;
+    using Ucoin.Framework.ValueObjects;
 
     public class SeatAssigned : VersionedEvent
     {

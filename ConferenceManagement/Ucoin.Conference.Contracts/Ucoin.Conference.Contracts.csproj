@@ -80,7 +80,6 @@
     <Compile Include="Events\Registration\SeatAssignmentUpdated.cs" />
     <Compile Include="Events\Registration\SeatUnassigned.cs" />
     <Compile Include="OrderLine.cs" />
-    <Compile Include="PersonalInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Events\Conference\SeatCreated.cs" />
     <Compile Include="Events\Conference\SeatUpdated.cs" />

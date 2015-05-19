@@ -3,6 +3,7 @@ namespace Ucoin.Conference.Contracts.Commands.Registration
 {
     using System;
     using Ucoin.Framework.Messaging;
+    using Ucoin.Framework.ValueObjects;
 
     public class AssignSeat : ICommand
     {

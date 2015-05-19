@@ -3,6 +3,7 @@ namespace Ucoin.Conference.Contracts.Events.Registration
 {
     using System;
     using Ucoin.Framework.EventSourcing;
+    using Ucoin.Framework.ValueObjects;
 
     public class SeatAssignmentUpdated : VersionedEvent
     {
@@ -12,6 +13,7 @@ namespace Ucoin.Conference.Contracts.Events.Registration
         }
 
         public int Position { get; set; }
+
         public PersonalInfo Attendee { get; set; }
     }
 }

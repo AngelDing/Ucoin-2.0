@@ -9,6 +9,7 @@ namespace Ucoin.Conference.Domain
     using Ucoin.Conference.Contracts;
     using Ucoin.Conference.Contracts.Events.Registration;
     using Ucoin.Framework.Utils;
+    using Ucoin.Framework.ValueObjects;
 
     /// <summary>
     /// Entity used to represent seats asignments.
