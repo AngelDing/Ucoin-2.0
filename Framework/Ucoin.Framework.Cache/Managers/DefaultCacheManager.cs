@@ -29,6 +29,19 @@ namespace Ucoin.Framework.Cache
             return Get(cacheKey, acquirer, cachePolicy);
         }
 
+        public T Get<T>(string key)
+        {
+            GuardHelper.ArgumentNotEmpty(() => key);
+            if (cacheProvider.Contains(key))
+            {
+                return (T)cacheProvider.Get(key);
+            }
+            else
+            {
+                return default(T);
+            }
+        }
+
         public T Get<T>(CacheKey cacheKey, Func<T> acquirer, CachePolicy cachePolicy = null)
         {
             var strKey = cacheKey.Key;
@@ -45,6 +58,10 @@ namespace Ucoin.Framework.Cache
             }
             else
             {
+                if (acquirer == null)
+                {
+                    return default(T);
+                }
                 using (EnterReadLock())
                 {
                     if (!cacheProvider.Contains(strKey))
@@ -60,11 +77,26 @@ namespace Ucoin.Framework.Cache
             }
         }
 
-        private void Set(CacheKey cacheKey, object value, CachePolicy cachePolicy)
+        public void Set(string key, object value, CachePolicy cachePolicy = null)
         {
+            GuardHelper.ArgumentNotEmpty(() => key);
+            var cacheKey = new CacheKey(key);
+            Set(cacheKey, value, cachePolicy);
+        }
+
+        public void Set(CacheKey cacheKey, object value, CachePolicy cachePolicy = null)
+        {
+            var strKey = cacheKey.Key;
+            GuardHelper.ArgumentNotEmpty(() => strKey);
+
             if (value == null)
             {
                 return;
+            }
+
+            if (cachePolicy == null)
+            {
+                cachePolicy = new CachePolicy();
             }
 
             using (EnterWriteLock())
@@ -72,44 +104,6 @@ namespace Ucoin.Framework.Cache
                 cacheProvider.Set(cacheKey, value, cachePolicy);
             }
         }
-
-        //public T Get<T>(string key, Func<T> acquirer, int cacheMinutes = 1, bool isAbsoluteExpiration = true)
-        //{
-        //    Guard.ArgumentNotEmpty(() => key);
-			
-        //    if (cacheProvider.Contains(key))
-        //    {
-        //        return (T)cacheProvider.Get(key);
-        //    }
-        //    else
-        //    {
-        //        using (EnterReadLock())
-        //        {
-        //            if (!cacheProvider.Contains(key))
-        //            {
-        //                var value = acquirer();
-        //                this.Set(key, value, cacheMinutes, isAbsoluteExpiration);
-
-        //                return value;
-        //            }
-        //        }
-
-        //        return (T)cacheProvider.Get(key);
-        //    }
-        //}
-
-        //private void Set(string key, object value, int cacheMinutes, bool isAbsoluteExpiration)
-        //{
-        //    Guard.ArgumentNotEmpty(() => key);
-			
-        //    if (value == null)
-        //        return;
-
-        //    using (EnterWriteLock())
-        //    {
-        //        cacheProvider.Set(key, value, cacheMinutes, isAbsoluteExpiration);
-        //    }
-        //}
 
         public void Remove(string key)
         {

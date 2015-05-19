@@ -45,14 +45,27 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachingConferenceService.cs" />
+    <Compile Include="ConferenceViewService.cs" />
     <Compile Include="ConferenceService.cs" />
+    <Compile Include="IConferenceViewService.cs" />
     <Compile Include="IConferenceService.cs" />
+    <Compile Include="IOrderViewService.cs" />
+    <Compile Include="OrderViewService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
+      <Project>{f01bd9f0-4404-4f33-90f2-dbd9ff35f9c1}</Project>
+      <Name>Ucoin.Framework.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.SqlDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
+      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
+      <Name>Ucoin.Framework.MongoDb</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
       <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>

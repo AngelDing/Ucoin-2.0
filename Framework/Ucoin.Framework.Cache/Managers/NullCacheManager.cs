@@ -41,6 +41,19 @@ namespace Ucoin.Framework.Cache
 		public IDisposable EnterWriteLock()
 		{
 			return ActionDisposable.Empty;
-		}       
+		}
+
+        public T Get<T>(string key)
+        {
+            return default(T);
+        }
+
+        public void Set(string key, object value, CachePolicy cachePolicy = null)
+        {
+        }
+
+        public void Set(CacheKey key, object value, CachePolicy cachePolicy = null)
+        {
+        }
     }
 }

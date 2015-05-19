@@ -42,8 +42,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConferenceMongoRepository.cs" />
     <Compile Include="PaymentRepository.cs" />
     <Compile Include="RegistrationProcessRepository.cs" />
     <Compile Include="SeatTypeRepository.cs" />
@@ -59,6 +61,10 @@
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.SqlDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
+      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
+      <Name>Ucoin.Framework.MongoDb</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
