@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ucoin.Framework
+namespace Ucoin.Framework.Threading
 {
     public struct ActionDisposable : IDisposable
     {

@@ -1,4 +1,5 @@
 using System;
+using Ucoin.Framework.Threading;
 
 namespace Ucoin.Framework.Cache
 {
