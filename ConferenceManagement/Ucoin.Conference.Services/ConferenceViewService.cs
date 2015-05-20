@@ -52,7 +52,6 @@ namespace Ucoin.Conference.Services
         public IList<ConferenceAlias> GetPublishedConferences()
         {
             var rep = new ConferenceMongoRepository<ConferencesView>();
-
             var conferenceList = rep.GetBy(dto => dto.IsPublished);
 
             return conferenceList.Select(x =>
@@ -68,8 +67,8 @@ namespace Ucoin.Conference.Services
 
         public IList<SeatTypeView> GetPublishedSeatTypes(Guid conferenceId)
         {
-            var rep = new ConferenceMongoRepository<SeatTypeView>();
-            return rep.GetBy(c => c.ConferenceId == conferenceId).ToList();
+            var rep = new SeatTypeViewRepository();
+            return rep.GetPublishedSeatTypes(conferenceId);
         }
 
         public IList<SeatTypeName> GetSeatTypeNames(IEnumerable<Guid> seatTypes)

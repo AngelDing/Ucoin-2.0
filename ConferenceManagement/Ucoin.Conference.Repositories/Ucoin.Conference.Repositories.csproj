@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConferenceMongoRepository.cs" />
+    <Compile Include="SeatTypeViewRepository.cs" />
     <Compile Include="PaymentRepository.cs" />
     <Compile Include="RegistrationProcessRepository.cs" />
     <Compile Include="SeatTypeRepository.cs" />

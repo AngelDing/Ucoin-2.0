@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IConferenceRepository.cs" />
+    <Compile Include="ISeatTypeViewRepository.cs" />
     <Compile Include="IOrderRepository.cs" />
     <Compile Include="IPaymentRepository.cs" />
     <Compile Include="IRegistrationProcessRepository.cs" />
@@ -46,6 +47,10 @@
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.SqlDb</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
+      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
+      <Name>Ucoin.Framework.MongoDb</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
       <Name>Ucoin.Framework</Name>
@@ -55,9 +60,7 @@
       <Name>Ucoin.Conference.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ReadModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
