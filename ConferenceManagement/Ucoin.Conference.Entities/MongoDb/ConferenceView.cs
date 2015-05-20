@@ -5,10 +5,10 @@ namespace Ucoin.Conference.Entities.MongoDb
     using Ucoin.Framework.MongoDb.Entities;
     using MongoDB.Bson.Serialization.Attributes;
 
-    public class ConferencesView : StringKeyMongoEntity
+    public class ConferenceView : StringKeyMongoEntity
     {
         [BsonConstructor]
-        public ConferencesView(Guid id, string code, string name, string description, 
+        public ConferenceView(Guid id, string code, string name, string description, 
             string location, string tagline, string twitterSearch, DateTimeOffset startDate)
         {
             this.ConferenceId = id;

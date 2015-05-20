@@ -3,12 +3,14 @@ namespace Ucoin.Conference.Domain
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Diagnostics;
     using System.Linq;
     using AutoMapper;
     using Ucoin.Conference.Contracts.Events.Registration;
     using Ucoin.Framework.Messaging.Handling;
+    using Ucoin.Conference.Entities.MongoDb;
+    using Ucoin.Conference.Repositories;
+    using Ucoin.Conference.Contracts;
 
     public class DraftOrderViewModelGenerator :
         IEventHandler<OrderPlaced>, IEventHandler<OrderUpdated>,
@@ -16,7 +18,7 @@ namespace Ucoin.Conference.Domain
         IEventHandler<OrderRegistrantAssigned>,
         IEventHandler<OrderConfirmed>, IEventHandler<OrderPaymentConfirmed>
     {
-        private readonly Func<ConferenceRegistrationDbContext> contextFactory;
+        private readonly ConferenceMongoRepository<DraftOrder> draftOrderRepository;
 
         static DraftOrderViewModelGenerator()
         {
@@ -26,59 +28,50 @@ namespace Ucoin.Conference.Domain
             Mapper.CreateMap<OrderPaymentConfirmed, OrderConfirmed>();
         }
 
-        public DraftOrderViewModelGenerator(Func<ConferenceRegistrationDbContext> contextFactory)
+        public DraftOrderViewModelGenerator()
         {
-            this.contextFactory = contextFactory;
+            draftOrderRepository = new ConferenceMongoRepository<DraftOrder>();
         }
 
         public void Handle(OrderPlaced @event)
         {
-            using (var context = this.contextFactory.Invoke())
+            var dto = new DraftOrder(@event.SourceId, @event.ConferenceId, DraftOrder.States.PendingReservation, @event.Version)
             {
-                var dto = new DraftOrder(@event.SourceId, @event.ConferenceId, DraftOrder.States.PendingReservation, @event.Version)
-                {
-                    AccessCode = @event.AccessCode,
-                };
-                dto.Lines.AddRange(@event.Seats.Select(seat => new DraftOrderItem(seat.SeatType, seat.Quantity)));
+                AccessCode = @event.AccessCode,
+            };
+            dto.Lines.AddRange(@event.Seats.Select(seat => new DraftOrderItem(seat.SeatType, seat.Quantity)));
 
-                context.Save(dto);
-            }
+            draftOrderRepository.Insert(dto);
         }
 
         public void Handle(OrderRegistrantAssigned @event)
         {
-            using (var context = this.contextFactory.Invoke())
+            var dto = GetDraftOrder(@event.SourceId);
+            if (WasNotAlreadyHandled(dto, @event.Version))
             {
-                var dto = context.Find<DraftOrder>(@event.SourceId);
-                if (WasNotAlreadyHandled(dto, @event.Version))
-                {
-                    dto.RegistrantEmail = @event.Email;
-                    dto.OrderVersion = @event.Version;
-                    context.Save(dto);
-                }
+                dto.RegistrantEmail = @event.Email;
+                dto.OrderVersion = @event.Version;
+
+                draftOrderRepository.Update(dto);
             }
+        }
+
+        private DraftOrder GetDraftOrder(Guid orderId)
+        {
+            return draftOrderRepository.GetBy(p => p.OrderId == orderId).FirstOrDefault();
         }
 
         public void Handle(OrderUpdated @event)
         {
-            using (var context = this.contextFactory.Invoke())
+            var dto = GetDraftOrder(@event.SourceId);
+            if (WasNotAlreadyHandled(dto, @event.Version))
             {
-                var dto = context.Set<DraftOrder>().Include(o => o.Lines).First(o => o.OrderId == @event.SourceId);
-                if (WasNotAlreadyHandled(dto, @event.Version))
-                {
-                    var linesSet = context.Set<DraftOrderItem>();
-                    foreach (var line in dto.Lines.ToArray())
-                    {
-                        linesSet.Remove(line);
-                    }
+                var newItems = @event.Seats.Select(seat => new DraftOrderItem(seat.SeatType, seat.Quantity));
+                dto.Lines = newItems.ToList();
+                dto.State = DraftOrder.States.PendingReservation;
+                dto.OrderVersion = @event.Version;
 
-                    dto.Lines.AddRange(@event.Seats.Select(seat => new DraftOrderItem(seat.SeatType, seat.Quantity)));
-
-                    dto.State = DraftOrder.States.PendingReservation;
-                    dto.OrderVersion = @event.Version;
-
-                    context.Save(dto);
-                }
+                draftOrderRepository.Update(dto);
             }
         }
 
@@ -99,38 +92,32 @@ namespace Ucoin.Conference.Domain
 
         public void Handle(OrderConfirmed @event)
         {
-            using (var context = this.contextFactory.Invoke())
+            var dto = GetDraftOrder(@event.SourceId);
+            if (WasNotAlreadyHandled(dto, @event.Version))
             {
-                var dto = context.Find<DraftOrder>(@event.SourceId);
-                if (WasNotAlreadyHandled(dto, @event.Version))
-                {
-                    dto.State = DraftOrder.States.Confirmed;
-                    dto.OrderVersion = @event.Version;
-                    context.Save(dto);
-                }
+                dto.State = DraftOrder.States.Confirmed;
+                dto.OrderVersion = @event.Version;
+                draftOrderRepository.Update(dto);
             }
         }
 
         private void UpdateReserved(Guid orderId, DateTime reservationExpiration, DraftOrder.States state, int orderVersion, IEnumerable<SeatQuantity> seats)
         {
-            using (var context = this.contextFactory.Invoke())
+            var dto = GetDraftOrder(orderId);
+            if (WasNotAlreadyHandled(dto, orderVersion))
             {
-                var dto = context.Set<DraftOrder>().Include(x => x.Lines).First(x => x.OrderId == orderId);
-                if (WasNotAlreadyHandled(dto, orderVersion))
+                foreach (var seat in seats)
                 {
-                    foreach (var seat in seats)
-                    {
-                        var item = dto.Lines.Single(x => x.SeatType == seat.SeatType);
-                        item.ReservedSeats = seat.Quantity;
-                    }
-
-                    dto.State = state;
-                    dto.ReservationExpirationDate = reservationExpiration;
-
-                    dto.OrderVersion = orderVersion;
-
-                    context.Save(dto);
+                    var item = dto.Lines.Single(x => x.SeatType == seat.SeatType);
+                    item.ReservedSeats = seat.Quantity;
                 }
+
+                dto.State = state;
+                dto.ReservationExpirationDate = reservationExpiration;
+
+                dto.OrderVersion = orderVersion;
+
+                draftOrderRepository.Update(dto);
             }
         }
 

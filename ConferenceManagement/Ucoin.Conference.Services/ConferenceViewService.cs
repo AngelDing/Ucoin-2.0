@@ -41,9 +41,9 @@ namespace Ucoin.Conference.Services
                 .FirstOrDefault();
         }
 
-        private IEnumerable<ConferencesView> GetConferenceByCode(string conferenceCode)
+        private IEnumerable<ConferenceView> GetConferenceByCode(string conferenceCode)
         {
-             var rep = new ConferenceMongoRepository<ConferencesView>();
+             var rep = new ConferenceMongoRepository<ConferenceView>();
 
              return rep.GetBy(dto => dto.Code == conferenceCode);
         }
@@ -51,7 +51,7 @@ namespace Ucoin.Conference.Services
 
         public IList<ConferenceAlias> GetPublishedConferences()
         {
-            var rep = new ConferenceMongoRepository<ConferencesView>();
+            var rep = new ConferenceMongoRepository<ConferenceView>();
             var conferenceList = rep.GetBy(dto => dto.IsPublished);
 
             return conferenceList.Select(x =>

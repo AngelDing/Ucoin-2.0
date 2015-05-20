@@ -38,7 +38,7 @@
 
         public DateTime? ReservationExpirationDate { get; set; }
 
-        public ICollection<DraftOrderItem> Lines { get; private set; }
+        public ICollection<DraftOrderItem> Lines { get; set; }
 
         public int StateValue { get; private set; }
 
@@ -49,10 +49,10 @@
             set { this.StateValue = (int)value; }
         }
 
-        public int OrderVersion { get; internal set; }
+        public int OrderVersion { get; set; }
 
-        public string RegistrantEmail { get; internal set; }
+        public string RegistrantEmail { get; set; }
 
-        public string AccessCode { get; internal set; }
+        public string AccessCode { get; set; }
     }
 }

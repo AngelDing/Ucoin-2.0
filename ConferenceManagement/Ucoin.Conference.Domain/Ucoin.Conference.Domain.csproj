@@ -51,8 +51,12 @@
     <Compile Include="Payment\PaymentProcessor.cs" />
     <Compile Include="Payment\PaymentStateType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\Handlers\ConferenceViewModelGenerator.cs" />
+    <Compile Include="Registration\Handlers\DraftOrderViewModelGenerator.cs" />
     <Compile Include="Registration\Handlers\OrderCommandHandler.cs" />
+    <Compile Include="Registration\Handlers\PricedOrderViewModelGenerator.cs" />
     <Compile Include="Registration\Handlers\SeatAssignmentsHandler.cs" />
+    <Compile Include="Registration\Handlers\SeatAssignmentsViewModelGenerator.cs" />
     <Compile Include="Registration\Handlers\SeatsAvailabilityHandler.cs" />
     <Compile Include="Registration\Order.cs" />
     <Compile Include="Registration\OrderItem.cs" />
@@ -66,6 +70,10 @@
     <Compile Include="Services\PricingService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
+      <Project>{f01bd9f0-4404-4f33-90f2-dbd9ff35f9c1}</Project>
+      <Name>Ucoin.Framework.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.SqlDb</Name>

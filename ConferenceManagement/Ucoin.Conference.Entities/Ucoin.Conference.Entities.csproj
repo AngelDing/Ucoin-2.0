@@ -55,7 +55,7 @@
     </Compile>
     <Compile Include="RegistrationProcess.cs" />
     <Compile Include="Management\SeatType.cs" />
-    <Compile Include="MongoDb\ConferencesView.cs" />
+    <Compile Include="MongoDb\ConferenceView.cs" />
     <Compile Include="ViewModel\ConferenceAlias.cs" />
     <Compile Include="ViewModel\ConferenceDetails.cs" />
     <Compile Include="MongoDb\DraftOrder.cs" />
