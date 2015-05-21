@@ -203,6 +203,10 @@
       <Project>{f01bd9f0-4404-4f33-90f2-dbd9ff35f9c1}</Project>
       <Name>Ucoin.Framework.Cache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EfExtensions\Ucoin.Framework.EfExtensions.csproj">
+      <Project>{ead977b4-8c2c-470b-a49e-506640da81a4}</Project>
+      <Name>Ucoin.Framework.EfExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.SqlDb</Name>

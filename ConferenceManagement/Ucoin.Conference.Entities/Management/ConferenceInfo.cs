@@ -47,7 +47,7 @@ namespace Ucoin.Conference.Entities
         public ConferenceInfo()
         {
             this.Id = GuidHelper.NewSequentialId();
-            this.Seats = new ObservableCollection<SeatType>();
+            this.Seats = new HashSet<SeatType>();
             this.AccessCode = HandleGenerator.Generate(6);
         }
 

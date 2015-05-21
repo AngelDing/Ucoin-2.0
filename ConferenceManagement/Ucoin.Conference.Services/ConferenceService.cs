@@ -66,7 +66,7 @@ namespace Ucoin.Conference.Services
             {
                 throw new ObjectNotFoundException();
             }
-
+            seat.ConferenceId = conferenceId;
             Context.RegisterNew(seat);
             Context.Commit();
 
@@ -200,7 +200,7 @@ namespace Ucoin.Conference.Services
             {
                 // This flags prevents any further seat type deletions.
                 conference.WasEverPublished = true;
-                //this.Context.RegisterModified(conference);
+                this.Context.RegisterModified(conference);
                 this.Context.Commit();
 
                 // We always publish events *after* saving to store.
