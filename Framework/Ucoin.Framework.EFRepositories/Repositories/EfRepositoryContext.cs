@@ -43,7 +43,8 @@ namespace Ucoin.Framework.SqlDb.Repositories
         }
 
         public override void RegisterModified<T>(T obj)
-        {            
+        {
+            obj.ObjectState = ObjectStateType.Modified;
             this.dbContext.ApplyChanges(obj);
         }
 

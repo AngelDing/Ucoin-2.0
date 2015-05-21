@@ -25,10 +25,18 @@ namespace Ucoin.Conference.Entities
 
         public string TwitterSearch { get; set; }
 
-        /// <summary>
-        /// 可預訂時間區間
-        /// </summary>
-        public DateTimeRange BookableDateRange { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        [Display(Name = "Start")]
+        public DateTime StartDate { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        [Display(Name = "End")]
+        public DateTime EndDate { get; set; }
+
+        ///// <summary>
+        ///// 可預訂時間區間
+        ///// </summary>
+        //public DateTimeRange BookableDateRange { get; set; }
 
         [Display(Name = "Is Published?")]
         public bool IsPublished { get; set; }

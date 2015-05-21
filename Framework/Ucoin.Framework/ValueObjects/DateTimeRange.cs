@@ -8,16 +8,16 @@ namespace Ucoin.Framework.ValueObjects
     {
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         [Display(Name = "Start Date")]
-        public DateTime StartDateTime { get; private set; }
+        public DateTime StartDateTime { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         [Display(Name = "End Date")]
-        public DateTime EndDateTime { get; private set; }
+        public DateTime EndDateTime { get; set; }
 
         /// <summary>
         /// 用於EF的數據構造
         /// </summary>
-        private DateTimeRange()
+        public DateTimeRange()
         {
         }
 

@@ -13,14 +13,14 @@ namespace Ucoin.Framework.SqlDb.Messaging.Implementation
     public class MessageSender : IMessageSender
     {
         private readonly IDbConnectionFactory connectionFactory;
-        private readonly string name;
+        private readonly string schemaName;
         private readonly string insertQuery;
 
-        public MessageSender(string name, string tableName)
+        public MessageSender(string schemaName, string tableName)
         {
-            //this.connectionFactory = new CustomConnectionFactory("localhost", "Conference");
-            //this.name = name;
-            //this.insertQuery = string.Format("INSERT INTO {0} (Body, DeliveryDate, CorrelationId) VALUES (@Body, @DeliveryDate, @CorrelationId)", tableName);
+            this.connectionFactory = new CustomConnectionFactory("localhost", "Conference");
+            this.schemaName = schemaName;
+            this.insertQuery = string.Format("INSERT INTO {0} (Body, DeliveryDate, CorrelationId) VALUES (@Body, @DeliveryDate, @CorrelationId)", tableName);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Implementation
         /// </summary>
         public void Send(Message message)
         {
-            using (var connection = this.connectionFactory.CreateConnection(this.name))
+            using (var connection = this.connectionFactory.CreateConnection(this.schemaName))
             {
                 connection.Open();
 
@@ -43,7 +43,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Implementation
         {
             using (var scope = new TransactionScope(TransactionScopeOption.Required))
             {
-                using (var connection = this.connectionFactory.CreateConnection(this.name))
+                using (var connection = this.connectionFactory.CreateConnection(this.schemaName))
                 {
                     connection.Open();
 

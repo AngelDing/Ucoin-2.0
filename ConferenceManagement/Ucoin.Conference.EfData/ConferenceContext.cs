@@ -12,11 +12,8 @@ namespace Ucoin.Conference.EfData
         public ConferenceContext()
             : base("Conference")
         {
-        }
-
-        public ConferenceContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
-        {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<ConferenceInfo> Conferences { get; set; }
@@ -39,10 +36,16 @@ namespace Ucoin.Conference.EfData
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ConferenceInfo>().ToTable("Conferences", SchemaName);
-            modelBuilder.Entity<ConferenceInfo>().HasMany(x => x.Seats).WithRequired();
-            modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.StartDateTime).HasColumnName("StartDate");
-            modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.EndDateTime).HasColumnName("EndDate");
+
             modelBuilder.Entity<SeatType>().ToTable("SeatTypes", SchemaName);
+            modelBuilder.Entity<SeatType>().HasKey(p => p.Id);
+            modelBuilder.Entity<SeatType>().HasRequired(c => c.ConferenceInfo)
+              .WithMany(t => t.Seats).HasForeignKey(p => p.ConferenceId);            
+
+            //modelBuilder.Entity<ConferenceInfo>().HasMany(x => x.Seats).WithRequired();
+            //modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.StartDateTime).HasColumnName("StartDate");
+            //modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.EndDateTime).HasColumnName("EndDate");
+            
             modelBuilder.Entity<Order>().ToTable("Orders", SchemaName);
             modelBuilder.Entity<OrderSeat>().ToTable("OrderSeats", SchemaName);
             modelBuilder.Entity<OrderSeat>().HasKey(seat => new { seat.OrderId, seat.Position });

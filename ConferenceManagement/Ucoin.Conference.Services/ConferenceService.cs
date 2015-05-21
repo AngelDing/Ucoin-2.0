@@ -126,7 +126,12 @@ namespace Ucoin.Conference.Services
                 throw new ObjectNotFoundException();
             }
 
-            this.Context.RegisterModified(seat);
+            existing.Name = seat.Name;
+            existing.Description = seat.Description;
+            existing.Quantity = seat.Quantity;
+            existing.Price = seat.Price;
+
+            this.Context.RegisterModified(existing);
             this.Context.Commit();
 
             var wasEverPublished = this.conferenceRepository
@@ -233,8 +238,8 @@ namespace Ucoin.Conference.Services
                 Slug = conference.Slug,
                 Tagline = conference.Tagline,
                 TwitterSearch = conference.TwitterSearch,
-                StartDate = conference.BookableDateRange.StartDateTime,
-                EndDate = conference.BookableDateRange.EndDateTime,
+                StartDate = conference.StartDate,
+                EndDate = conference.EndDate,
             });
         }
 

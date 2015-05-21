@@ -12,41 +12,41 @@ namespace Ucoin.Framework.SqlDb.Messaging.Implementation
     public class MessageReceiver : DisposableObject, IMessageReceiver, IDisposable
     {
         private readonly IDbConnectionFactory connectionFactory;
-        private readonly string name;
+        private readonly string schemaName;
         private readonly string readQuery;
         private readonly string deleteQuery;
         private readonly TimeSpan pollDelay;
         private readonly object lockObject = new object();
         private CancellationTokenSource cancellationSource;
 
-        public MessageReceiver(string name, string tableName)
-            : this(name, tableName, TimeSpan.FromMilliseconds(100))
+        public MessageReceiver(string schemaName, string tableName)
+            : this(schemaName, tableName, TimeSpan.FromMilliseconds(100))
         {
         }
 
-        public MessageReceiver(string name, string tableName, TimeSpan pollDelay)
+        public MessageReceiver(string schemaName, string tableName, TimeSpan pollDelay)
         {
-//            this.connectionFactory = new CustomConnectionFactory("localhost", "Conference");
-//            this.name = name;
-//            this.pollDelay = pollDelay;
+            this.connectionFactory = new CustomConnectionFactory("localhost", "Conference");
+            this.schemaName = schemaName;
+            this.pollDelay = pollDelay;
 
-//            this.readQuery =
-//                string.Format(
-//                    CultureInfo.InvariantCulture,
-//                    @"SELECT TOP (1) 
-//                    {0}.[Id] AS [Id], 
-//                    {0}.[Body] AS [Body], 
-//                    {0}.[DeliveryDate] AS [DeliveryDate],
-//                    {0}.[CorrelationId] AS [CorrelationId]
-//                    FROM {0} WITH (UPDLOCK, READPAST)
-//                    WHERE ({0}.[DeliveryDate] IS NULL) OR ({0}.[DeliveryDate] <= @CurrentDate)
-//                    ORDER BY {0}.[Id] ASC",
-//                    tableName);
-//            this.deleteQuery =
-//                string.Format(
-//                   CultureInfo.InvariantCulture,
-//                   "DELETE FROM {0} WHERE Id = @Id",
-//                   tableName);
+            this.readQuery =
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"SELECT TOP (1) 
+                    {0}.[Id] AS [Id], 
+                    {0}.[Body] AS [Body], 
+                    {0}.[DeliveryDate] AS [DeliveryDate],
+                    {0}.[CorrelationId] AS [CorrelationId]
+                    FROM {0} WITH (UPDLOCK, READPAST)
+                    WHERE ({0}.[DeliveryDate] IS NULL) OR ({0}.[DeliveryDate] <= @CurrentDate)
+                    ORDER BY {0}.[Id] ASC",
+                    tableName);
+            this.deleteQuery =
+                string.Format(
+                   CultureInfo.InvariantCulture,
+                   "DELETE FROM {0} WHERE Id = @Id",
+                   tableName);
         }
 
         public event EventHandler<MessageReceivedEventArgs> MessageReceived = (sender, args) => { };
@@ -99,7 +99,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Implementation
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "Does not contain user input.")]
         protected bool ReceiveMessage()
         {
-            using (var connection = this.connectionFactory.CreateConnection(this.name))
+            using (var connection = this.connectionFactory.CreateConnection(this.schemaName))
             {
                 var currentDate = GetCurrentDate();
 

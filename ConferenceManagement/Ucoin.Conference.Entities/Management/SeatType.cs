@@ -26,5 +26,9 @@ namespace Ucoin.Conference.Entities
 
         [Range(0, 50000)]
         public decimal Price { get; set; }
+
+        public Guid ConferenceId { get; set; }
+
+        public virtual ConferenceInfo ConferenceInfo { get; set; }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="BlobStorage\BlobStorageDbContext.cs" />
     <Compile Include="CacheAnyEnumerableExtensions.cs" />
     <Compile Include="ConcurrencyException.cs" />
+    <Compile Include="CustomConnectionFactory.cs" />
     <Compile Include="EntityNotFoundException.cs" />
     <Compile Include="EventSourcing\EventEntity.cs" />
     <Compile Include="EventSourcing\EventStoreDbContext.cs" />

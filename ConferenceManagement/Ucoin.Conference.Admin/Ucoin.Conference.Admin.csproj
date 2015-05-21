@@ -92,7 +92,64 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\common\common.css" />
+    <Content Include="Content\content-main\content-main.css" />
+    <Content Include="Content\content\content.css" />
+    <Content Include="Content\content\content_login.gif" />
+    <Content Include="Content\content\content_reg.gif" />
+    <Content Include="Content\content\content__create-conf.gif" />
+    <Content Include="Content\content\content__table__error.gif" />
+    <Content Include="Content\content\content__table__info.png" />
+    <Content Include="Content\footer\footer.css" />
+    <Content Include="Content\footer\footer__logo.png" />
+    <Content Include="Content\form\form-select__drop-down.png" />
+    <Content Include="Content\form\form.css" />
+    <Content Include="Content\form\form.js" />
+    <Content Include="Content\form\form__chb__item.png" />
+    <Content Include="Content\form\form__chb__item_a.png" />
+    <Content Include="Content\form\form__rb__item.png" />
+    <Content Include="Content\form\form__rb__item_a.png" />
+    <Content Include="Content\form\form__select-chb__item.gif" />
+    <Content Include="Content\form\form__select-chb__item_a.gif" />
+    <Content Include="Content\form\ui\css\custom-theme\images\l.gif" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ll.gif" />
+    <Content Include="Content\form\ui\css\custom-theme\images\r.gif" />
+    <Content Include="Content\form\ui\css\custom-theme\images\rr.gif" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-bg_flat_100_2f7d00_40x100.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-bg_flat_75_599733_40x100.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-icons_97be80_256x240.png" />
+    <Content Include="Content\form\ui\css\custom-theme\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\form\ui\css\custom-theme\jquery-ui-1.8.19.custom.css" />
+    <Content Include="Content\form\ui\index.html" />
+    <Content Include="Content\likes\likes.css" />
+    <Content Include="Content\likes\likes_sprite.png" />
+    <Content Include="Content\menu\menu.css" />
+    <Content Include="Content\menu\menu__back.png" />
+    <Content Include="Content\nav\nav.css" />
+    <Content Include="Content\nav\nav__left.png" />
+    <Content Include="Content\nav\nav__left_a.png" />
+    <Content Include="Content\nav\nav__right.png" />
+    <Content Include="Content\nav\nav__right_a.png" />
+    <Content Include="Content\page\lightbox-content_delete.gif" />
+    <Content Include="Content\page\lightbox-content_delete__action__no.gif" />
+    <Content Include="Content\page\lightbox-content_delete__action__yes.gif" />
+    <Content Include="Content\page\page.css" />
+    <Content Include="Content\quick\quick.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\table\table.css" />
+    <Content Include="Content\tabs\tabs.css" />
+    <Content Include="Content\tabs\tabs.js" />
+    <Content Include="Content\tile\tile.css" />
+    <Content Include="Content\tile\tile_register.png" />
+    <Content Include="Content\tile\tile__header.png" />
+    <Content Include="Content\time-n-place\time-n-place.css" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -133,10 +190,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>

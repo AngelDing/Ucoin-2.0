@@ -6,7 +6,7 @@ using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Conference.Entities
 {
-    public class OrderSeat : EfEntity<Guid>
+    public class OrderSeat
     {
         public OrderSeat(Guid orderId, int position, Guid seatInfoId)
             : this()
