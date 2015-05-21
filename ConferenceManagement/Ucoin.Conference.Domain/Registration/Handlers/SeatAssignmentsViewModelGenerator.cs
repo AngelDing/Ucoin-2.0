@@ -12,7 +12,7 @@ namespace Ucoin.Conference.Domain.Handlers
     using Ucoin.Conference.Entities.MongoDb;
     using Ucoin.Conference.Repositories;
 
-    public class SeatAssignmentsViewModelGenerator :
+    public class SeatAssignmentsViewModelGenerator : BaseViewModelGenerator,
         IEventHandler<SeatAssignmentsCreated>,
         IEventHandler<SeatAssigned>,
         IEventHandler<SeatUnassigned>,

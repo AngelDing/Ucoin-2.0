@@ -12,7 +12,7 @@ namespace Ucoin.Conference.Domain
     using Ucoin.Framework.Messaging.Handling;
 
 
-    public class PricedOrderViewModelGenerator :
+    public class PricedOrderViewModelGenerator : BaseViewModelGenerator,
         IEventHandler<OrderPlaced>,
         IEventHandler<OrderTotalsCalculated>,
         IEventHandler<OrderConfirmed>,

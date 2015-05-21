@@ -14,7 +14,7 @@
     using Ucoin.Conference.Contracts.Commands.Registration;
     using Ucoin.Framework.EventSourcing;
 
-    public class ConferenceViewModelGenerator :
+    public class ConferenceViewModelGenerator : BaseViewModelGenerator,
         IEventHandler<ConferenceCreated>,
         IEventHandler<ConferenceUpdated>,
         IEventHandler<ConferencePublished>,

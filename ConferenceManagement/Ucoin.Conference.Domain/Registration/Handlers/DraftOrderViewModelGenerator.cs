@@ -12,7 +12,7 @@ namespace Ucoin.Conference.Domain
     using Ucoin.Conference.Repositories;
     using Ucoin.Conference.Contracts;
 
-    public class DraftOrderViewModelGenerator :
+    public class DraftOrderViewModelGenerator : BaseViewModelGenerator,
         IEventHandler<OrderPlaced>, IEventHandler<OrderUpdated>,
         IEventHandler<OrderPartiallyReserved>, IEventHandler<OrderReservationCompleted>,
         IEventHandler<OrderRegistrantAssigned>,

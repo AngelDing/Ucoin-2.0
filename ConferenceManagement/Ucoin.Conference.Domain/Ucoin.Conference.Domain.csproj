@@ -46,11 +46,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrderEventHandler.cs" />
+    <Compile Include="Management\OrderEventHandler.cs" />
     <Compile Include="Payment\PaymentCommandHandler.cs" />
     <Compile Include="Payment\PaymentProcessor.cs" />
     <Compile Include="Payment\PaymentStateType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\Handlers\BaseViewModelGenerator.cs" />
     <Compile Include="Registration\Handlers\ConferenceViewModelGenerator.cs" />
     <Compile Include="Registration\Handlers\DraftOrderViewModelGenerator.cs" />
     <Compile Include="Registration\Handlers\OrderCommandHandler.cs" />

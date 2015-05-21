@@ -8,7 +8,7 @@ using Ucoin.Conference.EfData;
 using Ucoin.Conference.Entities;
 using Ucoin.Conference.Repositories;
 using Ucoin.Framework.Messaging.Handling;
-using Ucoin.Framework.Repositories;
+//using Ucoin.Framework.Repositories;
 
 namespace Ucoin.Conference.Services
 {
@@ -42,9 +42,9 @@ namespace Ucoin.Conference.Services
         IEventHandler<SeatUnassigned>
     {
         private IOrderRepository orderRepository;
-        private IRepositoryContext context;
+        private IConferenceRepositoryContext context;
 
-        public OrderEventHandler(IRepositoryContext context, IOrderRepository orderRepository)
+        public OrderEventHandler(IConferenceRepositoryContext context, IOrderRepository orderRepository)
         {
             this.context = context;
             this.orderRepository = orderRepository;
