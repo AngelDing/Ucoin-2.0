@@ -1,10 +1,11 @@
 ﻿using System.Data.Entity;
 using Ucoin.Conference.Entities;
+using Ucoin.Framework.SqlDb;
 using Ucoin.Framework.SqlDb.Processes;
 
 namespace Ucoin.Conference.EfData
 {
-    public class ConferenceContext : DbContext
+    public class ConferenceContext : BaseCustomDbContext
     {
         public const string SchemaName = "ConferenceManagement";
         public const string RegistrationProcessesSchemaName = "ConferenceRegistrationProcesses";
@@ -12,8 +13,6 @@ namespace Ucoin.Conference.EfData
         public ConferenceContext()
             : base("Conference")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<ConferenceInfo> Conferences { get; set; }
@@ -35,11 +34,16 @@ namespace Ucoin.Conference.EfData
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ConferenceInfo>().ToTable("Conferences", SchemaName);
+            modelBuilder.Entity<ConferenceInfo>()
+                .HasMany(c => c.Seats)
+                .WithRequired(c => c.ConferenceInfo)
+                .HasForeignKey(c => c.ConferenceId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SeatType>().ToTable("SeatTypes", SchemaName);
             modelBuilder.Entity<SeatType>().HasKey(p => p.Id);
-            modelBuilder.Entity<SeatType>().HasRequired(c => c.ConferenceInfo)
-              .WithMany(t => t.Seats).HasForeignKey(p => p.ConferenceId);            
+            //modelBuilder.Entity<SeatType>().HasRequired(c => c.ConferenceInfo)
+            //  .WithMany(t => t.Seats).HasForeignKey(p => p.ConferenceId);            
             
             modelBuilder.Entity<Order>().ToTable("Orders", SchemaName);
             modelBuilder.Entity<OrderSeat>().ToTable("OrderSeats", SchemaName);
