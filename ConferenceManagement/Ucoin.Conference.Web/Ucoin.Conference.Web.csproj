@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{874835AE-9784-47A4-AFF7-7FF605F17A35}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ucoin.Conference.Web</RootNamespace>
+    <AssemblyName>Ucoin.Conference.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\AutoMapper\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\AutoMapper\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\DLL\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\Unity\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\common\common.css" />
+    <Content Include="Content\Conference\date.png" />
+    <Content Include="Content\Conference\destination.png" />
+    <Content Include="Content\Conference\organizers.png" />
+    <Content Include="Content\Conference\plus.png" />
+    <Content Include="Content\Conference\press.png" />
+    <Content Include="Content\Conference\sessions.png" />
+    <Content Include="Content\Conference\sponsors.png" />
+    <Content Include="Content\content-main\content-main.css" />
+    <Content Include="Content\content\content.css" />
+    <Content Include="Content\content\content__table__error.gif" />
+    <Content Include="Content\content\content__table__info.png" />
+    <Content Include="Content\footer\footer.css" />
+    <Content Include="Content\footer\footer__logo.png" />
+    <Content Include="Content\form\form-select__drop-down.png" />
+    <Content Include="Content\form\form.css" />
+    <Content Include="Content\form\form.ie7.css" />
+    <Content Include="Content\form\form.js" />
+    <Content Include="Content\form\form__chb__item.png" />
+    <Content Include="Content\form\form__chb__item_a.png" />
+    <Content Include="Content\form\form__rb__item.png" />
+    <Content Include="Content\form\form__rb__item_a.png" />
+    <Content Include="Content\likes\likes.css" />
+    <Content Include="Content\likes\likes_sprite.png" />
+    <Content Include="Content\menu\menu.css" />
+    <Content Include="Content\menu\menu__back.png" />
+    <Content Include="Content\nav\nav.css" />
+    <Content Include="Content\nav\nav__left.png" />
+    <Content Include="Content\nav\nav__left_a.png" />
+    <Content Include="Content\nav\nav__right.png" />
+    <Content Include="Content\nav\nav__right_a.png" />
+    <Content Include="Content\page\page.css" />
+    <Content Include="Content\quick\quick.css" />
+    <Content Include="Content\reg-time-info\reg-time-info.css" />
+    <Content Include="Content\reg-time-info\reg-time-info.js" />
+    <Content Include="Content\reg-time-info\reg-time-info.png" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\style.ie7.css" />
+    <Content Include="Content\table\table.css" />
+    <Content Include="Content\tile\tile.css" />
+    <Content Include="Content\tile\tile_register.png" />
+    <Content Include="Content\tile\tile_twitter.png" />
+    <Content Include="Content\tile\tile__header.png" />
+    <Content Include="Content\time-n-place\time-n-place.css" />
+    <Content Include="Content\tmp\pic_.jpg" />
+    <Content Include="Content\tmp\pic_.png" />
+    <Content Include="Content\tmp\pic_1.jpg" />
+    <Content Include="Content\tmp\pic_2.jpg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\ThirdPartyProcessor\Controllers\ThirdPartyProcessorPaymentController.cs" />
+    <Compile Include="Areas\ThirdPartyProcessor\ThirdPartyProcessorAreaRegistration.cs" />
+    <Compile Include="Controllers\ConferenceTenantController.cs" />
+    <Compile Include="Controllers\ConferenceController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="App_Start\DatabaseSetup.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItemViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
+    <Compile Include="Models\RegistrationViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolver\Container.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="App_Code\ConferenceHelpers.cshtml" />
+    <Content Include="Areas\ThirdPartyProcessor\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ThirdPartyProcessor\Views\ThirdPartyProcessorPayment\Pay.cshtml" />
+    <Content Include="Areas\ThirdPartyProcessor\Views\Web.config" />
+    <Content Include="Views\Conference\Display.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\Order\AssignSeats.cshtml" />
+    <Content Include="Views\Order\Display.cshtml" />
+    <Content Include="Views\Order\Find.cshtml" />
+    <Content Include="Views\Payment\WaitForPayment.cshtml" />
+    <Content Include="Views\Registration\PricedOrderUnknown.cshtml" />
+    <Content Include="Views\Registration\ReservationUnknown.cshtml" />
+    <Content Include="Views\Registration\ShowCompletedOrder.cshtml" />
+    <Content Include="Views\Registration\ShowExpiredOrder.cshtml" />
+    <Content Include="Views\Registration\SpecifyRegistrantAndPaymentDetails.cshtml" />
+    <Content Include="Views\Registration\StartRegistration.cshtml" />
+    <Content Include="Views\Registration\ThankYou.cshtml" />
+    <Content Include="Views\Registration\_RegistrationDetailsEditor.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\MaintenanceMode.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_OrderDetails.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
+      <Project>{f01bd9f0-4404-4f33-90f2-dbd9ff35f9c1}</Project>
+      <Name>Ucoin.Framework.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
+      <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
+      <Name>Ucoin.Framework.SqlDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
+      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
+      <Name>Ucoin.Framework.MongoDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
+      <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>
+      <Name>Ucoin.Framework.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Web\Ucoin.Framework.Web.csproj">
+      <Project>{6169a1c5-9511-428f-8b90-1d5ae5a3682e}</Project>
+      <Name>Ucoin.Framework.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.Contracts\Ucoin.Conference.Contracts.csproj">
+      <Project>{ecb26cda-bf1a-4b7b-8e43-198730cce158}</Project>
+      <Name>Ucoin.Conference.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.EfData\Ucoin.Conference.EfData.csproj">
+      <Project>{dcfe7731-6077-42a6-8969-ee8410511a78}</Project>
+      <Name>Ucoin.Conference.EfData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.Entities\Ucoin.Conference.Entities.csproj">
+      <Project>{ed8d3cea-b211-4a5a-a981-23fdb31243d4}</Project>
+      <Name>Ucoin.Conference.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.IRepositories\Ucoin.Conference.IRepositories.csproj">
+      <Project>{04b78d1b-a939-4434-b871-0bb376e8abde}</Project>
+      <Name>Ucoin.Conference.IRepositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.Repositories\Ucoin.Conference.Repositories.csproj">
+      <Project>{5f3fad69-a0aa-46b8-9d27-f7529582b669}</Project>
+      <Name>Ucoin.Conference.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Conference.Services\Ucoin.Conference.Services.csproj">
+      <Project>{f63d4d9b-b772-4dea-bd08-b07f4455d44d}</Project>
+      <Name>Ucoin.Conference.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>7185</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:7185/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

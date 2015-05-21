@@ -6,8 +6,9 @@ namespace Ucoin.Conference.Services
     using Ucoin.Conference.Entities.MongoDb;
     using Ucoin.Conference.Entities.ViewModel;
     using Ucoin.Conference.Repositories;
+    using Ucoin.Framework.MongoDb;
 
-    public class ConferenceViewService : IConferenceViewService
+    public class ConferenceViewService : BaseMongoService, IConferenceViewService
     {
         public ConferenceDetails GetConferenceDetails(string conferenceCode)
         {
@@ -30,30 +31,6 @@ namespace Ucoin.Conference.Services
         public ConferenceAlias GetConferenceAlias(string conferenceCode)
         {
             var conferenceList = GetConferenceByCode(conferenceCode);
-            return conferenceList.Select(x => 
-                new ConferenceAlias 
-                { 
-                    Id = x.ConferenceId,
-                    Code = x.Code, 
-                    Name = x.Name, 
-                    Tagline = x.Tagline 
-                })
-                .FirstOrDefault();
-        }
-
-        private IEnumerable<ConferenceView> GetConferenceByCode(string conferenceCode)
-        {
-             var rep = new ConferenceMongoRepository<ConferenceView>();
-
-             return rep.GetBy(dto => dto.Code == conferenceCode);
-        }
-
-
-        public IList<ConferenceAlias> GetPublishedConferences()
-        {
-            var rep = new ConferenceMongoRepository<ConferenceView>();
-            var conferenceList = rep.GetBy(dto => dto.IsPublished);
-
             return conferenceList.Select(x =>
                 new ConferenceAlias
                 {
@@ -62,7 +39,35 @@ namespace Ucoin.Conference.Services
                     Name = x.Name,
                     Tagline = x.Tagline
                 })
-                .ToList();
+                .FirstOrDefault();
+        }
+
+        private IEnumerable<ConferenceView> GetConferenceByCode(string conferenceCode)
+        {
+            var rep = new ConferenceMongoRepository<ConferenceView>();
+
+            return rep.GetBy(dto => dto.Code == conferenceCode);
+        }
+
+
+        public IList<ConferenceAlias> GetPublishedConferences()
+        {
+            var alias = new List<ConferenceAlias>();
+            var rep = new ConferenceMongoRepository<ConferenceView>();
+            var conferenceList = rep.GetBy(dto => dto.IsPublished);
+            if (conferenceList.Count() > 0)
+            {
+                alias = conferenceList.Select(x =>
+                    new ConferenceAlias
+                    {
+                        Id = x.ConferenceId,
+                        Code = x.Code,
+                        Name = x.Name,
+                        Tagline = x.Tagline
+                    })
+                    .ToList();
+            }
+            return alias;
         }
 
         public IList<SeatTypeView> GetPublishedSeatTypes(Guid conferenceId)

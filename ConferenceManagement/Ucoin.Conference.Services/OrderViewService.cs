@@ -4,13 +4,14 @@ namespace Ucoin.Conference.Services
     using System.Linq;
     using Ucoin.Conference.Entities.MongoDb;
     using Ucoin.Conference.Repositories;
+    using Ucoin.Framework.MongoDb;
 
-    public class OrderViewService : IOrderViewService
+    public class OrderViewService : BaseMongoService, IOrderViewService
     {
         public Guid? LocateOrder(string email, string accessCode)
         {
             var rep = new ConferenceMongoRepository<DraftOrder>();
-            var orderProjection = rep.GetBy(o => 
+            var orderProjection = rep.GetBy(o =>
                 o.RegistrantEmail == email && o.AccessCode == accessCode)
                 .FirstOrDefault();
 

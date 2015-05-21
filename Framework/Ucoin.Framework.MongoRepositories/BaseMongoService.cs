@@ -6,7 +6,7 @@ namespace Ucoin.Framework.MongoDb
 {
     public abstract class BaseMongoService : IDisposable
     {
-        public BaseMongoService()
+        static BaseMongoService()
         {
             MongoInitHelper.InitMongoDBRepository();
         }

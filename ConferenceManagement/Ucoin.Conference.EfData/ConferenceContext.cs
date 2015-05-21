@@ -24,7 +24,6 @@ namespace Ucoin.Conference.EfData
 
         public DbSet<Payment> ThirdPartyProcessorPayments { get; set; }
 
-
         // Define the available entity sets for the database.
         public DbSet<RegistrationProcess> RegistrationProcesses { get; set; }
 
@@ -41,10 +40,6 @@ namespace Ucoin.Conference.EfData
             modelBuilder.Entity<SeatType>().HasKey(p => p.Id);
             modelBuilder.Entity<SeatType>().HasRequired(c => c.ConferenceInfo)
               .WithMany(t => t.Seats).HasForeignKey(p => p.ConferenceId);            
-
-            //modelBuilder.Entity<ConferenceInfo>().HasMany(x => x.Seats).WithRequired();
-            //modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.StartDateTime).HasColumnName("StartDate");
-            //modelBuilder.Entity<ConferenceInfo>().Property(t => t.BookableDateRange.EndDateTime).HasColumnName("EndDate");
             
             modelBuilder.Entity<Order>().ToTable("Orders", SchemaName);
             modelBuilder.Entity<OrderSeat>().ToTable("OrderSeats", SchemaName);

@@ -164,7 +164,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolver\Container.cs" />
-    <Compile Include="Resolver\UnityResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

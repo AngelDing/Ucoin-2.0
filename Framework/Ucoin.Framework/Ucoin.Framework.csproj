@@ -39,6 +39,7 @@
     <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="ReadUncommittedScope.cs" />
     <Compile Include="Threading\ActionDisposable.cs" />
     <Compile Include="BlobStorage\IBlobStorage.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Threading\ReadLockDisposable.cs" />
     <Compile Include="Threading\UpgradeableReadLockDisposable.cs" />
     <Compile Include="Threading\WriteLockDisposable.cs" />
+    <Compile Include="TimerTaskFactory.cs" />
     <Compile Include="UcoinValidationException.cs" />
     <Compile Include="Utils\GuidHelper.cs" />
     <Compile Include="Utils\HandleGenerator.cs" />

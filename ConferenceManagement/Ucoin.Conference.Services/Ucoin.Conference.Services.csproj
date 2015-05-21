@@ -51,6 +51,7 @@
     <Compile Include="IConferenceViewService.cs" />
     <Compile Include="IConferenceService.cs" />
     <Compile Include="IOrderViewService.cs" />
+    <Compile Include="IPaymentService.cs" />
     <Compile Include="OrderViewService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

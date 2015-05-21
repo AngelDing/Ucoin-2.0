@@ -8,10 +8,10 @@ namespace Ucoin.Conference.Entities.MongoDb
     public class ConferenceView : StringKeyMongoEntity
     {
         [BsonConstructor]
-        public ConferenceView(Guid id, string code, string name, string description, 
+        public ConferenceView(Guid conferenceId, string code, string name, string description,
             string location, string tagline, string twitterSearch, DateTimeOffset startDate)
         {
-            this.ConferenceId = id;
+            this.ConferenceId = conferenceId;
             this.Code = code;
             this.Name = name;
             this.Description = description;
