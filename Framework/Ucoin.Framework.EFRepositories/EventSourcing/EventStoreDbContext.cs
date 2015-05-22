@@ -1,6 +1,7 @@
 ﻿namespace Ucoin.Framework.SqlDb.EventSourcing
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
 
     /// <summary>
@@ -21,6 +22,9 @@
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<EventEntity>().ToTable("Events", SchemaName);
+            modelBuilder.Entity<EventEntity>().HasKey(p => p.Id);
+            modelBuilder.Entity<EventEntity>().Property(p => p.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

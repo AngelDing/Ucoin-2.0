@@ -51,8 +51,8 @@ namespace Ucoin.Conference.EfData
 
             modelBuilder.Entity<Payment>().ToTable("Payment", "ConferencePayments");
             modelBuilder.Entity<PaymentItem>().ToTable("PaymentItem", "ConferencePayments");
-            modelBuilder.Entity<RegistrationProcess>().ToTable("RegistrationProcess", SchemaName);
-            modelBuilder.Entity<UndispatchedMessages>().ToTable("UndispatchedMessages", SchemaName);
+            modelBuilder.Entity<RegistrationProcess>().ToTable("RegistrationProcess", RegistrationProcessesSchemaName);
+            modelBuilder.Entity<UndispatchedMessages>().ToTable("UndispatchedMessages", RegistrationProcessesSchemaName);
         }
     }
 }

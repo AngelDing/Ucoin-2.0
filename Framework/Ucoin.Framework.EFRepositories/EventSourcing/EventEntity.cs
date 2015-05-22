@@ -3,7 +3,7 @@ using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Framework.SqlDb.EventSourcing
 {
-    public class EventEntity : EfEntity<Guid>
+    public class EventEntity : EfEntity<long>
     {
         public Guid AggregateId { get; set; }
 

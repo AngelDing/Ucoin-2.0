@@ -9,7 +9,7 @@ namespace Ucoin.Conference.Entities.MongoDb
     {
         [BsonConstructor]
         public ConferenceView(Guid conferenceId, string code, string name, string description,
-            string location, string tagline, string twitterSearch, DateTimeOffset startDate)
+            string location, string tagline, string twitterSearch, DateTime startDate)
         {
             this.ConferenceId = conferenceId;
             this.Code = code;
@@ -35,7 +35,7 @@ namespace Ucoin.Conference.Entities.MongoDb
 
         public string TwitterSearch { get; set; }
 
-        public DateTimeOffset StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         public bool IsPublished { get; set; }
     }

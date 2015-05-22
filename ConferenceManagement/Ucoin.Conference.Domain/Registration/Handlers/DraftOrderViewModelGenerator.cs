@@ -35,7 +35,7 @@ namespace Ucoin.Conference.Domain
 
         public void Handle(OrderPlaced @event)
         {
-            var dto = new DraftOrder(@event.SourceId, @event.ConferenceId, DraftOrder.States.PendingReservation, @event.Version)
+            var dto = new DraftOrder(@event.SourceId, @event.ConferenceId, (int)DraftOrder.States.PendingReservation, @event.Version)
             {
                 AccessCode = @event.AccessCode,
             };

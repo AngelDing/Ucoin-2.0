@@ -18,12 +18,12 @@
         }
 
         [BsonConstructor]
-        public DraftOrder(Guid orderId, Guid conferenceId, States state, int orderVersion = 0)
+        public DraftOrder(Guid orderId, Guid conferenceId, int stateValue, int orderVersion = 0)
             : this()
         {
             this.OrderId = orderId;
             this.ConferenceId = conferenceId;
-            this.State = state;
+            this.StateValue = stateValue;
             this.OrderVersion = orderVersion;
         }
 

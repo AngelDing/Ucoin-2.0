@@ -30,6 +30,10 @@ namespace Ucoin.Framework.Service
 
         protected override void OnDispose(bool disposing)
         {
+            if (disposing)
+            {
+                this.Context.Dispose();
+            }
         }
     }
 }

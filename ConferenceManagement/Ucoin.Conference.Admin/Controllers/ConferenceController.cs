@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using Ucoin.Conference.Entities;
 using Ucoin.Conference.Services;
 using Ucoin.Framework.Utils;
+using Ucoin.Framework.Web;
 
 namespace Ucoin.Conference.Admin.Controllers
 {
-    public class ConferenceController : Controller
+    public class ConferenceController : BaseController
     {
         static ConferenceController()
         {
@@ -21,6 +22,7 @@ namespace Ucoin.Conference.Admin.Controllers
         public ConferenceController(IConferenceService service)
         {
             this.service = service;
+            this.AddDisposableObject(this.service);
         }
 
         //public ConferenceController()

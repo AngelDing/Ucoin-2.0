@@ -7,7 +7,8 @@ namespace Ucoin.Conference.Entities.MongoDb
     public class PaymentView : StringKeyMongoEntity
     {
         [BsonConstructor]
-        public PaymentView(Guid id, PaymentStateType state, Guid paymentSourceId, string description, decimal totalAmount)
+        public PaymentView(Guid id, PaymentStateType state, Guid paymentSourceId, 
+            string description, decimal totalAmount)
         {
             this.Id = id;
             this.State = state;

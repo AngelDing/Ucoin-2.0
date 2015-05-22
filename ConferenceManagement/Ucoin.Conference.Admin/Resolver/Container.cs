@@ -63,7 +63,7 @@ namespace Ucoin.Conference.Admin.Resolver
             );
 
             container.RegisterType<IConferenceService, ConferenceService>(
-                new HierarchicalLifetimeManager(),
+                new TransientLifetimeManager(),
                 injectionConstructor);
 
             return container;

@@ -7,9 +7,10 @@
     public class SeatTypeView : StringKeyMongoEntity
     {
         [BsonConstructor]
-        public SeatTypeView(Guid id, Guid conferenceId, string name, string description, decimal price, int quantity)
+        public SeatTypeView(Guid seatTypeId, Guid conferenceId, string name, 
+            string description, decimal price, int quantity)
         {
-            this.SeatTypeId = id;
+            this.SeatTypeId = seatTypeId;
             this.ConferenceId = conferenceId;
             this.Name = name;
             this.Description = description;

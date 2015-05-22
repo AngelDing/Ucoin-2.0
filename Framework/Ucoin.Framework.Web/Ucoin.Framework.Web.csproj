@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseController.cs" />
     <Compile Include="Extensions\MvcExtensions.cs" />
     <Compile Include="Extensions\SelectExtensions.cs" />
     <Compile Include="MaintenanceMode.cs" />

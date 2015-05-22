@@ -1,6 +1,4 @@
-﻿// ==============================================================================================================
-// Microsoft patterns & practices
-
+﻿
 namespace Ucoin.Framework.SqlDb.Messaging.Handling
 {
     using System;
@@ -13,7 +11,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
     /// Provides basic common processing code for components that handle 
     /// incoming messages from a receiver.
     /// </summary>
-    public abstract class MessageProcessor : DisposableObject, IProcessor, IDisposable
+    public abstract class MessageProcessor : DisposableObject, IProcessor
     {
         private readonly IMessageReceiver receiver;
         private readonly ITextSerializer serializer;
@@ -112,7 +110,9 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
         private void ThrowIfDisposed()
         {
             if (this.disposed)
+            {
                 throw new ObjectDisposedException("MessageProcessor");
+            }
         }
 
 
