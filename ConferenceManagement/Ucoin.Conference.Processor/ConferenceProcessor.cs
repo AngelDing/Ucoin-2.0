@@ -66,13 +66,13 @@ namespace Ucoin.Conference.Processor
             var container = new UnityContainer();
 
             // infrastructure
-            container.RegisterInstance<ITextSerializer>(new JsonTextSerializer());
+            container.RegisterInstance<ISerializer>(new JsonSerializer());
             container.RegisterInstance<IMetadataProvider>(new StandardMetadataProvider());
 
             container.RegisterType<DbContext, ConferenceContext>(new TransientLifetimeManager());
             container.RegisterType<IProcessManagerDataContext<RegistrationProcessManager>, SqlProcessManagerDataContext<RegistrationProcessManager>>(
                 new TransientLifetimeManager(),
-                new InjectionConstructor(new ResolvedParameter<Func<DbContext>>(), typeof(ICommandBus), typeof(ITextSerializer)));
+                new InjectionConstructor(new ResolvedParameter<Func<DbContext>>(), typeof(ICommandBus), typeof(ISerializer)));
 
             container.RegisterType<IConferenceViewService, ConferenceViewService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IOrderViewService, OrderViewService>(new ContainerControlledLifetimeManager());
@@ -112,7 +112,7 @@ namespace Ucoin.Conference.Processor
 
         private void OnCreateContainer(UnityContainer container)
         {
-            var serializer = container.Resolve<ITextSerializer>();
+            var serializer = container.Resolve<ISerializer>();
             var metadata = container.Resolve<IMetadataProvider>();
 
 

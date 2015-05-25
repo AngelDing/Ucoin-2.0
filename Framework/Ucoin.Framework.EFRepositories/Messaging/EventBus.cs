@@ -15,13 +15,13 @@ namespace Ucoin.Framework.SqlDb.Messaging
     public class EventBus : IEventBus
     {
         private readonly IMessageSender sender;
-        private readonly ITextSerializer serializer;
+        private readonly ISerializer serializer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventBus"/> class.
         /// </summary>
         /// <param name="serializer">The serializer to use for the message body.</param>
-        public EventBus(IMessageSender sender, ITextSerializer serializer)
+        public EventBus(IMessageSender sender, ISerializer serializer)
         {
             this.sender = sender;
             this.serializer = serializer;
@@ -49,11 +49,8 @@ namespace Ucoin.Framework.SqlDb.Messaging
 
         private Message BuildMessage(Envelope<IEvent> @event)
         {
-            using (var payloadWriter = new StringWriter())
-            {
-                this.serializer.Serialize(payloadWriter, @event.Body);
-                return new Message(payloadWriter.ToString(), correlationId: @event.CorrelationId);
-            }
+            var payload = this.serializer.Serialize(@event.Body);
+            return new Message(payload, correlationId: @event.CorrelationId);
         }
     }
 }

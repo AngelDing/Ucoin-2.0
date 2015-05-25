@@ -17,8 +17,8 @@ namespace Ucoin.Conference.Web.Resolver
         {
             var container = new UnityContainer();
 
-            var serializer = new JsonTextSerializer();
-            container.RegisterInstance<ITextSerializer>(serializer);
+            var serializer = new JsonSerializer();
+            container.RegisterInstance<ISerializer>(serializer);
 
             container.RegisterInstance<ICacheManager>(
                 new CacheManager<StaticCache>(t => { return new StaticCache(); })

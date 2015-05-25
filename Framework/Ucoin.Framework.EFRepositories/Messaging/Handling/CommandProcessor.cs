@@ -23,7 +23,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
         /// <param name="receiver">The receiver to use. If the receiver is <see cref="IDisposable"/>, it will be disposed when the processor is 
         /// disposed.</param>
         /// <param name="serializer">The serializer to use for the message body.</param>
-        public CommandProcessor(IMessageReceiver receiver, ITextSerializer serializer)
+        public CommandProcessor(IMessageReceiver receiver, ISerializer serializer)
             : base(receiver, serializer)
         {
         }

@@ -20,11 +20,11 @@ namespace Ucoin.Framework.SqlDb.EventSourcing
         // Could potentially use DataAnnotations to get a friendly/unique name in case of collisions between BCs.
         private static readonly string sourceType = typeof(T).Name;
         private readonly IEventBus eventBus;
-        private readonly ITextSerializer serializer;
+        private readonly ISerializer serializer;
         private readonly Func<EventStoreDbContext> contextFactory;
         private readonly Func<Guid, IEnumerable<IVersionedEvent>, T> entityFactory;
 
-        public SqlEventSourcedRepository(IEventBus eventBus, ITextSerializer serializer, Func<EventStoreDbContext> contextFactory)
+        public SqlEventSourcedRepository(IEventBus eventBus, ISerializer serializer, Func<EventStoreDbContext> contextFactory)
         {
             this.eventBus = eventBus;
             this.serializer = serializer;
@@ -91,28 +91,22 @@ namespace Ucoin.Framework.SqlDb.EventSourcing
 
         private EventEntity Serialize(IVersionedEvent e, string correlationId)
         {
-            EventEntity serialized;
-            using (var writer = new StringWriter())
+            var payload = this.serializer.Serialize(e);
+            var serialized = new EventEntity
             {
-                this.serializer.Serialize(writer, e);
-                serialized = new EventEntity
-                {
-                    AggregateId = e.SourceId,
-                    AggregateType = sourceType,
-                    Version = e.Version,
-                    Payload = writer.ToString(),
-                    CorrelationId = correlationId
-                };
-            }
+                AggregateId = e.SourceId,
+                AggregateType = sourceType,
+                Version = e.Version,
+                Payload = payload,
+                CorrelationId = correlationId
+            };
+
             return serialized;
         }
 
         private IVersionedEvent Deserialize(EventEntity @event)
         {
-            using (var reader = new StringReader(@event.Payload))
-            {
-                return (IVersionedEvent)this.serializer.Deserialize(reader);
-            }
+            return this.serializer.Deserialize<IVersionedEvent>(@event.Payload);
         }
     }
 }

@@ -15,13 +15,13 @@
     public class CommandBus : ICommandBus
     {
         private readonly IMessageSender sender;
-        private readonly ITextSerializer serializer;
+        private readonly ISerializer serializer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandBus"/> class.
         /// </summary>
         /// <param name="serializer">The serializer to use for the message body.</param>
-        public CommandBus(IMessageSender sender, ITextSerializer serializer)
+        public CommandBus(IMessageSender sender, ISerializer serializer)
         {
             this.sender = sender;
             this.serializer = serializer;
@@ -46,12 +46,8 @@
 
         private Message BuildMessage(Envelope<ICommand> command)
         {
-            // TODO: should use the Command ID as a unique constraint when storing it.
-            using (var payloadWriter = new StringWriter())
-            {
-                this.serializer.Serialize(payloadWriter, command.Body);
-                return new Message(payloadWriter.ToString(), command.Delay != TimeSpan.Zero ? (DateTime?)DateTime.UtcNow.Add(command.Delay) : null, command.CorrelationId);
-            }
+            var payload = this.serializer.Serialize(command.Body);
+            return new Message(payload, command.Delay != TimeSpan.Zero ? (DateTime?)DateTime.UtcNow.Add(command.Delay) : null, command.CorrelationId);
         }
     }
 }

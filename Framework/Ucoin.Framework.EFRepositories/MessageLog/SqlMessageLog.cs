@@ -13,9 +13,9 @@ namespace Ucoin.Framework.SqlDb.MessageLog
     public class SqlMessageLog : IEventLogReader
     {
         private IMetadataProvider metadataProvider;
-        private ITextSerializer serializer;
+        private ISerializer serializer;
 
-        public SqlMessageLog(ITextSerializer serializer, IMetadataProvider metadataProvider)
+        public SqlMessageLog(ISerializer serializer, IMetadataProvider metadataProvider)
         {
             this.serializer = serializer;
             this.metadataProvider = metadataProvider;
@@ -74,10 +74,10 @@ namespace Ucoin.Framework.SqlDb.MessageLog
 
         private class SqlQuery : IEnumerable<IEvent>
         {
-            private ITextSerializer serializer;
+            private ISerializer serializer;
             private QueryCriteria criteria;
 
-            public SqlQuery(ITextSerializer serializer, QueryCriteria criteria)
+            public SqlQuery(ISerializer serializer, QueryCriteria criteria)
             {
                 this.serializer = serializer;
                 this.criteria = criteria;

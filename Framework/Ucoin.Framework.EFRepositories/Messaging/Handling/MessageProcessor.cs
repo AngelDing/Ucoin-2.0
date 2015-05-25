@@ -14,7 +14,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
     public abstract class MessageProcessor : DisposableObject, IProcessor
     {
         private readonly IMessageReceiver receiver;
-        private readonly ITextSerializer serializer;
+        private readonly ISerializer serializer;
         private readonly object lockObject = new object();
         private bool disposed;
         private bool started = false;
@@ -22,7 +22,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageProcessor"/> class.
         /// </summary>
-        protected MessageProcessor(IMessageReceiver receiver, ITextSerializer serializer)
+        protected MessageProcessor(IMessageReceiver receiver, ISerializer serializer)
         {
             this.receiver = receiver;
             this.serializer = serializer;
@@ -92,19 +92,12 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
 
         protected object Deserialize(string serializedPayload)
         {
-            using (var reader = new StringReader(serializedPayload))
-            {
-                return this.serializer.Deserialize(reader);
-            }
+            return this.serializer.Deserialize(serializedPayload, typeof(object));
         }
 
         protected string Serialize(object payload)
         {
-            using (var writer = new StringWriter())
-            {
-                this.serializer.Serialize(writer, payload);
-                return writer.ToString();
-            }
+            return this.serializer.Serialize(payload);
         }
 
         private void ThrowIfDisposed()

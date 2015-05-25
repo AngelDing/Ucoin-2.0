@@ -31,10 +31,10 @@ namespace Ucoin.Framework.SqlDb.Processes
     {
         private readonly ICommandBus commandBus;
         private readonly DbContext context;
-        private readonly ITextSerializer serializer;
+        private readonly ISerializer serializer;
         private readonly RetryPolicy<SqlDatabaseTransientErrorDetectionStrategy> retryPolicy;
 
-        public SqlProcessManagerDataContext(Func<DbContext> contextFactory, ICommandBus commandBus, ITextSerializer serializer)
+        public SqlProcessManagerDataContext(Func<DbContext> contextFactory, ICommandBus commandBus, ISerializer serializer)
         {
             this.commandBus = commandBus;
             this.context = contextFactory.Invoke();

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="ReadUncommittedScope.cs" />
+    <Compile Include="Serialization\SerializationFormat.cs" />
     <Compile Include="Threading\ActionDisposable.cs" />
     <Compile Include="BlobStorage\IBlobStorage.cs" />
     <Compile Include="CodeTimer.cs" />
@@ -132,9 +133,8 @@
     <Compile Include="Result\ResultExtensions.cs" />
     <Compile Include="Result\ResultStatusType.cs" />
     <Compile Include="Result\SuccessfullyResult.cs" />
-    <Compile Include="Serialization\ITextSerializer.cs" />
-    <Compile Include="Serialization\JsonTextSerializer.cs" />
-    <Compile Include="Serialization\TextSerializerExtensions.cs" />
+    <Compile Include="Serialization\ISerializer.cs" />
+    <Compile Include="Serialization\JsonSerializer.cs" />
     <Compile Include="Threading\LockExtensions.cs" />
     <Compile Include="Threading\ReadLockDisposable.cs" />
     <Compile Include="Threading\UpgradeableReadLockDisposable.cs" />

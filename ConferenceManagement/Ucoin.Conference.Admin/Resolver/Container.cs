@@ -15,8 +15,8 @@ namespace Ucoin.Conference.Admin.Resolver
         public static UnityContainer InitUnityContainer()
         {
             var container = new UnityContainer();
-            var serializer = new JsonTextSerializer();
-            container.RegisterInstance<ITextSerializer>(serializer);
+            var serializer = new JsonSerializer();
+            container.RegisterInstance<ISerializer>(serializer);
             container.RegisterInstance<IMetadataProvider>(new StandardMetadataProvider());
 
             //container.RegisterType<IMessageSender, MessageSender>(
@@ -39,7 +39,7 @@ namespace Ucoin.Conference.Admin.Resolver
 
             container.RegisterType<IEventBus, EventBus>(
                 new ContainerControlledLifetimeManager(),
-                new InjectionConstructor(new ResolvedParameter<IMessageSender>("Events"), typeof(ITextSerializer))
+                new InjectionConstructor(new ResolvedParameter<IMessageSender>("Events"), typeof(ISerializer))
             );
 
             container.RegisterType<IConferenceRepositoryContext, ConferenceRepositoryContext>();

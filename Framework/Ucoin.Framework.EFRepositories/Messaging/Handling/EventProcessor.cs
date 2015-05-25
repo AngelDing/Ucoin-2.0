@@ -13,7 +13,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
     {
         private EventDispatcher messageDispatcher;
 
-        public EventProcessor(IMessageReceiver receiver, ITextSerializer serializer)
+        public EventProcessor(IMessageReceiver receiver, ISerializer serializer)
             : base(receiver, serializer)
         {
             this.messageDispatcher = new EventDispatcher();
