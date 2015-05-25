@@ -78,7 +78,7 @@ namespace Ucoin.Framework.EfExtensions.Future
             if (context == null)
                 throw new ObjectDisposedException("ObjectContext", "The ObjectContext for the future queries has been displosed.");
 
-            var runner = Locator.Current.Resolve<IFutureRunner>();
+            var runner = EfLocator.Current.Resolve<IFutureRunner>();
             if (runner == null)
                 throw new InvalidOperationException("Could not resolve the IFutureRunner. Make sure IFutureRunner is registered in the Locator.Current container.");
 

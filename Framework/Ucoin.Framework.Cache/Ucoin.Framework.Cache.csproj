@@ -36,9 +36,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheExpirationType.cs" />
+    <Compile Include="CacheHelper.cs" />
     <Compile Include="CacheKey.cs" />
+    <Compile Include="CacheLocator.cs" />
     <Compile Include="CachePolicy.cs" />
     <Compile Include="CacheTag.cs" />
+    <Compile Include="CacheType.cs" />
     <Compile Include="ICacheManager.cs" />
     <Compile Include="ICacheProvider.cs" />
     <Compile Include="Managers\DefaultCacheManager.cs" />
@@ -48,6 +51,7 @@
     <Compile Include="Providers\BaseCache.cs" />
     <Compile Include="Providers\RequestCache.cs" />
     <Compile Include="Providers\StaticCache.cs" />
+    <Compile Include="Providers\RedisCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">

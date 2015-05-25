@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 namespace Ucoin.Framework.Serialization
 {
     public class BinarySerializer : ISerializer

@@ -15,7 +15,7 @@ namespace Ucoin.Framework.EfExtensions.Mapping
         private readonly ICacheManager cacheManager;
         public MetadataMappingProvider()
         {
-            cacheManager = Locator.Current.Resolve<ICacheManager>();
+            cacheManager = EfLocator.Current.Resolve<ICacheManager>();
         }
 
         public EntityMap GetEntityMap(Type type, DbContext dbContext)

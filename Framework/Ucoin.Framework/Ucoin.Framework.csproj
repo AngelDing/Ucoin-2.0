@@ -40,13 +40,18 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dependency\SimpleLocator.cs" />
+    <Compile Include="Dependency\SimpleContainer.cs" />
+    <Compile Include="Dependency\IContainer.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="ReadUncommittedScope.cs" />
-    <Compile Include="Serialization\BinarySerializer.cs" />
-    <Compile Include="Serialization\NullSerializer.cs" />
+    <Compile Include="Serialization\Serializer.cs" />
+    <Compile Include="Serialization\SerializerLocator.cs" />
+    <Compile Include="Serialization\Serializers\BinarySerializer.cs" />
+    <Compile Include="Serialization\Serializers\NullSerializer.cs" />
     <Compile Include="Serialization\SerializationFormat.cs" />
     <Compile Include="Serialization\SerializerExtensions.cs" />
-    <Compile Include="Serialization\XmlSerializer.cs" />
+    <Compile Include="Serialization\Serializers\XmlSerializer.cs" />
     <Compile Include="Threading\ActionDisposable.cs" />
     <Compile Include="BlobStorage\IBlobStorage.cs" />
     <Compile Include="CodeTimer.cs" />
@@ -139,7 +144,7 @@
     <Compile Include="Result\ResultStatusType.cs" />
     <Compile Include="Result\SuccessfullyResult.cs" />
     <Compile Include="Serialization\ISerializer.cs" />
-    <Compile Include="Serialization\JsonSerializer.cs" />
+    <Compile Include="Serialization\Serializers\JsonSerializer.cs" />
     <Compile Include="Threading\LockExtensions.cs" />
     <Compile Include="Threading\ReadLockDisposable.cs" />
     <Compile Include="Threading\UpgradeableReadLockDisposable.cs" />

@@ -59,7 +59,6 @@
     <Compile Include="Batch\IBatchDelete.cs" />
     <Compile Include="Batch\IBatchInsert.cs" />
     <Compile Include="Batch\IBatchUpdate.cs" />
-    <Compile Include="Container.cs" />
     <Compile Include="Extensions\AuditExtensions.cs" />
     <Compile Include="Extensions\BatchExtensions.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
@@ -81,8 +80,7 @@
     <Compile Include="Future\IFutureContext.cs" />
     <Compile Include="Future\IFutureQuery.cs" />
     <Compile Include="Future\IFutureRunner.cs" />
-    <Compile Include="IContainer.cs" />
-    <Compile Include="Locator.cs" />
+    <Compile Include="EfLocator.cs" />
     <Compile Include="Mapping\EntityMap.cs" />
     <Compile Include="Mapping\IMappingProvider.cs" />
     <Compile Include="Mapping\MappingResolver.cs" />

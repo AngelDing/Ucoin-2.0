@@ -22,7 +22,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the source query can not be null.", "source");
 
-            var runner = Locator.Current.Resolve<IBatchDelete>();
+            var runner = EfLocator.Current.Resolve<IBatchDelete>();
             return runner.Delete(objectContext, sourceQuery);
         }      
 
@@ -37,7 +37,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the source query can not be null.", "source");
 
-            var runner = Locator.Current.Resolve<IBatchDelete>();
+            var runner = EfLocator.Current.Resolve<IBatchDelete>();
             return runner.DeleteAsync(objectContext, sourceQuery);
         }      
 
@@ -58,7 +58,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the query can not be null.", "source");
 
-            var runner = Locator.Current.Resolve<IBatchUpdate>();
+            var runner = EfLocator.Current.Resolve<IBatchUpdate>();
             return runner.Update(objectContext, sourceQuery, updateExpression);
         }
 
@@ -79,7 +79,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the query can not be null.", "source");
 
-            var runner = Locator.Current.Resolve<IBatchUpdate>();
+            var runner = EfLocator.Current.Resolve<IBatchUpdate>();
             return runner.UpdateAsync(objectContext, sourceQuery, updateExpression);
         }
 
@@ -90,7 +90,7 @@ namespace Ucoin.Framework.EfExtensions
             if (dbContext == null)
                 throw new ArgumentNullException("dbContext");
 
-            var runner = Locator.Current.Resolve<IBatchInsert>();
+            var runner = EfLocator.Current.Resolve<IBatchInsert>();
             runner.Insert(dbContext, entities, batchSize);
         }
     }
