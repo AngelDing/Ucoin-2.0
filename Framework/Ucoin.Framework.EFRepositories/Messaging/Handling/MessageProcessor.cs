@@ -97,7 +97,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Handling
 
         protected string Serialize(object payload)
         {
-            return this.serializer.Serialize(payload);
+            return this.serializer.SerializeToString(payload);
         }
 
         private void ThrowIfDisposed()

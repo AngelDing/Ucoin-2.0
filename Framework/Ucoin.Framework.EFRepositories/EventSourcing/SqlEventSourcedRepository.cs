@@ -91,7 +91,7 @@ namespace Ucoin.Framework.SqlDb.EventSourcing
 
         private EventEntity Serialize(IVersionedEvent e, string correlationId)
         {
-            var payload = this.serializer.Serialize(e);
+            var payload = this.serializer.SerializeToString(e);
             var serialized = new EventEntity
             {
                 AggregateId = e.SourceId,

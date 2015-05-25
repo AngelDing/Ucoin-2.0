@@ -49,7 +49,7 @@ namespace Ucoin.Framework.SqlDb.Messaging
 
         private Message BuildMessage(Envelope<IEvent> @event)
         {
-            var payload = this.serializer.Serialize(@event.Body);
+            var payload = this.serializer.SerializeToString(@event.Body);
             return new Message(payload, correlationId: @event.CorrelationId);
         }
     }

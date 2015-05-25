@@ -4,14 +4,14 @@ namespace Ucoin.Framework.Serialization
     public enum SerializationFormat
     {
         /// <summary>
-        /// No serialization format set
+        /// No serialization format set 
         /// </summary>
-        Null = 0,
+        None = 0,
 
         /// <summary>
-        /// No serailization to be done
+        /// Null serailization
         /// </summary>
-        None,
+        Null,
 
         /// <summary>
         /// JSON serialization

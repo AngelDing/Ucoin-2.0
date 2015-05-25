@@ -10,7 +10,7 @@ namespace Ucoin.Framework.Serialization
             get { return SerializationFormat.Json; }
         }
 
-        public string Serialize(object input)
+        public object Serialize(object input)
         {
             try
             {
@@ -22,11 +22,11 @@ namespace Ucoin.Framework.Serialization
             }
         }
 
-        public T Deserialize<T>(string input)
+        public T Deserialize<T>(object input)
         {
             try
             {
-                return JsonConvert.DeserializeObject<T>(input, GetSettings());
+                return JsonConvert.DeserializeObject<T>(input.ToString(), GetSettings());
             }
             catch
             {
@@ -34,11 +34,11 @@ namespace Ucoin.Framework.Serialization
             }
         }
 
-        public object Deserialize(string input, System.Type type)
+        public object Deserialize(object input, System.Type type)
         {
             try
             {
-                return JsonConvert.DeserializeObject(input, GetSettings());
+                return JsonConvert.DeserializeObject(input.ToString(), GetSettings());
             }
             catch
             {

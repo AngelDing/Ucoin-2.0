@@ -117,7 +117,7 @@ namespace Ucoin.Framework.SqlDb.Processes
                 // if there are pending commands to send, we store them as undispatched.
                 undispatched = new UndispatchedMessages(processManager.Id)
                                    {
-                                       Commands = this.serializer.Serialize(commands)
+                                       Commands = this.serializer.SerializeToString(commands)
                                    };
                 this.context.Set<UndispatchedMessages>().Add(undispatched);
             }
@@ -166,7 +166,7 @@ namespace Ucoin.Framework.SqlDb.Processes
                     if (originalCommandsCount != deserializedCommands.Count)
                     {
                         // if we were able to send some commands, then updates the undispatched messages.
-                        undispatched.Commands = this.serializer.Serialize(deserializedCommands);
+                        undispatched.Commands = this.serializer.SerializeToString(deserializedCommands);
                         try
                         {
                             this.context.SaveChanges();

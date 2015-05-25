@@ -38,7 +38,7 @@ namespace Ucoin.Framework.SqlDb.MessageLog
                     TypeName = metadata.TryGetValue(StandardMetadata.TypeName),
                     SourceType = metadata.TryGetValue(StandardMetadata.SourceType) as string,
                     CreationDate = DateTime.UtcNow.ToString("o"),
-                    Payload = serializer.Serialize(@event),
+                    Payload = serializer.SerializeToString(@event),
                 });
                 context.SaveChanges();
             }
@@ -61,7 +61,7 @@ namespace Ucoin.Framework.SqlDb.MessageLog
                     TypeName = metadata.TryGetValue(StandardMetadata.TypeName),
                     SourceType = metadata.TryGetValue(StandardMetadata.SourceType) as string,
                     CreationDate = DateTime.UtcNow.ToString("o"),
-                    Payload = serializer.Serialize(command),
+                    Payload = serializer.SerializeToString(command),
                 });
                 context.SaveChanges();
             }

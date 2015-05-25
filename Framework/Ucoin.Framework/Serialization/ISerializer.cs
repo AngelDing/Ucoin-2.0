@@ -6,10 +6,10 @@
     {
         SerializationFormat Format { get; }
 
-        string Serialize(object input);
+        object Serialize(object input);
 
-        T Deserialize<T>(string input);
+        T Deserialize<T>(object input);
 
-        object Deserialize(string input, Type type);
+        object Deserialize(object input, Type type);
     }
 }

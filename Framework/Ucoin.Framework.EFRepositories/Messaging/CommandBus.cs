@@ -46,7 +46,7 @@
 
         private Message BuildMessage(Envelope<ICommand> command)
         {
-            var payload = this.serializer.Serialize(command.Body);
+            var payload = this.serializer.SerializeToString(command.Body);
             return new Message(payload, command.Delay != TimeSpan.Zero ? (DateTime?)DateTime.UtcNow.Add(command.Delay) : null, command.CorrelationId);
         }
     }

@@ -37,11 +37,16 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="ReadUncommittedScope.cs" />
+    <Compile Include="Serialization\BinarySerializer.cs" />
+    <Compile Include="Serialization\NullSerializer.cs" />
     <Compile Include="Serialization\SerializationFormat.cs" />
+    <Compile Include="Serialization\SerializerExtensions.cs" />
+    <Compile Include="Serialization\XmlSerializer.cs" />
     <Compile Include="Threading\ActionDisposable.cs" />
     <Compile Include="BlobStorage\IBlobStorage.cs" />
     <Compile Include="CodeTimer.cs" />
