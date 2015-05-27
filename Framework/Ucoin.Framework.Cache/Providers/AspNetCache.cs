@@ -8,31 +8,40 @@ using Ucoin.Framework.Extensions;
 
 namespace Ucoin.Framework.Cache
 {    
-    public partial class AspNetCache : BaseCache, ICacheProvider
+    public partial class AspNetCache : CommonCache, ICacheProvider
     {
         private const string REGION_NAME = "$$GroupTour$$";
 		private const string FAKE_NULL = "__[NULL]__";
 
-        public IEnumerable<KeyValuePair<string, object>> Entries
+        public override IEnumerable<KeyValuePair<string, object>> GetAllEntries()
         {
-            get
+            if (HttpRuntime.Cache == null)
             {
-                if (HttpRuntime.Cache == null)
-                {
-                    return Enumerable.Empty<KeyValuePair<string, object>>();
-                }
-                
-                var result = 
-                    from entry in HttpRuntime.Cache.Cast<DictionaryEntry>()
-                    let key = entry.Key.ToString()
-                    where key.StartsWith(REGION_NAME)
-                    select new KeyValuePair<string, object>(
-                        key.Substring(REGION_NAME.Length),
-                        entry.Value);
-
-                return result;
+                return Enumerable.Empty<KeyValuePair<string, object>>();
             }
+
+            var result =
+                from entry in HttpRuntime.Cache.Cast<DictionaryEntry>()
+                let key = entry.Key.ToString()
+                where key.StartsWith(REGION_NAME)
+                select new KeyValuePair<string, object>(
+                    key.Substring(REGION_NAME.Length),
+                    entry.Value);
+
+            return result;
         }
+
+        public override bool IsSingleton()
+        {
+            // because Asp.NET Cache is thread-safe by itself,
+            // no need to mess up with locks.
+            return false;
+        }
+
+        public CacheType CacheType
+        {
+            get { return CacheType.Web; }
+        }       
 
 		public object Get(string key)
         {
@@ -98,25 +107,23 @@ namespace Ucoin.Framework.Cache
 			return HttpRuntime.Cache.Get(BuildKey(key)) != null;
         }
 
-        public void Remove(string key)
+        public override void Remove(string key)
         {
             if (HttpRuntime.Cache == null)
             {
                 return;
             }
 			HttpRuntime.Cache.Remove(BuildKey(key));
-        }
+        }      
        
-		public bool IsSingleton
-		{
-			// because Asp.NET Cache is thread-safe by itself,
-			// no need to mess up with locks.
-			get { return false; }
-		}
-
         private static string BuildKey(string key)
         {
             return key.HasValue() ? REGION_NAME + key : null;
+        }   
+
+        public void Expire(CacheTag cacheTag)
+        {
+            throw new NotImplementedException();
         }
     }
 }

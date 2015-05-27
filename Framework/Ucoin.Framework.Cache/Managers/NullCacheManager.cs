@@ -34,14 +34,9 @@ namespace Ucoin.Framework.Cache
         {
         }
 
-        public void Clear()
+        public void ClearAll()
         {
         }
-
-		public IDisposable EnterWriteLock()
-		{
-			return ActionDisposable.Empty;
-		}
 
         public T Get<T>(string key)
         {
@@ -53,6 +48,10 @@ namespace Ucoin.Framework.Cache
         }
 
         public void Set(CacheKey key, object value, CachePolicy cachePolicy = null)
+        {
+        }
+
+        public void Expire(string tag)
         {
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ucoin.Framework.Cache
 {    
-    public partial class StaticCache : BaseCache, ICacheProvider
+    public partial class StaticCache : CommonCache, ICacheProvider
     {       
 		private ObjectCache _cache;
 
@@ -23,13 +23,15 @@ namespace Ucoin.Framework.Cache
             }
         }
 
-        public IEnumerable<KeyValuePair<string, object>> Entries
+        public override IEnumerable<KeyValuePair<string, object>> GetAllEntries()
         {
-            get
-            {
-				return Cache;
-            }
+            return Cache;
         }
+
+        public override bool IsSingleton()
+        {
+            return true;
+        }       
 
 		public object Get(string key)
         {
@@ -55,15 +57,19 @@ namespace Ucoin.Framework.Cache
             return Cache.Contains(key);
         }
 
-        public void Remove(string key)
+        public override void Remove(string key)
         {
             Cache.Remove(key);
         }
 
-		public bool IsSingleton
-		{
-			get { return true; }
-		}        
+        public void Expire(CacheTag cacheTag)
+        {
+            string key = GetTagKey(cacheTag);
+            var item = new CacheItem(key, DateTimeOffset.UtcNow.Ticks);
+            var policy = new CacheItemPolicy { AbsoluteExpiration = ObjectCache.InfiniteAbsoluteExpiration };
+
+            Cache.Set(item, policy);
+        }		 
 
         internal CacheItemPolicy CreatePolicy(CacheKey key, CachePolicy cachePolicy)
         {
@@ -112,5 +118,10 @@ namespace Ucoin.Framework.Cache
 
             return Cache.CreateCacheEntryChangeMonitor(tags);
         }
+
+        public CacheType CacheType
+        {
+            get { return CacheType.Memory; }
+        }  
     }
 }

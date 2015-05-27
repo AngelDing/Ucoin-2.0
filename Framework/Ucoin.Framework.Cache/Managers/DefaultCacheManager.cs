@@ -62,7 +62,7 @@ namespace Ucoin.Framework.Cache
                 {
                     return default(T);
                 }
-                using (EnterReadLock())
+                using (cacheProvider.EnterReadLock())
                 {
                     if (!cacheProvider.Contains(strKey))
                     {
@@ -99,7 +99,7 @@ namespace Ucoin.Framework.Cache
                 cachePolicy = new CachePolicy();
             }
 
-            using (EnterWriteLock())
+            using (cacheProvider.EnterWriteLock())
             {
                 cacheProvider.Set(cacheKey, value, cachePolicy);
             }
@@ -109,7 +109,7 @@ namespace Ucoin.Framework.Cache
         {
             GuardHelper.ArgumentNotEmpty(() => key);
 
-			using (EnterWriteLock())
+            using (cacheProvider.EnterWriteLock())
 			{
 				cacheProvider.Remove(key);
 			}
@@ -117,54 +117,18 @@ namespace Ucoin.Framework.Cache
 
         public void RemoveByPattern(string pattern)
         {
-            GuardHelper.ArgumentNotEmpty(() => pattern);
-			
-			var regex = new Regex(pattern, RegexOptions.Singleline 
-                | RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            var keysToRemove = new List<String>();
-
-            foreach (var item in cacheProvider.Entries)
-            {
-                if (regex.IsMatch(item.Key))
-                {
-                    keysToRemove.Add(item.Key);
-                }
-            }
-
-			using (EnterWriteLock())
-			{
-				foreach (string key in keysToRemove)
-				{
-					cacheProvider.Remove(key);
-				}
-			}
+            cacheProvider.RemoveByPattern(pattern);
         }
 
-        public void Clear()
+        public void ClearAll()
         {
-            var keysToRemove = new List<string>();
-            foreach (var item in cacheProvider.Entries)
-            {
-                keysToRemove.Add(item.Key);
-            }
-
-			using (EnterWriteLock())
-			{
-				foreach (string key in keysToRemove)
-				{
-					cacheProvider.Remove(key);
-				}
-			}
+            cacheProvider.ClearAll();
         }
 
-		private IDisposable EnterReadLock()
-		{
-            return cacheProvider.IsSingleton ? rwLock.GetUpgradeableReadLock() : ActionDisposable.Empty;
-		}
-
-		public IDisposable EnterWriteLock()
-		{
-			return cacheProvider.IsSingleton ? rwLock.GetWriteLock() : ActionDisposable.Empty;
-		}       
+        public void Expire(string tag)
+        {
+            var cacheTag = new CacheTag(tag);
+            cacheProvider.Expire(cacheTag);
+        }
     }
 }

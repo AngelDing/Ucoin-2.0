@@ -81,7 +81,7 @@
     <Compile Include="CacheTest\CacheManagerTest.cs" />
     <Compile Include="CacheTest\CachePolicyTest.cs" />
     <Compile Include="CacheTest\CacheTagTest.cs" />
-    <Compile Include="CacheTest\MemoryCacheProviderTest.cs" />
+    <Compile Include="CacheTest\StaticCacheTest.cs" />
     <Compile Include="CompareObjectsTest\BaseCompareTest.cs" />
     <Compile Include="CompareObjectsTest\ClassCompareTest.cs" />
     <Compile Include="CompareObjectsTest\EnumCompareTest.cs" />
