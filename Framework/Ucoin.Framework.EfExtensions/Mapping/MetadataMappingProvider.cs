@@ -7,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using Ucoin.Framework.Cache;
+using Ucoin.Framework.Dependency;
 
 namespace Ucoin.Framework.EfExtensions.Mapping
 {
@@ -15,7 +16,7 @@ namespace Ucoin.Framework.EfExtensions.Mapping
         private readonly ICacheManager cacheManager;
         public MetadataMappingProvider()
         {
-            cacheManager = EfLocator.Current.Resolve<ICacheManager>();
+            cacheManager = SimpleLocator<EfLocator>.Current.Resolve<ICacheManager>();
         }
 
         public EntityMap GetEntityMap(Type type, DbContext dbContext)

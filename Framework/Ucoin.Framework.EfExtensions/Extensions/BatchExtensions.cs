@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Ucoin.Framework.EfExtensions.Batch;
+using Ucoin.Framework.Dependency;
 
 namespace Ucoin.Framework.EfExtensions
 {
@@ -22,7 +23,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the source query can not be null.", "source");
 
-            var runner = EfLocator.Current.Resolve<IBatchDelete>();
+            var runner = SimpleLocator<EfLocator>.Current.Resolve<IBatchDelete>();
             return runner.Delete(objectContext, sourceQuery);
         }      
 
@@ -37,7 +38,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the source query can not be null.", "source");
 
-            var runner = EfLocator.Current.Resolve<IBatchDelete>();
+            var runner = SimpleLocator<EfLocator>.Current.Resolve<IBatchDelete>();
             return runner.DeleteAsync(objectContext, sourceQuery);
         }      
 
@@ -58,7 +59,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the query can not be null.", "source");
 
-            var runner = EfLocator.Current.Resolve<IBatchUpdate>();
+            var runner = SimpleLocator<EfLocator>.Current.Resolve<IBatchUpdate>();
             return runner.Update(objectContext, sourceQuery, updateExpression);
         }
 
@@ -79,7 +80,7 @@ namespace Ucoin.Framework.EfExtensions
             if (objectContext == null)
                 throw new ArgumentException("The ObjectContext for the query can not be null.", "source");
 
-            var runner = EfLocator.Current.Resolve<IBatchUpdate>();
+            var runner = SimpleLocator<EfLocator>.Current.Resolve<IBatchUpdate>();
             return runner.UpdateAsync(objectContext, sourceQuery, updateExpression);
         }
 
@@ -90,7 +91,7 @@ namespace Ucoin.Framework.EfExtensions
             if (dbContext == null)
                 throw new ArgumentNullException("dbContext");
 
-            var runner = EfLocator.Current.Resolve<IBatchInsert>();
+            var runner = SimpleLocator<EfLocator>.Current.Resolve<IBatchInsert>();
             runner.Insert(dbContext, entities, batchSize);
         }
     }

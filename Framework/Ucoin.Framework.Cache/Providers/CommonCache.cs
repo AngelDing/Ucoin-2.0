@@ -10,6 +10,8 @@ namespace Ucoin.Framework.Cache
     {
         public abstract IEnumerable<KeyValuePair<string, object>> GetAllEntries();
 
+        public abstract void Remove(string key);
+
         public List<string> GetKeysToRemoveByPattern(string pattern)
         {
             GuardHelper.ArgumentNotEmpty(() => pattern);
@@ -63,8 +65,6 @@ namespace Ucoin.Framework.Cache
                     Remove(key);
                 }
             }
-        } 
-
-        public abstract void Remove(string key);
+        }        
     }
 }

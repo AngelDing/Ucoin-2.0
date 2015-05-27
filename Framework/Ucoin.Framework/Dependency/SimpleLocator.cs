@@ -1,9 +1,32 @@
 ﻿
 namespace Ucoin.Framework.Dependency
 {
+    public class SimpleLocator<T> where T : SimpleLocator, new()
+    {
+        private static T _instance;
+        public static T Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new T();
+                }
+                return _instance;
+            }
+        }
+
+        /// <summary>
+        /// Gets the current Locator <see cref="IContainer"/>.
+        /// </summary>
+        public static IContainer Current
+        {
+            get { return Instance.Container; }
+        }        
+    }
+
     public class SimpleLocator
     {
-        private static readonly SimpleLocator _instance = new SimpleLocator();
         private IContainer _container;
 
         /// <summary>
@@ -16,17 +39,9 @@ namespace Ucoin.Framework.Dependency
         }
 
         /// <summary>
-        /// Gets the current Locator <see cref="IContainer"/>.
-        /// </summary>
-        public static IContainer Current
-        {
-            get { return _instance.Container; }
-        }        
-
-        /// <summary>
         /// Gets the <see cref="IContainer"/> for this instance.
         /// </summary>
-        protected IContainer Container
+        public IContainer Container
         {
             get { return _container; }
         }
@@ -36,7 +51,7 @@ namespace Ucoin.Framework.Dependency
         /// </summary>
         /// <param name="container">The <see cref="IContainer"/> to register the default service resolvers with.</param>
         public virtual void RegisterDefaults(IContainer container)
-        { 
-        }
+        {
+        }        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Ucoin.Framework.Dependency;
 
 namespace Ucoin.Framework.Serialization
 {
@@ -11,7 +12,7 @@ namespace Ucoin.Framework.Serialization
         {
             get 
             {
-                return SerializerLocator.Current.Resolve<JsonSerializer>();
+                return SimpleLocator<SerializerLocator>.Current.Resolve<JsonSerializer>();
             }
         }
 
@@ -19,7 +20,7 @@ namespace Ucoin.Framework.Serialization
         {
             get
             {
-                return SerializerLocator.Current.Resolve<XmlSerializer>();
+                return SimpleLocator<SerializerLocator>.Current.Resolve<XmlSerializer>();
             }
         }
 
@@ -27,7 +28,7 @@ namespace Ucoin.Framework.Serialization
         {
             get
             {
-                return SerializerLocator.Current.Resolve<BinarySerializer>();
+                return SimpleLocator<SerializerLocator>.Current.Resolve<BinarySerializer>();
             }
         }
     }

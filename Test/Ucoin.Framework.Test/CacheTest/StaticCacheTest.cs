@@ -133,7 +133,7 @@ namespace Ucoin.Framework.Test.Caching
             tagKey.Should().NotBeNullOrEmpty();
 
             // underlying cache
-            provider.Entries.ToList().Count.Should().Be(6);
+            (provider as StaticCache).GetAllEntries().ToList().Count.Should().Be(6);
 
             var cachedTag = provider.Get(tagKey);
             cachedTag.Should().NotBeNull();
@@ -157,7 +157,7 @@ namespace Ucoin.Framework.Test.Caching
             var expiredValue3 = provider.Get(cacheKey3.Key);
             expiredValue3.Should().NotBeNull();
 
-            provider.Entries.ToList().Count.Should().Be(4);
+            (provider as StaticCache).GetAllEntries().ToList().Count.Should().Be(4);
         }
 
         [Fact]
