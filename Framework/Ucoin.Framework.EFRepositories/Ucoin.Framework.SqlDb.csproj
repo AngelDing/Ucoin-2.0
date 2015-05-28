@@ -87,6 +87,10 @@
     <Compile Include="BlobStorage\SqlBlobStorage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ucoin.Framework.Serialization\Ucoin.Framework.Serialization.csproj">
+      <Project>{e92caec1-a15b-43d4-9249-c8e2f7bc7dc9}</Project>
+      <Name>Ucoin.Framework.Serialization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
       <Name>Ucoin.Framework</Name>

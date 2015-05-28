@@ -14,6 +14,6 @@ namespace Ucoin.Framework.Cache
         //// char defined earlier. It may seem unimportant but I need to use the ';' as a separator so it works in
         //// in the cache specific provider config, where as using',' was problematic.
         public const char ConfigDistributedServerSeparatorObsolete = ',';
-        public const char ConfigDistributedServerPortSeparator = ':';
+        public const char ConfigDistributedServerPortSeparator = ':'; 
     }
 }

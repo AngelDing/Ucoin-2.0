@@ -18,7 +18,7 @@ namespace Ucoin.Framework.Cache
 
         public string DistributedCacheServers { get; set; }
 
-        public CacheConfig()
+        public CacheConfig() 
         {
             InitConfiguration();
         }
