@@ -31,5 +31,13 @@ namespace Ucoin.Framework.Serialization
                 return SimpleLocator<SerializerLocator>.Current.Resolve<BinarySerializer>();
             }
         }
+
+        public static ISerializer Jil   
+        {
+            get
+            {
+                return SimpleLocator<SerializerLocator>.Current.Resolve<JilSerializer>();
+            }
+        }
     }
 }

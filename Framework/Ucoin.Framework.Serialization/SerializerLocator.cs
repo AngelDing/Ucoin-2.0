@@ -10,6 +10,7 @@ namespace Ucoin.Framework.Serialization
             container.Register<JsonSerializer>(() => new JsonSerializer());
             container.Register<XmlSerializer>(() => new XmlSerializer());
             container.Register<BinarySerializer>(() => new BinarySerializer());
+            container.Register<JilSerializer>(() => new JilSerializer());
         }
     }
 }

@@ -26,6 +26,11 @@ namespace Ucoin.Framework.Serialization
         /// <summary>
         /// Binary serialization
         /// </summary>
-        Binary
+        Binary,
+
+        /// <summary>
+        /// Jil serialization
+        /// </summary>
+        Jil 
     }
 }

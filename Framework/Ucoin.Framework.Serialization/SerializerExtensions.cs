@@ -7,7 +7,9 @@ namespace Ucoin.Framework.Serialization
         {
             var res = serializer.Serialize(data);
             var format = serializer.Format;
-            if (format == SerializationFormat.Json || format == SerializationFormat.Xml)
+            if (format == SerializationFormat.Json 
+                || format == SerializationFormat.Xml
+                || format == SerializationFormat.Jil)
             {
                 if (res != null)
                 {
