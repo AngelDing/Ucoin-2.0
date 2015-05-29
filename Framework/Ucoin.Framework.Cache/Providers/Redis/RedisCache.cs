@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Ucoin.Framework.Serialization;
+using System.Configuration;
 
 namespace Ucoin.Framework.Cache
 {
@@ -24,9 +25,15 @@ namespace Ucoin.Framework.Cache
         /// </remarks>
         private static readonly Encoding encoding = Encoding.UTF8;
 
-        public RedisCache(ISerializer serializer)
+        public RedisCache(ISerializer serializer, IRedisCachingConfiguration configuration = null)
         {
-            var factory = new RedisCacheFactory();
+            if (serializer == null)
+            {
+                throw new ArgumentNullException("serializer");
+            }
+
+            this.serializer = serializer;
+            var factory = new RedisCacheFactory(configuration);
             var connection = factory.ConstructCacheInstance();
             db = connection.GetDatabase();
             this.serializer = serializer;

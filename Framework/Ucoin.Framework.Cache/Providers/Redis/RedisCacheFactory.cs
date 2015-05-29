@@ -1,18 +1,25 @@
 ﻿using StackExchange.Redis;
 using System;
+using System.Configuration;
 
 namespace Ucoin.Framework.Cache
 {
-    public class RedisCacheFactory : DistributedCacheFactory
+    public class RedisCacheFactory
     {
-        private ConnectionMultiplexer _redisConnection = null;
-        private const string DEFAULT_IpAddress = "127.0.0.1";
-        private const int DEFAULT_Port = 6379;
+        private ConnectionMultiplexer redisConnection = null;
+        private IRedisCachingConfiguration configuration;
 
-        public RedisCacheFactory(CacheConfig config = null)
-            : base(config)
+        public RedisCacheFactory(IRedisCachingConfiguration configuration = null)
         {
-            ParseConfig(DEFAULT_IpAddress, DEFAULT_Port);
+            if (configuration == null)
+            {
+                configuration = RedisCachingSectionHandler.GetConfig();
+            }
+
+            if (configuration == null)
+            {
+                throw new ConfigurationErrorsException("Unable to locate <redisCacheClient> section into your configuration file. Take a look https://github.com/imperugo/StackExchange.Redis.Extensions");
+            }
         }
 
         internal ConnectionMultiplexer ConstructCacheInstance()
@@ -21,7 +28,7 @@ namespace Ucoin.Framework.Cache
 
             try
             {
-                _redisConnection = ConnectionMultiplexer.Connect(connectionOptions);
+                redisConnection = ConnectionMultiplexer.Connect(connectionOptions);
             }
             catch (Exception ex)
             {
@@ -29,26 +36,21 @@ namespace Ucoin.Framework.Cache
                 throw ex;
             }
 
-            return _redisConnection;
+            return redisConnection;
         }
 
         private ConfigurationOptions ConstructConnectionOptions()
         {
-            var redisOptions = new ConfigurationOptions();
-            if (!string.IsNullOrWhiteSpace(CacheConfiguration.CacheSpecificData))
+            var redisOptions = new ConfigurationOptions
             {
-                // Note: The redis config parser requires values be separated by a comma, not a semi-colon which is what CacheAdapter likes
-                var redisSpecificOptions = CacheConfiguration.CacheSpecificData.Replace(';', ',');
-                redisOptions = ConfigurationOptions.Parse(redisSpecificOptions, true);
-            }
+                Ssl = configuration.Ssl,
+                AllowAdmin = configuration.AllowAdmin
+            };
 
-            // Clear the endpoints if any specified here as we use the ones defined in DistributedCacheServers setting to keep
-            // config consistent and it means that users can switch to different cache providers without issues
-            redisOptions.EndPoints.Clear();
-            CacheConfiguration.ServerNodes.ForEach(n =>
+            foreach (RedisHost redisHost in configuration.RedisHosts)
             {
-                redisOptions.EndPoints.Add(n.IPAddressOrHostName, n.Port);
-            });
+                redisOptions.EndPoints.Add(redisHost.Host, redisHost.CachePort);
+            }
             return redisOptions;
         }
     }

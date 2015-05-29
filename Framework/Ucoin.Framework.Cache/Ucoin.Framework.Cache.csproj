@@ -39,8 +39,6 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheConfig.cs" />
-    <Compile Include="CacheConstants.cs" />
     <Compile Include="CacheExpirationType.cs" />
     <Compile Include="CacheHelper.cs" />
     <Compile Include="CacheKey.cs" />
@@ -56,9 +54,11 @@
     <Compile Include="Providers\AspNetCache.cs" />
     <Compile Include="Providers\BaseCache.cs" />
     <Compile Include="Providers\CommonCache.cs" />
-    <Compile Include="Providers\Redis\DistributedCacheFactory.cs" />
+    <Compile Include="Providers\Redis\Configuration\IRedisCachingConfiguration.cs" />
+    <Compile Include="Providers\Redis\Configuration\RedisCachingSectionHandler.cs" />
+    <Compile Include="Providers\Redis\Configuration\RedisHost.cs" />
+    <Compile Include="Providers\Redis\Configuration\RedisHostCollection.cs" />
     <Compile Include="Providers\Redis\RedisCacheFactory.cs" />
-    <Compile Include="Providers\Redis\ServerNode.cs" />
     <Compile Include="Providers\StaticCache.cs" />
     <Compile Include="Providers\Redis\RedisCache.cs" />
   </ItemGroup>
@@ -75,6 +75,9 @@
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
       <Name>Ucoin.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Providers\Redis\Configuration\App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
