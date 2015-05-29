@@ -4,7 +4,7 @@ using Xunit;
 using System;
 using Ucoin.Framework.Cache;
 
-namespace Ucoin.Framework.Test
+namespace Ucoin.Framework.Test.Caching
 {
     public class CacheManagerTest
     {

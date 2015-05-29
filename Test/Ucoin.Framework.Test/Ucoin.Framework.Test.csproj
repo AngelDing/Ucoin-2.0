@@ -48,6 +48,10 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Jil, Version=2.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\Jil\Jil.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -56,6 +60,18 @@
     <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sigil, Version=4.4.0.0, Culture=neutral, PublicKeyToken=2d06c3494341c8ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\Jil\Sigil.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -77,11 +93,13 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="CacheTest\RedisCacheTest.cs" />
     <Compile Include="CacheTest\CacheKeyTest.cs" />
     <Compile Include="CacheTest\CacheManagerTest.cs" />
     <Compile Include="CacheTest\CachePolicyTest.cs" />
     <Compile Include="CacheTest\CacheTagTest.cs" />
     <Compile Include="CacheTest\StaticCacheTest.cs" />
+    <Compile Include="CacheTest\TestClass.cs" />
     <Compile Include="CompareObjectsTest\BaseCompareTest.cs" />
     <Compile Include="CompareObjectsTest\ClassCompareTest.cs" />
     <Compile Include="CompareObjectsTest\EnumCompareTest.cs" />
@@ -126,6 +144,10 @@
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
       <Name>Ucoin.Framework.SqlDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Serialization\Ucoin.Framework.Serialization.csproj">
+      <Project>{e92caec1-a15b-43d4-9249-c8e2f7bc7dc9}</Project>
+      <Name>Ucoin.Framework.Serialization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.ServiceLocation\Ucoin.Framework.ServiceLocation.csproj">
       <Project>{7fd70353-b6a3-4d53-bed4-2aad1177fc7d}</Project>

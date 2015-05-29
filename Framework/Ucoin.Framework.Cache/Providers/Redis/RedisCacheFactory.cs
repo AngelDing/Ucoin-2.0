@@ -6,8 +6,9 @@ namespace Ucoin.Framework.Cache
 {
     public class RedisCacheFactory
     {
-        private ConnectionMultiplexer redisConnection = null;
+        private static ConnectionMultiplexer redisConnection = null;
         private IRedisCachingConfiguration configuration;
+        private static readonly object SyncLock = new object();
 
         public RedisCacheFactory(IRedisCachingConfiguration configuration = null)
         {
@@ -20,20 +21,34 @@ namespace Ucoin.Framework.Cache
             {
                 throw new ConfigurationErrorsException("Unable to locate <redisCacheClient> section into your configuration file. Take a look https://github.com/imperugo/StackExchange.Redis.Extensions");
             }
+
+            this.configuration = configuration;
         }
 
-        internal ConnectionMultiplexer ConstructCacheInstance()
+        internal IDatabase GetDatabase()
         {
-            var connectionOptions = ConstructConnectionOptions();
+            var connection = ConstructCacheInstance();
+            return connection.GetDatabase(configuration.Database);
+        }
 
-            try
+        private ConnectionMultiplexer ConstructCacheInstance()
+        {
+            if (redisConnection == null || !redisConnection.IsConnected 
+                || !redisConnection.GetDatabase().IsConnected(default(RedisKey)))
             {
-                redisConnection = ConnectionMultiplexer.Connect(connectionOptions);
-            }
-            catch (Exception ex)
-            {
-                //Logger.WriteException(ex);
-                throw ex;
+                lock (SyncLock)
+                {
+                    var connectionOptions = ConstructConnectionOptions();
+                    try
+                    {
+                        redisConnection = ConnectionMultiplexer.Connect(connectionOptions);
+                    }
+                    catch (Exception ex)
+                    {
+                        //Logger.WriteException(ex);
+                        throw ex;
+                    }
+                }
             }
 
             return redisConnection;
@@ -52,6 +67,6 @@ namespace Ucoin.Framework.Cache
                 redisOptions.EndPoints.Add(redisHost.Host, redisHost.CachePort);
             }
             return redisOptions;
-        }
+        }       
     }
 }

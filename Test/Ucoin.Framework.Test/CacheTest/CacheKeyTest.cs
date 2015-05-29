@@ -4,7 +4,7 @@ using FluentAssertions;
 using Xunit;
 using Ucoin.Framework.Cache;
 
-namespace Ucoin.Framework.Test
+namespace Ucoin.Framework.Test.Caching
 {
     public class CacheKeyTest
     {

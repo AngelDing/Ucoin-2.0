@@ -25,6 +25,11 @@ namespace Ucoin.Framework.Cache
         /// </remarks>
         private static readonly Encoding encoding = Encoding.UTF8;
 
+        public RedisCache()
+            : this(Serializer.Jil)
+        { 
+        }
+
         public RedisCache(ISerializer serializer, IRedisCachingConfiguration configuration = null)
         {
             if (serializer == null)
@@ -34,8 +39,7 @@ namespace Ucoin.Framework.Cache
 
             this.serializer = serializer;
             var factory = new RedisCacheFactory(configuration);
-            var connection = factory.ConstructCacheInstance();
-            db = connection.GetDatabase();
+            db = factory.GetDatabase();
             this.serializer = serializer;
         }
 
