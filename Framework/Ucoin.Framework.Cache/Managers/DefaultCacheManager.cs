@@ -34,7 +34,7 @@ namespace Ucoin.Framework.Cache
             GuardHelper.ArgumentNotEmpty(() => key);
             if (cacheProvider.Contains(key))
             {
-                return (T)cacheProvider.Get(key);
+                return cacheProvider.Get<T>(key);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace Ucoin.Framework.Cache
 
             if (cacheProvider.Contains(strKey))
             {
-                return (T)cacheProvider.Get(strKey);
+                return cacheProvider.Get<T>(strKey);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace Ucoin.Framework.Cache
                     }
                 }
 
-                return (T)cacheProvider.Get(strKey);
+                return cacheProvider.Get<T>(strKey);
             }
         }
 

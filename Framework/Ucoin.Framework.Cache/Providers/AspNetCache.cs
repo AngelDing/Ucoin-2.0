@@ -43,21 +43,22 @@ namespace Ucoin.Framework.Cache
             get { return CacheType.Web; }
         }       
 
-		public object Get(string key)
+		public T Get<T>(string key)
         {
+            T data = default(T);
             if (HttpRuntime.Cache == null)
             {
-                return null;
+                return data;
             }
 
 			var value = HttpRuntime.Cache.Get(BuildKey(key));
 
             if (value.Equals(FAKE_NULL))
             {
-                return null;
+                return data;
             }
 
-			return value;
+			return (T)value;
         }
 
         public void Set(CacheKey cacheKey, object value, CachePolicy cachePolicy)

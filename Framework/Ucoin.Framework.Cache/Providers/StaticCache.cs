@@ -33,9 +33,10 @@ namespace Ucoin.Framework.Cache
             return true;
         }       
 
-		public object Get(string key)
+		public T Get<T>(string key)
         {
-			return Cache.Get(key);
+			var data = Cache.Get(key);
+            return (T)data;
         }
 
         public void Set(CacheKey cacheKey, object value, CachePolicy cachePolicy)

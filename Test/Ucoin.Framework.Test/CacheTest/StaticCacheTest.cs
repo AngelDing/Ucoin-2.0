@@ -34,7 +34,7 @@ namespace Ucoin.Framework.Test.Caching
             provider.Set(cacheKey, value, cachePolicy);
 
             // look in underlying MemoryCache
-            var cachedValue = provider.Get(cacheKey.Key).ToString();
+            var cachedValue = provider.Get<string>(cacheKey.Key);
             cachedValue.Should().NotBeNull();
             cachedValue.Should().Be(value);
         }
@@ -52,7 +52,7 @@ namespace Ucoin.Framework.Test.Caching
     
             // look in underlying MemoryCache
             string innerKey = provider.GetKey(cacheKey);
-            var cachedValue = provider.Get(innerKey);
+            var cachedValue = provider.Get<string>(innerKey);
             cachedValue.Should().NotBeNull();
             cachedValue.Should().Be(value);
 
@@ -61,7 +61,7 @@ namespace Ucoin.Framework.Test.Caching
             string tagKey = provider.GetTagKey(cacheTag);
             tagKey.Should().NotBeNullOrEmpty();
 
-            var cachedTag = provider.Get(tagKey);
+            var cachedTag = provider.Get<string>(tagKey);
             cachedTag.Should().NotBeNull();
         }
 
@@ -81,7 +81,7 @@ namespace Ucoin.Framework.Test.Caching
             string tagKey = provider.GetTagKey(cacheTag);
             tagKey.Should().NotBeNullOrEmpty();
 
-            var cachedTag = provider.Get(tagKey);
+            var cachedTag = provider.Get<string>(tagKey);
             cachedTag.Should().NotBeNull();
 
             // add second value with same tag
@@ -94,7 +94,7 @@ namespace Ucoin.Framework.Test.Caching
             provider.Set(cacheKey2, value2, cachePolicy2);
 
             // tag 'a' should have same value
-            var cachedTag2 = provider.Get(tagKey);
+            var cachedTag2 = provider.Get<string>(tagKey);
             cachedTag2.Should().NotBeNull();
             cachedTag2.Should().Be(cachedTag);
         }
@@ -135,7 +135,7 @@ namespace Ucoin.Framework.Test.Caching
             // underlying cache
             (provider as StaticCache).GetAllEntries().ToList().Count.Should().Be(6);
 
-            var cachedTag = provider.Get(tagKey);
+            var cachedTag = provider.Get<string>(tagKey);
             cachedTag.Should().NotBeNull();
 
             System.Threading.Thread.Sleep(500);
@@ -143,18 +143,18 @@ namespace Ucoin.Framework.Test.Caching
             // expire actually just changes the value for tag key
             provider.Expire(cacheTag);
 
-            var expiredTag = provider.Get(tagKey);
+            var expiredTag = provider.Get<string>(tagKey);
             expiredTag.Should().NotBeNull();
             expiredTag.Should().NotBe(cachedTag);
 
             // items should have been removed
-            var expiredValue = provider.Get(cacheKey.Key);
+            var expiredValue = provider.Get<string>(cacheKey.Key);
             expiredValue.Should().BeNull();
 
-            var expiredValue2 = provider.Get(cacheKey2.Key);
+            var expiredValue2 = provider.Get<string>(cacheKey2.Key);
             expiredValue2.Should().BeNull();
 
-            var expiredValue3 = provider.Get(cacheKey3.Key);
+            var expiredValue3 = provider.Get<string>(cacheKey3.Key);
             expiredValue3.Should().NotBeNull();
 
             (provider as StaticCache).GetAllEntries().ToList().Count.Should().Be(4);
@@ -169,7 +169,7 @@ namespace Ucoin.Framework.Test.Caching
 
             provider.Set(cacheKey, value, cachePolicy);
 
-            var existing = provider.Get(cacheKey.Key);
+            var existing = provider.Get<string>(cacheKey.Key);
             existing.Should().NotBeNull();
             existing.Should().BeSameAs(value);
         }
@@ -185,14 +185,14 @@ namespace Ucoin.Framework.Test.Caching
 
             // look in underlying MemoryCache
             string innerKey = provider.GetKey(cacheKey);
-            var cachedValue = provider.Get(innerKey);
+            var cachedValue = provider.Get<string>(innerKey);
             cachedValue.Should().NotBeNull();
             cachedValue.Should().Be(value);
 
             provider.Remove(cacheKey.Key);
 
             // look in underlying MemoryCache
-            var previous = provider.Get(innerKey);
+            var previous = provider.Get<string>(innerKey);
             previous.Should().BeNull();
         }
 
