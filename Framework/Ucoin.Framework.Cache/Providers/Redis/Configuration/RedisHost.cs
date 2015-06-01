@@ -5,21 +5,21 @@ namespace Ucoin.Framework.Cache
 {
 	public class RedisHost : ConfigurationElement
 	{
-		[ConfigurationProperty("host", IsRequired = true)]
-		public string Host
+		[ConfigurationProperty("ip", IsRequired = true)]
+		public string IP
 		{
 			get
 			{
-				return this["host"] as string;
+				return this["ip"] as string;
 			}
 		}
 
-		[ConfigurationProperty("cachePort", IsRequired = true)]
-		public int CachePort
+		[ConfigurationProperty("port", IsRequired = true)]
+		public int Port
 		{
 			get
 			{
-				var config = this["cachePort"];
+                var config = this["port"];
 				if (config != null)
 				{
 					var value = config.ToString();

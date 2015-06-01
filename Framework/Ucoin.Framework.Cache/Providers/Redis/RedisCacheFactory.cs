@@ -59,12 +59,13 @@ namespace Ucoin.Framework.Cache
             var redisOptions = new ConfigurationOptions
             {
                 Ssl = configuration.Ssl,
-                AllowAdmin = configuration.AllowAdmin
+                AllowAdmin = configuration.AllowAdmin,
+                ConnectTimeout = configuration.ConnectTimeout
             };
 
             foreach (RedisHost redisHost in configuration.RedisHosts)
             {
-                redisOptions.EndPoints.Add(redisHost.Host, redisHost.CachePort);
+                redisOptions.EndPoints.Add(redisHost.IP, redisHost.Port);
             }
             return redisOptions;
         }       
