@@ -17,14 +17,6 @@ namespace Ucoin.Framework.Cache
         private static IDatabase db = null;
         private readonly ISerializer serializer;
         private readonly RedisCacheFactory factory;
-        /// <summary>
-        /// Encoding to use to convert string to byte[] and the other way around.
-        /// </summary>
-        /// <remarks>
-        /// StackExchange.Redis uses Encoding.UTF8 to convert strings to bytes,
-        /// hence we do same here.
-        /// </remarks>
-        private static readonly Encoding encoding = Encoding.UTF8;
 
         public RedisCache()
             : this(Serializer.Jil)
@@ -54,9 +46,7 @@ namespace Ucoin.Framework.Cache
             var data = db.StringGet(key);
             if (!data.IsNull && data.HasValue)
             {
-                var blobBytes = (byte[])data;
-                var jsonString = encoding.GetString(blobBytes);
-                var deserialisedObject = serializer.Deserialize<T>(jsonString);
+                var deserialisedObject = serializer.Deserialize<T>(data);
                 return deserialisedObject;
             }
 
@@ -66,10 +56,9 @@ namespace Ucoin.Framework.Cache
         public void Set(CacheKey key, object value, CachePolicy cachePolicy)
         {
             var jsonString = serializer.SerializeToString(value);
-            var entryBytes = encoding.GetBytes(jsonString);
             var expiry = ComputeExpiryTimeSpan(cachePolicy);
 
-            db.StringSet(key.Key, entryBytes, expiry);
+            db.StringSet(key.Key, jsonString, expiry);
         }
 
         private TimeSpan? ComputeExpiryTimeSpan(CachePolicy cachePolicy)
@@ -103,6 +92,15 @@ namespace Ucoin.Framework.Cache
             db.KeyDelete(key);
         }
 
+        /// <summary>
+        /// 批量刪除緩存
+        /// </summary>
+        /// <param name="pattern">模式匹配</param>
+        /// <example>
+        /// if you want to return all keys that start with "myCacheKey" uses "myCacheKey*"
+        ///	if you want to return all keys that contain with "myCacheKey" uses "*myCacheKey*"
+        ///	if you want to return all keys that end with "myCacheKey" uses "*myCacheKey"
+        /// </example>
         public void RemoveByPattern(string pattern)
         {
             var keys = new List<RedisKey>();
