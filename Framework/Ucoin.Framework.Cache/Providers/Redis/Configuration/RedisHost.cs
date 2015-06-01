@@ -35,9 +35,25 @@ namespace Ucoin.Framework.Cache
 					}
 				}
 
-
 				throw new Exception("Redis Cahe port must be number.");
 			}
 		}
+
+        [ConfigurationProperty("isReadonly", IsRequired = true)]
+        public bool IsReadonly
+        {
+            get
+            {
+                return (bool)this["isReadonly"];
+            }
+        }
+
+        public string HostFullName
+        {
+            get
+            {
+                return string.Format("{0}:{1}", this.IP, this.Port);
+            }
+        }
 	}
 }

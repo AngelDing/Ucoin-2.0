@@ -29,7 +29,7 @@ namespace Ucoin.Framework.Cache
 		protected override object GetElementKey(ConfigurationElement element)
 		{
             var config = ((RedisHost)element);
-            return string.Format("{0}:{1}", config.IP, config.Port);
+            return config.HostFullName;
 		}
 	}
 }

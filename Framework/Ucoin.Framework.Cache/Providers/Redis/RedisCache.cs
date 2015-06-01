@@ -16,6 +16,7 @@ namespace Ucoin.Framework.Cache
     {
         private static IDatabase db = null;
         private readonly ISerializer serializer;
+        private readonly RedisCacheFactory factory;
         /// <summary>
         /// Encoding to use to convert string to byte[] and the other way around.
         /// </summary>
@@ -38,7 +39,7 @@ namespace Ucoin.Framework.Cache
             }
 
             this.serializer = serializer;
-            var factory = new RedisCacheFactory(configuration);
+            factory = new RedisCacheFactory(configuration);
             db = factory.GetDatabase();
             this.serializer = serializer;
         }
@@ -130,7 +131,10 @@ namespace Ucoin.Framework.Cache
 
             foreach (var endpoint in endPoints)
             {
-                db.Multiplexer.GetServer(endpoint).FlushDatabase(db.Database);
+                if (factory.IsEndPointReadonly(endpoint.ToString()) == false)
+                {
+                    db.Multiplexer.GetServer(endpoint).FlushDatabase(db.Database);
+                }
             }
         }
 

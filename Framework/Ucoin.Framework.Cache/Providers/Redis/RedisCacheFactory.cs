@@ -1,6 +1,8 @@
 ﻿using StackExchange.Redis;
 using System;
 using System.Configuration;
+using System.Net;
+using System.Linq;
 
 namespace Ucoin.Framework.Cache
 {
@@ -29,6 +31,19 @@ namespace Ucoin.Framework.Cache
         {
             var connection = ConstructCacheInstance();
             return connection.GetDatabase(configuration.Database);
+        }
+
+        internal bool IsEndPointReadonly(string hostName)
+        {
+            foreach (RedisHost host in configuration.RedisHosts)
+            {
+                if (host.HostFullName == hostName)
+                {
+                    return host.IsReadonly;
+                }
+            }
+
+            return false;
         }
 
         private ConnectionMultiplexer ConstructCacheInstance()
