@@ -8,11 +8,7 @@ using System.Configuration;
 
 namespace Ucoin.Framework.Cache
 {
-    /// <summary>
-    /// 暫不支持相對過期策略，使用redis緩存，只能指定過期時間；
-    /// 如果要支持，則需要將緩存內容再包裝一層，將過期策略也緩存，然後取得的時候，根據策略，判斷是否需要重新指定到期日期
-    /// </summary>
-    public class RedisCache : BaseCache, ICacheProvider
+    public class RedisCache : DistributedCache, ICacheProvider
     {
         private static IDatabase db = null;
         private readonly ISerializer serializer;
@@ -24,6 +20,7 @@ namespace Ucoin.Framework.Cache
         }
 
         public RedisCache(ISerializer serializer, IRedisCachingConfiguration configuration = null)
+            : base(new RedisDependencyManager(this))
         {
             if (serializer == null)
             {
@@ -59,7 +56,7 @@ namespace Ucoin.Framework.Cache
             var expiry = ComputeExpiryTimeSpan(cachePolicy);
 
             db.StringSet(key.Key, jsonString, expiry);
-        }
+        }       
 
         private TimeSpan? ComputeExpiryTimeSpan(CachePolicy cachePolicy)
         {

@@ -46,6 +46,11 @@
     <Compile Include="CachePolicy.cs" />
     <Compile Include="CacheTag.cs" />
     <Compile Include="CacheType.cs" />
+    <Compile Include="Dependencies\BaseCacheDependencyManager.cs" />
+    <Compile Include="Dependencies\DependencyItem.cs" />
+    <Compile Include="Dependencies\GenericDependencyManager.cs" />
+    <Compile Include="Dependencies\ICacheDependencyManager.cs" />
+    <Compile Include="Dependencies\RedisDependencyManager.cs" />
     <Compile Include="ICacheManager.cs" />
     <Compile Include="ICacheProvider.cs" />
     <Compile Include="Managers\DefaultCacheManager.cs" />
@@ -54,6 +59,7 @@
     <Compile Include="Providers\AspNetCache.cs" />
     <Compile Include="Providers\BaseCache.cs" />
     <Compile Include="Providers\CommonCache.cs" />
+    <Compile Include="Providers\DistributedCache.cs" />
     <Compile Include="Providers\Redis\Configuration\IRedisCachingConfiguration.cs" />
     <Compile Include="Providers\Redis\Configuration\RedisCachingSectionHandler.cs" />
     <Compile Include="Providers\Redis\Configuration\RedisHost.cs" />

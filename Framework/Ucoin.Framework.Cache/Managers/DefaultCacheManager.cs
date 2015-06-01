@@ -22,10 +22,6 @@ namespace Ucoin.Framework.Cache
         {
             GuardHelper.ArgumentNotEmpty(() => key);
             var cacheKey = new CacheKey(key);
-            if (cachePolicy == null)
-            {
-                cachePolicy = new CachePolicy();
-            }
             return Get(cacheKey, acquirer, cachePolicy);
         }
 
@@ -54,7 +50,13 @@ namespace Ucoin.Framework.Cache
 
             if (cacheProvider.Contains(strKey))
             {
-                return cacheProvider.Get<T>(strKey);
+                var value = cacheProvider.Get<T>(strKey);
+                if (cacheProvider.CacheType == CacheType.Redis
+                    && cachePolicy.ExpirationType == CacheExpirationType.Sliding)
+                {
+                    this.Set(cacheKey, value, cachePolicy);
+                }
+                return value;
             }
             else
             {

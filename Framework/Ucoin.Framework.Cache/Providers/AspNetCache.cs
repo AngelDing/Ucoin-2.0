@@ -124,7 +124,13 @@ namespace Ucoin.Framework.Cache
 
         public void Expire(CacheTag cacheTag)
         {
-            throw new NotImplementedException();
+            string key = GetTagKey(cacheTag);
+            var value = DateTimeOffset.UtcNow.Ticks;
+
+            var slidingExpiration = System.Web.Caching.Cache.NoSlidingExpiration;
+            var absoluteExpiration = DateTime.UtcNow;
+
+            HttpRuntime.Cache.Insert(key, value, null, absoluteExpiration, slidingExpiration);         
         }
     }
 }
