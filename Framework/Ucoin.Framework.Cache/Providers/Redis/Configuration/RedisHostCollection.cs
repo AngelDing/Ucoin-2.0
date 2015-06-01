@@ -14,7 +14,7 @@ namespace Ucoin.Framework.Cache
 			{
 				if (BaseGet(index) != null)
 				{
-					BaseRemoveAt(index);
+					BaseRemoveAt(index); 
 				}
 
 				BaseAdd(index, value);

@@ -15,7 +15,7 @@ namespace Ucoin.Framework.Cache
 		/// </value>
 		[ConfigurationProperty("hosts")]
 		public RedisHostCollection RedisHosts
-		{
+		{ 
 			get
 			{
 				return this["hosts"] as RedisHostCollection;

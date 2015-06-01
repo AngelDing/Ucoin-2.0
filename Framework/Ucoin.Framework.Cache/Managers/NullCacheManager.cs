@@ -9,7 +9,7 @@ namespace Ucoin.Framework.Cache
 
 		public static ICacheManager Instance
 		{
-			get { return s_instance; }
+			get { return s_instance; } 
 		}
 
         public T Get<T>(string key, Func<T> acquirer, CachePolicy cachePolicy)

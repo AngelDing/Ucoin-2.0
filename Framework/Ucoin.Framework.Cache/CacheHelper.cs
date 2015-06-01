@@ -22,7 +22,7 @@ namespace Ucoin.Framework.Cache
 
         public static ICacheManager RedisCache
         {
-            get
+            get 
             {
                 return SimpleLocator<CacheLocator>.Current.Resolve<CacheManager<RedisCache>>();
             }

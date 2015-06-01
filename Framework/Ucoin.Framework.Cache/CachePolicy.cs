@@ -16,7 +16,7 @@ namespace Ucoin.Framework.Cache
             ExpirationType = CacheExpirationType.None;
             absoluteExpiration = ObjectCache.InfiniteAbsoluteExpiration;
             slidingExpiration = ObjectCache.NoSlidingExpiration;
-            duration = TimeSpan.Zero;
+            duration = TimeSpan.Zero; 
         }
 
         public CacheExpirationType ExpirationType { get; set; }

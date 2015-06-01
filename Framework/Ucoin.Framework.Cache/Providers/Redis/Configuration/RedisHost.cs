@@ -10,7 +10,7 @@ namespace Ucoin.Framework.Cache
 		{
 			get
 			{
-				return this["ip"] as string;
+				return this["ip"] as string; 
 			}
 		}
 

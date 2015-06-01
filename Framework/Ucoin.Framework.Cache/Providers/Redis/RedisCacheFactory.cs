@@ -14,7 +14,7 @@ namespace Ucoin.Framework.Cache
 
         public RedisCacheFactory(IRedisCachingConfiguration configuration = null)
         {
-            if (configuration == null)
+            if (configuration == null) 
             {
                 configuration = RedisCachingSectionHandler.GetConfig();
             }

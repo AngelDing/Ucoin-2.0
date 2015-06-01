@@ -11,7 +11,7 @@
 		/// <value>
 		/// The ip or name
 		/// </value>
-		RedisHostCollection RedisHosts { get; }
+		RedisHostCollection RedisHosts { get; } 
 
 		/// <summary>
 		/// Specify if the connection can use Admin commands like flush database

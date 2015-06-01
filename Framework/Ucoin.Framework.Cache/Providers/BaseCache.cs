@@ -19,7 +19,7 @@ namespace Ucoin.Framework.Cache
         internal string GetTagKey(CacheTag t)
         {
             return string.Format(tagKey, t);
-        }
+        } 
 
         internal string GetKey(CacheKey cacheKey)
         {

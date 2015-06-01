@@ -16,7 +16,7 @@ namespace Ucoin.Framework.Cache
         void Set(CacheKey key, object value, CachePolicy cachePolicy);
         
         //Task SetAsync(CacheKey key, object value, CachePolicy cachePolicy);
-
+         
         bool Contains(string key);
 
         void Remove(string key);

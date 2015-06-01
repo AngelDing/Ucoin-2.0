@@ -15,7 +15,7 @@ namespace Ucoin.Framework.Cache
 
         //Memcached,
 
-        //AzureTableStorage,
+        //AzureTableStorage, 
 
         //Disk
     }

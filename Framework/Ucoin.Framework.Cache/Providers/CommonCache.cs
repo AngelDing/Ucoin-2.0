@@ -53,7 +53,7 @@ namespace Ucoin.Framework.Cache
         {
             var allKeys = GetAllKeys();
 
-            RemoveByKeys(allKeys);
+            RemoveByKeys(allKeys); 
         }
 
         private void RemoveByKeys(IList<string> keys)

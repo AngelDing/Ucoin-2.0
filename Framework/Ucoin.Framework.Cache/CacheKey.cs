@@ -25,7 +25,7 @@ namespace Ucoin.Framework.Cache
             }
 
             this.key = key;
-
+             
             var cacheTags = tags.Select(k => new CacheTag(k));
             this.tags = new HashSet<CacheTag>(cacheTags);
         }

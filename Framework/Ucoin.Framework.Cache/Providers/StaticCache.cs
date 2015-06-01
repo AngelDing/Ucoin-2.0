@@ -29,7 +29,7 @@ namespace Ucoin.Framework.Cache
         }
 
         public override bool IsSingleton()
-        {
+        { 
             return true;
         }       
 

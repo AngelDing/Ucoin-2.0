@@ -21,5 +21,5 @@ namespace Ucoin.Framework.Cache
         /// The cache item will expire on the AbsoluteExpiration DateTime.
         /// </summary>
         Absolute
-    }
+    } 
 }

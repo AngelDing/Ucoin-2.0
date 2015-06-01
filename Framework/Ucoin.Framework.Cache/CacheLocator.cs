@@ -4,7 +4,7 @@ using Ucoin.Framework.Serialization;
 namespace Ucoin.Framework.Cache
 {
     public class CacheLocator : SimpleLocator
-    {
+    {  
         public override void RegisterDefaults(IContainer container)
         {
             container.Register<CacheManager<AspNetCache>>(() => new CacheManager<AspNetCache>(t => { return new AspNetCache(); }));

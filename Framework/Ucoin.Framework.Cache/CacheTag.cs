@@ -13,7 +13,7 @@ namespace Ucoin.Framework.Cache
                 throw new ArgumentNullException("tag");
             }
 
-            tagStr = tag;
+            tagStr = tag; 
         }
 
         public bool Equals(CacheTag other)

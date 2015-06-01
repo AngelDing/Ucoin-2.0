@@ -16,7 +16,7 @@ namespace Ucoin.Framework.Cache
         public CacheManager(Func<Type, ICacheProvider> fn)
         {
             this.cacheProvider = fn(typeof(TCache));
-        }
+        } 
 
         public T Get<T>(string key, Func<T> acquirer, CachePolicy cachePolicy = null)
         {

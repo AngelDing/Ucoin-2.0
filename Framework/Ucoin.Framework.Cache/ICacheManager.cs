@@ -18,7 +18,7 @@ namespace Ucoin.Framework.Cache
         void Set(string key, object value, CachePolicy cachePolicy = null);
 
         void Set(CacheKey key, object value, CachePolicy cachePolicy = null);
-
+         
         void Remove(string key);
 
         void RemoveByPattern(string pattern);

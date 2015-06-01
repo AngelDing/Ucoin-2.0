@@ -100,7 +100,7 @@ namespace Ucoin.Framework.Cache
         }
 
         public bool Contains(string key)
-        {
+        { 
             if (HttpRuntime.Cache == null)
             {
                 return false;
