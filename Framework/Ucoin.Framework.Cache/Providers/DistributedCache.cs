@@ -6,7 +6,7 @@ namespace Ucoin.Framework.Cache
         private readonly ICacheDependencyManager dependencyManager;
         public DistributedCache(ICacheDependencyManager dependencyManager)
         {
-            this.dependencyManager = dependencyManager;
+            this.dependencyManager = dependencyManager; 
         }
 
         internal void ManageCacheDependencies(string dataToAdd, CacheKey cacheKey)
