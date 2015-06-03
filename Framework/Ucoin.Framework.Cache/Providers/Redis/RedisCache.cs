@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using Ucoin.Framework.Serialization;
 using System.Configuration;
+using Ucoin.Framework.Extensions;
 
 namespace Ucoin.Framework.Cache
 {
-    public class RedisCache : DistributedCache, ICacheProvider
+    public class RedisCache : BaseCache, ICacheProvider
     {
         private static IDatabase db = null;
         private readonly ISerializer serializer;
@@ -16,11 +17,10 @@ namespace Ucoin.Framework.Cache
 
         public RedisCache()
             : this(Serializer.Jil)
-        { 
+        {
         }
 
         public RedisCache(ISerializer serializer, IRedisCachingConfiguration configuration = null)
-            : base(new RedisDependencyManager(this))
         {
             if (serializer == null)
             {
@@ -56,7 +56,9 @@ namespace Ucoin.Framework.Cache
             var expiry = ComputeExpiryTimeSpan(cachePolicy);
 
             db.StringSet(key.Key, jsonString, expiry);
-        }       
+
+            ManageCacheDependencies(key);
+        }
 
         private TimeSpan? ComputeExpiryTimeSpan(CachePolicy cachePolicy)
         {
@@ -136,12 +138,40 @@ namespace Ucoin.Framework.Cache
         public void Expire(CacheTag cacheTag)
         {
             string key = GetTagKey(cacheTag);
-            db.KeyDelete(key);
+            var childKeys = this.Get<List<string>>(key);
+            if (childKeys.IsNullOrEmpty() == false)
+            {
+                childKeys.ForEach(k => Remove(k));
+            }
+            Remove(key);
         }
 
         public override bool IsSingleton()
         {
             return false;
+        }
+
+        private void ManageCacheDependencies(CacheKey cacheKey)
+        {
+            if (cacheKey.Tags.Any())
+            {
+                foreach (var tag in cacheKey.Tags)
+                {
+                    var tagStr = GetTagKey(tag);
+                    var childKeys = this.Get<List<string>>(tagStr);
+                    if (childKeys.IsNullOrEmpty() == true)
+                    {
+                        childKeys = new List<string>();
+                    }
+                    if (childKeys.Contains(tagStr) == false)
+                    {
+                        childKeys.Add(tagStr);
+                    }
+                    var tagKey = new CacheKey(tagStr);
+                    var cachePolicy = CachePolicy.WithAbsoluteExpiration(DateTime.Now.AddYears(10));
+                    this.Set(tagKey, childKeys, cachePolicy);
+                }
+            }
         }
     }
 }
