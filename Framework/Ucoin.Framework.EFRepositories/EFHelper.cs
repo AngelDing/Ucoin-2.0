@@ -5,6 +5,7 @@ using Ucoin.Framework.Entities;
 using System.Data.Entity.Infrastructure;
 using System.Linq.Expressions;
 using Ucoin.Framework.Paging;
+using System.Transactions;
 
 namespace Ucoin.Framework.SqlDb
 {
@@ -94,6 +95,21 @@ namespace Ucoin.Framework.SqlDb
                         puEntry.SetModifiedProperty(pList[0]);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 本幫助方法提供讀未提交的事務隔離級別的數據,也就是我們日常寫SQL後面帶上(no lock)的效果
+        /// </summary>
+        /// <param name="action"></param>
+        public static void NoLockInvokeDB(Action action)
+        {
+            var transactionOptions = new TransactionOptions();
+            transactionOptions.IsolationLevel = IsolationLevel.ReadUncommitted;
+            using (var scope = new TransactionScope(TransactionScopeOption.Required, transactionOptions))
+            {
+                action();
+                scope.Complete();
             }
         }
 
