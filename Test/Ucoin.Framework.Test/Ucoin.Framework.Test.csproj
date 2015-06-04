@@ -131,7 +131,9 @@
     <Compile Include="EFRepositoriesTest\TableInheritance\TableInheritanceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedisSessionTest\ExpirationTests.cs" />
+    <Compile Include="RedisSessionTest\MultiThreadedTests.cs" />
     <Compile Include="RedisSessionTest\RedisJsonSerializerTests.cs" />
+    <Compile Include="RedisSessionTest\SingleThreadedTests.cs" />
     <Compile Include="ReflectionTest\DelegateFactoryTest.cs" />
     <Compile Include="ReflectionTest\DynamicProxyTest.cs" />
     <Compile Include="ReflectionTest\ReflectionHelperTest.cs" />
