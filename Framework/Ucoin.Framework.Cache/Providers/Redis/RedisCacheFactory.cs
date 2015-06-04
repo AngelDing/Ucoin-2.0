@@ -75,7 +75,10 @@ namespace Ucoin.Framework.Cache
             {
                 Ssl = configuration.Ssl,
                 AllowAdmin = configuration.AllowAdmin,
-                ConnectTimeout = configuration.ConnectTimeout
+                ConnectTimeout = configuration.ConnectTimeout,
+                KeepAlive = 5,
+                DefaultVersion = new Version("2.8.19"),
+                Proxy = Proxy.None
             };
 
             foreach (RedisHost redisHost in configuration.RedisHosts)
