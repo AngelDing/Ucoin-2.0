@@ -40,8 +40,6 @@ namespace Ucoin.Framework.RedisSession
         /// The serializer from RedisSerializationConfig to use
         /// </summary>
         private IRedisSerializer cereal;
-        private Dictionary<string, byte[]> dictionary;
-        private string p;
 
         public RedisSessionStateItemCollection()
             : this(null, null, 0)
