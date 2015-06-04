@@ -6,11 +6,11 @@ namespace Ucoin.Framework.Serialization
 {
 	public class JilSerializer : ISerializer
 	{
-		public object Serialize(object item)
-		{
-			var jsonString = JSON.Serialize(item);
+        public object Serialize(object item)
+        {
+            var jsonString = JSON.Serialize(item, new Options(includeInherited: true));
             return jsonString;
-		}
+        }
 
         public Task<object> SerializeAsync(object item)
 		{

@@ -449,7 +449,7 @@ namespace Ucoin.Framework.RedisSession
                     {
                         if (changeData.Value is SetValue)
                         {
-                            string newSerVal = this.cereal.SerializeOne(changeData.Key, changeData.Value.Value);
+                            string newSerVal = this.cereal.SerializeOne(changeData.Value.Value);
 
                             // now set the SerializedRawData of the key to what we are returning to the
                             //      Session provider, which will write it to Redis so the next thread won't
@@ -517,7 +517,7 @@ namespace Ucoin.Framework.RedisSession
 
                             if (!alreadyAdded && !(itm.Value is NotYetDeserializedPlaceholderValue))
                             {
-                                string serVal = this.cereal.SerializeOne(itm.Key, itm.Value);
+                                string serVal = this.cereal.SerializeOne(itm.Value);
                                 string origSerVal;
                                 if (this.SerializedRawData.TryGetValue(itm.Key, out origSerVal))
                                 {

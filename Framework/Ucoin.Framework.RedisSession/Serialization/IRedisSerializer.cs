@@ -20,10 +20,8 @@
         /// <summary>
         /// This method serializes one key-object pair into a string.
         /// </summary>
-        /// <param name="key">The string key of the Session property, may factor into your serializer, 
-        ///     may not</param>
         /// <param name="origObj">The value of the Session property</param>
         /// <returns>The serialized origObj data as a string</returns>
-        string SerializeOne(string key, object origObj);
+        string SerializeOne(object origObj);
     }
 }
