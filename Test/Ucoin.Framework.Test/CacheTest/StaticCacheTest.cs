@@ -9,201 +9,29 @@ using Ucoin.Framework.Cache;
 
 namespace Ucoin.Framework.Test.Caching
 {
-    public class StaticCacheTest
+    public class StaticCacheTest : CacheManagerTest
     {
-        private readonly StaticCache provider;
         public StaticCacheTest()
+            : base(CacheHelper.MemoryCache)
         {
-            provider = new StaticCache();
         }
 
         [Fact]
-        public void cache_static_constructor_test()
+        public void cache_memary_constructor_test()
         {
             Action action = () => new StaticCache();
             action.ShouldNotThrow();
         }
 
         [Fact]
-        public void cache_static_set_test()
-        {
-            var cacheKey = new CacheKey("AddTest" + DateTime.Now.Ticks);
-            var value = "Test Value " + DateTime.Now;
-            var cachePolicy = new CachePolicy();
-
-            provider.Set(cacheKey, value, cachePolicy);
-
-            // look in underlying MemoryCache
-            var cachedValue = provider.Get<string>(cacheKey.Key);
-            cachedValue.Should().NotBeNull();
-            cachedValue.Should().Be(value);
-        }
-
-        [Fact]
-        public void cache_static_set_with_tags_test()
-        {
-            string key = "AddWithTagsTest" + DateTime.Now.Ticks;
-            string[] tags = new[] { "a", "b" };
-            var cacheKey = new CacheKey(key, tags);
-            var value = "Test Value " + DateTime.Now;
-            var cachePolicy = new CachePolicy();
-
-            provider.Set(cacheKey, value, cachePolicy);
-    
-            // look in underlying MemoryCache
-            string innerKey = provider.GetKey(cacheKey);
-            var cachedValue = provider.Get<string>(innerKey);
-            cachedValue.Should().NotBeNull();
-            cachedValue.Should().Be(value);
-
-            // make sure cache key is in underlying MemoryCache
-            var cacheTag = new CacheTag("a");
-            string tagKey = provider.GetTagKey(cacheTag);
-            tagKey.Should().NotBeNullOrEmpty();
-
-            var cachedTag = provider.Get<string>(tagKey);
-            cachedTag.Should().NotBeNull();
-        }
-
-        [Fact]
-        public void cache_static_set_with_existing_tag_test()
-        {
-            string key = "AddWithExistingTagTest" + DateTime.Now.Ticks;
-            string[] tags = new[] { "a", "b" };
-            var cacheKey = new CacheKey(key, tags);
-            var value = "Test Value " + DateTime.Now;
-            var cachePolicy = new CachePolicy();
-
-            provider.Set(cacheKey, value, cachePolicy);
-
-            // make sure cache key is in underlying MemoryCache
-            var cacheTag = new CacheTag("a");
-            string tagKey = provider.GetTagKey(cacheTag);
-            tagKey.Should().NotBeNullOrEmpty();
-
-            var cachedTag = provider.Get<string>(tagKey);
-            cachedTag.Should().NotBeNull();
-
-            // add second value with same tag
-            string key2 = "AddWithExistingTagTest2" + DateTime.Now.Ticks;
-            string[] tags2 = new[] { "a", "c" };
-            var cacheKey2 = new CacheKey(key2, tags2);
-            var value2 = "Test Value 2 " + DateTime.Now;
-            var cachePolicy2 = new CachePolicy();
-
-            provider.Set(cacheKey2, value2, cachePolicy2);
-
-            // tag 'a' should have same value
-            var cachedTag2 = provider.Get<string>(tagKey);
-            cachedTag2.Should().NotBeNull();
-            cachedTag2.Should().Be(cachedTag);
-        }
-
-        [Fact]
-        public void cache_static_expire_test()
-        {
-            string key = "ExpireTest" + DateTime.Now.Ticks;
-            var tags = new[] { "a", "b" };
-            var cacheKey = new CacheKey(key, tags);
-            var value = "Test Value " + DateTime.Now;
-            var cachePolicy = new CachePolicy();
-
-            provider.Set(cacheKey, value, cachePolicy);
-
-            // add second value with same tag
-            string key2 = "ExpireTest2" + DateTime.Now.Ticks;
-            var tags2 = new[] { "a", "c" };
-            var cacheKey2 = new CacheKey(key2, tags2);
-            var value2 = "Test Value 2 " + DateTime.Now;
-            var cachePolicy2 = new CachePolicy();
-
-            provider.Set(cacheKey2, value2, cachePolicy2);
-
-            // add third value with same tag
-            string key3 = "ExpireTest3" + DateTime.Now.Ticks;
-            var tags3 = new[] { "b", "c" };
-            var cacheKey3 = new CacheKey(key3, tags3);
-            var value3 = "Test Value 3 " + DateTime.Now;
-            var cachePolicy3 = new CachePolicy();
-
-            provider.Set(cacheKey3, value3, cachePolicy3);
-
-            var cacheTag = new CacheTag("a");
-            string tagKey = provider.GetTagKey(cacheTag);
-            tagKey.Should().NotBeNullOrEmpty();
-
-            // underlying cache
-            (provider as StaticCache).GetAllEntries().ToList().Count.Should().Be(6);
-
-            var cachedTag = provider.Get<string>(tagKey);
-            cachedTag.Should().NotBeNull();
-
-            System.Threading.Thread.Sleep(500);
-
-            // expire actually just changes the value for tag key
-            provider.Expire(cacheTag);
-
-            var expiredTag = provider.Get<string>(tagKey);
-            expiredTag.Should().NotBeNull();
-            expiredTag.Should().NotBe(cachedTag);
-
-            // items should have been removed
-            var expiredValue = provider.Get<string>(cacheKey.Key);
-            expiredValue.Should().BeNull();
-
-            var expiredValue2 = provider.Get<string>(cacheKey2.Key);
-            expiredValue2.Should().BeNull();
-
-            var expiredValue3 = provider.Get<string>(cacheKey3.Key);
-            expiredValue3.Should().NotBeNull();
-
-            (provider as StaticCache).GetAllEntries().ToList().Count.Should().Be(4);
-        }
-
-        [Fact]
-        public void cache_static_get_test()
-        {
-            var cacheKey = new CacheKey("GetTest" + DateTime.Now.Ticks);
-            var value = "Get Value " + DateTime.Now;
-            var cachePolicy = new CachePolicy();
-
-            provider.Set(cacheKey, value, cachePolicy);
-
-            var existing = provider.Get<string>(cacheKey.Key);
-            existing.Should().NotBeNull();
-            existing.Should().BeSameAs(value);
-        }
-
-        [Fact]
-        public void cache_static_remove_test()
-        {
-            var cacheKey = new CacheKey("RemoveTest" + DateTime.Now.Ticks);
-            var value = "Test Value " + DateTime.Now;
-            var cachePolicy = new CachePolicy();
-
-            provider.Set(cacheKey, value, cachePolicy);
-
-            // look in underlying MemoryCache
-            string innerKey = provider.GetKey(cacheKey);
-            var cachedValue = provider.Get<string>(innerKey);
-            cachedValue.Should().NotBeNull();
-            cachedValue.Should().Be(value);
-
-            provider.Remove(cacheKey.Key);
-
-            // look in underlying MemoryCache
-            var previous = provider.Get<string>(innerKey);
-            previous.Should().BeNull();
-        }
-
-        [Fact]
-        public void cache_static_create_change_monitor_test()
+        public void cache_memary_create_change_monitor_test()
         {
             string key = DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture);
             string[] tags = new[] { "a", "b" };
             var cacheKey = new CacheKey(key, tags);
             cacheKey.Should().NotBeNull();
 
+            var provider = new StaticCache();
             var monitor = provider.CreateChangeMonitor(cacheKey);
             monitor.Should().NotBeNull();
             monitor.CacheKeys.Should().HaveCount(2);
@@ -216,7 +44,7 @@ namespace Ucoin.Framework.Test.Caching
         }
 
         [Fact]
-        public void cache_static_create_policy_absolute_test()
+        public void cache_memary_create_policy_absolute_test()
         {
             string key = DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture);
             string[] tags = new[] { "a", "b" };
@@ -226,7 +54,7 @@ namespace Ucoin.Framework.Test.Caching
             var absoluteExpiration = DateTimeOffset.Now.AddMinutes(5);
             var cachePolicy = CachePolicy.WithAbsoluteExpiration(absoluteExpiration);
             cachePolicy.Should().NotBeNull();
-
+            var provider = new StaticCache();
             var policy = provider.CreatePolicy(cacheKey, cachePolicy);
             policy.Should().NotBeNull();
             policy.AbsoluteExpiration.Should().Be(absoluteExpiration);
@@ -236,7 +64,7 @@ namespace Ucoin.Framework.Test.Caching
         }
 
         [Fact]
-        public void cache_static_create_policy_sliding_test()
+        public void cache_memary_create_policy_sliding_test()
         {
             string key = DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture);
             string[] tags = new[] { "a", "b" };
@@ -246,7 +74,7 @@ namespace Ucoin.Framework.Test.Caching
             var slidingExpiration = TimeSpan.FromMinutes(5);
             var cachePolicy = CachePolicy.WithSlidingExpiration(slidingExpiration);
             cachePolicy.Should().NotBeNull();
-
+            var provider = new StaticCache();
             var policy = provider.CreatePolicy(cacheKey, cachePolicy);
             policy.Should().NotBeNull();
             policy.SlidingExpiration.Should().Be(slidingExpiration);
@@ -255,5 +83,18 @@ namespace Ucoin.Framework.Test.Caching
             policy.ChangeMonitors.Should().ContainItemsAssignableTo<CacheEntryChangeMonitor>();
         }
 
+        [Fact]
+        public void cache_memary_remove_by_pattern_test()
+        {
+            var key1 = "Key:Jakcy:1";
+            var key2 = "Key:JakcyX:2";
+            var key3 = "Key:JakcyX:3";
+            CacheManager.Set(key1, "my value");
+            CacheManager.Set(key2, "my value");
+            CacheManager.Set(key3, "my value");
+            CacheManager.RemoveByPattern(":Jakcy:");
+            CacheManager.Get<string>(key1).Should().BeNullOrEmpty();
+            CacheManager.Get<string>(key2).Should().NotBeNullOrEmpty();
+        }       
     }
 }

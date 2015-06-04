@@ -163,9 +163,10 @@ namespace Ucoin.Framework.Cache
                     {
                         childKeys = new List<string>();
                     }
-                    if (childKeys.Contains(tagStr) == false)
+                    var childKey = cacheKey.Key;
+                    if (childKeys.Contains(childKey) == false)
                     {
-                        childKeys.Add(tagStr);
+                        childKeys.Add(childKey);
                     }
                     var tagKey = new CacheKey(tagStr);
                     var cachePolicy = CachePolicy.WithAbsoluteExpiration(DateTime.Now.AddYears(10));

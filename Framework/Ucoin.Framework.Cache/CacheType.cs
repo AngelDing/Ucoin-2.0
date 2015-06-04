@@ -4,6 +4,8 @@ namespace Ucoin.Framework.Cache
 {
     public enum CacheType
     {
+        [Description("None")]
+        None = 0,
         [Description("Web")]
         Web = 1,
         [Description("Memory")]

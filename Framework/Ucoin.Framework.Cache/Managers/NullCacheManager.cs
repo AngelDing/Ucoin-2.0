@@ -54,5 +54,10 @@ namespace Ucoin.Framework.Cache
         public void Expire(string tag)
         {
         }
+
+        public CacheType CacheType
+        {
+            get { return CacheType.None; }
+        }
     }
 }

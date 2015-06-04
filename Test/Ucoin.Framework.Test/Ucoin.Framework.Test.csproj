@@ -100,6 +100,7 @@
     <Compile Include="CacheTest\CacheTagTest.cs" />
     <Compile Include="CacheTest\StaticCacheTest.cs" />
     <Compile Include="CacheTest\TestClass.cs" />
+    <Compile Include="CacheTest\WebCacheTest.cs" />
     <Compile Include="CompareObjectsTest\BaseCompareTest.cs" />
     <Compile Include="CompareObjectsTest\ClassCompareTest.cs" />
     <Compile Include="CompareObjectsTest\EnumCompareTest.cs" />

@@ -132,5 +132,11 @@ namespace Ucoin.Framework.Cache
             var cacheTag = new CacheTag(tag);
             cacheProvider.Expire(cacheTag);
         }
+
+
+        public CacheType CacheType
+        {
+            get { return cacheProvider.CacheType; }
+        }
     }
 }

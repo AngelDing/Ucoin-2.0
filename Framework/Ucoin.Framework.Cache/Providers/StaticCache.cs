@@ -70,6 +70,8 @@ namespace Ucoin.Framework.Cache
             var policy = new CacheItemPolicy { AbsoluteExpiration = ObjectCache.InfiniteAbsoluteExpiration };
 
             Cache.Set(item, policy);
+
+            this.Remove(key);
         }		 
 
         internal CacheItemPolicy CreatePolicy(CacheKey key, CachePolicy cachePolicy)

@@ -26,5 +26,7 @@ namespace Ucoin.Framework.Cache
         void Expire(string tag);
 
         void ClearAll();
+
+        CacheType CacheType { get; }
     }
 }
