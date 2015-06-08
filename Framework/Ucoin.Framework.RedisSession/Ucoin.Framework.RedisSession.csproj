@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StackExchange.Redis">
-      <HintPath>..\..\DLL\StackExchange.Redis.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Web" />
@@ -44,7 +41,6 @@
     <Compile Include="Config\RedisSessionConfig.cs" />
     <Compile Include="LocalSharedSessionDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedisConnectionWrapper.cs" />
     <Compile Include="RedisSessionStateItemCollection.cs" />
     <Compile Include="RedisSessionStateStoreProvider.cs" />
     <Compile Include="Serialization\IRedisSerializer.cs" />
