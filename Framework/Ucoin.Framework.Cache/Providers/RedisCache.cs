@@ -26,7 +26,7 @@ namespace Ucoin.Framework.Cache
             GuardHelper.ArgumentNotNull(() => serializer);
             if (redisWrapper == null)
             {
-                redisWrapper = new StackExchangeRedisWrapper();
+                redisWrapper = RedisWrapperFactory.GetRedisWrapper();
             }
 
             this.serializer = serializer;

@@ -23,5 +23,10 @@ namespace Ucoin.Conference.Admin
             DependencyResolver.SetResolver(new UnityResolver(Container.InitUnityContainer()));
             ModelBinders.Binders.DefaultBinder = new DefaultModelBinder();
         }
+
+        protected void Session_Start(Object sender, EventArgs e)
+        {
+            Session["onStart"] = true;
+        }
     }
 }

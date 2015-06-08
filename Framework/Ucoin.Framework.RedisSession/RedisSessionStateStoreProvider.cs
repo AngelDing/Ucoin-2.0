@@ -342,15 +342,11 @@ namespace Ucoin.Framework.RedisSession
             string currentRedisHashId,
             TimeSpan expirationTimeout)
         {
-            //List<HashEntry> setItems = new List<HashEntry>();
-            //List<RedisValue> delItems = new List<RedisValue>();
-
-
             var setItems = new List<KeyValuePair<string, string>>();
             var delItems = new List<string>();
 
             // Determine if we are adding or removing keys, separate them into their own lists
-            //      note that redisItems.GetChangedObjectsEnumerator contains complex logic
+            // note that redisItems.GetChangedObjectsEnumerator contains complex logic
             foreach (KeyValuePair<string, string> changedObj in redisItems.GetChangedObjectsEnumerator())
             {
                 if (changedObj.Value != null)
@@ -400,8 +396,7 @@ namespace Ucoin.Framework.RedisSession
         /// </returns>
         public static IRedisWrapper RedisConnWrapper()
         {
-            //return new RedisConnectionWrapper();
-            return new StackExchangeRedisWrapper();
+            return RedisWrapperFactory.GetRedisWrapper();
         }
 
         /// <summary>
