@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Timers;
 using System.Linq;
 using System;
+using Ucoin.Framework.Redis;
 
 namespace Ucoin.Framework.RedisSession
 {
@@ -41,53 +42,14 @@ namespace Ucoin.Framework.RedisSession
         /// </summary>
         public int DatabaseIndex { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of the RedisConnectionWrapper class, which contains methods for accessing
-        ///     a static concurrentdictionary of already created and open RedisConnection instances
-        /// </summary>
-        /// <param name="serverAddress">The ip address of the redis instance</param>
-        /// <param name="serverPort">The port number of the redis instance</param>
-        public RedisConnectionWrapper(string srvAddr, int srvPort)
+
+        public RedisConnectionWrapper()
         {
-            this.connData = ConfigurationOptions.Parse(srvAddr + ":" + srvPort);
+            var redisFactory = new StackExchangeRedisFactory();
 
-            this.ConnectionID = string.Format(
-                    "{0}_%_{1}",
-                    srvAddr,
-                    srvPort);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the RedisConnectionWrapper class, which contains methods for accessing
-        ///     a static concurrentdictionary of already created and open redisconnection instances
-        /// </summary>
-        /// <param name="connIdentifier">Because it is possible to have connections to multiple redis instances, we store
-        /// a dictionary of them to reuse. This parameter is used as the key to that dictionary.</param>
-        /// <param name="connOpts">A StackExchange.Redis configuration class containing the redis connection info</param>
-        public RedisConnectionWrapper(string connIdentifier, ConfigurationOptions connOpts)
-            : this(connIdentifier, 0, connOpts)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the RedisConnectionWrapper class, which contains methods for accessing
-        ///     a static concurrentdictionary of already created and open redisconnection instances
-        /// </summary>
-        /// <param name="connIdentifier">Because it is possible to have connections to multiple redis instances, we store
-        /// a dictionary of them to reuse. This parameter is used as the key to that dictionary.</param>
-        /// <param name="dbIndex">The index of the redis database with session information</param>
-        /// <param name="connOpts">A StackExchange.Redis configuration class containing the redis connection info</param>
-        public RedisConnectionWrapper(string connIdentifier, int dbIndex, ConfigurationOptions connOpts)
-        {
-            if (connOpts == null)
-            {
-                throw new ConfigurationErrorsException(
-                    "RedisConnectionWrapper cannot be initialized with null ConfigurationOptions property");
-            }
-
-            this.connData = connOpts;
-            this.DatabaseIndex = dbIndex;
-            this.ConnectionID = connIdentifier;
+            this.connData = redisFactory.ConstructConnectionOptions();
+            this.DatabaseIndex = 0; //redisFactory.;
+            this.ConnectionID = "Default Redis Connection";
         }
 
         /// <summary>
@@ -112,8 +74,7 @@ namespace Ucoin.Framework.RedisSession
                 }
             }
 
-            return RedisConnectionWrapper.RedisConnections[this.ConnectionID].GetDatabase(
-                this.DatabaseIndex);
+            return RedisConnectionWrapper.RedisConnections[this.ConnectionID].GetDatabase(this.DatabaseIndex);
         }
 
         /// <summary>

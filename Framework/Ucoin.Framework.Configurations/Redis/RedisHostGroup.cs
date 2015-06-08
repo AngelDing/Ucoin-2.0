@@ -1,19 +1,10 @@
 ﻿using System.Configuration;
 
-namespace Ucoin.Framework.Cache
+namespace Ucoin.Framework.Configurations
 {
-	/// <summary>
-	/// The implementation of <see cref="IRedisCachingConfiguration"/>
-	/// </summary>
-	public class RedisCachingSectionHandler : ConfigurationSection, IRedisCachingConfiguration
-	{
-		/// <summary>
-		/// The host of Redis Server
-		/// </summary>
-		/// <value>
-		/// The ip or name
-		/// </value>
-		[ConfigurationProperty("hosts")]
+    public class RedisHostGroup : ConfigurationElement, IRedisConfiguration
+	{       
+		[ConfigurationProperty("hosts")]      
 		public RedisHostCollection RedisHosts
 		{ 
 			get
@@ -22,12 +13,15 @@ namespace Ucoin.Framework.Cache
 			}
 		}
 
-		/// <summary>
-		/// Specify if the connection can use Admin commands like flush database
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if can use admin commands; otherwise, <c>false</c>.
-		/// </value>
+        [ConfigurationProperty("name", IsRequired = true, IsKey = true, DefaultValue = "System")]
+        public string Name
+        {
+            get
+            {
+                return this["name"] as string;
+            }
+        }
+
 		[ConfigurationProperty("allowAdmin")]
 		public bool AllowAdmin
 		{
@@ -53,12 +47,6 @@ namespace Ucoin.Framework.Cache
 			}
 		}
 
-		/// <summary>
-		/// Specify if the connection is a secure connection or not.
-		/// </summary>
-		/// <value>
-		///   <c>true</c> if is secure; otherwise, <c>false</c>.
-		/// </value>
 		[ConfigurationProperty("ssl")]
 		public bool Ssl
 		{
@@ -82,9 +70,6 @@ namespace Ucoin.Framework.Cache
 			}
 		}
 
-		/// <summary>
-		/// The connection timeout
-		/// </summary>
 		[ConfigurationProperty("connectTimeout")]
 		public int ConnectTimeout
 		{
@@ -108,12 +93,6 @@ namespace Ucoin.Framework.Cache
 			}
 		}
 
-		/// <summary>
-		/// Database Id
-		/// </summary>
-		/// <value>
-		/// The database id, the default value is 0
-		/// </value>
 		[ConfigurationProperty("database")]
 		public int Database
 		{
@@ -135,15 +114,6 @@ namespace Ucoin.Framework.Cache
 
 				return 0;
 			}
-		}
-
-		/// <summary>
-		/// Gets the configuration.
-		/// </summary>
-		/// <returns></returns>
-		public static RedisCachingSectionHandler GetConfig()
-		{
-			return ConfigurationManager.GetSection("redisCacheClient") as RedisCachingSectionHandler;
 		}
 	}
 }

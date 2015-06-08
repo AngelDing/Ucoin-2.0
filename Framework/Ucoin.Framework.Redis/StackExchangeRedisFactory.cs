@@ -1,39 +1,38 @@
 ﻿using StackExchange.Redis;
 using System;
 using System.Configuration;
-using System.Net;
-using System.Linq;
+using Ucoin.Framework.Configurations;
 
-namespace Ucoin.Framework.Cache
+namespace Ucoin.Framework.Redis
 {
-    public class RedisCacheFactory
+    public class StackExchangeRedisFactory
     {
         private static ConnectionMultiplexer redisConnection = null;
-        private IRedisCachingConfiguration configuration;
+        private IRedisConfiguration configuration;
         private static readonly object SyncLock = new object();
 
-        public RedisCacheFactory(IRedisCachingConfiguration configuration = null)
+        public StackExchangeRedisFactory(IRedisConfiguration configuration = null)
         {
-            if (configuration == null) 
+            if (configuration == null)
             {
-                configuration = RedisCachingSectionHandler.GetConfig();
+                configuration = RedisConfigurationHandler.GetConfig();
             }
 
             if (configuration == null)
             {
-                throw new ConfigurationErrorsException("Unable to locate <redisCacheClient> section into your configuration file. Take a look https://github.com/imperugo/StackExchange.Redis.Extensions");
+                throw new ConfigurationErrorsException("Unable to locate <redisConfig> section into your configuration file. Take a look https://github.com/imperugo/StackExchange.Redis.Extensions");
             }
 
             this.configuration = configuration;
         }
 
-        internal IDatabase GetDatabase()
+        public IDatabase GetDatabase()
         {
             var connection = ConstructCacheInstance();
             return connection.GetDatabase(configuration.Database);
         }
 
-        internal bool IsEndPointReadonly(string hostName)
+        public bool IsEndPointReadonly(string hostName)
         {
             foreach (RedisHost host in configuration.RedisHosts)
             {
@@ -48,7 +47,7 @@ namespace Ucoin.Framework.Cache
 
         private ConnectionMultiplexer ConstructCacheInstance()
         {
-            if (redisConnection == null || !redisConnection.IsConnected 
+            if (redisConnection == null || !redisConnection.IsConnected
                 || !redisConnection.GetDatabase().IsConnected(default(RedisKey)))
             {
                 lock (SyncLock)
@@ -69,7 +68,7 @@ namespace Ucoin.Framework.Cache
             return redisConnection;
         }
 
-        private ConfigurationOptions ConstructConnectionOptions()
+        public ConfigurationOptions ConstructConnectionOptions()
         {
             var redisOptions = new ConfigurationOptions
             {
@@ -86,6 +85,6 @@ namespace Ucoin.Framework.Cache
                 redisOptions.EndPoints.Add(redisHost.IP, redisHost.Port);
             }
             return redisOptions;
-        }       
+        }
     }
 }

@@ -1,36 +1,36 @@
-﻿using StackExchange.Redis;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Ucoin.Framework.Serialization;
 using System.Configuration;
 using Ucoin.Framework.Extensions;
+using Ucoin.Framework.Configurations;
+using Ucoin.Framework.Redis;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Framework.Cache
 {
     public class RedisCache : BaseCache, ICacheProvider
     {
-        private static IDatabase db = null;
         private readonly ISerializer serializer;
-        private readonly RedisCacheFactory factory;
+        private readonly IRedisWrapper redisWrapper;
 
         public RedisCache()
             : this(Serializer.Jil)
         {
         }
 
-        public RedisCache(ISerializer serializer, IRedisCachingConfiguration configuration = null)
+        public RedisCache(ISerializer serializer, IRedisWrapper redisWrapper = null)
         {
-            if (serializer == null)
+            GuardHelper.ArgumentNotNull(() => serializer);
+            if (redisWrapper == null)
             {
-                throw new ArgumentNullException("serializer");
+                redisWrapper = new StackExchangeRedisWrapper();
             }
 
             this.serializer = serializer;
-            factory = new RedisCacheFactory(configuration);
-            db = factory.GetDatabase();
-            this.serializer = serializer;
+            this.redisWrapper = redisWrapper;
         }
 
         public CacheType CacheType
@@ -40,8 +40,8 @@ namespace Ucoin.Framework.Cache
 
         public T Get<T>(string key)
         {
-            var data = db.StringGet(key);
-            if (!data.IsNull && data.HasValue)
+            var data = redisWrapper.Get(key); 
+            if (data != null)
             {
                 var deserialisedObject = serializer.Deserialize<T>(data);
                 return deserialisedObject;
@@ -55,7 +55,7 @@ namespace Ucoin.Framework.Cache
             var jsonString = serializer.SerializeToString(value);
             var expiry = ComputeExpiryTimeSpan(cachePolicy);
 
-            db.StringSet(key.Key, jsonString, expiry);
+            redisWrapper.Set(key.Key, jsonString, expiry);
 
             ManageCacheDependencies(key);
         }
@@ -83,12 +83,12 @@ namespace Ucoin.Framework.Cache
 
         public bool Contains(string key)
         {
-            return db.KeyExists(key);
+            return redisWrapper.Exists(key);
         }
 
         public void Remove(string key)
         {
-            db.KeyDelete(key);
+            redisWrapper.Remove(key);
         }
 
         /// <summary>
@@ -102,37 +102,12 @@ namespace Ucoin.Framework.Cache
         /// </example>
         public void RemoveByPattern(string pattern)
         {
-            var keys = new List<RedisKey>();
-
-            var endPoints = db.Multiplexer.GetEndPoints();
-
-            foreach (var endpoint in endPoints)
-            {
-                var dbKeys = db.Multiplexer.GetServer(endpoint).Keys(pattern: pattern);
-
-                foreach (var dbKey in dbKeys)
-                {
-                    if (!keys.Contains(dbKey))
-                    {
-                        keys.Add(dbKey);
-                    }
-                }
-            }
-
-            keys.ForEach(k => Remove(k));
+            redisWrapper.RemoveByPattern(pattern);
         }
 
         public void ClearAll()
         {
-            var endPoints = db.Multiplexer.GetEndPoints();
-
-            foreach (var endpoint in endPoints)
-            {
-                if (factory.IsEndPointReadonly(endpoint.ToString()) == false)
-                {
-                    db.Multiplexer.GetServer(endpoint).FlushDatabase(db.Database);
-                }
-            }
+            redisWrapper.ClearAll();
         }
 
         public void Expire(CacheTag cacheTag)

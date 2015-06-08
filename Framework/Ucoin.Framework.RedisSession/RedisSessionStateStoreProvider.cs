@@ -233,8 +233,7 @@ namespace Ucoin.Framework.RedisSession
         /// <param name="item">The Session's properties</param>
         public override void RemoveItem(HttpContext context, string id, object lockId, SessionStateStoreData item)
         {
-            RedisConnectionWrapper rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapperFromContext(
-                new HttpContextWrapper(context));
+            var rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapper();
 
             IDatabase redisConn = rConnWrap.GetConnection();
 
@@ -313,8 +312,7 @@ namespace Ucoin.Framework.RedisSession
             HttpContextBase context,
             TimeSpan expirationTimeout)
         {
-            RedisConnectionWrapper rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapperFromContext(
-                context);
+            var rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapper();
 
             IDatabase redisConn = rConnWrap.GetConnection();
 
@@ -358,8 +356,7 @@ namespace Ucoin.Framework.RedisSession
             List<HashEntry> setItems = new List<HashEntry>();
             List<RedisValue> delItems = new List<RedisValue>();
 
-            RedisConnectionWrapper rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapperFromContext(
-                context);
+            var rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapper();
 
             // Determine if we are adding or removing keys, separate them into their own lists
             //      note that redisItems.GetChangedObjectsEnumerator contains complex logic
@@ -432,28 +429,9 @@ namespace Ucoin.Framework.RedisSession
         /// A RedisConnectionWrapper object which can be used to get an StackExchange.Redis IDatabase instance
         ///     for communicating with Redis
         /// </returns>
-        public static RedisConnectionWrapper RedisConnWrapperFromContext(HttpContextBase context)
+        public static RedisConnectionWrapper RedisConnWrapper()
         {
-            if (RedisConnectionConfig.GetSERedisServerConfigDbIndex != null)
-            {
-                Tuple<string, int, ConfigurationOptions> connData =
-                    RedisConnectionConfig.GetSERedisServerConfigDbIndex(context);
-                return new RedisConnectionWrapper(
-                    connData.Item1,
-                    connData.Item2,
-                    connData.Item3);
-            }
-            else if (RedisConnectionConfig.GetSERedisServerConfig != null)
-            {
-                KeyValuePair<string, ConfigurationOptions> connData =
-                    RedisConnectionConfig.GetSERedisServerConfig(context);
-                return new RedisConnectionWrapper(
-                    connData.Key,
-                    connData.Value);
-            }
-            throw new ConfigurationErrorsException(
-                "RedisSessionProvider.Config.RedisConnectionWrapper.GetSERedisServerConfig delegate not set " +
-                "see project page at: github.com/welegan/RedisSessionProvider#configuring-your-specifics");
+            return new RedisConnectionWrapper();
         }
 
         /// <summary>

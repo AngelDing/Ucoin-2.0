@@ -1,25 +1,16 @@
 ﻿using System.Configuration;
 
-namespace Ucoin.Framework.Cache
+namespace Ucoin.Framework.Configurations
 {
 	public class RedisHostCollection : ConfigurationElementCollection
 	{
-		public RedisHost this[int index]
-		{
-			get
-			{
-				return BaseGet(index) as RedisHost;
-			}
-			set
-			{
-				if (BaseGet(index) != null)
-				{
-					BaseRemoveAt(index); 
-				}
-
-				BaseAdd(index, value);
-			}
-		}
+        public override ConfigurationElementCollectionType CollectionType
+        {
+            get
+            {
+                return ConfigurationElementCollectionType.BasicMap;
+            }
+        }
 
 		protected override ConfigurationElement CreateNewElement()
 		{
@@ -31,5 +22,10 @@ namespace Ucoin.Framework.Cache
             var config = ((RedisHost)element);
             return config.HostFullName;
 		}
+
+        protected override string ElementName
+        {
+            get { return "host"; }
+        }
 	}
 }

@@ -130,7 +130,6 @@
     <Compile Include="EFRepositoriesTest\TableInheritance\SchoolContext.cs" />
     <Compile Include="EFRepositoriesTest\TableInheritance\TableInheritanceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedisSessionTest\ExpirationTests.cs" />
     <Compile Include="RedisSessionTest\MultiThreadedTests.cs" />
     <Compile Include="RedisSessionTest\RedisJsonSerializerTests.cs" />
     <Compile Include="RedisSessionTest\SingleThreadedTests.cs" />
@@ -149,6 +148,10 @@
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
       <Project>{f01bd9f0-4404-4f33-90f2-dbd9ff35f9c1}</Project>
       <Name>Ucoin.Framework.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Configurations\Ucoin.Framework.Configurations.csproj">
+      <Project>{42176523-9fc9-4a1e-b492-50c7bcf25d4e}</Project>
+      <Name>Ucoin.Framework.Configurations</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
       <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>

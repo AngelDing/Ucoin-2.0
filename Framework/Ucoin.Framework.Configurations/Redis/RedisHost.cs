@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Ucoin.Framework.Cache
+namespace Ucoin.Framework.Configurations
 {
 	public class RedisHost : ConfigurationElement
 	{
