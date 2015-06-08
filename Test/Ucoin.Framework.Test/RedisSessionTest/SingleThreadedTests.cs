@@ -1,7 +1,6 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Ucoin.Framework.RedisSession;
 using Xunit;
 
@@ -17,10 +16,10 @@ namespace Ucoin.Framework.Test.RedisSession
             srsly = new RedisJsonSerializer();
 
             this.items = new RedisSessionStateItemCollection(
-                new Dictionary<string, byte[]> { 
-                    { "a", Encoding.UTF8.GetBytes(srsly.SerializeOne("x")) },
-                    { "b", Encoding.UTF8.GetBytes(srsly.SerializeOne("y")) },
-                    { "c", Encoding.UTF8.GetBytes(srsly.SerializeOne("z")) }
+                new Dictionary<string, string> { 
+                    { "a", srsly.SerializeOne("x")},
+                    { "b", srsly.SerializeOne("y")},
+                    { "c", srsly.SerializeOne("z")}
                 },
                 "fakeCollection");
         }

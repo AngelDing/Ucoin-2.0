@@ -16,14 +16,22 @@ namespace Ucoin.Framework.Configurations
             }
         }
 
-        public static IRedisConfiguration GetConfig()
+        public static IRedisConfiguration GetConfig(AppCodeType? appCodeType = null)
         {
-            var appCodeType = ConfigurationManager.AppSettings["AppCodeType"];
-            GuardHelper.ArgumentNotNull(() => appCodeType);
+            var configName = string.Empty;
+            if (appCodeType == null)
+            {
+                var codeType = ConfigurationManager.AppSettings["AppCodeType"];
+                GuardHelper.ArgumentNotNull(() => codeType);
+                configName = codeType.ToString();
+            }
+            else
+            {
+                configName = appCodeType.Value.GetDescription();
+            }
+           
             var handler = ConfigurationManager.GetSection("redisConfig") as RedisConfigurationHandler;
             GuardHelper.ArgumentNotNull(() => handler);
-
-            var configName = appCodeType.ToString();
             RedisHostGroup group = null;
 
             foreach (RedisHostGroup item in handler.HostGroups)

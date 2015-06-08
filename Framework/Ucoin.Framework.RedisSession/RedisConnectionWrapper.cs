@@ -15,7 +15,7 @@ namespace Ucoin.Framework.RedisSession
         private static Dictionary<string, long> RedisStats =
             new Dictionary<string, long>();
 
-        private static System.Timers.Timer connMessagesSentTimer;
+        private static Timer connMessagesSentTimer;
 
         private static object RedisCreateLock = new object();
 

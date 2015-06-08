@@ -18,7 +18,7 @@ namespace Ucoin.Framework.Cache
 
         public RedisCache()
             : this(Serializer.Jil)
-        {
+        { 
         }
 
         public RedisCache(ISerializer serializer, IRedisWrapper redisWrapper = null)

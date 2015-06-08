@@ -1,4 +1,4 @@
-﻿using StackExchange.Redis;
+﻿//using StackExchange.Redis;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -42,14 +42,13 @@ namespace Ucoin.Framework.RedisSession
         private IRedisSerializer cereal;
 
         public RedisSessionStateItemCollection()
-            : this(null, null, 0)
+            : this(null, null)
         {
         }
 
         public RedisSessionStateItemCollection(
-            HashEntry[] redisHashData,
-            string redisConnName,
-            byte constructorSignatureDifferentiator)
+           Dictionary<string, string> redisHashData,
+           string redisConnName)
         {
             int byteDataTotal = 0;
             int concLevel = RedisSessionConfig.SessionAccessConcurrencyLevel;
@@ -61,7 +60,7 @@ namespace Ucoin.Framework.RedisSession
             int numItems = 0;
             if (redisHashData != null)
             {
-                numItems = redisHashData.Length;
+                numItems = redisHashData.Count;
             }
 
             this.Items = new ConcurrentDictionary<string, object>(concLevel, numItems);
@@ -70,16 +69,12 @@ namespace Ucoin.Framework.RedisSession
             {
                 foreach (var sessDataEntry in redisHashData)
                 {
-                    string hashItemKey = sessDataEntry.Name.ToString();
-                    string hashItemValue = sessDataEntry.Value.ToString();
+                    string hashItemKey = sessDataEntry.Key;
+                    string hashItemValue = sessDataEntry.Value;
 
-                    if (this.SerializedRawData.TryAdd(
-                        hashItemKey,
-                        hashItemValue))
+                    if (this.SerializedRawData.TryAdd(hashItemKey, hashItemValue))
                     {
-                        this.Items.TryAdd(
-                            hashItemKey,
-                            new NotYetDeserializedPlaceholderValue());
+                        this.Items.TryAdd(hashItemKey, new NotYetDeserializedPlaceholderValue());
                     }
 
                     byteDataTotal += hashItemValue.Length;
@@ -102,60 +97,60 @@ namespace Ucoin.Framework.RedisSession
             }
         }
 
-        /// <summary>
-        /// For Unit Test
-        /// </summary>
-        /// <param name="dictionary"></param>
-        /// <param name="redisConnName"></param>
-        public RedisSessionStateItemCollection(Dictionary<string, byte[]> redisHashData, string redisConnName)
-        {
-            int byteDataTotal = 0;
-            int concLevel = RedisSessionConfig.SessionAccessConcurrencyLevel;
-            if (concLevel < 1)
-            {
-                concLevel = 1;
-            }
+        ///// <summary>
+        ///// For Unit Test
+        ///// </summary>
+        ///// <param name="dictionary"></param>
+        ///// <param name="redisConnName"></param>
+        //public RedisSessionStateItemCollection(Dictionary<string, byte[]> redisHashData, string redisConnName)
+        //{
+        //    int byteDataTotal = 0;
+        //    int concLevel = RedisSessionConfig.SessionAccessConcurrencyLevel;
+        //    if (concLevel < 1)
+        //    {
+        //        concLevel = 1;
+        //    }
 
-            int numItems = 0;
-            if (redisHashData != null)
-            {
-                numItems = redisHashData.Count;
-            }
+        //    int numItems = 0;
+        //    if (redisHashData != null)
+        //    {
+        //        numItems = redisHashData.Count;
+        //    }
 
-            this.Items = new ConcurrentDictionary<string, object>(concLevel, numItems);
-            this.SerializedRawData = new ConcurrentDictionary<string, string>();
-            if (redisHashData != null)
-            {
-                foreach (var sessDataEntry in redisHashData)
-                {
-                    if (this.SerializedRawData.TryAdd(
-                        sessDataEntry.Key,
-                        Encoding.UTF8.GetString(sessDataEntry.Value)))
-                    {
-                        this.Items.TryAdd(
-                            sessDataEntry.Key,
-                            new NotYetDeserializedPlaceholderValue());
-                    }
+        //    this.Items = new ConcurrentDictionary<string, object>(concLevel, numItems);
+        //    this.SerializedRawData = new ConcurrentDictionary<string, string>();
+        //    if (redisHashData != null)
+        //    {
+        //        foreach (var sessDataEntry in redisHashData)
+        //        {
+        //            if (this.SerializedRawData.TryAdd(
+        //                sessDataEntry.Key,
+        //                Encoding.UTF8.GetString(sessDataEntry.Value)))
+        //            {
+        //                this.Items.TryAdd(
+        //                    sessDataEntry.Key,
+        //                    new NotYetDeserializedPlaceholderValue());
+        //            }
 
-                    byteDataTotal += sessDataEntry.Value.Length;
-                }
-            }
+        //            byteDataTotal += sessDataEntry.Value.Length;
+        //        }
+        //    }
 
-            this.ChangedKeysDict = new ConcurrentDictionary<string, ActionAndValue>();
+        //    this.ChangedKeysDict = new ConcurrentDictionary<string, ActionAndValue>();
 
-            if (byteDataTotal != 0 && !string.IsNullOrEmpty(redisConnName) &&
-                RedisConnectionConfig.LogRedisSessionSize != null)
-            {
-                RedisConnectionConfig.LogRedisSessionSize(redisConnName, byteDataTotal);
-            }
+        //    if (byteDataTotal != 0 && !string.IsNullOrEmpty(redisConnName) &&
+        //        RedisConnectionConfig.LogRedisSessionSize != null)
+        //    {
+        //        RedisConnectionConfig.LogRedisSessionSize(redisConnName, byteDataTotal);
+        //    }
 
-            this.cereal = RedisSerializationConfig.SessionDataSerializer;
+        //    this.cereal = RedisSerializationConfig.SessionDataSerializer;
 
-            if (byteDataTotal > RedisConnectionConfig.MaxSessionByteSize)
-            {
-                RedisConnectionConfig.RedisSessionSizeExceededHandler(this, byteDataTotal);
-            }
-        }
+        //    if (byteDataTotal > RedisConnectionConfig.MaxSessionByteSize)
+        //    {
+        //        RedisConnectionConfig.RedisSessionSizeExceededHandler(this, byteDataTotal);
+        //    }
+        //}
 
         #region ISessionStateItemCollection Members
         

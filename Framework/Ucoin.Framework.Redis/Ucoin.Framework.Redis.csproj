@@ -47,6 +47,10 @@
       <Project>{42176523-9fc9-4a1e-b492-50c7bcf25d4e}</Project>
       <Name>Ucoin.Framework.Configurations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
+      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
+      <Name>Ucoin.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

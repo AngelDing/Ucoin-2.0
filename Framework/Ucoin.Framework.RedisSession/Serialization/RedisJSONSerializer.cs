@@ -9,11 +9,6 @@ using Ucoin.Framework.Serialization;
 
 namespace Ucoin.Framework.RedisSession
 {
-    /// <summary>
-    /// This serializer encodes/decodes Session values into/from JSON for Redis persistence, using
-    ///     the Json.NET library. The only exceptions are for ADO.NET types (DataTable and DataSet),
-    ///     which revert to using XML serialization.
-    /// </summary>
     public class RedisJsonSerializer : IRedisSerializer
     {
         private readonly ISerializer innerSerializer;
@@ -22,26 +17,11 @@ namespace Ucoin.Framework.RedisSession
             innerSerializer = Serializer.Jil;
         }
 
-        /// <summary>
-        /// Shared concurrent dictionary to optimize type-safe deserialization from json, since
-        /// we store the type info in the string
-        /// </summary>
         private static ConcurrentDictionary<string, Type> TypeCache = new ConcurrentDictionary<string, Type>();
-
-        /// <summary>
-        /// Format string used to write type information into the Redis entry before the JSON data
-        /// </summary>
+        
         protected string typeInfoPattern = "|!a_{0}_a!|";
-        /// <summary>
-        /// Regular expression used to extract type information from Redis entry
-        /// </summary>
         protected Regex typeInfoReg = new Regex(@"\|\!a_(.*)_a\!\|", RegexOptions.Compiled);
 
-        /// <summary>
-        /// Deserializes a string containing type and object information back into the original object
-        /// </summary>
-        /// <param name="objRaw">A string containing type info and JSON object data</param>
-        /// <returns>The original object</returns>
         public object DeserializeOne(string objRaw)
         {
             Match fieldTypeMatch = this.typeInfoReg.Match(objRaw);
@@ -67,13 +47,6 @@ namespace Ucoin.Framework.RedisSession
             return null;
         }
         
-        /// <summary>
-        /// Serializes one key and object into a string containing type and JSON data
-        /// </summary>
-        /// <param name="origObj">The value of the Session property</param>
-        /// <returns>A string containing type information and JSON data about the object, or XML data
-        ///     in the case of serialiaing ADO.NET objects. Don't store ADO.NET objects in Session if 
-        ///     you can help it, but if you do we don't want to mess up your Session</returns>
         public string SerializeOne(object origObj)
         {
             Type objType = origObj.GetType();
@@ -89,7 +62,7 @@ namespace Ucoin.Framework.RedisSession
             return string.Format(this.typeInfoPattern, typeInfo) + objInfo;
         }
 
-        public class TypeCacheException : Exception
+        private class TypeCacheException : Exception
         {
             public TypeCacheException(string msg, Exception inner) 
                 : base(msg, inner)

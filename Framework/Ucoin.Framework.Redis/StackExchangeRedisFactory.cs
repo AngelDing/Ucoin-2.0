@@ -8,8 +8,9 @@ namespace Ucoin.Framework.Redis
     public class StackExchangeRedisFactory
     {
         private static ConnectionMultiplexer redisConnection = null;
-        private IRedisConfiguration configuration;
         private static readonly object SyncLock = new object();
+
+        internal IRedisConfiguration Configuration { get; private set; }
 
         public StackExchangeRedisFactory(IRedisConfiguration configuration = null)
         {
@@ -23,18 +24,18 @@ namespace Ucoin.Framework.Redis
                 throw new ConfigurationErrorsException("Unable to locate <redisConfig> section into your configuration file. Take a look https://github.com/imperugo/StackExchange.Redis.Extensions");
             }
 
-            this.configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IDatabase GetDatabase()
         {
             var connection = ConstructCacheInstance();
-            return connection.GetDatabase(configuration.Database);
+            return connection.GetDatabase(Configuration.Database);
         }
 
         public bool IsEndPointReadonly(string hostName)
         {
-            foreach (RedisHost host in configuration.RedisHosts)
+            foreach (RedisHost host in Configuration.RedisHosts)
             {
                 if (host.HostFullName == hostName)
                 {
@@ -72,15 +73,15 @@ namespace Ucoin.Framework.Redis
         {
             var redisOptions = new ConfigurationOptions
             {
-                Ssl = configuration.Ssl,
-                AllowAdmin = configuration.AllowAdmin,
-                ConnectTimeout = configuration.ConnectTimeout,
+                Ssl = Configuration.Ssl,
+                AllowAdmin = Configuration.AllowAdmin,
+                ConnectTimeout = Configuration.ConnectTimeout,
                 KeepAlive = 5,
                 DefaultVersion = new Version("2.8.19"),
                 Proxy = Proxy.None
             };
 
-            foreach (RedisHost redisHost in configuration.RedisHosts)
+            foreach (RedisHost redisHost in Configuration.RedisHosts)
             {
                 redisOptions.EndPoints.Add(redisHost.IP, redisHost.Port);
             }

@@ -1,5 +1,6 @@
 ﻿using StackExchange.Redis;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Hosting;
@@ -55,14 +56,14 @@ namespace Ucoin.Framework.RedisSession
         /// in the session's Redis hash. The delegate is given the current context, 
         /// the StackExchange.Redis.HashEntry[] values to be changed, and the redis hash key as parameters
         /// </summary>
-        public static Action<HttpContextBase, HashEntry[], string> RedisWriteFieldDel { get; set; }
+        public static Action<HttpContextBase, IList<KeyValuePair<string, string>>, string> RedisWriteFieldDel { get; set; }
 
         /// <summary>
         /// A delegate called whenever RedisSessionProvider or RedisSessionAccessor removes a field
         /// from the session's Redis hash. The delegate is riven the current context, the
         /// StackExchange.Redis.RedisValue[] keys to be deleted, and the redis hash key as parameters
         /// </summary>
-        public static Action<HttpContextBase, RedisValue[], string> RedisRemoveFieldDel { get; set; }
+        public static Action<HttpContextBase, IList<string>, string> RedisRemoveFieldDel { get; set; }
 
         /// <summary>
         /// Gets or sets the expected number of threads that will simultaneously try to access a session,

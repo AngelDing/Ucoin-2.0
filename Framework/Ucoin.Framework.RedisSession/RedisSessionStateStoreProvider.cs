@@ -1,4 +1,4 @@
-﻿using StackExchange.Redis;
+﻿//using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.SessionState;
+using Ucoin.Framework.Redis;
 
 namespace Ucoin.Framework.RedisSession
 {
@@ -233,15 +234,10 @@ namespace Ucoin.Framework.RedisSession
         /// <param name="item">The Session's properties</param>
         public override void RemoveItem(HttpContext context, string id, object lockId, SessionStateStoreData item)
         {
+            var contextBase = new HttpContextWrapper(context);
+            var sessionId = RedisSessionStateStoreProvider.RedisHashIdFromSessionId(contextBase, id);
             var rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapper();
-
-            IDatabase redisConn = rConnWrap.GetConnection();
-
-            redisConn.KeyDelete(
-                RedisSessionStateStoreProvider.RedisHashIdFromSessionId(
-                    new HttpContextWrapper(context),
-                    id),
-                CommandFlags.FireAndForget);
+            rConnWrap.Remove(sessionId);         
         }
 
         /// <summary>
@@ -314,18 +310,11 @@ namespace Ucoin.Framework.RedisSession
         {
             var rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapper();
 
-            IDatabase redisConn = rConnWrap.GetConnection();
-
             try
             {
-                HashEntry[] redisData = redisConn.HashGetAll(redisKey);
-
-                redisConn.KeyExpire(redisKey, expirationTimeout, CommandFlags.FireAndForget);
-
-                return new RedisSessionStateItemCollection(
-                    redisData,
-                    rConnWrap.ConnectionID,
-                    0);
+                var redisData = rConnWrap.HashGetAll(redisKey);
+                rConnWrap.KeyExpire(redisKey, expirationTimeout);
+                return new RedisSessionStateItemCollection(redisData, rConnWrap.ConnectionId);
             }
             catch (Exception e)
             {
@@ -353,22 +342,20 @@ namespace Ucoin.Framework.RedisSession
             string currentRedisHashId,
             TimeSpan expirationTimeout)
         {
-            List<HashEntry> setItems = new List<HashEntry>();
-            List<RedisValue> delItems = new List<RedisValue>();
+            //List<HashEntry> setItems = new List<HashEntry>();
+            //List<RedisValue> delItems = new List<RedisValue>();
 
-            var rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapper();
+
+            var setItems = new List<KeyValuePair<string, string>>();
+            var delItems = new List<string>();
 
             // Determine if we are adding or removing keys, separate them into their own lists
             //      note that redisItems.GetChangedObjectsEnumerator contains complex logic
-            foreach (KeyValuePair<string, string> changedObj in
-                redisItems.GetChangedObjectsEnumerator())
+            foreach (KeyValuePair<string, string> changedObj in redisItems.GetChangedObjectsEnumerator())
             {
                 if (changedObj.Value != null)
                 {
-                    setItems.Add(
-                        new HashEntry(
-                            changedObj.Key,
-                            changedObj.Value));
+                    setItems.Add(changedObj);
                 }
                 else
                 {
@@ -376,48 +363,30 @@ namespace Ucoin.Framework.RedisSession
                 }
             }
 
-            IDatabase redisConn = rConnWrap.GetConnection();
-
+            var rConnWrap = RedisSessionStateStoreProvider.RedisConnWrapper();
             if (setItems.Count > 0)
             {
-                HashEntry[] writeItems = setItems.ToArray();
-                redisConn.HashSet(
-                    currentRedisHashId,
-                    writeItems,
-                    CommandFlags.FireAndForget);
+                rConnWrap.HashSet(currentRedisHashId, setItems);
 
                 // call appropriate delegate if set for changing keys
                 if (RedisSessionConfig.RedisWriteFieldDel != null)
                 {
-                    RedisSessionConfig.RedisWriteFieldDel(
-                        context,
-                        writeItems,
-                        currentRedisHashId);
+                    RedisSessionConfig.RedisWriteFieldDel(context, setItems, currentRedisHashId);
                 }
             }
             if (delItems != null && delItems.Count > 0)
             {
-                RedisValue[] removeItems = delItems.ToArray();
-                redisConn.HashDelete(
-                    currentRedisHashId,
-                    removeItems,
-                    CommandFlags.FireAndForget);
+                rConnWrap.HashDelete(currentRedisHashId, delItems);
 
                 // call appropriate delegate if set for removing keys
                 if (RedisSessionConfig.RedisRemoveFieldDel != null)
                 {
-                    RedisSessionConfig.RedisRemoveFieldDel(
-                        context,
-                        removeItems,
-                        currentRedisHashId);
+                    RedisSessionConfig.RedisRemoveFieldDel(context, delItems, currentRedisHashId);
                 }
             }
 
             // always refresh the timeout of the session hash
-            redisConn.KeyExpire(
-                currentRedisHashId,
-                expirationTimeout,
-                CommandFlags.FireAndForget);
+            rConnWrap.KeyExpire(currentRedisHashId, expirationTimeout);
         }
 
         /// <summary>
@@ -429,9 +398,10 @@ namespace Ucoin.Framework.RedisSession
         /// A RedisConnectionWrapper object which can be used to get an StackExchange.Redis IDatabase instance
         ///     for communicating with Redis
         /// </returns>
-        public static RedisConnectionWrapper RedisConnWrapper()
+        public static IRedisWrapper RedisConnWrapper()
         {
-            return new RedisConnectionWrapper();
+            //return new RedisConnectionWrapper();
+            return new StackExchangeRedisWrapper();
         }
 
         /// <summary>
