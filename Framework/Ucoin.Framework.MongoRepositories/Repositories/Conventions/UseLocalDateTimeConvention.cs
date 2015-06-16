@@ -11,21 +11,24 @@ namespace Ucoin.Framework.MongoDb.Repositories.Conventions
     {
         public void Apply(BsonMemberMap memberMap)
         {
-            IBsonSerializer options = null;
+            IBsonSerializer serializer = null;
             switch (memberMap.MemberInfo.MemberType)
             {
                 case MemberTypes.Property:
                     var propertyInfo = (PropertyInfo)memberMap.MemberInfo;
-                    options = GetBsonSerializer(propertyInfo.PropertyType);                  
+                    serializer = GetBsonSerializer(propertyInfo.PropertyType);                  
                     break;
                 case MemberTypes.Field:
                     var fieldInfo = (FieldInfo)memberMap.MemberInfo;
-                    options = GetBsonSerializer(fieldInfo.FieldType);    
+                    serializer = GetBsonSerializer(fieldInfo.FieldType);    
                     break;
                 default:
                     break;
             }
-            memberMap.SetSerializer(options);
+            if (serializer != null)
+            {
+                memberMap.SetSerializer(serializer);
+            }
         }
 
         private IBsonSerializer GetBsonSerializer(Type type)
