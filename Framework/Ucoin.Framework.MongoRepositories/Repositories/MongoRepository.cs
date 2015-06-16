@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using MongoDB.Driver.Builders;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -39,33 +38,23 @@ namespace Ucoin.Framework.MongoDb.Repositories
         #region IReadOnlyRepository
 
         public T GetByKey(TKey id)
-        {
-            if (typeof(T).IsSubclassOf(typeof(StringKeyMongoEntity)))
-            {
-                return this.GetById(new ObjectId(id as string));
-            }
-
-            return this.Collection.FindOneByIdAs<T>(BsonValue.Create(id));
-        }
-
-        private T GetById(ObjectId id)
-        {
-            return this.Collection.FindOneByIdAs<T>(id);
+        {            
+            return this.Collection.Find<T>(p => p.Id.ToString() == id.ToString()).FirstOrDefaultAsync().Result;
         }
 
         public IEnumerable<T> GetAll()
         {
-            return this.Collection.FindAll();
+            return this.Collection.Find(new BsonDocument()).ToListAsync().Result;
         }
 
         public IEnumerable<T> GetBy(Expression<Func<T, bool>> predicate)
         {
-            return CollectionQueryable.Where(predicate);
+            return this.Collection.Find<T>(predicate).ToListAsync().Result;
         }
 
         public IEnumerable<T> GetBy(ISpecification<T> specification)
         {
-            return CollectionQueryable.Where(specification.SatisfiedBy());
+            return this.GetBy(specification.SatisfiedBy());
         }
 
         #endregion
@@ -75,19 +64,19 @@ namespace Ucoin.Framework.MongoDb.Repositories
         public virtual void Insert(T entity)
         {
             Validate(entity);
-            this.Collection.Insert<T>(entity);
+            this.Collection.InsertOneAsync(entity);
         }
 
         public void Insert(IEnumerable<T> entities)
         {
             Validate(entities);
-            this.Collection.InsertBatch<T>(entities);
+            this.Collection.InsertManyAsync(entities);
         }
 
         public void Update(T entity)
         {
             Validate(entity);
-            this.Collection.Save<T>(entity);
+            this.Collection.ReplaceOneAsync<T>(p => p.Id.ToString() == entity.Id.ToString(), entity);
         }
 
         public void Update(IEnumerable<T> entities)
@@ -95,20 +84,13 @@ namespace Ucoin.Framework.MongoDb.Repositories
             Validate(entities);
             foreach (T entity in entities)
             {
-                this.Collection.Save<T>(entity);
+                this.Update(entity);
             }
         }
 
         public void Delete(TKey id)
         {
-            if (typeof(T).IsSubclassOf(typeof(StringKeyMongoEntity)))
-            {
-                this.Collection.Remove(Query.EQ("_id", new ObjectId(id as string)));
-            }
-            else
-            {
-                this.Collection.Remove(Query.EQ("_id", BsonValue.Create(id)));
-            }
+            this.Collection.DeleteOneAsync<T>(p => p.Id.ToString() == id.ToString());
         }
 
         public void Delete(T entity)
@@ -127,20 +109,21 @@ namespace Ucoin.Framework.MongoDb.Repositories
 
         public bool Exists(Expression<Func<T, bool>> predicate)
         {
-            return CollectionQueryable.Any(predicate);
+            var obj = this.Collection.Find<T>(predicate).SingleOrDefaultAsync().Result;
+            return obj != null;
         }
 
         #endregion
 
         #region IMongoRepository
 
-        public IQueryable<T> CollectionQueryable
-        {
-            get
-            {
-                return this.Collection.AsQueryable<T>();
-            }
-        }
+        //public IQueryable<T> CollectionQueryable
+        //{
+        //    get
+        //    {
+        //        return this.Collection.AsQueryable<T>();
+        //    }
+        //}
 
         public void Update(Expression<Func<T, bool>> query, Dictionary<string, object> columnValues)
         {
@@ -148,11 +131,16 @@ namespace Ucoin.Framework.MongoDb.Repositories
             {
                 throw new ArgumentException("Update Columns is Null!", "columnValues");
             }
-            var mongoQuery = Query<T>.Where(query);
-            var update = new UpdateBuilder();
-            columnValues.Keys.ToList().ForEach(x => update.SetWrapped(x, columnValues[x]));
 
-            this.Collection.Update(mongoQuery, update);           
+            var updates = new List<UpdateDefinition<T>>();
+            var builder = Builders<T>.Update;
+            foreach (var key in columnValues.Keys)
+            {
+                var definition = builder.Set(key, columnValues[key]);
+                updates.Add(definition);
+            }
+            var update = builder.Combine(updates);
+            this.Collection.UpdateOneAsync<T>(query, update);           
         }
 
         public void Update(Expression<Func<T, bool>> query, T entity)
@@ -162,7 +150,7 @@ namespace Ucoin.Framework.MongoDb.Repositories
 
         public void RemoveAll()
         {
-            this.Collection.RemoveAll();
+            this.Collection.DeleteManyAsync(p => true);
         }
 
         #endregion             
@@ -183,7 +171,7 @@ namespace Ucoin.Framework.MongoDb.Repositories
             //顯式釋放所有的MongoDB鏈接，目前用於主要用於Task
             if (isDispose == true)
             {
-                this.Collection.Database.Server.Disconnect();
+                //this.Collection.Database.Disconnect();
             }
             //http://docs.mongodb.org/ecosystem/tutorial/getting-started-with-csharp-driver/#getting-started-with-csharp-driver
             //The C# driver has a connection pool to use connections to the server efficiently. 

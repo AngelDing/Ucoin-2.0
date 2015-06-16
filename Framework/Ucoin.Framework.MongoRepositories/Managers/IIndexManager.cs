@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System.Collections.Generic;
 
 namespace Ucoin.Framework.MongoDb.Managers
@@ -10,8 +11,6 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         bool IndexExists(string keyName);
 
-        bool IndexesExists(IEnumerable<string> keyNames);
-
         void DropIndex(string keyName);
 
         void DropIndexByName(string indexName);
@@ -22,9 +21,7 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         void CreateIndexes(IEnumerable<string> keyNames);
 
-        void CreateIndexes(IMongoIndexKeys keys, IMongoIndexOptions options);
-
-        void ReIndex();
+        void CreateIndexes(IndexKeysDefinition<T> keys, CreateIndexOptions options = null);
 
         #endregion
     }

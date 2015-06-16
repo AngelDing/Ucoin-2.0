@@ -60,46 +60,46 @@ namespace Ucoin.MongoRepository.Test
             sList.Count.Should().Be(1);
         }
 
-        [Fact]
-        public void mongo_manager_replication_context_test()
-        {
-            var sNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Server);
-            var context = new ReplicationContext(sNode.Id);
-            var info = context.GetReplicationInfo();
-            info.Count.Should().BeGreaterThan(0);
-        }
+        //[Fact]
+        //public void mongo_manager_replication_context_test()
+        //{
+        //    var sNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Server);
+        //    var context = new ReplicationContext(sNode.Id);
+        //    var info = context.GetReplicationInfo();
+        //    info.Count.Should().BeGreaterThan(0);
+        //}
 
-        [Fact]
-        public void mongo_manager_profile_context_test()
-        {
-            var dbNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Database && p.Name == "MongoTestDB");
-            var context = new ProfileContext(dbNode.Id);
+        //[Fact]
+        //public void mongo_manager_profile_context_test()
+        //{
+        //    var dbNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Database && p.Name == "MongoTestDB");
+        //    var context = new ProfileContext(dbNode.Id);
 
-            var result = context.SetProfile((int)ProfilingLevel.All);
-            result.Should().BeTrue();
+        //    var result = context.SetProfile((int)ProfilingLevel.All);
+        //    result.Should().BeTrue();
 
-            InitManagerTest();
-            var info = context.GetProfileData(10);
-            info.Count.Should().Be(10);
+        //    InitManagerTest();
+        //    var info = context.GetProfileData(10);
+        //    info.Count.Should().Be(10);
 
-            var status = context.GetProfileStatus();
-            status.Should().Be(ProfilingLevel.All);
-        }
+        //    var status = context.GetProfileStatus();
+        //    status.Should().Be(ProfilingLevel.All);
+        //}
 
-        [Fact]
-        public void mongo_manager_data_context_test()
-        {
-            var fieldNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Field && p.Name.Contains("OrderId"));
-            var context = new DataContext(fieldNode.PId);
-            var dataList = context.GetData("{OrderId:5}", "{CreatedBy:-1}", 0, 10);
-            dataList.Count.Should().BeGreaterThan(0);
+        //[Fact]
+        //public void mongo_manager_data_context_test()
+        //{
+        //    var fieldNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Field && p.Name.Contains("OrderId"));
+        //    var context = new DataContext(fieldNode.PId);
+        //    var dataList = context.GetData("{OrderId:5}", "{CreatedBy:-1}", 0, 10);
+        //    dataList.Count.Should().BeGreaterThan(0);
 
-            var fieldList = context.GetFields();
-            fieldList.Count.Should().BeGreaterThan(0);
+        //    var fieldList = context.GetFields();
+        //    fieldList.Count.Should().BeGreaterThan(0);
 
-            var explainList = context.Explain("{OrderId:5}", "{CreatedBy:-1}");
-            explainList.Count.Should().BeGreaterThan(0);
-        }
+        //    var explainList = context.Explain("{OrderId:5}", "{CreatedBy:-1}");
+        //    explainList.Count.Should().BeGreaterThan(0);
+        //}
 
         [Fact]
         public void mongo_manager_index_context_test()

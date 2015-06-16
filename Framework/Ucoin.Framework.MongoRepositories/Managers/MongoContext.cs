@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Ucoin.Framework.MongoDb.Managers
 {
@@ -102,8 +104,8 @@ namespace Ucoin.Framework.MongoDb.Managers
                             Database = dbModel,
                             Id = ConstHelper.GetRandomId(),
                             Name = cName,
-                            Namespace = coll.FullName,
-                            TotalCount = coll.Count()
+                            Namespace = coll.CollectionNamespace.FullName,
+                            TotalCount = coll.CountAsync<BsonDocument>(p => true).Result
                         };
                         tempCollList.Add(collModel);
                         TreeNodes.Add(new TreeNode
@@ -199,7 +201,8 @@ namespace Ucoin.Framework.MongoDb.Managers
             TreeNodes.Add(fieldNode);
 
             //字段节点
-            var doc = manager.GetCollection(collModel.Name).FindOne();
+            var doc = manager.GetCollection(collModel.Name).Find(new BsonDocument())
+                .Skip(1).FirstOrDefaultAsync().Result;
             if (doc != null)
             {
                 foreach (var item in doc.Names)

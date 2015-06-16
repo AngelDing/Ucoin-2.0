@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,12 +21,9 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public bool IndexExists(string keyName)
         {
-            return this.IndexesExists(new string[] { keyName });
-        }
-
-        public bool IndexesExists(IEnumerable<string> keyNames)
-        {
-            return this.Collection.IndexExists(keyNames.ToArray());
+            var indexList = new List<string>();
+            this.Collection.Indexes.ListAsync().Result.ForEachAsync(i => indexList.Add(i.ToString()));
+            return indexList.Contains(keyName);
         }
 
         public void DropIndex(string keyName)
@@ -37,12 +33,15 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public void DropIndexes(IEnumerable<string> keyNames)
         {
-            this.Collection.DropIndex(keyNames.ToArray());
+            foreach (var key in keyNames)
+            {
+                this.DropIndexByName(key);
+            }
         }
 
         public void DropIndexByName(string indexName)
         {
-            this.Collection.DropIndexByName(indexName);
+            this.Collection.Indexes.DropOneAsync(indexName);
         }
 
         public void CreateIndex(string keyName)
@@ -52,20 +51,22 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public void CreateIndexes(IEnumerable<string> keyNames)
         {
-            var ixk = new IndexKeysBuilder();
-            ixk.Ascending(keyNames.ToArray());
-            var option = new IndexOptionsBuilder().SetUnique(false).SetSparse(false);
-            this.CreateIndexes(ixk, option);
+             var builder = Builders<T>.IndexKeys;
+            var keys = new List<IndexKeysDefinition<T>>();
+            foreach(var name in keyNames)
+            {
+                var key = builder.Ascending(name);
+                keys.Add(key);
+            }
+
+            var keyList = builder.Combine(keys);
+
+            this.CreateIndexes(keyList);
         }
 
-        public void CreateIndexes(IMongoIndexKeys keys, IMongoIndexOptions options)
+        public void CreateIndexes(IndexKeysDefinition<T> keys, CreateIndexOptions options = null)
         {
-            this.Collection.CreateIndex(keys, options);
-        }
-
-        public void ReIndex()
-        {
-            this.Collection.ReIndex();
+            this.Collection.Indexes.CreateOneAsync(keys, options);
         }
 
         #endregion

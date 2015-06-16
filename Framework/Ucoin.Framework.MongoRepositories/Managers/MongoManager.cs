@@ -10,12 +10,12 @@ namespace Ucoin.Framework.MongoDb.Managers
     {
         public MongoManager(string sName)
             : this(sName, ConstHelper.AdminDBName)
-        { 
+        {
         }
 
         public MongoManager(string sName, string dbName)
             : this(sName, dbName, null)
-        { 
+        {
         }
 
         public MongoManager(string sName, string dbName, string cName)
@@ -25,69 +25,82 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public CommandResult GetServerInfo()
         {
-            var cr = DB.RunCommand(new CommandDocument { { "serverStatus", 1 } });
-            return cr;
-        }
+            var command = new BsonDocument("serverStatus", 1);
+            return RealExecuteCommand(command);
+        }      
 
         public CommandResult GetDatabaseInfo()
         {
-            var cr = DB.RunCommand(new CommandDocument { { "dbstats", 1 } });
-            return cr;
+            var command = new BsonDocument("dbstats", 1);
+            return RealExecuteCommand(command);  
         }
 
         public CommandResult GetDatabaseList()
         {
-            var cr = DB.RunCommand(new CommandDocument { { "listDatabases", 1 } });
-            return cr;
+            var command = new BsonDocument("listDatabases", 1);
+            return RealExecuteCommand(command);  
         }
 
         public CommandResult GetCollectionInfo()
         {
-            var cr = DB.RunCommand(new CommandDocument { { "collstats", this.Collection.Name } });
-            return cr;
+            var command = new BsonDocument("collstats", this.Collection.CollectionNamespace.CollectionName);
+            return RealExecuteCommand(command);  
         }
 
-        public MongoCollection<BsonDocument> GetCollection(string collName)
+        public IMongoCollection<BsonDocument> GetCollection(string collName)
         {
-            return DB.GetCollection(collName);
+            return DB.GetCollection<BsonDocument>(collName);
         }
 
-        public MongoCursor<BsonDocument> GetCollectionIndexs(string collName, string nameSpace)
+        public IList<BsonDocument> GetCollectionIndexs(string collName, string nameSpace)
         {
             var coll = GetCollection(collName);
-            var result = coll.Find(new QueryDocument { { "ns", nameSpace } });
-            return result;
+            var result = coll.Find(new BsonDocument { { "ns", nameSpace } });
+            return result.ToListAsync().Result;
         }
 
         public IEnumerable<string> GetCollectionNames()
         {
-            return DB.GetCollectionNames();
+            var collections = DB.ListCollectionsAsync().Result.ToListAsync().Result;
+            var colStrList = new List<string>();
+            foreach (var col in collections)
+            {
+                colStrList.Add(col["name"].ToString());
+            }
+            return colStrList;
         }
 
-        public GetProfilingLevelResult GetProfilingLevel()
-        {
-            return DB.GetProfilingLevel();
-        }
+        //public GetProfilingLevelResult GetProfilingLevel()
+        //{
+        //    return DB.GetProfilingLevel();
+        //}
 
-        public MongoCursor<SystemProfileInfo> GetProfilingInfo(IMongoQuery query, int limit)
-        {
-            return DB.GetProfilingInfo(query).SetLimit(limit);
-        }
+        //public MongoCursor<SystemProfileInfo> GetProfilingInfo(IMongoQuery query, int limit)
+        //{
+        //    return DB.GetProfilingInfo(query).SetLimit(limit);
+        //}
 
-        public CommandResult SetProfilingLevel(ProfilingLevel level, TimeSpan timeSpan)
-        {
-            return DB.SetProfilingLevel(level, timeSpan);
-        }
+        //public CommandResult SetProfilingLevel(ProfilingLevel level, TimeSpan timeSpan)
+        //{
+        //    return DB.SetProfilingLevel(level, timeSpan);
+        //}
 
-        public CommandResult SetProfilingLevel(ProfilingLevel level)
-        {
-            return DB.SetProfilingLevel(level);
-        }
+        //public CommandResult SetProfilingLevel(ProfilingLevel level)
+        //{
+        //    return DB.SetProfilingLevel(level);
+        //}
 
 
         public CommandResult GetReplicationInfo()
         {
-            return DB.RunCommand(new CommandDocument { { "ismaster", 1 } });
+            var command = new BsonDocument("ismaster", 1);
+            return RealExecuteCommand(command);  
+        }
+
+        private CommandResult RealExecuteCommand(BsonDocument command)
+        {
+            var response = DB.RunCommandAsync<BsonDocument>(command).Result;
+            return new CommandResult(response);
         }
     }
 }

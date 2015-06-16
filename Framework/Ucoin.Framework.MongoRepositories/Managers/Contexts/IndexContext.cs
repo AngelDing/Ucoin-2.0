@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Ucoin.Framework.MongoDb.Managers
 {
@@ -49,33 +48,33 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public void CreateIndex(string jsonData)
         {
-            var model = JsonConvert.DeserializeObject<IndexEditModel>(jsonData);
-            var idxDoc = ToDoc(model.Keys);
-            var idxOption = new IndexOptionsBuilder()
-                .SetBackground(model.Background)
-                .SetDropDups(model.DropDups)
-                .SetSparse(model.Sparse)
-                .SetName(model.IndexName);
+            //var model = JsonConvert.DeserializeObject<IndexEditModel>(jsonData);
+            //var idxDoc = ToDoc(model.Keys);
+            //var idxOption = new IndexOptionsBuilder()
+            //    .SetBackground(model.Background)
+            //    .SetDropDups(model.DropDups)
+            //    .SetSparse(model.Sparse)
+            //    .SetName(model.IndexName);
 
-            var connStr = string.Format(ConstHelper.ConnString, sName, dbName);
-            var indexManager = new IndexManager<BsonDocument>(connStr, collName);
-            indexManager.CreateIndexes(idxDoc, idxOption);
+            //var connStr = string.Format(ConstHelper.ConnString, sName, dbName);
+            //var indexManager = new IndexManager<BsonDocument>(connStr, collName);
+            //indexManager.CreateIndexes(idxDoc, idxOption);
 
-            CacheHelper.Clear();
+            //CacheHelper.Clear();
         }
 
-        private IndexKeysDocument ToDoc(List<IndexKey> keys)
-        {
-            var doc = new IndexKeysDocument();
-            if (keys != null && keys.Count > 0)
-            {
-                foreach (var key in keys)
-                {
-                    doc.Add(key.FieldName, (int)key.OrderType);
-                }
-            }
-            return doc;
-        }
+        //private IndexKeysDocument ToDoc(List<IndexKey> keys)
+        //{
+        //    var doc = new IndexKeysDocument();
+        //    if (keys != null && keys.Count > 0)
+        //    {
+        //        foreach (var key in keys)
+        //        {
+        //            doc.Add(key.FieldName, (int)key.OrderType);
+        //        }
+        //    }
+        //    return doc;
+        //}
 
         public void DeleteIndex(int id)
         {         

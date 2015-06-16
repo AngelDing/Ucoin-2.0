@@ -30,13 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson, Version=1.10.0.62, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+    <Reference Include="MongoDB.Bson, Version=2.0.1.27, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\..\packages\MongoDB.Bson.2.0.1\lib\net45\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=1.10.0.62, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+    <Reference Include="MongoDB.Driver, Version=2.0.1.27, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\..\packages\MongoDB.Driver.2.0.1\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\..\packages\MongoDB.Driver.Core.2.0.1\lib\net45\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -58,40 +61,109 @@
     <Compile Include="Entities\IdentityEntity.cs" />
     <Compile Include="Entities\IntKeyMongoEntity.cs" />
     <Compile Include="Entities\LongKeyMongoEntity.cs" />
-    <Compile Include="Managers\ConstHelper.cs" />
-    <Compile Include="Managers\Contexts\BaseContext.cs" />
-    <Compile Include="Managers\Contexts\DataContext.cs" />
-    <Compile Include="Managers\Contexts\IndexContext.cs" />
-    <Compile Include="Managers\Contexts\ProfileContext.cs" />
-    <Compile Include="Managers\Contexts\ReplicationContext.cs" />
-    <Compile Include="Managers\Contexts\ServerContext.cs" />
-    <Compile Include="Managers\Helpers\CacheHelper.cs" />
-    <Compile Include="Managers\Helpers\MemoryCacheHelper.cs" />
-    <Compile Include="Managers\Helpers\UnityHelper.cs" />
-    <Compile Include="Managers\IIndexManager.cs" />
-    <Compile Include="Managers\IMongoManager.cs" />
-    <Compile Include="Managers\IndexManager.cs" />
-    <Compile Include="Managers\Infos\BaseInfo.cs" />
-    <Compile Include="Managers\Infos\CollectionInfo.cs" />
-    <Compile Include="Managers\Infos\DatabaseInfo.cs" />
-    <Compile Include="Managers\Infos\IMongoInfo.cs" />
-    <Compile Include="Managers\Infos\ServerInfo.cs" />
-    <Compile Include="Managers\Models\BaseModel.cs" />
-    <Compile Include="Managers\Models\CollectionModel.cs" />
-    <Compile Include="Managers\Models\DatabaseModel.cs" />
-    <Compile Include="Managers\Models\FieldModel.cs" />
-    <Compile Include="Managers\Models\IModel.cs" />
-    <Compile Include="Managers\Models\IndexEditModel.cs" />
-    <Compile Include="Managers\Models\IndexModel.cs" />
-    <Compile Include="Managers\Models\IndexOrderType.cs" />
-    <Compile Include="Managers\Models\ProfileModel.cs" />
-    <Compile Include="Managers\Models\ServerModel.cs" />
-    <Compile Include="Managers\Models\TreeNode.cs" />
-    <Compile Include="Managers\Models\TreeNodeType.cs" />
-    <Compile Include="Managers\MongoContext.cs" />
-    <Compile Include="Managers\MongoInfoFactory.cs" />
-    <Compile Include="Managers\MongoJsonConverter.cs" />
-    <Compile Include="Managers\MongoManager.cs" />
+    <Compile Include="Managers\CommandResult.cs" />
+    <Compile Include="Managers\ConstHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Contexts\BaseContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Contexts\DataContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Contexts\IndexContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Contexts\ProfileContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Contexts\ReplicationContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Contexts\ServerContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Helpers\CacheHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Helpers\MemoryCacheHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Helpers\UnityHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\IIndexManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\IMongoManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\IndexManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Infos\BaseInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Infos\CollectionInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Infos\DatabaseInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Infos\IMongoInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Infos\ServerInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\BaseModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\CollectionModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\DatabaseModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\FieldModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\IModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\IndexEditModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\IndexModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\IndexOrderType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\ProfileModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\ServerModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\TreeNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\Models\TreeNodeType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\MongoContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\MongoInfoFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\MongoJsonConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\MongoManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Conventions\UseLocalDateTimeConvention.cs" />
     <Compile Include="Repositories\IdGenerators\LongIdGenerator.cs" />
@@ -100,13 +172,23 @@
     <Compile Include="Repositories\MongoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
+      <Project>{f01bd9f0-4404-4f33-90f2-dbd9ff35f9c1}</Project>
+      <Name>Ucoin.Framework.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Framework.Serialization\Ucoin.Framework.Serialization.csproj">
+      <Project>{e92caec1-a15b-43d4-9249-c8e2f7bc7dc9}</Project>
+      <Name>Ucoin.Framework.Serialization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
       <Name>Ucoin.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

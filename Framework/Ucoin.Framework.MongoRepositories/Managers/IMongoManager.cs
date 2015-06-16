@@ -17,18 +17,18 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         CommandResult GetCollectionInfo();
 
-        MongoCollection<BsonDocument> GetCollection(string collectionName);
+        IMongoCollection<BsonDocument> GetCollection(string collectionName);
 
-        MongoCursor<BsonDocument> GetCollectionIndexs(string collName, string nameSpace);
+        IList<BsonDocument> GetCollectionIndexs(string collName, string nameSpace);
 
         IEnumerable<string> GetCollectionNames();
 
-        GetProfilingLevelResult GetProfilingLevel();
+        //GetProfilingLevelResult GetProfilingLevel();
 
-        MongoCursor<SystemProfileInfo> GetProfilingInfo(IMongoQuery query, int limit);
+        //MongoCursor<SystemProfileInfo> GetProfilingInfo(IMongoQuery query, int limit);
 
-        CommandResult SetProfilingLevel(ProfilingLevel level, TimeSpan timeSpan);
+        //CommandResult SetProfilingLevel(ProfilingLevel level, TimeSpan timeSpan);
 
-        CommandResult SetProfilingLevel(ProfilingLevel level);
+        //CommandResult SetProfilingLevel(ProfilingLevel level);
     }
 }

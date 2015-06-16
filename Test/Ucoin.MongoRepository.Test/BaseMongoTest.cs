@@ -19,7 +19,7 @@ namespace Ucoin.MongoRepository.Test
                 .ConnectionStrings["MongoTestDB"].ConnectionString;
             var url = new MongoUrl(connectionString);
             var client = new MongoClient(url);
-            client.GetServer().DropDatabase(url.DatabaseName);
+            client.DropDatabaseAsync(url.DatabaseName);
         }
     }
 }

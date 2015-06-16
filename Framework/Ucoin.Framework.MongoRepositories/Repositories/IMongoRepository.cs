@@ -13,7 +13,7 @@ namespace Ucoin.Framework.MongoDb.Repositories
     public interface IMongoRepository<T, TKey> : IRepository<T, TKey>
         where T : IAggregateRoot<TKey>
     {
-        IQueryable<T> CollectionQueryable { get; }
+        //IQueryable<T> CollectionQueryable { get; }
 
         void Update(Expression<Func<T, bool>> query, Dictionary<string, object> columnValues);
 

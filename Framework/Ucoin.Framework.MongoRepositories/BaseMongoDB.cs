@@ -6,8 +6,8 @@ namespace Ucoin.Framework.MongoDb
 {
     public class BaseMongoDB<T> where T : class
     {
-        private MongoCollection<T> collection;
-        private MongoDatabase db;
+        private IMongoCollection<T> collection;
+        private IMongoDatabase db;
 
         public BaseMongoDB(string connectionString)
             : this(connectionString, null)
@@ -51,19 +51,19 @@ namespace Ucoin.Framework.MongoDb
             return collectionName;
         }
 
-        private MongoDatabase GetDatabaseFromUrl(MongoUrl url)
+        private IMongoDatabase GetDatabaseFromUrl(MongoUrl url)
         {
             var client = new MongoClient(url);
-            var server = client.GetServer();
-            return server.GetDatabase(url.DatabaseName);
+            //var server = client.GetServer();
+            return client.GetDatabase(url.DatabaseName);
         }
 
-        internal MongoCollection<T> Collection
+        internal IMongoCollection<T> Collection
         {
             get { return this.collection; }
         }
 
-        internal MongoDatabase DB
+        internal IMongoDatabase DB
         {
             get { return this.db; }
         }

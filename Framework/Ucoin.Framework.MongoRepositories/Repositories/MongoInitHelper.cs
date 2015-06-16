@@ -47,7 +47,7 @@ namespace Ucoin.Framework.MongoDb.Repositories
             {
                 rc.AutoMap();
                 rc.SetIdMember(rc.GetMemberMap(c => c.Id));
-                rc.IdMemberMap.SetRepresentation(BsonType.ObjectId);
+                //rc.IdMemberMap.SetRepresentation(BsonType.ObjectId);
                 rc.IdMemberMap.SetIdGenerator(StringObjectIdGenerator.Instance);
             });
 

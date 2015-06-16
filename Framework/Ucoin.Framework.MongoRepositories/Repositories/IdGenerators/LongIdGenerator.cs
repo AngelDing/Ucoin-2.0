@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
         public object GenerateId(object container, object document)
         {
             TKey id = default(TKey);
-            var collection = container as MongoCollection;
+            var collection = container as IMongoCollection<object>;
             if (null != collection)
             {
                 var mongoDB = collection.Database; 
@@ -31,28 +30,32 @@ namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
             return id;
         }
 
-        private TKey RealGenerateId(MongoCollection<IdentityEntity<TKey>> idColl, string keyName)
+        private TKey RealGenerateId(IMongoCollection<IdentityEntity<TKey>> idColl, string keyName)
         {
             TKey id;
 
-            var idQuery = new QueryDocument("Key", BsonValue.Create(keyName));
+            var idBuilder = Builders<IdentityEntity<TKey>>.Update.Inc("Value", 1);
 
-            var idBuilder = new UpdateBuilder();
-            idBuilder.Inc("Value", 1);
+            //var args = new FindAndModifyArgs();
+            //args.Query = idQuery;
+            //args.Update = idBuilder;
+            //args.VersionReturned = FindAndModifyDocumentVersion.Modified;
+            //args.Upsert = true;
 
-            var args = new FindAndModifyArgs();
-            args.Query = idQuery;
-            args.Update = idBuilder;
-            args.VersionReturned = FindAndModifyDocumentVersion.Modified;
-            args.Upsert = true;
-
-            var result = idColl.FindAndModify(args);
-
-            if (!string.IsNullOrEmpty(result.ErrorMessage))
+            var options = new FindOneAndUpdateOptions<IdentityEntity<TKey>>
             {
-                throw new Exception(result.ErrorMessage);
-            }
-            id = result.GetModifiedDocumentAs<IdentityEntity<TKey>>().Value;
+                ReturnDocument = ReturnDocument.After,
+                IsUpsert = true
+            };
+
+            var result = idColl.FindOneAndUpdateAsync<IdentityEntity<TKey>>(i => i.Key == keyName, idBuilder, options);
+
+            id = result.Result.Value;
+            //if (!string.IsNullOrEmpty(result.ErrorMessage))
+            //{
+            //    throw new Exception(result.ErrorMessage);
+            //}
+            //id = result.GetModifiedDocumentAs<IdentityEntity<TKey>>().Value;
 
             return id;
         }        

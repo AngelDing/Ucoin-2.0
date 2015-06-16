@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System;
+using Ucoin.Framework.Cache;
 
 namespace Ucoin.Framework.MongoDb.Managers
 {
@@ -8,10 +9,14 @@ namespace Ucoin.Framework.MongoDb.Managers
     {
         public static readonly string NodeKey = "Cache_Tree_Nodes";
 
+
         public static List<TreeNode> GetTreeNodes()
         {
             var expDate = DateTime.Now.AddHours(2);
-            var nodes = MemoryCacheHelper.GetCacheItem(NodeKey, () => RealGetTreeNodes(), null, expDate);
+            var cache = CachePolicy.WithAbsoluteExpiration(expDate);
+            var nodes = Ucoin.Framework.Cache.CacheHelper.MemoryCache
+                .Get<List<TreeNode>>(NodeKey, () => RealGetTreeNodes(), cache);
+            // MemoryCacheHelper.GetCacheItem(NodeKey, () => RealGetTreeNodes(), null, expDate);
             return nodes;
         }
 
@@ -48,7 +53,8 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public static void Clear()
         {
-            MemoryCacheHelper.Remove(NodeKey);
+            Ucoin.Framework.Cache.CacheHelper.MemoryCache.Remove(NodeKey);
+            //MemoryCacheHelper.Remove(NodeKey);
         }
     }
 }
