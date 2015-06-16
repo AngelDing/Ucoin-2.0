@@ -22,9 +22,9 @@ namespace Ucoin.EfExtensions.Test
                 var query =  db.Users.Where(u => u.EmailAddress.Contains(emailDomain));
                 int count = query.Update(u => new User { IsApproved = false, LastActivityDate = DateTime.Now });
 
-                count = db.Users
-                    .Where(u => u.EmailAddress.EndsWith(emailDomain))
-                    .Delete();
+                count = db.Tasks
+                  .Where(u => u.Id == 1)
+                  .Update(t => new Task { Summary = "XXX" });
 
                 tx.Commit();
             }
@@ -41,10 +41,9 @@ namespace Ucoin.EfExtensions.Test
                     .Where(u => u.EmailAddress.EndsWith(emailDomain))
                     .Update(u => new User { IsApproved = false, LastActivityDate = DateTime.Now });
 
-                count = db.Users
-                    .Where(u => u.EmailAddress.EndsWith(emailDomain))
-                    .Delete();
-
+                count = db.Tasks
+                  .Where(u => u.Id == 1)
+                  .Update(t => new Task { Summary = "YYY" });
             }
         }
 
@@ -60,13 +59,12 @@ namespace Ucoin.EfExtensions.Test
                     .Where(u => u.EmailAddress.EndsWith(emailDomain))
                     .Update(u => new User { IsApproved = false, LastActivityDate = DateTime.Now });
 
-                count = db.Users
-                    .Where(u => u.EmailAddress.EndsWith(emailDomain))
-                    .Delete();
+                count = db.Tasks
+                    .Where(u => u.Id == 1)
+                    .Update(t => new Task { Summary = "ZZZ" });
 
                 tx.Complete();
             }
         }
-
     }
 }

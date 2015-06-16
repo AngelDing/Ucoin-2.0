@@ -37,9 +37,8 @@ namespace Ucoin.EfExtensions.Test
             task2.PriorityId = 2;
             task2.StatusId = 2;
             task2.Summary = "Summary: " + DateTime.Now.Ticks;
-            task2.TaskExtended.ModifiedDate = DateTime.Now.AddDays(1);
+
             var auditList = task2.Audits.ToList();
-            auditList.RemoveAt(0);
 
             auditList.AddRange(new List<AuditData> 
             {
