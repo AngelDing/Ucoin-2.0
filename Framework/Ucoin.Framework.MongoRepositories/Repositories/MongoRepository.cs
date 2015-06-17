@@ -155,33 +155,6 @@ namespace Ucoin.Framework.MongoDb.Repositories
 
         #endregion             
 
-        #region IDispose
-
-        public void Dispose()
-        {
-            this.Dispose(false);
-        }
-
-        /// <summary>
-        /// 顯式釋放MongoDB的鏈接，默認不釋放
-        /// </summary>
-        /// <param name="isDispose">true：需要顯式釋放鏈接</param>
-        public void Dispose(bool isDispose = false)
-        {
-            //顯式釋放所有的MongoDB鏈接，目前用於主要用於Task
-            if (isDispose == true)
-            {
-                //this.Collection.Database.Disconnect();
-            }
-            //http://docs.mongodb.org/ecosystem/tutorial/getting-started-with-csharp-driver/#getting-started-with-csharp-driver
-            //The C# driver has a connection pool to use connections to the server efficiently. 
-            //There is no need to call Connect or Disconnect; 
-            //just let the driver take care of the connections (calling Connect is harmless, 
-            //but calling Disconnect is bad because it closes all the connections in the connection pool).
-        }
-
-        #endregion
-
         private void Validate(T entity)
         {
             var validator = new EntityValidator();

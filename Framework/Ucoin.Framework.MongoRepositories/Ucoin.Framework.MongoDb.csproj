@@ -52,7 +52,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseCollection.cs" />
     <Compile Include="BaseMongoDB.cs" />
     <Compile Include="BaseMongoService.cs" />
     <Compile Include="Entities\CollectionNameAttribute.cs" />

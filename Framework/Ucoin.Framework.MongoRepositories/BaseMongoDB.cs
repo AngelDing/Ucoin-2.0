@@ -4,7 +4,7 @@ using Ucoin.Framework.MongoDb.Entities;
 
 namespace Ucoin.Framework.MongoDb
 {
-    public class BaseMongoDB<T> where T : class
+    public class BaseMongoDB<T> : DisposableObject where T : class
     {
         private IMongoCollection<T> collection;
         private IMongoDatabase db;
@@ -66,6 +66,14 @@ namespace Ucoin.Framework.MongoDb
         internal IMongoDatabase DB
         {
             get { return this.db; }
+        }
+
+        /// <summary>
+        /// 2.0以後的驅動，不論是IMongoDatabase，還是IMongoServer均無Close方法，不要顯示釋放資源
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void OnDispose(bool disposing)
+        {           
         }
     }
 }
