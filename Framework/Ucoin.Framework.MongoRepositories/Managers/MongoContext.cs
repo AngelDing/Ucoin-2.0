@@ -108,7 +108,7 @@ namespace Ucoin.Framework.MongoDb.Managers
                             TotalCount = coll.CountAsync(new BsonDocument()).Result 
                         };
                         tempCollList.Add(collModel);
-                        TreeNodes.Add(new TreeNode
+                        TreeNodes.Add(new TreeNode 
                         {
                             Id = collModel.Id,
                             PId = dbModel.Id,
