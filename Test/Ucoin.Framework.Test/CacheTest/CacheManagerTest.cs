@@ -12,7 +12,7 @@ namespace Ucoin.Framework.Test.Caching
         public ICacheManager CacheManager { get; private set; }
 
         public CacheManagerTest()
-            : this(CacheHelper.MemoryCache)
+            : this(CacheHelper.WebCache)
         {
         }
 

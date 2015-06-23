@@ -69,7 +69,7 @@ namespace Ucoin.Framework.Cache
                     expiry = cachePolicy.SlidingExpiration;
                     break;
                 case CacheExpirationType.Absolute:
-                    expiry = cachePolicy.AbsoluteExpiration - DateTimeOffset.Now;
+                    expiry = cachePolicy.AbsoluteExpiration - DateTimeOffset.UtcNow;
                     break;
                 case CacheExpirationType.Duration:
                     expiry = cachePolicy.Duration;
@@ -144,7 +144,7 @@ namespace Ucoin.Framework.Cache
                         childKeys.Add(childKey);
                     }
                     var tagKey = new CacheKey(tagStr);
-                    var cachePolicy = CachePolicy.WithAbsoluteExpiration(DateTime.Now.AddYears(10));
+                    var cachePolicy = CachePolicy.WithAbsoluteExpiration(DateTimeOffset.UtcNow.AddYears(10));
                     this.Set(tagKey, childKeys, cachePolicy);
                 }
             }

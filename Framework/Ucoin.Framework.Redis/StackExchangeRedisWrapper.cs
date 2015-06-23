@@ -70,7 +70,10 @@ namespace Ucoin.Framework.Redis
         public object Get(string key)
         {
             var data = db.StringGet(key);
-
+            if (data.IsNull)
+            {
+                return null;
+            }
             return data;
         }
 

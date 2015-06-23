@@ -79,7 +79,7 @@ namespace Ucoin.Framework.Cache
                     slidingExpiration = cachePolicy.SlidingExpiration;
                     break;
                 case CacheExpirationType.Absolute:
-                    absoluteExpiration = cachePolicy.AbsoluteExpiration.DateTime;
+                    absoluteExpiration = cachePolicy.AbsoluteExpiration.UtcDateTime;
                     break;
                 case CacheExpirationType.Duration:
                     absoluteExpiration = DateTime.Now.Add(cachePolicy.Duration);
