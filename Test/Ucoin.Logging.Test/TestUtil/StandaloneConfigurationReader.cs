@@ -1,10 +1,11 @@
 using System.Configuration;
 using System.Xml;
+using Ucoin.Framework.Logging;
 using Ucoin.Framework.Logging.Configuration;
 
 namespace Ucoin.Logging.Test
 {
-    public class StandaloneConfigurationReader : IConfigurationReader
+    public class StandaloneConfigurationReader : IConfigurationReader, ILoggerAdapter
     {
         private string xmlString;
 
@@ -34,6 +35,16 @@ namespace Ucoin.Logging.Test
             var doc = new ConfigXmlDocument();
             doc.LoadXml(xml);
             return doc.DocumentElement;
+        }
+
+        public ILogger GetLogger(System.Type type)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ILogger GetLogger(string name)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

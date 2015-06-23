@@ -14,7 +14,7 @@ namespace Ucoin.Framework.Logging.Configuration
             GuardHelper.ArgumentNotNull(() => type);
             var msg = string.Format("Type {0} does not implement {1}", 
                 type.AssemblyQualifiedName, typeof(ILoggerAdapter).FullName);
-            GuardHelper.InheritsFrom<ILoggerAdapter>(type, msg);
+            GuardHelper.Implements<ILoggerAdapter>(type, msg);
             
             factoryAdapterType = type;
             properties = nvList;

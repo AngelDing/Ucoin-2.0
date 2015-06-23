@@ -9,6 +9,8 @@ namespace Ucoin.Framework.Utils
 {
     public static class GuardHelper
     {
+        private const string ImplementsMessage = "Type '{0}' must implement type '{1}'.";
+
         [DebuggerStepThrough]
         public static void ArgumentNotEmpty(Func<string> arg)
         {
@@ -44,7 +46,14 @@ namespace Ucoin.Framework.Utils
             {
                 throw new InvalidOperationException(message);
             }
-        } 
+        }
+
+        [DebuggerStepThrough]
+        public static void Implements<TInterface>(Type type, string message = ImplementsMessage)
+        {
+            if (!typeof(TInterface).IsAssignableFrom(type))
+                throw new InvalidOperationException(message.FormatInvariant(type.FullName, typeof(TInterface).FullName));
+        }
 
         [DebuggerStepThrough]
         private static string GetParamName<T>(Func<T> expression)

@@ -116,7 +116,7 @@ namespace Ucoin.Logging.Test
                   <loggerAdapter type='Ucoin.Logging.Test.StandaloneConfigurationReader, Ucoin.Logging.Test'>
                   </loggerAdapter>
                 </logging>";
-            Assert.Throws<ArgumentOutOfRangeException>(delegate { GetLog(xml); });
+            Assert.Throws<NotImplementedException>(delegate { GetLog(xml); });
         }
 
         [Fact]
