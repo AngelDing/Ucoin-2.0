@@ -19,7 +19,7 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         void CreateIndex(string keyName);
 
-        void CreateIndexes(IEnumerable<string> keyNames);
+        void CreateIndexes(IEnumerable<string> keyNames, string indexName);
 
         void CreateIndexes(IndexKeysDefinition<T> keys, CreateIndexOptions options = null);
 

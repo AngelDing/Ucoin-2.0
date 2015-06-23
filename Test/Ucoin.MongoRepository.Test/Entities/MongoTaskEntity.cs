@@ -14,7 +14,7 @@ namespace Ucoin.MongoRepository.Test
 
     public class TaskStatusEntity
     {
-        public DateTime? LastRunTime { get; set; }
+        public DateTime LastRunTime { get; set; }
     }
 
     public class TaskEntity

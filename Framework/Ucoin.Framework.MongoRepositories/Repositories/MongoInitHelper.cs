@@ -4,10 +4,12 @@ using System.Linq.Expressions;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using Ucoin.Framework.MongoDb.Entities;
 using Ucoin.Framework.MongoDb.Repositories.Conventions;
 using Ucoin.Framework.MongoDb.Repositories.IdGenerators;
 using Ucoin.Framework.Entities;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace Ucoin.Framework.MongoDb.Repositories
 {
@@ -47,7 +49,6 @@ namespace Ucoin.Framework.MongoDb.Repositories
             {
                 rc.AutoMap();
                 rc.SetIdMember(rc.GetMemberMap(c => c.Id));
-                //rc.IdMemberMap.SetRepresentation(BsonType.ObjectId);
                 rc.IdMemberMap.SetIdGenerator(StringObjectIdGenerator.Instance);
             });
 

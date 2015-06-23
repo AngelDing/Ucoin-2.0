@@ -2,6 +2,7 @@
 using System;
 using System.Configuration;
 using Ucoin.Framework.MongoDb.Repositories;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.MongoRepository.Test
 {
@@ -10,16 +11,14 @@ namespace Ucoin.MongoRepository.Test
         public BaseMongoTest()
         {
             MongoInitHelper.InitMongoDBRepository();
-            Dispose();
         }
 
         public virtual void Dispose()
         {
-            var connectionString = ConfigurationManager
-                .ConnectionStrings["MongoTestDB"].ConnectionString;
+            var connectionString = ConfigurationManager.ConnectionStrings["MongoTestDB"].ConnectionString;
             var url = new MongoUrl(connectionString);
             var client = new MongoClient(url);
-            client.DropDatabaseAsync(url.DatabaseName);
+            AsyncHelper.RunSync(() => client.DropDatabaseAsync(url.DatabaseName));
         }
     }
 }

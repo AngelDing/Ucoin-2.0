@@ -1,7 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Framework.MongoDb.Managers
 {
@@ -21,9 +23,22 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public bool IndexExists(string keyName)
         {
-            var indexList = new List<string>();
-            this.Collection.Indexes.ListAsync().Result.ForEachAsync(i => indexList.Add(i.ToString()));
-            return indexList.Contains(keyName);
+            var indexList = new List<BsonDocument>();
+            AsyncHelper.RunSync(() => this.Collection.Indexes.ListAsync()
+                .Result.ForEachAsync(i => indexList.Add(i)));
+            var exist = false;
+            foreach (var index in indexList)
+            {
+                foreach (var e in index.Elements)
+                {
+                    if (e.Name == "name" && e.Value == keyName)
+                    {
+                        exist = true;
+                        break;
+                    }
+                }
+            }
+            return exist;
         }
 
         public void DropIndex(string keyName)
@@ -46,22 +61,23 @@ namespace Ucoin.Framework.MongoDb.Managers
 
         public void CreateIndex(string keyName)
         {
-            this.CreateIndexes(new string[] { keyName });
+            this.CreateIndexes(new string[] { keyName }, keyName);
         }
 
-        public void CreateIndexes(IEnumerable<string> keyNames)
+        public void CreateIndexes(IEnumerable<string> keyNames, string indexName)
         {
-             var builder = Builders<T>.IndexKeys;
+            var builder = Builders<T>.IndexKeys;
             var keys = new List<IndexKeysDefinition<T>>();
-            foreach(var name in keyNames)
+            foreach (var name in keyNames)
             {
                 var key = builder.Ascending(name);
                 keys.Add(key);
             }
 
             var keyList = builder.Combine(keys);
+            var options = new CreateIndexOptions { Name = indexName };
 
-            this.CreateIndexes(keyList);
+            this.CreateIndexes(keyList, options);
         }
 
         public void CreateIndexes(IndexKeysDefinition<T> keys, CreateIndexOptions options = null)

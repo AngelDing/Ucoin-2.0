@@ -39,6 +39,7 @@
     <Compile Include="Dependency\SimpleContainer.cs" />
     <Compile Include="Dependency\IContainer.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="ReadUncommittedScope.cs" />
     <Compile Include="Threading\ActionDisposable.cs" />
     <Compile Include="BlobStorage\IBlobStorage.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Threading\WriteLockDisposable.cs" />
     <Compile Include="TimerTaskFactory.cs" />
     <Compile Include="UcoinValidationException.cs" />
+    <Compile Include="Utils\AsyncHelper.cs" />
     <Compile Include="Utils\GuidHelper.cs" />
     <Compile Include="Utils\HandleGenerator.cs" />
     <Compile Include="Utils\RandomHelper.cs" />

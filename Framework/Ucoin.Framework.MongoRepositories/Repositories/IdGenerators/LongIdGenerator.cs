@@ -6,6 +6,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using Ucoin.Framework.MongoDb.Entities;
+using System.Configuration;
+using System.Reflection;
 
 namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
 {
@@ -19,15 +21,24 @@ namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
         public object GenerateId(object container, object document)
         {
             TKey id = default(TKey);
-            var collection = container as IMongoCollection<object>;
-            if (null != collection)
-            {
-                var mongoDB = collection.Database; 
-                var idColl = mongoDB.GetCollection<IdentityEntity<TKey>>("IdentityEntity");
-                var keyName = document.GetType().Name;
-                id  = RealGenerateId(idColl, keyName) ;
-            }
+
+            var mongoDB = GetMongoDatabase(container);
+            var idColl = mongoDB.GetCollection<IdentityEntity<TKey>>("IdentityEntity");
+            var keyName = document.GetType().FullName;
+            id = RealGenerateId(idColl, keyName);
+
             return id;
+        }
+
+        private static IMongoDatabase GetMongoDatabase(object container)
+        {
+            Type type = container.GetType();
+            var property = from pi in type.GetProperties()
+                           where pi.Name == "Database"
+                           select pi;
+
+            var mongoDB = property.First().GetValue(container, null) as IMongoDatabase;
+            return mongoDB;
         }
 
         private TKey RealGenerateId(IMongoCollection<IdentityEntity<TKey>> idColl, string keyName)
@@ -35,12 +46,6 @@ namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
             TKey id;
 
             var idBuilder = Builders<IdentityEntity<TKey>>.Update.Inc("Value", 1);
-
-            //var args = new FindAndModifyArgs();
-            //args.Query = idQuery;
-            //args.Update = idBuilder;
-            //args.VersionReturned = FindAndModifyDocumentVersion.Modified;
-            //args.Upsert = true;
 
             var options = new FindOneAndUpdateOptions<IdentityEntity<TKey>>
             {
@@ -51,11 +56,6 @@ namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
             var result = idColl.FindOneAndUpdateAsync<IdentityEntity<TKey>>(i => i.Key == keyName, idBuilder, options);
 
             id = result.Result.Value;
-            //if (!string.IsNullOrEmpty(result.ErrorMessage))
-            //{
-            //    throw new Exception(result.ErrorMessage);
-            //}
-            //id = result.GetModifiedDocumentAs<IdentityEntity<TKey>>().Value;
 
             return id;
         }        
@@ -68,15 +68,6 @@ namespace Ucoin.Framework.MongoDb.Repositories.IdGenerators
             }
 
             return true;
-            //try
-            //{
-            //    var myId = id a;
-            //    return myId <= 0;
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
         }
     }
 }

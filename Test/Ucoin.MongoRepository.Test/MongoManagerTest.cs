@@ -29,7 +29,7 @@ namespace Ucoin.MongoRepository.Test
                     OrderId = i,
                     Summary = "Summary : " + i,
                     Title = "OrderLog : " + i,
-                    CreatedBy = DateTime.Now
+                    UpdatedDate = DateTime.Now
                 };
                 orderLogRep.Insert(orderLog);
             }
@@ -101,85 +101,85 @@ namespace Ucoin.MongoRepository.Test
         //    explainList.Count.Should().BeGreaterThan(0);
         //}
 
-        [Fact]
-        public void mongo_manager_index_context_test()
-        {
-            var idxNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Index && p.Name.Contains("OrderId"));
-            var context = new IndexContext(idxNode.PId);
-            var indexList = context.GetIndexes();
-            indexList.Count.Should().BeGreaterThan(0);
+        //[Fact]
+        //public void mongo_manager_index_context_test()
+        //{
+        //    var idxNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Index && p.Name.Contains("OrderId"));
+        //    var context = new IndexContext(idxNode.PId);
+        //    var indexList = context.GetIndexes();
+        //    indexList.Count.Should().BeGreaterThan(0);
 
-            var indexEdit = new IndexEditModel
-            {
-                IndexName = "CreatedBy_Index",
-                Keys = new List<IndexKey>
-                {
-                    new IndexKey
-                    {
-                        FieldName = "CreatedBy",
-                        OrderType = IndexOrderType.Ascending
-                    }
-                }
-            };
-            var jsonStr = JsonConvert.SerializeObject(indexEdit);
-            context.CreateIndex(jsonStr);
+        //    var indexEdit = new IndexEditModel
+        //    {
+        //        IndexName = "CreatedBy_Index",
+        //        Keys = new List<IndexKey>
+        //        {
+        //            new IndexKey
+        //            {
+        //                FieldName = "CreatedBy",
+        //                OrderType = IndexOrderType.Ascending
+        //            }
+        //        }
+        //    };
+        //    var jsonStr = JsonConvert.SerializeObject(indexEdit);
+        //    context.CreateIndex(jsonStr);
 
-            idxNode = CacheHelper.GetTreeNodes().FirstOrDefault(p => 
-                p.Type == TreeNodeType.Index && p.Name.Contains("CreatedBy_Index"));
-            idxNode.Should().NotBeNull();
+        //    idxNode = CacheHelper.GetTreeNodes().FirstOrDefault(p => 
+        //        p.Type == TreeNodeType.Index && p.Name.Contains("CreatedBy_Index"));
+        //    idxNode.Should().NotBeNull();
 
-            context.DeleteIndex(idxNode.Id);
+        //    context.DeleteIndex(idxNode.Id);
 
-            idxNode = CacheHelper.GetTreeNodes().FirstOrDefault(p =>
-                p.Type == TreeNodeType.Index && p.Name.Contains("CreatedBy_Index"));
-            idxNode.Should().BeNull();
-        }
+        //    idxNode = CacheHelper.GetTreeNodes().FirstOrDefault(p =>
+        //        p.Type == TreeNodeType.Index && p.Name.Contains("CreatedBy_Index"));
+        //    idxNode.Should().BeNull();
+        //}
         #endregion
 
         #region Info Test
-        [Fact]
-        public void mongo_manager_server_info_test()
-        {
-            var sNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Server);
-            var info = new ServerInfo(sNode.Id);
-            var result = info.GetInfo();
-            result.Count.Should().BeGreaterThan(0);
-        }
+        //[Fact]
+        //public void mongo_manager_server_info_test()
+        //{
+        //    var sNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Server);
+        //    var info = new ServerInfo(sNode.Id);
+        //    var result = info.GetInfo();
+        //    result.Count.Should().BeGreaterThan(0);
+        //}
 
-        [Fact]
-        public void mongo_manager_collection_info_test()
-        {
-            var cNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Collection);
-            var info = new CollectionInfo(cNode.Id);
-            var result = info.GetInfo();
-            result.Count.Should().BeGreaterThan(0);
-        }
+        //[Fact]
+        //public void mongo_manager_collection_info_test()
+        //{
+        //    var cNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Collection);
+        //    var info = new CollectionInfo(cNode.Id);
+        //    var result = info.GetInfo();
+        //    result.Count.Should().BeGreaterThan(0);
+        //}
 
-        [Fact]
-        public void mongo_manager_database_info_test()
-        {
-            var dbNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Database);
-            var info = new DatabaseInfo(dbNode.Id);
-            var result = info.GetInfo();
-            result.Count.Should().BeGreaterThan(0);
-        }
+        //[Fact]
+        //public void mongo_manager_database_info_test()
+        //{
+        //    var dbNode = nodeList.FirstOrDefault(p => p.Type == TreeNodeType.Database);
+        //    var info = new DatabaseInfo(dbNode.Id);
+        //    var result = info.GetInfo();
+        //    result.Count.Should().BeGreaterThan(0);
+        //}
         #endregion
 
-        private string keyName = "CustId";
+        //private string keyName = "CustId";
 
-        [Fact]
-        public void mongo_index_test()
-        {
-            var manager = new MongoIndexManagerTest<Customer>();
-            if (!manager.IndexExists(keyName))
-            {
-                manager.CreateIndex("CustId");
-            }
-            manager.IndexExists("CustId").Should().BeTrue();
+        //[Fact]
+        //public void mongo_index_test()
+        //{
+        //    var manager = new MongoIndexManagerTest<Customer>();
+        //    if (!manager.IndexExists(keyName))
+        //    {
+        //        manager.CreateIndex("CustId");
+        //    }
+        //    manager.IndexExists("CustId").Should().BeTrue();
 
-            manager.DropIndex("CustId");
-            manager.IndexExists("CustId").Should().BeFalse();
-        }
+        //    manager.DropIndex("CustId");
+        //    manager.IndexExists("CustId").Should().BeFalse();
+        //}
 
         [Fact]
         public void mongo_index_manager_test()

@@ -34,7 +34,7 @@ namespace Ucoin.Framework.MongoDb.Repositories.Conventions
         private IBsonSerializer GetBsonSerializer(Type type)
         {
             IBsonSerializer serializer = null;
-            if (type == typeof(DateTime) || type == typeof(DateTime?))
+            if (type == typeof(DateTime))
             {
                 serializer = new DateTimeSerializer(DateTimeKind.Local);
             }

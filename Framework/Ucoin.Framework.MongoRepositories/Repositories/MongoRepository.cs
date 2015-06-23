@@ -10,6 +10,8 @@ using Ucoin.Framework.Repositories;
 using Ucoin.Framework.MongoDb.Entities;
 using Ucoin.Framework.Entities;
 using Ucoin.Framework.Validator;
+using System.Threading.Tasks;
+using Ucoin.Framework.Utils;
 
 namespace Ucoin.Framework.MongoDb.Repositories
 {
@@ -39,12 +41,12 @@ namespace Ucoin.Framework.MongoDb.Repositories
 
         public T GetByKey(TKey id)
         {            
-            return this.Collection.Find<T>(p => p.Id.ToString() == id.ToString()).FirstOrDefaultAsync().Result;
+            return this.Collection.Find<T>(p => (object)p.Id == (object)id).FirstOrDefaultAsync().Result;
         }
 
         public IEnumerable<T> GetAll()
         {
-            return this.Collection.Find(new BsonDocument()).ToListAsync().Result;
+            return this.Collection.Find<T>(p => true).ToListAsync().Result;
         }
 
         public IEnumerable<T> GetBy(Expression<Func<T, bool>> predicate)
@@ -63,20 +65,42 @@ namespace Ucoin.Framework.MongoDb.Repositories
 
         public virtual void Insert(T entity)
         {
+            AsyncHelper.RunSync(() => this.InsertAsync(entity));
+        }
+
+        public async Task InsertAsync(T entity)
+        {
             Validate(entity);
-            this.Collection.InsertOneAsync(entity);
+            await this.Collection.InsertOneAsync(entity);
         }
 
         public void Insert(IEnumerable<T> entities)
         {
+            AsyncHelper.RunSync(() => this.InsertAsync(entities));
+        }
+
+        public async Task InsertAsync(IEnumerable<T> entities)
+        {
             Validate(entities);
-            this.Collection.InsertManyAsync(entities);
+            await this.Collection.InsertManyAsync(entities);
         }
 
         public void Update(T entity)
         {
-            Validate(entity);
-            this.Collection.ReplaceOneAsync<T>(p => p.Id.ToString() == entity.Id.ToString(), entity);
+            Update(entity, true);
+        }
+        private void Update(T entity, bool isNeedValidate)
+        {
+            AsyncHelper.RunSync(() => this.UpdateAsync(entity, isNeedValidate));
+        }
+
+        public async Task UpdateAsync(T entity, bool isNeedValidate)
+        {
+            if (isNeedValidate)
+            {
+                Validate(entity);
+            }
+            await this.Collection.ReplaceOneAsync<T>(p => (object)p.Id == (object)entity.Id, entity);
         }
 
         public void Update(IEnumerable<T> entities)
@@ -84,13 +108,18 @@ namespace Ucoin.Framework.MongoDb.Repositories
             Validate(entities);
             foreach (T entity in entities)
             {
-                this.Update(entity);
+                this.Update(entity, false);
             }
         }
 
         public void Delete(TKey id)
         {
-            this.Collection.DeleteOneAsync<T>(p => p.Id.ToString() == id.ToString());
+            AsyncHelper.RunSync(() => this.DeleteAsync(id));
+        }
+
+        public async Task DeleteAsync(TKey id)
+        {
+            await this.Collection.DeleteOneAsync<T>(p => (object)p.Id == (object)id);
         }
 
         public void Delete(T entity)
@@ -140,7 +169,12 @@ namespace Ucoin.Framework.MongoDb.Repositories
                 updates.Add(definition);
             }
             var update = builder.Combine(updates);
-            this.Collection.UpdateOneAsync<T>(query, update);           
+            AsyncHelper.RunSync(() => this.UpdateAsync(query, update));      
+        }
+
+        public async Task UpdateAsync(Expression<Func<T, bool>> query, UpdateDefinition<T> update)
+        {
+            await this.Collection.UpdateOneAsync<T>(query, update);      
         }
 
         public void Update(Expression<Func<T, bool>> query, T entity)
@@ -179,6 +213,6 @@ namespace Ucoin.Framework.MongoDb.Repositories
             {
                 throw new UcoinValidationException(errorList);
             }
-        }
+        }      
     }
 }

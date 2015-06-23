@@ -183,8 +183,8 @@ namespace Ucoin.MongoRepository.Test
             repo.Insert(task);
             var all = repo.GetAll();
             var addedTask = all.First();
-            addedTask.TaskStatusEntity.LastRunTime.Value.Millisecond.Should().Be(dateTime.Millisecond);
-            addedTask.TaskStatusEntity.LastRunTime.Value.Second.Should().Be(dateTime.Second);
+            addedTask.TaskStatusEntity.LastRunTime.Millisecond.Should().Be(dateTime.Millisecond);
+            addedTask.TaskStatusEntity.LastRunTime.Second.Should().Be(dateTime.Second);
             addedTask.TaskEntity.StartTime.Should().Be(timeSpan);
         }
 
@@ -212,7 +212,7 @@ namespace Ucoin.MongoRepository.Test
 
             var updatedTask = repo.GetAll().First();
             updatedTask.TaskEntity.StartTime.Should().Be(newTimeSpan);
-            updatedTask.TaskStatusEntity.LastRunTime.Value.Day.Should().Be(dateTime.AddDays(-1).Day);
+            updatedTask.TaskStatusEntity.LastRunTime.Day.Should().Be(dateTime.AddDays(-1).Day);
             updatedTask.Name.Should().Be(newName);
         }
 
@@ -243,7 +243,7 @@ namespace Ucoin.MongoRepository.Test
             var updatedTask = updatedTaskList.FirstOrDefault();
             updatedTask.Should().NotBeNull();
             updatedTask.TaskEntity.StartTime.Should().Be(newTimeSpan);
-            updatedTask.TaskStatusEntity.LastRunTime.Value.Day.Should().Be(dateTime.AddDays(-1).Day);
+            updatedTask.TaskStatusEntity.LastRunTime.Day.Should().Be(dateTime.AddDays(-1).Day);
             updatedTask.Name.Should().Be(newName);
         }
         
