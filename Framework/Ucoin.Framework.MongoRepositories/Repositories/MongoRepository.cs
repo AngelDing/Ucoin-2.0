@@ -165,11 +165,39 @@ namespace Ucoin.Framework.MongoDb.Repositories
             var builder = Builders<T>.Update;
             foreach (var key in columnValues.Keys)
             {
-                var definition = builder.Set(key, columnValues[key]);
+                if (string.IsNullOrEmpty(key))
+                {
+                    continue;
+                }
+
+                dynamic value = columnValues[key];
+                var exp = GetExpression(key, value);
+                var definition = builder.Set(exp, value);
                 updates.Add(definition);
             }
             var update = builder.Combine(updates);
             AsyncHelper.RunSync(() => this.UpdateAsync(query, update));      
+        }
+
+        private Expression<Func<T, TField>> GetExpression<TField>(string key, TField value)
+        {
+            var keyArray = key.Split('.');
+            var param = Expression.Parameter(typeof(T), "i");
+
+            MemberExpression member = Expression.Property(param, keyArray[0]);
+            for (var i = 1; i < keyArray.Length; i++)
+            {
+                member = Expression.Property(member, keyArray[i]);
+            }
+
+            var exp = Expression.Lambda<Func<T, TField>>(member, param);
+
+            return exp;
+        }
+
+        private UpdateDefinitionBuilder<T> CreateSubject<T>()
+        {
+            return new UpdateDefinitionBuilder<T>();
         }
 
         public async Task UpdateAsync(Expression<Func<T, bool>> query, UpdateDefinition<T> update)

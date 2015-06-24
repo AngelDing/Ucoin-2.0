@@ -160,14 +160,14 @@ namespace Ucoin.Framework.Test.Caching
         {
             string key = DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture);
             var cacheKey = new CacheKey(key);
-            var absoluteExpiration = DateTimeOffset.UtcNow.AddSeconds(3);
+            var absoluteExpiration = DateTimeOffset.UtcNow.AddSeconds(5);
             var cachePolicy = CachePolicy.WithAbsoluteExpiration(absoluteExpiration);
             var value = "Jacky zhou";
             this.CacheManager.Get<string>(cacheKey, () => { return value; }, cachePolicy);
             var expectValue = this.CacheManager.Get<string>(cacheKey, () => { return ""; });
             expectValue.Should().Be(value);
 
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
 
             expectValue = this.CacheManager.Get<string>(cacheKey, () => { return ""; });
             expectValue.Should().Be("");

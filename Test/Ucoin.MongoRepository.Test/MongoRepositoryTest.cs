@@ -210,7 +210,8 @@ namespace Ucoin.MongoRepository.Test
 
             repo.Update(p => p.Id == id, dic);
 
-            var updatedTask = repo.GetAll().First();
+            //var updatedTask = repo.GetAll().First();
+            var updatedTask = repo.GetByKey(id);
             updatedTask.TaskEntity.StartTime.Should().Be(newTimeSpan);
             updatedTask.TaskStatusEntity.LastRunTime.Day.Should().Be(dateTime.AddDays(-1).Day);
             updatedTask.Name.Should().Be(newName);
