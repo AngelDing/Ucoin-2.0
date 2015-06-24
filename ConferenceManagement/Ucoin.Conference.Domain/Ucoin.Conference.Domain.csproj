@@ -44,6 +44,22 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Ucoin.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.Cache, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.MongoDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.MongoDb.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.SqlDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.SqlDb.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Management\OrderEventHandler.cs" />
@@ -71,22 +87,6 @@
     <Compile Include="Services\PricingService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
-      <Project>{f01bd9f0-4404-4f33-90f2-dbd9ff35f9c1}</Project>
-      <Name>Ucoin.Framework.Cache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
-      <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
-      <Name>Ucoin.Framework.SqlDb</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
-      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
-      <Name>Ucoin.Framework.MongoDb</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
-      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
-      <Name>Ucoin.Framework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Conference.Contracts\Ucoin.Conference.Contracts.csproj">
       <Project>{ecb26cda-bf1a-4b7b-8e43-198730cce158}</Project>
       <Name>Ucoin.Conference.Contracts</Name>

@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Admin", "ConferenceManagement\Ucoin.Conference.Admin\Ucoin.Conference.Admin.csproj", "{FE234661-8175-414C-90D6-0D68F4EB77B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Contracts", "ConferenceManagement\Ucoin.Conference.Contracts\Ucoin.Conference.Contracts.csproj", "{ECB26CDA-BF1A-4B7B-8E43-198730CCE158}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Domain", "ConferenceManagement\Ucoin.Conference.Domain\Ucoin.Conference.Domain.csproj", "{5596435A-D1D0-4D92-83F8-726BE47A13D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.EfData", "ConferenceManagement\Ucoin.Conference.EfData\Ucoin.Conference.EfData.csproj", "{DCFE7731-6077-42A6-8969-EE8410511A78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Entities", "ConferenceManagement\Ucoin.Conference.Entities\Ucoin.Conference.Entities.csproj", "{ED8D3CEA-B211-4A5A-A981-23FDB31243D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.IRepositories", "ConferenceManagement\Ucoin.Conference.IRepositories\Ucoin.Conference.IRepositories.csproj", "{04B78D1B-A939-4434-B871-0BB376E8ABDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Processor", "ConferenceManagement\Ucoin.Conference.Processor\Ucoin.Conference.Processor.csproj", "{BBECC627-9D34-4DF5-ACE7-B5BD2A0126A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Repositories", "ConferenceManagement\Ucoin.Conference.Repositories\Ucoin.Conference.Repositories.csproj", "{5F3FAD69-A0AA-46B8-9D27-F7529582B669}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Services", "ConferenceManagement\Ucoin.Conference.Services\Ucoin.Conference.Services.csproj", "{F63D4D9B-B772-4DEA-BD08-B07F4455D44D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Conference.Web", "ConferenceManagement\Ucoin.Conference.Web\Ucoin.Conference.Web.csproj", "{874835AE-9784-47A4-AFF7-7FF605F17A35}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE234661-8175-414C-90D6-0D68F4EB77B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE234661-8175-414C-90D6-0D68F4EB77B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE234661-8175-414C-90D6-0D68F4EB77B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE234661-8175-414C-90D6-0D68F4EB77B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECB26CDA-BF1A-4B7B-8E43-198730CCE158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB26CDA-BF1A-4B7B-8E43-198730CCE158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB26CDA-BF1A-4B7B-8E43-198730CCE158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB26CDA-BF1A-4B7B-8E43-198730CCE158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5596435A-D1D0-4D92-83F8-726BE47A13D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5596435A-D1D0-4D92-83F8-726BE47A13D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5596435A-D1D0-4D92-83F8-726BE47A13D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5596435A-D1D0-4D92-83F8-726BE47A13D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFE7731-6077-42A6-8969-EE8410511A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFE7731-6077-42A6-8969-EE8410511A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFE7731-6077-42A6-8969-EE8410511A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFE7731-6077-42A6-8969-EE8410511A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8D3CEA-B211-4A5A-A981-23FDB31243D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8D3CEA-B211-4A5A-A981-23FDB31243D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8D3CEA-B211-4A5A-A981-23FDB31243D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8D3CEA-B211-4A5A-A981-23FDB31243D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04B78D1B-A939-4434-B871-0BB376E8ABDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B78D1B-A939-4434-B871-0BB376E8ABDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B78D1B-A939-4434-B871-0BB376E8ABDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B78D1B-A939-4434-B871-0BB376E8ABDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBECC627-9D34-4DF5-ACE7-B5BD2A0126A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBECC627-9D34-4DF5-ACE7-B5BD2A0126A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBECC627-9D34-4DF5-ACE7-B5BD2A0126A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBECC627-9D34-4DF5-ACE7-B5BD2A0126A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F3FAD69-A0AA-46B8-9D27-F7529582B669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3FAD69-A0AA-46B8-9D27-F7529582B669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3FAD69-A0AA-46B8-9D27-F7529582B669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3FAD69-A0AA-46B8-9D27-F7529582B669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63D4D9B-B772-4DEA-BD08-B07F4455D44D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63D4D9B-B772-4DEA-BD08-B07F4455D44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63D4D9B-B772-4DEA-BD08-B07F4455D44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63D4D9B-B772-4DEA-BD08-B07F4455D44D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874835AE-9784-47A4-AFF7-7FF605F17A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874835AE-9784-47A4-AFF7-7FF605F17A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874835AE-9784-47A4-AFF7-7FF605F17A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874835AE-9784-47A4-AFF7-7FF605F17A35}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

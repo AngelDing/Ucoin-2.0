@@ -38,6 +38,18 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Ucoin.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.MongoDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.MongoDb.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.SqlDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.SqlDb.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Management\Attendee.cs" />
@@ -67,20 +79,6 @@
     <Compile Include="MongoDb\PricedOrder.cs" />
     <Compile Include="MongoDb\SeatTypeView.cs" />
     <Compile Include="ViewModel\SeatTypeName.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
-      <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
-      <Name>Ucoin.Framework.SqlDb</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.MongoRepositories\Ucoin.Framework.MongoDb.csproj">
-      <Project>{3d2ea83d-9865-4fd7-97c6-60d60589d65d}</Project>
-      <Name>Ucoin.Framework.MongoDb</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
-      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
-      <Name>Ucoin.Framework</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
