@@ -4,27 +4,24 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5D5BCB2E-DDDE-4C64-A5CD-BA8218F1D8A3}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{411A8B12-323B-4C79-9DFB-336951F42457}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ucoin.Logging.Demo</RootNamespace>
-    <AssemblyName>Ucoin.Logging.Demo</AssemblyName>
+    <RootNamespace>Ucoin.Resource.Service</RootNamespace>
+    <AssemblyName>Ucoin.Resource.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\Framework\Ucoin.Service.Host\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,38 +30,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="Ucoin.Framework">
+      <HintPath>..\..\Output\Ucoin.Framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="FileProcessService.cs" />
+    <Compile Include="Image\ImageManager.cs" />
+    <Compile Include="ImageProcessService.cs" />
+    <Compile Include="CommonHelper.cs" />
+    <Compile Include="FileUploadManager.cs" />
+    <Compile Include="Image\Thumbnail.cs" />
+    <Compile Include="Image\Watermark.cs" />
+    <Compile Include="Image\WatermarkPositionType.cs" />
+    <Compile Include="Image\WatermarkType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <ProjectReference Include="..\Ucoin.Resource.Entity\Ucoin.Resource.Entity.csproj">
+      <Project>{90af23ad-f5b4-48ad-9f38-8225b0b86aa1}</Project>
+      <Name>Ucoin.Resource.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Resource.IService\Ucoin.Resource.IService.csproj">
+      <Project>{8f9bc5c7-12c1-4324-89c3-01649880687d}</Project>
+      <Name>Ucoin.Resource.IService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Logging.EntLib\Ucoin.Framework.Logging.EntLib.csproj">
-      <Project>{ba4126c0-b452-44bd-a1fe-e5c3ed33e2a4}</Project>
-      <Name>Ucoin.Framework.Logging.EntLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Log\Ucoin.Framework.Logging.csproj">
-      <Project>{1c70a165-5326-41a9-84fd-2fdb51819401}</Project>
-      <Name>Ucoin.Framework.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
-      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
-      <Name>Ucoin.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Log\Ucoin.Log.Services\Ucoin.Log.Services.csproj">
-      <Project>{5263e7fd-f1f7-42b5-8d1d-08f237013ac0}</Project>
-      <Name>Ucoin.Log.Services</Name>
-    </ProjectReference>
+    <Content Include="wingon_logo2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

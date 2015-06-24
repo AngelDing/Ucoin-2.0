@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Ucoin.Framework.Extensions
 {
@@ -22,6 +23,61 @@ namespace Ucoin.Framework.Extensions
         }      
 
         #endregion
+
+        #region To Long
+
+        public static long ToLong(this string str, long defaultValue)
+        {
+            long v;
+            if (long.TryParse(str, out v))
+                return v;
+            else
+                return defaultValue;
+        }
+
+        public static long ToLong(this string str)
+        {
+            return str.ToLong(0);
+        }
+
+        #endregion
+
+        #region Url
+
+        /// <summary>
+        /// 修正URL
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string FixUrl(this string url)
+        {
+            return url.FixUrl("");
+        }
+
+        /// <summary>
+        /// 修正URL
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="defaultPrefix"></param>
+        /// <returns></returns>
+        public static string FixUrl(this string url, string defaultPrefix)
+        {
+            // 必須這樣,請不要修改
+            if (url == null)
+                url = "";
+
+            if (defaultPrefix == null)
+                defaultPrefix = "";
+            string tmp = url.Trim();
+            if (!Regex.Match(tmp, "^(http|https):").Success)
+            {
+                tmp = string.Format("{0}/{1}", defaultPrefix, tmp);
+            }
+            tmp = Regex.Replace(tmp, @"(?<!(http|https):)[\\/]+", "/").Trim();
+            return tmp;
+        }
+
+        #endregion   
 
         public static int ToInt(this string str, int defaultValue)
         {

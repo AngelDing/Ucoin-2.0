@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Resource.Entity", "Resource\Ucoin.Resource.Entity\Ucoin.Resource.Entity.csproj", "{90AF23AD-F5B4-48AD-9F38-8225B0B86AA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Resource.IService", "Resource\Ucoin.Resource.IService\Ucoin.Resource.IService.csproj", "{8F9BC5C7-12C1-4324-89C3-01649880687D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Resource.Service", "Resource\Ucoin.Resource.Service\Ucoin.Resource.Service.csproj", "{411A8B12-323B-4C79-9DFB-336951F42457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Resource.Web", "Resource\Ucoin.Resource.Web\Ucoin.Resource.Web.csproj", "{A580E88E-4A65-4081-A64E-F1E892D6066D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Resource.Test", "Resource\Ucoin.Resource.Test\Ucoin.Resource.Test.csproj", "{6680DCD5-4050-453C-A4E1-5AAE6780858E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90AF23AD-F5B4-48AD-9F38-8225B0B86AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90AF23AD-F5B4-48AD-9F38-8225B0B86AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90AF23AD-F5B4-48AD-9F38-8225B0B86AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90AF23AD-F5B4-48AD-9F38-8225B0B86AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F9BC5C7-12C1-4324-89C3-01649880687D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F9BC5C7-12C1-4324-89C3-01649880687D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F9BC5C7-12C1-4324-89C3-01649880687D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F9BC5C7-12C1-4324-89C3-01649880687D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{411A8B12-323B-4C79-9DFB-336951F42457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{411A8B12-323B-4C79-9DFB-336951F42457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{411A8B12-323B-4C79-9DFB-336951F42457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{411A8B12-323B-4C79-9DFB-336951F42457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A580E88E-4A65-4081-A64E-F1E892D6066D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A580E88E-4A65-4081-A64E-F1E892D6066D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A580E88E-4A65-4081-A64E-F1E892D6066D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A580E88E-4A65-4081-A64E-F1E892D6066D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6680DCD5-4050-453C-A4E1-5AAE6780858E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6680DCD5-4050-453C-A4E1-5AAE6780858E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6680DCD5-4050-453C-A4E1-5AAE6780858E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6680DCD5-4050-453C-A4E1-5AAE6780858E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -139,6 +139,7 @@
     <Compile Include="TimerTaskFactory.cs" />
     <Compile Include="UcoinValidationException.cs" />
     <Compile Include="Utils\AsyncHelper.cs" />
+    <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\GuidHelper.cs" />
     <Compile Include="Utils\HandleGenerator.cs" />
     <Compile Include="Utils\RandomHelper.cs" />
