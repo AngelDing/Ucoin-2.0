@@ -195,11 +195,6 @@ namespace Ucoin.Framework.MongoDb.Repositories
             return exp;
         }
 
-        private UpdateDefinitionBuilder<T> CreateSubject<T>()
-        {
-            return new UpdateDefinitionBuilder<T>();
-        }
-
         public async Task UpdateAsync(Expression<Func<T, bool>> query, UpdateDefinition<T> update)
         {
             await this.Collection.UpdateOneAsync<T>(query, update);      
