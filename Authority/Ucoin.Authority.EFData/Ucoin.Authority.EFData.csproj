@@ -37,6 +37,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Ucoin.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.SqlDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\Ucoin.Framework.SqlDb.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorityRepositoryContext.cs" />
@@ -48,14 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework.EFRepositories\Ucoin.Framework.SqlDb.csproj">
-      <Project>{2f183b8a-997f-4999-8c70-60d55ab4b80a}</Project>
-      <Name>Ucoin.Framework.SqlDb</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
-      <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
-      <Name>Ucoin.Framework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Authority.Entities\Ucoin.Authority.Entities.csproj">
       <Project>{9cd0a57a-8705-4074-9c00-7bf54bda882a}</Project>
       <Name>Ucoin.Authority.Entities</Name>
