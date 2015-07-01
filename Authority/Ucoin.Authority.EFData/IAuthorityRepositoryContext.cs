@@ -1,8 +1,8 @@
-﻿using Ucoin.Framework.Repositories;
+﻿using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.EFData
 {
-    public interface IAuthorityRepositoryContext : IRepositoryContext
+    public interface IAuthorityRepositoryContext : IEfRepositoryContext
     {
     }
 }

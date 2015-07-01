@@ -5,7 +5,7 @@ namespace Ucoin.Authority.EFData
     public class AuthorityRepositoryContext : EfRepositoryContext, IAuthorityRepositoryContext
     {
         public AuthorityRepositoryContext()
-            : base(new AuthorityDbContext())
+            : base(new IdentityDbContext())
         { 
         }
     }

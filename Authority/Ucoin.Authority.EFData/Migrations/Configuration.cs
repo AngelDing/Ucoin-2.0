@@ -2,7 +2,7 @@
 
 namespace Ucoin.Authority.EFData
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<AuthorityDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<IdentityDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace Ucoin.Authority.EFData
             ContextKey = "Ucoin.Authority.EFData.AuthorityDbContext";
         }
 
-        protected override void Seed(AuthorityDbContext context)
+        protected override void Seed(IdentityDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

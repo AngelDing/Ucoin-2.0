@@ -4,18 +4,22 @@ using System.Linq;
 using System.Data.Entity.ModelConfiguration;
 using System;
 using Ucoin.Framework.SqlDb;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Ucoin.Authority.EFData
 {
-    public sealed class AuthorityDbContext : BaseCustomDbContext
+    public sealed class IdentityDbContext : BaseCustomDbContext
     {
-        public AuthorityDbContext()
-            : base("name=AuthorityDB")
+        public IdentityDbContext()
+            : base("name=IdentityDb")
         {
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //移除复数表名的契约
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
             var typeList = Assembly.GetExecutingAssembly().GetTypes().ToList();
 
             var typesToRegister = typeList

@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Ucoin.Framework.Entities;
 using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Authority.Entities
 {
-    public class Group : EfEntity<int>, IAggregateRoot<int>, IOperateEntity<string>
+    public class Button : EfEntity<int>, IAggregateRoot<int>, IOperateEntity<string>
     {
+        public string Code { get; set; }
+
         public string Name { get; set; }
 
-        public int ParentId { get; set; }
+        public string IconClass { get; set; }
 
-        public byte Status { get; set; }
+        public string Description { get; set; }
+
+        public string Sequence { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
@@ -22,6 +25,6 @@ namespace Ucoin.Authority.Entities
 
         public string UpdatedBy { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<ResourceButton> ResourceButtons { get; set; }
     }
 }

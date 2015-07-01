@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Site", "Authority\Ucoin.Authority.Site\Ucoin.Authority.Site.csproj", "{F405CFD7-515C-43AC-ABF7-01918373BDFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.AdminSite", "Authority\Ucoin.Authority.Site\Identity.AdminSite.csproj", "{F405CFD7-515C-43AC-ABF7-01918373BDFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.EFData", "Authority\Ucoin.Authority.EFData\Ucoin.Authority.EFData.csproj", "{1523B79A-6760-4EC4-9518-8E6279720BE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.EFData", "Authority\Ucoin.Authority.EFData\Identity.EFData.csproj", "{1523B79A-6760-4EC4-9518-8E6279720BE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Entities", "Authority\Ucoin.Authority.Entities\Ucoin.Authority.Entities.csproj", "{9CD0A57A-8705-4074-9C00-7BF54BDA882A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Entities", "Authority\Ucoin.Authority.Entities\Identity.Entities.csproj", "{9CD0A57A-8705-4074-9C00-7BF54BDA882A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.IRepositories", "Authority\Ucoin.Authority.IRepositories\Ucoin.Authority.IRepositories.csproj", "{1425A984-4B1D-40F4-A4E0-1757B7E6E506}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.IRepositories", "Authority\Ucoin.Authority.IRepositories\Identity.IRepositories.csproj", "{1425A984-4B1D-40F4-A4E0-1757B7E6E506}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.IServices", "Authority\Ucoin.Authority.IServices\Ucoin.Authority.IServices.csproj", "{72E3CDAE-0762-41FA-9D70-F0EAA3A32F7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.IServices", "Authority\Ucoin.Authority.IServices\Identity.IServices.csproj", "{72E3CDAE-0762-41FA-9D70-F0EAA3A32F7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Repositories", "Authority\Ucoin.Authority.Repositories\Ucoin.Authority.Repositories.csproj", "{032F3EB8-F1EB-4D5A-B393-97E30B3AE1E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Repositories", "Authority\Ucoin.Authority.Repositories\Identity.Repositories.csproj", "{032F3EB8-F1EB-4D5A-B393-97E30B3AE1E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucoin.Authority.Services", "Authority\Ucoin.Authority.Services\Ucoin.Authority.Services.csproj", "{4DCEC664-2B67-4059-AB2D-DE6ED9E87835}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Services", "Authority\Ucoin.Authority.Services\Identity.Services.csproj", "{4DCEC664-2B67-4059-AB2D-DE6ED9E87835}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.DataObjects", "Authority\Ucoin.Identity.DataObjects\Identity.DataObjects.csproj", "{D970C094-6FE5-42D4-BF26-30F4B6EE3435}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{4DCEC664-2B67-4059-AB2D-DE6ED9E87835}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DCEC664-2B67-4059-AB2D-DE6ED9E87835}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DCEC664-2B67-4059-AB2D-DE6ED9E87835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D970C094-6FE5-42D4-BF26-30F4B6EE3435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D970C094-6FE5-42D4-BF26-30F4B6EE3435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D970C094-6FE5-42D4-BF26-30F4B6EE3435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D970C094-6FE5-42D4-BF26-30F4B6EE3435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

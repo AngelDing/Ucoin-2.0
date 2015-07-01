@@ -5,9 +5,9 @@ using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.Repositories
 {
-    public class DelegateRepositroy : EfRepository<Delegate, int>, IDelegateRepositroy
+    public class UserDelegateRepositroy : EfRepository<UserDelegate, int>, IUserDelegateRepositroy
     {
-        public DelegateRepositroy(IAuthorityRepositoryContext context)
+        public UserDelegateRepositroy(IAuthorityRepositoryContext context)
             : base(context)
         {
         }

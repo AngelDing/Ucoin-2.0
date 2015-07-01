@@ -3,7 +3,7 @@ using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.IRepositories
 {
-    public interface IDelegateRepositroy : IEfRepository<Delegate, int>
+    public interface IButtonRepository : IEfRepository<Button, int>
     {
     }
 }

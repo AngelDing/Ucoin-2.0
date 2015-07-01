@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{032F3EB8-F1EB-4D5A-B393-97E30B3AE1E9}</ProjectGuid>
+    <ProjectGuid>{1425A984-4B1D-40F4-A4E0-1757B7E6E506}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ucoin.Authority.Repositories</RootNamespace>
-    <AssemblyName>Ucoin.Authority.Repositories</AssemblyName>
+    <RootNamespace>Ucoin.Authority.IRepositories</RootNamespace>
+    <AssemblyName>Ucoin.Authority.IRepositories</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\..\DLL\Identity\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\..\DLL\Identity\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -46,25 +48,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DelegateRepositroy.cs" />
-    <Compile Include="GroupRepositroy.cs" />
-    <Compile Include="ResourceRepositroy.cs" />
-    <Compile Include="RoleRepositroy.cs" />
-    <Compile Include="UserRepositroy.cs" />
+    <Compile Include="IPermissionRepository.cs" />
+    <Compile Include="IButtonRepository.cs" />
+    <Compile Include="IApplicationRepository.cs" />
+    <Compile Include="IGroupRepositroy.cs" />
+    <Compile Include="IResourceRepositroy.cs" />
+    <Compile Include="IUserDelegateRepositroy.cs" />
+    <Compile Include="IRoleRepositroy.cs" />
+    <Compile Include="IUserRepositroy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ucoin.Authority.EFData\Ucoin.Authority.EFData.csproj">
-      <Project>{1523b79a-6760-4ec4-9518-8e6279720be9}</Project>
-      <Name>Ucoin.Authority.EFData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ucoin.Authority.Entities\Ucoin.Authority.Entities.csproj">
+    <ProjectReference Include="..\Ucoin.Authority.Entities\Identity.Entities.csproj">
       <Project>{9cd0a57a-8705-4074-9c00-7bf54bda882a}</Project>
-      <Name>Ucoin.Authority.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ucoin.Authority.IRepositories\Ucoin.Authority.IRepositories.csproj">
-      <Project>{1425a984-4b1d-40f4-a4e0-1757b7e6e506}</Project>
-      <Name>Ucoin.Authority.IRepositories</Name>
+      <Name>Identity.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
