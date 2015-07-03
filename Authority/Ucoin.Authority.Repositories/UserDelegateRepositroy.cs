@@ -7,7 +7,7 @@ namespace Ucoin.Authority.Repositories
 {
     public class UserDelegateRepositroy : EfRepository<UserDelegate, int>, IUserDelegateRepositroy
     {
-        public UserDelegateRepositroy(IAuthorityRepositoryContext context)
+        public UserDelegateRepositroy(IIdentityRepositoryContext context)
             : base(context)
         {
         }

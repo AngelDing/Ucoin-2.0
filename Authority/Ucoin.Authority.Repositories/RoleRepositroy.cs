@@ -9,7 +9,7 @@ namespace Ucoin.Authority.Repositories
     public class RoleRepositroy<TRole> : RoleStore<TRole, int, UserRole>, IRoleRepositroy
         where TRole : Role, new()
     {
-        public RoleRepositroy(IAuthorityRepositoryContext context)
+        public RoleRepositroy(IIdentityRepositoryContext context)
             : base(context.DbContext)
         {
         }

@@ -7,7 +7,7 @@ namespace Ucoin.Authority.Repositories
 {
     public class PermissionRepository : EfRepository<Permission, int>, IPermissionRepository
     {
-        public PermissionRepository(IAuthorityRepositoryContext context)
+        public PermissionRepository(IIdentityRepositoryContext context)
             : base(context)
         { 
         }

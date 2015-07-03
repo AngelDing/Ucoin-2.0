@@ -7,7 +7,7 @@ namespace Ucoin.Authority.Repositories
 {
     public class ResourceRepositroy : EfRepository<Resource, int>, IResourceRepositroy
     {
-        public ResourceRepositroy(IAuthorityRepositoryContext context)
+        public ResourceRepositroy(IIdentityRepositoryContext context)
             : base(context)
         {
         }

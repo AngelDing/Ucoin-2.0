@@ -6,11 +6,21 @@ using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Authority.Entities
 {
+    /// <summary>
+    /// 數據權限
+    /// </summary>
     public class Group : EfEntity<int>, IAggregateRoot<int>, IOperateEntity<string>
     {
         public string Name { get; set; }
 
-        public int ParentId { get; set; }
+        /// <summary>
+        /// 組類型：如：用戶組，項目組，部門，區域等
+        /// </summary>
+        public byte Type { get; set; }
+
+        public int RefId { get; set; }
+
+        public int ParentRefId { get; set; }
 
         public byte Status { get; set; }
 

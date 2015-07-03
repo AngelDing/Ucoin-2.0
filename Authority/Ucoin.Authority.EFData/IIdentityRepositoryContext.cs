@@ -2,7 +2,7 @@
 
 namespace Ucoin.Authority.EFData
 {
-    public interface IAuthorityRepositoryContext : IEfRepositoryContext
+    public interface IIdentityRepositoryContext : IEfRepositoryContext
     {
     }
 }

@@ -8,7 +8,7 @@ namespace Ucoin.Authority.Repositories
 {
     public class UserRepositroy : UserStore<User, Role, int, UserLogin, UserRole, UserClaim>, IUserRepositroy
     {
-        public UserRepositroy(IAuthorityRepositoryContext context)
+        public UserRepositroy(IIdentityRepositoryContext context)
             : base(context.DbContext)
         {
         }

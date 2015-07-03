@@ -2,9 +2,9 @@
 
 namespace Ucoin.Authority.EFData
 {
-    public class AuthorityRepositoryContext : EfRepositoryContext, IAuthorityRepositoryContext
+    public class IdentityRepositoryContext : EfRepositoryContext, IIdentityRepositoryContext
     {
-        public AuthorityRepositoryContext()
+        public IdentityRepositoryContext()
             : base(new IdentityDbContext())
         { 
         }

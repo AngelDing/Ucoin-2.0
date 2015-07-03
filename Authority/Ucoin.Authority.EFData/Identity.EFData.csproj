@@ -53,10 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorityRepositoryContext.cs" />
+    <Compile Include="IdentityRepositoryContext.cs" />
     <Compile Include="DbContextInitailizer.cs" />
     <Compile Include="IdentityDbContext.cs" />
-    <Compile Include="IAuthorityRepositoryContext.cs" />
+    <Compile Include="IIdentityRepositoryContext.cs" />
     <Compile Include="TypeConfigurations\ApplicationConfiguration.cs" />
     <Compile Include="TypeConfigurations\GroupConfiguration.cs" />
     <Compile Include="TypeConfigurations\PermissionConfiguration.cs" />

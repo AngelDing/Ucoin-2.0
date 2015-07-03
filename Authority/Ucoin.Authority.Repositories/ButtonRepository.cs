@@ -7,7 +7,7 @@ namespace Ucoin.Authority.Repositories
 {
     public class ButtonRepository : EfRepository<Button, int>, IButtonRepository
     {
-        public ButtonRepository(IAuthorityRepositoryContext context)
+        public ButtonRepository(IIdentityRepositoryContext context)
             : base(context)
         { 
         }

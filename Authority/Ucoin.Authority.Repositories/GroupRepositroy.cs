@@ -7,7 +7,7 @@ namespace Ucoin.Authority.Repositories
 {
     public class GroupRepositroy : EfRepository<Group, int>, IGroupRepositroy
     {
-        public GroupRepositroy(IAuthorityRepositoryContext context)
+        public GroupRepositroy(IIdentityRepositoryContext context)
             : base(context)
         { 
         }
