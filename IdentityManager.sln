@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Services", "Author
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.DataObjects", "Authority\Ucoin.Identity.DataObjects\Identity.DataObjects.csproj", "{D970C094-6FE5-42D4-BF26-30F4B6EE3435}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.ServerHost", "Authority\Ucoin.Identity.ServerHost\Identity.ServerHost.csproj", "{0656A8F2-76E2-41CD-87A5-6EB6CD9C68EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{D970C094-6FE5-42D4-BF26-30F4B6EE3435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D970C094-6FE5-42D4-BF26-30F4B6EE3435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D970C094-6FE5-42D4-BF26-30F4B6EE3435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0656A8F2-76E2-41CD-87A5-6EB6CD9C68EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0656A8F2-76E2-41CD-87A5-6EB6CD9C68EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0656A8F2-76E2-41CD-87A5-6EB6CD9C68EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0656A8F2-76E2-41CD-87A5-6EB6CD9C68EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
