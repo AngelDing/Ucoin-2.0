@@ -61,8 +61,8 @@
     <Compile Include="TypeConfigurations\GroupConfiguration.cs" />
     <Compile Include="TypeConfigurations\PermissionConfiguration.cs" />
     <Compile Include="TypeConfigurations\ResourceColumnConfiguration.cs" />
-    <Compile Include="TypeConfigurations\ResourceButtonConfiguration.cs" />
-    <Compile Include="TypeConfigurations\ButtonConfiguration.cs" />
+    <Compile Include="TypeConfigurations\ResourceActionConfiguration.cs" />
+    <Compile Include="TypeConfigurations\ActionConfiguration.cs" />
     <Compile Include="TypeConfigurations\ResourceConfiguration.cs" />
     <Compile Include="TypeConfigurations\RoleConfiguration.cs" />
     <Compile Include="TypeConfigurations\UserDelegateConfiguration.cs" />

@@ -55,7 +55,7 @@
     <Compile Include="ApplicationRepository.cs" />
     <Compile Include="UserDelegateRepositroy.cs" />
     <Compile Include="GroupRepositroy.cs" />
-    <Compile Include="ButtonRepository.cs" />
+    <Compile Include="ActionRepository.cs" />
     <Compile Include="PermissionRepository.cs" />
     <Compile Include="ResourceRepositroy.cs" />
     <Compile Include="RoleRepositroy.cs" />

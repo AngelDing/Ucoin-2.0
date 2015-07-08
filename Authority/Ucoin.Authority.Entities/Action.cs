@@ -5,7 +5,7 @@ using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Authority.Entities
 {
-    public class Button : EfEntity<int>, IAggregateRoot<int>, IOperateEntity<string>
+    public class Action : EfEntity<int>, IAggregateRoot<int>, IOperateEntity<string>
     {
         public string Code { get; set; }
 
@@ -25,6 +25,6 @@ namespace Ucoin.Authority.Entities
 
         public string UpdatedBy { get; set; }
 
-        public virtual ICollection<ResourceButton> ResourceButtons { get; set; }
+        public virtual ICollection<ResourceAction> ResourceActions { get; set; }
     }
 }

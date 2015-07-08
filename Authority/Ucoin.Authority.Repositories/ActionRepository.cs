@@ -5,9 +5,9 @@ using Ucoin.Framework.SqlDb.Repositories;
 
 namespace Ucoin.Authority.Repositories
 {
-    public class ButtonRepository : EfRepository<Button, int>, IButtonRepository
+    public class ActionRepository : EfRepository<Action, int>, IActionRepository
     {
-        public ButtonRepository(IIdentityRepositoryContext context)
+        public ActionRepository(IIdentityRepositoryContext context)
             : base(context)
         { 
         }

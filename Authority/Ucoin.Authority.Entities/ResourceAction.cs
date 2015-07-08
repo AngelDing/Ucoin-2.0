@@ -2,11 +2,11 @@
 
 namespace Ucoin.Authority.Entities
 {
-    public class ResourceButton : EfEntity<int>
+    public class ResourceAction : EfEntity<int>
     {
         public int ResourceId { get; set; }
 
-        public int ButtonId { get; set; }
+        public int ActionId { get; set; }
 
         public string Url { get; set; }
 
@@ -14,6 +14,6 @@ namespace Ucoin.Authority.Entities
 
         public virtual Resource Resource { get; set; }
 
-        public virtual Button Button { get; set; }
+        public virtual Action Button { get; set; }
     }
 }

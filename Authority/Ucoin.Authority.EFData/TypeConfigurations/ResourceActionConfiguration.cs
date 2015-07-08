@@ -3,11 +3,11 @@ using Ucoin.Authority.Entities;
 
 namespace Ucoin.Authority.EFData.TypeConfigurations
 {
-    public class ResourceButtonConfiguration : EntityTypeConfiguration<ResourceButton>
+    public class ResourceActionConfiguration : EntityTypeConfiguration<ResourceAction>
     {
-        public ResourceButtonConfiguration()
+        public ResourceActionConfiguration()
         {
-            this.ToTable("ResourceButton");
+            this.ToTable("ResourceAction");
             this.HasKey(p => p.Id);
         }
     }

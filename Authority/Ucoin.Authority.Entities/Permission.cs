@@ -11,9 +11,11 @@ namespace Ucoin.Authority.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// 权限类型：1.Resource; 2.Button; 3.Column
+        /// 权限类型：1.Resource; 2.Action; 3.Column
         /// </summary>
         public byte Type { get; set; }
+
+        public int RefId { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

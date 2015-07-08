@@ -42,7 +42,7 @@ namespace Ucoin.Authority.Entities
 
         public string UpdatedBy { get; set; }
 
-        public virtual ICollection<ResourceButton> ResourceButtons { get; set; }
+        public virtual ICollection<ResourceAction> ResourceButtons { get; set; }
 
         public virtual ICollection<ResourceColumn> ResourceColumns { get; set; }
 
