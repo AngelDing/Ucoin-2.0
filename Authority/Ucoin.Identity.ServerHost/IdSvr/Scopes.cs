@@ -15,6 +15,7 @@ namespace Ucoin.Identity.ServerHost.IdSvr
                 StandardScopes.Profile,
                 StandardScopes.Email,
                 StandardScopes.OfflineAccess,
+                StandardScopes.Roles,
                 new Scope
                 {
                     Name = "read",
