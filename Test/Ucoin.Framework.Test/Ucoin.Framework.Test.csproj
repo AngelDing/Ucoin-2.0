@@ -143,6 +143,10 @@
     <Compile Include="ServiceLocatorTest\ServiceLocatorTests.cs" />
     <Compile Include="ServiceLocatorTest\Components\SimpleLogger.cs" />
     <Compile Include="ServiceLocatorTest\UnityServiceLocatorTests.cs" />
+    <Compile Include="Web\ActivatorUnitTest.cs" />
+    <Compile Include="Web\Library\ExecutionLogger.cs" />
+    <Compile Include="Web\Library\MyOtherStartupCode.cs" />
+    <Compile Include="Web\Library\MyStartupCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Cache\Ucoin.Framework.Cache.csproj">
@@ -172,6 +176,10 @@
     <ProjectReference Include="..\..\Framework\Ucoin.Framework.Service\Ucoin.Framework.Service.csproj">
       <Project>{ee23e806-83fe-459a-9050-95a327e28792}</Project>
       <Name>Ucoin.Framework.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Ucoin.Framework.Web\Ucoin.Framework.Web.csproj">
+      <Project>{6169a1c5-9511-428f-8b90-1d5ae5a3682e}</Project>
+      <Name>Ucoin.Framework.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
