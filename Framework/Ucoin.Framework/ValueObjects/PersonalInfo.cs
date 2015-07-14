@@ -12,5 +12,7 @@ namespace Ucoin.Framework.ValueObjects
 
         [RegularExpression(@"[\w-]+(\.?[\w-])*\@[\w-]+(\.[\w-]+)+", ErrorMessage = "The provided email address is not valid.")]
         public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }
