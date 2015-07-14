@@ -9,6 +9,7 @@ namespace Ucoin.Authority.Site
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapPageRoute("Report", "report", "~/Content/page/report.aspx");
 
             routes.MapRoute(
                 name: "Default",
