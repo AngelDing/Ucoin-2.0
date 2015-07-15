@@ -1,4 +1,5 @@
-﻿using Ucoin.Authority.EFData;
+﻿using System.Collections.Generic;
+using Ucoin.Authority.EFData;
 using Ucoin.Authority.Entities;
 using Ucoin.Authority.IRepositories;
 using Ucoin.Framework.SqlDb.Repositories;
@@ -10,6 +11,26 @@ namespace Ucoin.Authority.Repositories
         public ResourceRepositroy(IIdentityRepositoryContext context)
             : base(context)
         {
+        }
+
+        public IEnumerable<Resource> GetResourceListByUserName(string userName)
+        {
+            var resourceList = new List<Resource>()
+            {
+                new Resource
+                {
+                    Id = 1,
+                    AppId = 1,
+                    Code = "001",
+                    Name = "資源管理",
+                    ParentId = 0,
+                    Sequence = "001",
+                    Url = "sys/Resource",
+                    IsVisible = true
+                }
+            };
+
+            return resourceList;
         }
     }
 }

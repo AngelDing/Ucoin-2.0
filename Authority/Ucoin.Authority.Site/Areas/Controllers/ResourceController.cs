@@ -2,10 +2,11 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using Ucoin.Authority.IServices;
+using Ucoin.Identity.DataObjects;
 
 namespace Ucoin.Authority.Site.Areas.Sys.Controllers
 {
-    public class MenuController : Controller
+    public class ResourceController : Controller
     {
         public ActionResult Index()
         {
@@ -13,10 +14,14 @@ namespace Ucoin.Authority.Site.Areas.Sys.Controllers
         }
     }
 
-    public class MenuApiController : ApiController
+    public class ResourceApiController : ApiController
     {
+        public ResourceApiController()
+        { 
+        }
+
         private IResourceService resourceService;
-        public MenuApiController(IResourceService resourceService)
+        public ResourceApiController(IResourceService resourceService)
         {
             this.resourceService = resourceService;
         }
@@ -25,7 +30,7 @@ namespace Ucoin.Authority.Site.Areas.Sys.Controllers
         public IEnumerable<dynamic> Get()
         {
             var userName = this.User.Identity.Name;
-            return resourceService.GetUserResources(userName);
+            return resourceService.GetResourceListByUserName(userName);
         }
 
 //        // GET api/menu
@@ -38,12 +43,7 @@ namespace Ucoin.Authority.Site.Areas.Sys.Controllers
         // GET api/menu
         public IEnumerable<dynamic> GetAll()
         {
-            var MenuService = new sys_menuService();
-            var pQuery = ParamQuery.Instance().Select("A.*,B.MenuName as ParentName")
-                .From(@"sys_menu A left join sys_menu B on B.MenuCode = A.ParentCode")
-                .OrderBy("A.MenuSeq,A.MenuCode");
-            var result = resourceService.GetDynamicList(pQuery);
-            return result;
+            return resourceService.GetResourceListByUserName(string.Empty);
         }
 
 //        /// <summary>

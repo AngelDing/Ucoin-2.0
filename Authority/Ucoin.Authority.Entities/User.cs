@@ -25,6 +25,5 @@ namespace Ucoin.Authority.Entities
 
         public virtual ICollection<Group> Groups { get; set; }
 
-        public virtual ICollection<UserDelegate> UserDelegates { get; set; }
     }
 }

@@ -23,6 +23,8 @@ namespace Ucoin.Authority.Entities
         /// </summary>
         public int MandataryId { get; set; }
 
+        public int PermissionId { get; set; }
+
         /// <summary>
         /// 生效期限
         /// </summary>
@@ -38,8 +40,5 @@ namespace Ucoin.Authority.Entities
 
         public string UpdatedBy { get; set; }
 
-        public virtual User Mandator { get; set; }
-
-        public virtual User Mandatary { get; set; }
     }
 }

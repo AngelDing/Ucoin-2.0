@@ -37,6 +37,7 @@
       <HintPath>..\..\DLL\Identity\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="Thinktecture.IdentityServer3">
       <HintPath>..\..\packages\Thinktecture.IdentityServer3.1.6.2\lib\net45\Thinktecture.IdentityServer3.dll</HintPath>
     </Reference>
@@ -45,6 +46,12 @@
     </Reference>
     <Reference Include="Ucoin.Framework">
       <HintPath>..\..\Output\Ucoin.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.Service">
+      <HintPath>..\..\Output\Ucoin.Framework.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="Ucoin.Framework.SqlDb">
+      <HintPath>..\..\Output\Ucoin.Framework.SqlDb.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +62,10 @@
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ucoin.Authority.EFData\Identity.EFData.csproj">
+      <Project>{1523b79a-6760-4ec4-9518-8e6279720be9}</Project>
+      <Name>Identity.EFData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Authority.Entities\Identity.Entities.csproj">
       <Project>{9cd0a57a-8705-4074-9c00-7bf54bda882a}</Project>
       <Name>Identity.Entities</Name>
@@ -66,6 +77,10 @@
     <ProjectReference Include="..\Ucoin.Authority.IServices\Identity.IServices.csproj">
       <Project>{72e3cdae-0762-41fa-9d70-f0eaa3a32f7b}</Project>
       <Name>Identity.IServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ucoin.Identity.DataObjects\Identity.DataObjects.csproj">
+      <Project>{d970c094-6fe5-42d4-bf26-30f4b6ee3435}</Project>
+      <Name>Identity.DataObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

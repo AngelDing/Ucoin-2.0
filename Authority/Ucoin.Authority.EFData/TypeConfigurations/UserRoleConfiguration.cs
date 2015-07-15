@@ -8,6 +8,7 @@ namespace Ucoin.Authority.EFData.TypeConfigurations
         public UserRoleConfiguration()
         {
             this.ToTable("UserRoleMapping");
+            this.HasKey(p => p.Id);
         }
     }
 }

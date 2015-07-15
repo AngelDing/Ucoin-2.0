@@ -38,6 +38,12 @@
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ucoin.Identity.DataObjects\Identity.DataObjects.csproj">
+      <Project>{d970c094-6fe5-42d4-bf26-30f4b6ee3435}</Project>
+      <Name>Identity.DataObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

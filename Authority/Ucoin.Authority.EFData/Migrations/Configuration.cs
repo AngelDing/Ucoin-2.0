@@ -10,7 +10,7 @@ namespace Ucoin.Authority.EFData
             AutomaticMigrationsEnabled = true;
             //获取或设置 指示是否可接受自动迁移期间的数据丢失的值。如果设置为false，则将在数据丢失可能作为自动迁移一部分出现时引发异常。
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "Ucoin.Authority.EFData.AuthorityDbContext";
+            ContextKey = "Ucoin.Authority.EFData.IdentityDbContext";
         }
 
         protected override void Seed(IdentityDbContext context)

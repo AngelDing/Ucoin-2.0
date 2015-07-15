@@ -134,6 +134,8 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Ucoin.Framework">
       <HintPath>..\..\Output\Ucoin.Framework.dll</HintPath>
     </Reference>
@@ -151,6 +153,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Scripts\Resource.js" />
     <Content Include="Areas\ViewModels\Code.js" />
     <Content Include="Areas\ViewModels\Config.js" />
     <Content Include="Areas\ViewModels\Generator.js" />
@@ -3240,7 +3243,7 @@
     <Content Include="Areas\Views\Generator\Index.cshtml" />
     <Content Include="Areas\Views\Log\Index.cshtml" />
     <Content Include="Areas\Views\Log\View.cshtml" />
-    <Content Include="Areas\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Views\Resource\Index.cshtml" />
     <Content Include="Areas\Views\Organize\Index.cshtml" />
     <Content Include="Areas\Views\Parameter\Index.cshtml" />
     <Content Include="Areas\Views\Permission\Index.cshtml" />
@@ -3257,13 +3260,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\Extensions\NamespaceHttpControllerSelector .cs" />
+    <Compile Include="App_Start\Extensions\RequestWrapper.cs" />
+    <Compile Include="App_Start\Extensions\RequestWrapperMethods.cs" />
+    <Compile Include="App_Start\Extensions\RequestWrapperParameterBinding.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\JObjectModelBinder.cs" />
+    <Compile Include="App_Start\Extensions\JObjectModelBinder.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Common\HtmlHelperExtensions.cs" />
-    <Compile Include="Areas\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Controllers\ResourceController.cs" />
     <Compile Include="Areas\SysAreaRegistration.cs" />
     <Compile Include="Content\page\report.aspx.cs">
       <DependentUpon>report.aspx</DependentUpon>

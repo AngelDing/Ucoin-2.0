@@ -11,10 +11,6 @@ namespace Ucoin.Framework.Service
     {
         private readonly IRepositoryContext context;
 
-        /// <summary>
-        /// 初始化一个<c>ApplicationService</c>类型的实例。
-        /// </summary>
-        /// <param name="context">用来初始化<c>ApplicationService</c>类型的仓储上下文实例。</param>
         public BaseService(IRepositoryContext context)
         {
             this.context = context;

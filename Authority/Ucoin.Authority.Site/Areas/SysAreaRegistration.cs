@@ -26,7 +26,7 @@ namespace Ucoin.Authority.Site.Areas.Systems
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
                 this.AreaName + "Api",
                 "api/" + this.AreaName + "/{controller}/{action}/{id}",
-                new { area = this.AreaName, action = RouteParameter.Optional, id = RouteParameter.Optional, namespaceName = new string[] { string.Format("Zephyr.Areas.{0}.Controllers", this.AreaName) } },
+                new { area = this.AreaName, action = RouteParameter.Optional, id = RouteParameter.Optional, namespaceName = new string[] { string.Format("Ucoin.Authority.Site.Areas.{0}.Controllers", this.AreaName) } },
                 new { action = new StartWithConstraint() }
             );
         }

@@ -9,7 +9,7 @@ wrapper.settings = {
 
 //初始化
 wrapper.init = function () {
-    com.ajax({ type: 'GET', url: 'api/sys/menu', success: wrapper.initMenu });
+    com.ajax({ type: 'GET', url: 'api/sys/resource', success: wrapper.initMenu });
     
     $('.loginOut').click(wrapper.logout);
     $('.changepwd').click(wrapper.changePassword);
@@ -31,9 +31,9 @@ wrapper.init = function () {
 wrapper.initLocationHash = function (data) {
     var subUrl = location.hash.replace('#!', '');
     $.each(data, function () {
-        var s = this.URL.replace('.aspx', '');
-        if (this.URL && this.URL != '#' && (subUrl == s || subUrl.indexOf(s + "/") > -1))
-            wrapper.addTab(this.MenuName, subUrl, this.IconClass);
+        var s = this.Url.replace('.aspx', '');
+        if (this.Url && this.Url != '#' && (subUrl == s || subUrl.indexOf(s + "/") > -1))
+            wrapper.addTab(this.Name, subUrl, this.IconClass);
     });
 };
 
@@ -189,7 +189,7 @@ wrapper.initMenu = function (d) {
 
     $('body').data('menulist', d);
     var visibleMenu = $.grep(d, function (row) {return row.IsVisible;});
-    var menus = utils.toTreeData(visibleMenu, 'MenuCode', 'ParentCode', 'children');
+    var menus = utils.toTreeData(visibleMenu, 'Id', 'ParentId', 'children');
 
     switch (wrapper.settings.navigation) {
         case "tree":
@@ -290,12 +290,12 @@ wrapper.menuAccordion = function (menus) {
         var html = '<ul>';
         var temple = '<li><div><a ref="{0}" href="javascript:void(0)" rel="{1}"><span class="icon {2}">&nbsp;</span><span class="nav">{3}</span></a></div></li>';
         $.each(this.children || [], function () {
-            html += utils.formatString(temple, this.MenuCode, this.URL, this.IconClass, this.MenuName);
+            html += utils.formatString(temple, this.Id, this.Url, this.IconClass, this.Name);
         });
         html += '</ul>';
 
         $obj.accordion('add', {
-            title: this.MenuName,
+            title: this.Name,
             content: html,
             iconCls: 'icon ' + this.IconClass,
             border: false
@@ -324,7 +324,7 @@ wrapper.menuAccordion = function (menus) {
 };
 
 wrapper.menuTree = function (menus) {
-    var settings = { data: { key: { name: "MenuName", url: "URL" } }, callback: { onClick: function (event, treeId, node) { wrapper.addTab(node.MenuName, node.URL, node.IconClass); } } };
+    var settings = { data: { key: { name: "Name", url: "Url" } }, callback: { onClick: function (event, treeId, node) { wrapper.addTab(node.Name, node.Url, node.IconClass); } } };
     var $obj = $('#wnav').addClass("ztree");
     if (menus.length > 0) menus[0].open = true;
     $.fn.zTree.init($obj, settings, menus);
@@ -335,11 +335,11 @@ wrapper.menuButtonChild = function (n) {
     $.each(n.children, function (j, o) {
         if (o.children) {
             str += '<div>';
-            str += '<span iconCls="' + o.IconClass + '">' + o.MenuName + '</span><div style="width:120px;">';
+            str += '<span iconCls="' + o.IconClass + '">' + o.Name + '</span><div style="width:120px;">';
             str = wrapper.menuButtonChild(o);
             str += '</div></div>';
         } else
-            str += '<div iconCls="' + o.IconClass + '" id="' + o.URL + '">' + o.MenuName + '</div>';
+            str += '<div iconCls="' + o.IconClass + '" id="' + o.Url + '">' + o.Name + '</div>';
     });
     return str;
 }
@@ -349,7 +349,7 @@ wrapper.menuButton = function (menus) {
     var childMenu = '';
     $.each(menus, function (i, n) {
         menulist += utils.formatString('<a href="javascript:void(0)" id="mb{0}" class="easyui-menubutton" menu="#mm{0}" iconCls="{1}">{2}</a>',
-            (i + 1), n.IconClass, n.MenuName);
+            (i + 1), n.IconClass, n.Name);
  
         if ((n.children||[]).length > 0) {
             childMenu += '<div id="mm' + (i + 1) + '" style="width:120px;">';

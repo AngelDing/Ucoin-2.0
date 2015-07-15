@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Ucoin.Identity.DataObjects;
 
 namespace Ucoin.Authority.IServices
 {
     public interface IResourceService
     {
-        IEnumerable<dynamic> GetUserResources(string userName);
+        IEnumerable<ResourceInfo> GetResourceListByUserName(string userName);
     }
 }

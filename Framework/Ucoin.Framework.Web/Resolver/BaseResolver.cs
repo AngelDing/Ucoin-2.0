@@ -1,19 +1,19 @@
 ﻿using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
+using Ucoin.Framework.Utils;
 
-namespace Ucoin.Framework.Web
+namespace Ucoin.Framework.Web.Resolver
 {
-    public class UnityResolver : IDependencyResolver
+    public class BaseResolver : DisposableObject
     {
         protected IUnityContainer container;
 
-        public UnityResolver(IUnityContainer container)
+        public BaseResolver(IUnityContainer container)
         {
             if (container == null)
             {
-                throw new ArgumentNullException("container");
+                GuardHelper.ArgumentNotNull(() => container);
             }
             this.container = container;
         }
@@ -42,9 +42,12 @@ namespace Ucoin.Framework.Web
             }
         }
 
-        public void Dispose()
+        protected override void OnDispose(bool disposing)
         {
-            container.Dispose();
+            if (disposing)
+            {
+                container.Dispose();
+            }
         }
     }
 }

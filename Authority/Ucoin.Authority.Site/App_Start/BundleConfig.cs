@@ -21,7 +21,7 @@ namespace Ucoin.Authority.Site
                 "~/Content/js/core/jquery.easyui.fix.js"));
 
             bundles.Add(new ScriptBundle("~/Content/js/index").Include(
-                "~/Content/js/jquery/jquery-{version}.min.js",
+                "~/Content/js/jquery/jquery-1.8.1.min.js",
                 "~/Content/js/core/json2.min.js",
                 "~/Content/js/jquery-extend/jquery.cookie.js",
                 "~/Content/js/core/utils.js",

@@ -72,9 +72,11 @@
     <Compile Include="Paging\PagingInfo.cs" />
     <Compile Include="Paging\PagingMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolver\BaseResolver.cs" />
     <Compile Include="Script\IScriptResourceManager.cs" />
     <Compile Include="Script\ScriptResourceManager.cs" />
-    <Compile Include="UnityResolver.cs" />
+    <Compile Include="Resolver\UnityApiResolver.cs" />
+    <Compile Include="Resolver\UnityMvcResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Paging\DoPagingPost.js" />

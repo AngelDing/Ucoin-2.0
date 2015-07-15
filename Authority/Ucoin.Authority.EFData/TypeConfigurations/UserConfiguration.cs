@@ -17,10 +17,7 @@ namespace Ucoin.Authority.EFData.TypeConfigurations
                     m.ToTable("UserGroupMapping");
                     m.MapLeftKey("UserId");
                     m.MapRightKey("GroupId");
-                });
-
-            this.HasMany(p => p.UserDelegates).WithRequired(p => p.Mandator).HasForeignKey(p => p.MandatorId);
-            this.HasMany(p => p.UserDelegates).WithRequired(p => p.Mandatary).HasForeignKey(p => p.MandataryId);
+                });           
 
             //this.Property(c => c.Name).IsRequired().HasMaxLength(400);
             //this.Property(c => c.UpdatedOnUtc).IsOptional();

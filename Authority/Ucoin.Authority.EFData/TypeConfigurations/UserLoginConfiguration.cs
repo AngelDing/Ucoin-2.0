@@ -8,6 +8,7 @@ namespace Ucoin.Authority.EFData.TypeConfigurations
         public UserLoginConfiguration()
         {
             this.ToTable("UserLogin");
+            this.HasKey(p => p.Id);
         }
     }
 }
