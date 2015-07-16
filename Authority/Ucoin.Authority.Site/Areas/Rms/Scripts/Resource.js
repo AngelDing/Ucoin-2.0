@@ -8,37 +8,40 @@ function viewModel() {
     var self = this;
     this.grid = {
         size: { w: 4, h: 40 },
-        url: '/api/sys/resource/getall',
+        url: '/Api/Rms/Resource/GetAll',
         idField: '_id',
         queryParams: ko.observable(),
-        treeField: 'MenuName',
+        treeField: 'Name',
         loadFilter: function (d) {
-            d = utils.copyProperty(d.rows || d, ["MenuCode", "IconClass"], ["_id", "iconCls"], false);
-            return utils.toTreeData(d, '_id', 'ParentCode', "children");
+            d = utils.copyProperty(d.rows || d, ["Id", "IconClass"], ["_id", "iconCls"], false);
+            return utils.toTreeData(d, '_id', 'ParentId', "children");
         } 
     };
+
     this.refreshClick = function () {
         window.location.reload();
     };
+
     this.addClick = function () {
         if (self.grid.onClickRow()) {
-            var row = { _id: utils.uuid(),MenuCode:'',MenuName:''};
+            var row = { _id: utils.uuid(), Id:'', Name:''};
             self.grid.treegrid('append', { parent: '', data: [row] });
             self.grid.treegrid('select', row._id);
             self.grid.$element().data("datagrid").insertedRows.push(row);
             self.editClick();
         }
     };
+
     this.editClick = function () {
         var row = self.grid.treegrid('getSelected');
         if (row) {
             //取得父节点数据
-            var treeData = JSON.parse(JSON.stringify(self.grid.treegrid('getData')).replace(/_id/g, "id").replace(/MenuName/g, "text"));
+            var treeData = JSON.parse(JSON.stringify(self.grid.treegrid('getData')).replace(/_id/g, "id").replace(/Name/g, "text"));
             treeData.unshift({ "id": 0, "text": "" });
 
             //设置上级菜单下拉树
             var gridOpt = $.data(self.grid.$element()[0], "datagrid").options;
-            var col = $.grep(gridOpt.columns[0], function (n) { return n.field == 'ParentCode' })[0];
+            var col = $.grep(gridOpt.columns[0], function (n) { return n.field == 'ParentId' })[0];
             col.editor = { type: 'combotree', options: { data: treeData } };
             col.editor.options.onBeforeSelect = function (node) {
                 var isChild = utils.isInChild(treeData, row._id, node.id);
@@ -54,6 +57,7 @@ function viewModel() {
             self.afterCreateEditors(edt);
         }
     };
+
     this.afterCreateEditors = function (editors) {
         var iconInput = editors("IconClass").target;
         var onShowPanel = function () {
@@ -82,10 +86,12 @@ function viewModel() {
         iconInput.lookup('resize', iconInput.parent().width());
         iconInput.lookup('textbox').unbind();
     };
+
     this.grid.OnBeforeDestroyEditor = function (editors, row) {
-        row.ParentName = editors['ParentCode'].target.combotree('getText');
+        row.ParentName = editors['ParentId'].target.combotree('getText');
         row.IconClass = editors["IconClass"].target.lookup('textbox').val();
     };
+
     this.deleteClick = function () {
         var row = self.grid.treegrid('getSelected');
         if (row) {
@@ -93,6 +99,7 @@ function viewModel() {
             self.grid.$element().data("datagrid").deletedRows.push(row);
         }
     };
+
     this.grid.onDblClickRow = self.editClick;
     this.grid.onClickRow = function () {
         var edit_id = self.edit_id;
@@ -108,13 +115,14 @@ function viewModel() {
         }
         return true;
     };
+
     this.saveClick = function () {
         self.grid.onClickRow();
         var post = {};
-        post.list = new com.editTreeGridViewModel(self.grid).getChanges(['_id', 'MenuName', 'MenuCode', 'ParentCode', 'IconClass', 'URL', 'IsVisible', 'IsEnable', 'MenuSeq']);
+        post.list = new com.editTreeGridViewModel(self.grid).getChanges(['_id', 'Name', 'Id', 'ParentId', 'IconClass', 'Url', 'IsVisible', 'IsEnable', 'Sequence']);
         if (self.grid.onClickRow() && post.list._changed) {
             com.ajax({
-                url: '/api/sys/menu/edit',
+                url: '/api/rms/resource/edit',
                 data: ko.toJSON(post),
                 success: function (d) {
                     com.message('success', '保存成功！');
@@ -123,11 +131,10 @@ function viewModel() {
                 }
             });
         }
-
     };
 }
 
-var setButton = function (MenuCode) {
+var setButton = function (resourceId) {
     com.dialog({
         title: "设置按钮",
         width: 555,
@@ -139,7 +146,7 @@ var setButton = function (MenuCode) {
             this.buttons = ko.observableArray();
             this.refresh = function () {
                 com.ajax({
-                    url: '/api/sys/menu/getmenubuttons/' + MenuCode,
+                    url: '/api/rms/resource/GetResourceButtons/' + resourceId,
                     type: 'GET',
                     async: false,
                     success: function (d) {
@@ -162,7 +169,7 @@ var setButton = function (MenuCode) {
                     return row.Selected() > 0;
                 }), ['ButtonCode']);
                 com.ajax({
-                    url: '/api/sys/menu/editmenubuttons/' + MenuCode,
+                    url: '/Api/Rms/Resource/EditResourceButtons/' + resourceId,
                     data: ko.toJSON(data),
                     success: function (d) {
                         com.message('success', '保存成功！');
@@ -183,7 +190,7 @@ var setButton = function (MenuCode) {
                             height: 340,
                             pagination: false,
                             pageSize: 10,
-                            url: "/api/sys/menu/getbuttons",
+                            url: "/Api/Rms/Resource/Getbuttons",
                             queryParams: ko.observable()
                         };
                         this.cancelClick = function () {

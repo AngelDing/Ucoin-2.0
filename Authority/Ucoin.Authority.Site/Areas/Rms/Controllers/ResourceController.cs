@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Ucoin.Authority.IServices;
 using Ucoin.Identity.DataObjects;
 
-namespace Ucoin.Authority.Site.Areas.Sys.Controllers
+namespace Ucoin.Authority.Site.Areas.Rms.Controllers
 {
     public class ResourceController : Controller
     {

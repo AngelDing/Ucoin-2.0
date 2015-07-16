@@ -7,7 +7,7 @@ namespace Ucoin.Authority.Site.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "XXX管理系统";
+            ViewBag.Title = "My System";
             ViewBag.UserName = "Jacky";
             ViewBag.Settings = GetCurrentUserSettings();
 

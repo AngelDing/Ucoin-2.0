@@ -2,7 +2,7 @@
 {
     <div region="north" class="head-north" split="true" border="false" style="height:66px;">
         <span class="head head-right">
-            <a href="javascript:void(0)" class="easyui-linkbutton swich_project" plain="true" title="切换项目" data-options="iconCls:'icon-flag_france'"></a>
+            @*<a href="javascript:void(0)" class="easyui-linkbutton swich_project" plain="true" title="切换项目" data-options="iconCls:'icon-flag_france'"></a>*@
             <a href="javascript:void(0)" class="easyui-menubutton" data-options="menu:'#mm_user',iconCls:'icon-user'">当前用户:@ViewBag.UserName</a>
             <div id="mm_user" style="width:150px;">
                 <div data-options="iconCls:'icon-rainbow'" class="myconfig">个人设置</div>
@@ -23,18 +23,20 @@ else
 {
     <div region="north" class="head-north" split="true" border="false">
         <div class="head head-right">
-            <a href="javascript:void(0)" class="easyui-linkbutton swich_project" plain="true" title="切换项目" data-options="iconCls:'icon-flag_france'"></a>
+           @*<a href="javascript:void(0)" class="easyui-linkbutton myHome" plain="true" data-options="iconCls:'icon-user_home'">我的桌面</a>*@
+           @* <a href="javascript:void(0)" class="easyui-linkbutton swich_project" plain="true" title="切换项目" data-options="iconCls:'icon-flag_france'"></a>*@
             <a href="javascript:void(0)" class="easyui-menubutton" data-options="menu:'#mm_user',iconCls:'icon-user'">当前用户:@ViewBag.UserName</a>
             <div id="mm_user" style="width:150px;">
                 <div data-options="iconCls:'icon-rainbow'" class="myconfig">个人设置</div>
                 <div data-options="iconCls:'icon-edit'" class="changepwd">修改密码</div>
-                <div class="menu-sep"></div>
-                <div data-options="iconCls:'icon-user_go'" class="loginOut">安全退出</div>
+                @*<div class="menu-sep"></div>
+                <div data-options="iconCls:'icon-user_go'" class="loginOut">安全退出</div>*@
             </div>
+            <a href="javascript:void(0)" class="easyui-linkbutton loginOut" plain="true" data-options="iconCls:'icon-user_go'">安全退出</a>
         </div>
-        <span class="head-left">
-            @*@ViewBag.Title*@
-        </span>
+        @*<span class="head-left">
+            @ViewBag.Title
+        </span>*@
 
     </div>
 

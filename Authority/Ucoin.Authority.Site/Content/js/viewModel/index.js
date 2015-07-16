@@ -3,17 +3,18 @@
 //设置
 wrapper.settings = {
     homeTabTitle: '我的桌面',
-    homeTabUrl: '/mms',
+    homeTabUrl: '/Sys',
     maxTabCount: 10
 };
 
 //初始化
 wrapper.init = function () {
-    com.ajax({ type: 'GET', url: 'api/sys/resource', success: wrapper.initMenu });
+    com.ajax({ type: 'GET', url: 'api/rms/resource', success: wrapper.initMenu });
     
     $('.loginOut').click(wrapper.logout);
     $('.changepwd').click(wrapper.changePassword);
     $('.myconfig').click(wrapper.mysettings);
+    //$('.myHome').click(wrapper.myHome);
     $('.swich_project').click(wrapper.changeProject).html("当前项目：" + com.cookie('CurrentProjectName'));
     $('#notity').jnotifyInizialize({ oneAtTime: true, appendType: 'append' }).css({ 'position': 'absolute', '*top': '2px', 'left': '50%', 'margin': '20px 0px 0px -120px', '*margin': '0px 0px 0px -120px', 'width': '240px', 'z-index': '9999' });
     $('#closeMenu').menu({ onClick: wrapper.rightMenuClick });
@@ -62,6 +63,10 @@ wrapper.changePassword = function () {
 wrapper.mysettings = function () {
     wrapper.addTab("个人设置", "/sys/config", "icon icon-wrench_orange");
 };
+
+//wrapper.myHome = function () {
+//    wrapper.addTab("我的桌面", "/MyHome", "icon icon-user_home");
+//};
 
 wrapper.changeProject = function () {
     var self = this;
@@ -131,7 +136,12 @@ wrapper.rightMenuClick = function (item) {
             break;
         case "close":
             var currtab_title = currentTab.panel('options').title;
-            $tab.tabs('close', currtab_title);
+            if (currtab_title == wrapper.settings.homeTabTitle) {
+                alert('不能关闭我的桌面!!');
+            }
+            else {
+                $tab.tabs('close', currtab_title);
+            }            
             break;
         case "closeall":
             $.each(titles, function () {

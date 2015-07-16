@@ -22,11 +22,24 @@ namespace Ucoin.Authority.Repositories
                     Id = 1,
                     AppId = 1,
                     Code = "001",
-                    Name = "資源管理",
+                    Name = "權限管理",
                     ParentId = 0,
                     Sequence = "001",
-                    Url = "sys/Resource",
-                    IsVisible = true
+                    Url = "#",
+                    IsVisible = true,
+                    IconClass = "icon-sysset",
+                },
+                new Resource
+                {
+                    Id = 2,
+                    AppId = 1,
+                    Code = "001",
+                    Name = "菜单导航",
+                    ParentId = 1,
+                    Sequence = "002",
+                    Url = "Rms/Resource",
+                    IsVisible = true,
+                    IconClass = "icon-chart_organisation",
                 }
             };
 
