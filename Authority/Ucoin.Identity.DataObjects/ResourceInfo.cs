@@ -13,7 +13,6 @@ namespace Ucoin.Identity.DataObjects
 
         public string IconClass { get; set; } 
 
-
         public string Url { get; set; }
 
         public bool IsVisible { get; set; }
