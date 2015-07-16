@@ -11,7 +11,8 @@ namespace Ucoin.Identity.DataObjects
 
         public string Code { get; set; }
 
-        public string IconClass { get; set; }
+        public string IconClass { get; set; } 
+
 
         public string Url { get; set; }
 
