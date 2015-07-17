@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Framework", "1.Framework", "{93384C3E-A6B6-4191-A2F7-425D66DE2523}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Log", "3.Log", "{2C33AC00-0212-4FA8-818C-5B502BCB4EF7}"
+	ProjectSection(SolutionItems) = preProject
+		TODO.txt = TODO.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "8.Tests", "8.Tests", "{77E2A99B-F19A-45D2-83A5-2FF165A85916}"
 EndProject
