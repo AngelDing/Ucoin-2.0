@@ -45,5 +45,45 @@ namespace Ucoin.Authority.Repositories
 
             return resourceList;
         }
+
+
+        public IEnumerable<ResourceAction> GetResourceActionsByResourceId(int resourceId)
+        {
+            var actionList = new List<ResourceAction>
+            {
+                new ResourceAction
+                {
+                    Id = 1,
+                    ActionId = 1,
+                    ResourceId = 2,
+                    Url = "Rms/Add",
+                    AccessControl = true,
+                    Action = new Action
+                    {
+                        Code = "add",
+                        IsPublic = true,
+                        Name = "新增",
+                        IconClass = "icon-add"
+                    }
+                },
+                new ResourceAction
+                {
+                    Id = 2,
+                    ActionId = 2,
+                    ResourceId = 2,
+                    Url = "Rms/Edit",
+                    AccessControl = true,
+                    Action = new Action
+                    {
+                        Code = "edit",
+                        IsPublic = true,
+                        Name = "編輯",
+                        IconClass = "icon-edit"
+                    }
+                }
+            };
+
+            return actionList;
+        }
     }
 }

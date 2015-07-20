@@ -145,7 +145,8 @@
     <Reference Include="Ucoin.Framework.SqlDb">
       <HintPath>..\..\Output\Ucoin.Framework.SqlDb.dll</HintPath>
     </Reference>
-    <Reference Include="Ucoin.Framework.Web">
+    <Reference Include="Ucoin.Framework.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Output\Ucoin.Framework.Web.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">

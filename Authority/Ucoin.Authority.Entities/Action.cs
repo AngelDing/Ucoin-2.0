@@ -5,7 +5,7 @@ using Ucoin.Framework.SqlDb.Entities;
 
 namespace Ucoin.Authority.Entities
 {
-    public class Action : EfEntity<int>, IAggregateRoot<int>, IOperateEntity<string>
+    public class Action : EfEntity<int>, IOperateEntity<string>
     {
         public string Code { get; set; }
 
@@ -14,6 +14,8 @@ namespace Ucoin.Authority.Entities
         public string IconClass { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsPublic { get; set; }
 
         public string Sequence { get; set; }
 

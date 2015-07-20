@@ -7,6 +7,8 @@ namespace Ucoin.Identity.DataObjects
 
         public int ParentId { get; set; }
 
+        public string ParentName { get; set; }
+
         public string Name { get; set; }
 
         public string Code { get; set; }

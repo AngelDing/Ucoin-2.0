@@ -1,9 +1,4 @@
-﻿/**
-* 模块名：mms viewModel
-* 程序名: menu.js
-* Copyright(c) 2013-2015 liuhuisheng [ liuhuisheng.xm@gmail.com ] 
-**/
- 
+﻿ 
 function viewModel() {
     var self = this;
     this.grid = {
@@ -24,7 +19,7 @@ function viewModel() {
 
     this.addClick = function () {
         if (self.grid.onClickRow()) {
-            var row = { _id: utils.uuid(), Id:'', Name:''};
+            var row = { _id: utils.uuid(), Code:'', Name:''};
             self.grid.treegrid('append', { parent: '', data: [row] });
             self.grid.treegrid('select', row._id);
             self.grid.$element().data("datagrid").insertedRows.push(row);
@@ -119,7 +114,7 @@ function viewModel() {
     this.saveClick = function () {
         self.grid.onClickRow();
         var post = {};
-        post.list = new com.editTreeGridViewModel(self.grid).getChanges(['_id', 'Name', 'Id', 'ParentId', 'IconClass', 'Url', 'IsVisible', 'IsEnable', 'Sequence']);
+        post.list = new com.editTreeGridViewModel(self.grid).getChanges(['_id', 'Name', 'Code', 'ParentId', 'IconClass', 'Url', 'IsVisible', 'IsEnable', 'Sequence']);
         if (self.grid.onClickRow() && post.list._changed) {
             com.ajax({
                 url: '/api/rms/resource/edit',
@@ -146,7 +141,7 @@ var setButton = function (resourceId) {
             this.buttons = ko.observableArray();
             this.refresh = function () {
                 com.ajax({
-                    url: '/api/rms/resource/GetResourceButtons/' + resourceId,
+                    url: '/Api/Rms/Resource/GetResourceActions/' + resourceId,
                     type: 'GET',
                     async: false,
                     success: function (d) {
@@ -167,9 +162,9 @@ var setButton = function (resourceId) {
             this.confirmClick = function () {
                 var data = utils.filterProperties($.grep(self.buttons(), function (row) {
                     return row.Selected() > 0;
-                }), ['ButtonCode']);
+                }), ['Id']);
                 com.ajax({
-                    url: '/Api/Rms/Resource/EditResourceButtons/' + resourceId,
+                    url: '/Api/Rms/Resource/EditResourceActions/' + resourceId,
                     data: ko.toJSON(data),
                     success: function (d) {
                         com.message('success', '保存成功！');
@@ -190,7 +185,7 @@ var setButton = function (resourceId) {
                             height: 340,
                             pagination: false,
                             pageSize: 10,
-                            url: "/Api/Rms/Resource/Getbuttons",
+                            url: '/Api/Rms/Resource/GetResourceActions/' + resourceId,
                             queryParams: ko.observable()
                         };
                         this.cancelClick = function () {
@@ -198,7 +193,7 @@ var setButton = function (resourceId) {
                         };
                         this.gridEdit = new com.editGridViewModel(this.grid);
                         this.grid.OnAfterCreateEditor = function (editors, row) {
-                            if (!row._isnew) com.readOnlyHandler('input')(editors["ButtonCode"].target, true);
+                            if (!row._isnew) com.readOnlyHandler('input')(editors["Code"].target, true);
                         };
                         this.grid.onClickRow = that.gridEdit.ended;
                         this.grid.onDblClickRow = that.gridEdit.begin;
@@ -209,9 +204,9 @@ var setButton = function (resourceId) {
                         ];
                         this.confirmClick = function () {
                             if (!that.gridEdit.isChangedAndValid()) return;
-                            var list = that.gridEdit.getChanges(['ButtonCode', 'ButtonName','ButtonIcon', 'ButtonSeq', 'Description']);
+                            var list = that.gridEdit.getChanges(['Id', 'Code', 'Name', 'IconClass', 'IsPublic', 'Sequence', 'Description']);
                             com.ajax({
-                                url: '/api/sys/menu/editbutton',
+                                url: '/Api/Rms/Resource/EditAction',
                                 data: ko.toJSON({ list: list }),
                                 success: function (d) {
                                     that.cancelClick();

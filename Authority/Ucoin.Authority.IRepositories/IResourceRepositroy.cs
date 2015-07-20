@@ -7,5 +7,7 @@ namespace Ucoin.Authority.IRepositories
     public interface IResourceRepositroy : IEfRepository<Resource, int>
     {
         IEnumerable<Resource> GetResourceListByUserName(string userName);
+
+        IEnumerable<ResourceAction> GetResourceActionsByResourceId(int resourceId);
     }
 }

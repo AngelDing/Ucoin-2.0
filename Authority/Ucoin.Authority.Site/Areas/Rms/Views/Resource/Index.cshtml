@@ -3,16 +3,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @section scripts{
     <script src="~/Areas/Rms/Scripts/Resource.js"></script>
     <script type="text/javascript">
         using("lookup", easyuifix.datagrid_editor_extend);
         ko.bindingViewModel(new viewModel());
         using(['validatebox', 'combotree', 'numberspinner'], easyuifix.datagrid_editor_extend);
-        var formatterEnable = function (value, row) { return '<img src="/Content/images/' + ((value || '').toString() == "true" ? "checkmark.gif" : "checknomark.gif") + '"/>'; };
-        var formatterParent = function (value, row) { return row.ParentName };
-        var formatterButton = function (value, row) { return (row.URL && row.URL != '#') ? '<a href="#" onclick="setButton(\'' + row.MenuCode + '\')"><span class="icon icon-set2">&nbsp;</span>[设置按钮]</a>' : ''; };
+        var formatterEnable = function (value, row) {
+            return '<img src="/Content/images/' + ((value || '').toString() == "true" ? "checkmark.gif" : "checknomark.gif") + '"/>';
+        };
+        var formatterParent = function (value, row) {
+            return row.ParentName
+        };
+        var formatterButton = function (value, row) {
+            return (row.Url && row.Url != '#') ? '<a href="#" onclick="setButton(\'' + row.Id + '\')"><span class="icon icon-set2">&nbsp;</span>[设置按钮]</a>' : '';
+        };
     </script>
 }
 <div class="z-toolbar">
@@ -27,15 +32,15 @@
     <thead>
         <tr>
             <th field="_id" hidden="true"></th>
-            <th field="Name" align="left" width="150" editor="{type:'validatebox',options:{required: true }}">菜单名称   </th>
-            <th field="Code" align="left" width="80" editor="{type:'validatebox',options:{required: true }}">编码   </th>
-            <th field="ParentId" align="left" width="150" editor="combotree" formatter="formatterParent">上级菜单   </th>
-            <th field="IconClass" align="left" width="180" editor="{type:'lookup'}">图标     </th>
-            <th field="Url" align="left" width="180" editor="text">链接地址   </th>
+            <th field="Name" align="left" width="150" editor="{type:'validatebox',options:{required: true }}">菜单名称</th>
+            <th field="Code" align="left" width="80" editor="{type:'validatebox',options:{required: true }}">编码</th>
+            <th field="ParentId" align="left" width="150" editor="combotree" formatter="formatterParent">上级菜单</th>
+            <th field="IconClass" align="left" width="180" editor="{type:'lookup'}">图标</th>
+            <th field="Url" align="left" width="180" editor="text">链接地址</th>
             <th field="IsVisible" align="center" width="60" editor="{type: 'checkbox',options: {on: true,off: false}}" formatter="formatterEnable">是否可见</th>
             <th field="IsEnable" align="center" width="60" editor="{type: 'checkbox',options: {on: true,off: false}}" formatter="formatterEnable">是否启用</th>
             <th field="Sequence" align="right" width="50" editor="text">排序</th>
-            <th field="Button" align="center" width="100" formatter="formatterButton">页面按钮 </th>
+            <th field="Button" align="center" width="100" formatter="formatterButton">页面按钮</th>
         </tr>
     </thead>
 </table>
@@ -48,23 +53,23 @@
                 margin: 0 !important;
             }
 
-                .listview li {
-                    width: 100px !important;
-                    background-color: #ECECFF !important;
-                    float: left;
-                    margin: 3px;
-                    overflow: hidden;
-                }
+            .listview li {
+                width: 100px !important;
+                background-color: #ECECFF !important;
+                float: left;
+                margin: 3px;
+                overflow: hidden;
+            }
 
-                .listview span {
-                    font-size: 14px !important;
-                    height: auto !important;
-                    white-space: nowrap;
-                }
+            .listview span {
+                font-size: 14px !important;
+                height: auto !important;
+                white-space: nowrap;
+            }
 
-                .listview .icon:before {
-                    content: "" !important;
-                }
+            .listview .icon:before {
+                content: "" !important;
+            }
         </style>
 
         <div style="border-bottom:1px solid #CCC; margin-bottom:5px;">
@@ -80,7 +85,7 @@
                 管理按钮库
             </button>
             <ul class="listview" data-bind="foreach: buttons" style="clear:both">
-                <li data-bind="click:$parent.buttonClick,css:{selected:Selected()>0}"><span class="icon" data-bind="text:ButtonName,css:ButtonIcon"></span></li>
+                <li data-bind="click:$parent.buttonClick,css:{selected:Selected()>0}"><span class="icon" data-bind="text:Name,css:IconClass"></span></li>
             </ul>
         </div>
 
@@ -104,11 +109,15 @@
 
     <table data-bind="datagrid:grid">
         <thead>
-        <th field="ButtonCode" align="left" editor="{type:'validatebox',options:{required:true}}" width="80">编码   </th>
-        <th field="ButtonName" align="left" editor="{type:'validatebox',options:{required:true}}" width="70">名称   </th>
-        <th field="ButtonIcon" align="left" editor="{type:'validatebox',options:{required:true}}" width="120">图标   </th>
-        <th field="ButtonSeq" align="left" editor="text" width="50">排序   </th>
-        <th field="Description" align="left" editor="text" width="200">备注说明   </th>
+            <tr>
+                <th field="Id" hidden="true"></th>
+                <th field="Code" align="left" editor="{type:'validatebox',options:{required:true}}" width="80">编码</th>
+                <th field="Name" align="left" editor="{type:'validatebox',options:{required:true}}" width="70">名称</th>
+                <th field="IconClass" align="left" editor="{type:'validatebox',options:{required:true}}" width="120">图标</th>
+                <th field="IsPublic" align="left" editor="{type: 'checkbox',options: {on: true,off: false}}" width="100">是否公共</th>
+                <th field="Sequence" align="left" editor="text" width="50">排序</th>
+                <th field="Description" align="left" editor="text" width="100">备注说明</th>
+            </tr>
         </thead>
     </table>
 

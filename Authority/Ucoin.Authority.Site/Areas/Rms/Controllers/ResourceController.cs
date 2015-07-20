@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
 using Ucoin.Authority.IServices;
@@ -26,11 +27,11 @@ namespace Ucoin.Authority.Site.Areas.Rms.Controllers
             this.resourceService = resourceService;
         }
 
-        // GET api/menu
-        public IEnumerable<dynamic> Get()
+        public async Task<IHttpActionResult> Get()
         {
             var userName = this.User.Identity.Name;
-            return resourceService.GetResourceListByUserName(userName);
+            var result = await resourceService.GetResourceListByUserName(userName);
+            return Json(result);
         }
 
 //        // GET api/menu
@@ -41,9 +42,9 @@ namespace Ucoin.Authority.Site.Areas.Rms.Controllers
 //        }
 
         // GET api/menu
-        public IEnumerable<dynamic> GetAll()
+        public async Task<IHttpActionResult> GetAll()
         {
-            return resourceService.GetResourceListByUserName(string.Empty);
+            return await this.Get();
         }
 
 //        /// <summary>
@@ -70,10 +71,12 @@ namespace Ucoin.Authority.Site.Areas.Rms.Controllers
 //            service.Logger("api/mms/send", "菜单数据", "修改", data);
 //        }
 
-//        public IEnumerable<dynamic> GetMenuButtons(string id)
-//        {
-//            return new sys_menuService().GetMenuButtons(id);
-//        }
+        public async Task<IHttpActionResult> GetResourceActions(int id)
+        {
+            var result = await resourceService.GetResourceActionsByResourceId(id);
+
+            return Json(result);
+        }
 
 //        public IEnumerable<dynamic> GetButtons()
 //        {

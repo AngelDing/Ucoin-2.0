@@ -8,7 +8,7 @@ namespace Ucoin.Authority.EFData.TypeConfigurations
         public ActionConfiguration()
         {
             this.ToTable("Action");
-            this.HasMany(p => p.ResourceActions).WithRequired(p => p.Button).HasForeignKey(p => p.ActionId);
+            this.HasMany(p => p.ResourceActions).WithRequired(p => p.Action).HasForeignKey(p => p.ActionId);
         }
     }
 }

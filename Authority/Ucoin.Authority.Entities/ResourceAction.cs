@@ -14,6 +14,6 @@ namespace Ucoin.Authority.Entities
 
         public virtual Resource Resource { get; set; }
 
-        public virtual Action Button { get; set; }
+        public virtual Action Action { get; set; }
     }
 }
