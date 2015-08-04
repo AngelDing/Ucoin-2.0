@@ -17,7 +17,7 @@ namespace Ucoin.Framework.Cache
         private readonly IRedisWrapper redisWrapper;
 
         public RedisCache()
-            : this(Serializer.Jil)
+            : this(SerializationHelper.Jil)
         { 
         }
 

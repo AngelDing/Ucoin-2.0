@@ -1,47 +1,35 @@
 ﻿using Jil;
 using System;
-using System.Threading.Tasks;
 
 namespace Ucoin.Framework.Serialization
 {
-	public class JilSerializer : ISerializer
-	{
-        public object Serialize(object item)
+    /// <summary>
+    /// 1.不支持循環引用；
+    /// 2.集合不支持ICollection，但支持IList
+    /// </summary>
+    public class JilSerializer : BaseSerializer<JilSerializer>,ISerializer
+	{     
+        internal override SerializationFormat GetSerializationFormat()
         {
-            var jsonString = JSON.Serialize(item, new Options(includeInherited: true));
-            return jsonString;
+            return SerializationFormat.Jil;
         }
 
-        public Task<object> SerializeAsync(object item)
-		{
-			return Task.Factory.StartNew(() => Serialize(item));
-		}
-
-        public object Deserialize(object serializedObject, Type type)
-		{
-            var jsonString = serializedObject.ToString();
-            return JSON.Deserialize(jsonString, type);
-		}
-
-        public Task<object> DeserializeAsync(object serializedObject, Type type)
-		{
-			return Task.Factory.StartNew(() => Deserialize(serializedObject, type));
-		}
-
-        public T Deserialize<T>(object serializedObject)
-		{
-            var jsonString = serializedObject.ToString();
-			return JSON.Deserialize<T>(jsonString);
-		}
-
-        public Task<T> DeserializeAsync<T>(object serializedObject)
-		{
-			return Task.Factory.StartNew(() => Deserialize<T>(serializedObject));
-		}
-
-        public SerializationFormat Format
+        internal override object DoSerialize(object item)
         {
-            get { return SerializationFormat.Jil; }
+            var result = JSON.Serialize(item, new Options(includeInherited: true));
+            return result;
+        }
+
+        internal override T DoDeserialize<T>(object serializedObject)
+        {
+            var result = serializedObject.ToString();
+            return JSON.Deserialize<T>(result);
+        }
+
+        internal override object DoDeserialize(object serializedObject, Type type)
+        {
+            var result = serializedObject.ToString();
+            return JSON.Deserialize(result, type);
         }
     }
 }

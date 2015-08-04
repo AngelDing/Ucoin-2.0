@@ -1,72 +1,61 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Ucoin.Framework.Serialization
 {
-    public class XmlSerializer : ISerializer
-    {
-        public SerializationFormat Format
+    /// <summary>
+    /// 1.不支持循環引用；
+    /// 2.不支持IList,ICollection等接口，但支持List；
+    /// 3.不支持TimeSpan數據類型；
+    /// </summary>
+    public class XmlSerializer : BaseSerializer<XmlSerializer>, ISerializer
+    {      
+        internal override SerializationFormat GetSerializationFormat()
         {
-            get { return SerializationFormat.Xml; }
+            return SerializationFormat.Xml;
         }
 
-        public object Serialize(object input)
+        internal override object DoSerialize(object item)
         {
-            if (null == input)
+            var result = string.Empty;
+            if (null == item)
             {
-                return string.Empty;
+                return result;
             }
 
-            try
+            var xmlSer = new System.Xml.Serialization.XmlSerializer(item.GetType());
+            using (var ms = new MemoryStream())
             {
-                using (var ms = new MemoryStream())
-                {
-                    var xmlSer = new System.Xml.Serialization.XmlSerializer(input.GetType());
-                    xmlSer.Serialize(ms, input);
-                    var res = Encoding.UTF8.GetString(ms.ToArray());
-                    return res;
-                }
+                xmlSer.Serialize(ms, item);
+                result = Encoding.UTF8.GetString(ms.ToArray());
             }
-            catch
-            {
-                return string.Empty;
-            }
+
+            return result;
         }
 
-        public T Deserialize<T>(object input)
+        internal override T DoDeserialize<T>(object serializedObject)
         {
-            T res = default(T);
-            var obj = GetObject(input, typeof(T));
+            T result = default(T);
+            var obj = DoDeserialize(serializedObject, typeof(T));
             if (null != obj)
             {
-                res = (T)obj;
+                result = (T)obj;
             }
-            return res;
+            return result;
         }
 
-        public object Deserialize(object input, Type type)
+        internal override object DoDeserialize(object serializedObject, Type type)
         {
-            return GetObject(input, type);
-        }
-
-        private object GetObject(object input, Type type)
-        {
-            try
-            {
-                object res = null;
-                var bytes = Encoding.UTF8.GetBytes(input.ToString());
-                using (var stream = new MemoryStream(bytes))
-                {
-                    var xmlSer = new System.Xml.Serialization.XmlSerializer(type);
-                    res = xmlSer.Deserialize(stream);
-                }
-                return res;
+            object result = null;
+            var bytes = Encoding.UTF8.GetBytes(serializedObject.ToString());
+            var xmlSer = new System.Xml.Serialization.XmlSerializer(type);
+            using (var stream = new MemoryStream(bytes))
+            {               
+                result = xmlSer.Deserialize(stream);
             }
-            catch
-            {
-                return null;
-            }
+            return result;
         }
     }
 }

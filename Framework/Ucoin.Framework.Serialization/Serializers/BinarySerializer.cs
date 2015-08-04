@@ -4,53 +4,49 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Ucoin.Framework.Serialization
 {
-    public class BinarySerializer : ISerializer
+    /// <summary>
+    /// 支持循環引用
+    /// </summary>
+    public class BinarySerializer : BaseSerializer<BinarySerializer>, ISerializer
     {
-        public SerializationFormat Format
+        internal override SerializationFormat GetSerializationFormat()
         {
-            get { return SerializationFormat.Binary; }
+            return SerializationFormat.Binary;
         }      
 
-        public object Serialize(object value)
+        internal override object DoSerialize(object value)
         {
-            byte[] serialized;
+            byte[] result;
             var formatter = new BinaryFormatter();
             using (var stream = new MemoryStream())
             {
                 formatter.Serialize(stream, value);
                 stream.Flush();
-                serialized = stream.ToArray();
+                result = stream.ToArray();
             }
-            return serialized;
+            return result;
         }
 
-        public object Deserialize(object serializedValue, Type type)
+        internal override T DoDeserialize<T>(object serializedObject)
         {
-            try
-            {
-                object deserialized;
-                var formatter = new BinaryFormatter();
-                using (var stream = new MemoryStream(serializedValue as byte[]))
-                {
-                    deserialized = formatter.Deserialize(stream);
-                }
-                return deserialized;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public T Deserialize<T>(object input)
-        {
-            T res = default(T);
-            var obj = Deserialize(input, typeof(T));
+            T result = default(T);
+            var obj = Deserialize(serializedObject, typeof(T));
             if (null != obj)
             {
-                res = (T)obj;
+                result = (T)obj;
             }
-            return res;
+            return result;
+        }
+
+        internal override object DoDeserialize(object serializedObject, Type type)
+        {
+            object result;
+            var formatter = new BinaryFormatter();
+            using (var stream = new MemoryStream(serializedObject as byte[]))
+            {
+                result = formatter.Deserialize(stream);
+            }
+            return result;
         }
     }
 }

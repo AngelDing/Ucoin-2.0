@@ -12,7 +12,7 @@ namespace Ucoin.Framework.Cache
             container.Register<CacheManager<StaticCache>>(
                 () => new CacheManager<StaticCache>(t => { return new StaticCache(); }));
             container.Register<CacheManager<RedisCache>>(
-                () => new CacheManager<RedisCache>(t => { return new RedisCache(Serializer.Jil);}));
+                () => new CacheManager<RedisCache>(t => { return new RedisCache(SerializationHelper.Jil);}));
         }
     }
 }

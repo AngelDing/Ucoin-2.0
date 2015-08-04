@@ -1,55 +1,39 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Ucoin.Framework.Serialization
 {
-    public class JsonSerializer : ISerializer
+    /// <summary>
+    /// 支持循環引用
+    /// </summary>
+    public class JsonSerializer : BaseSerializer<JsonSerializer>, ISerializer
     {
-        public SerializationFormat Format
+        internal override object DoDeserialize(object serializedObject, Type type)
         {
-            get { return SerializationFormat.Json; }
+            return JsonConvert.DeserializeObject(serializedObject.ToString(), GetSettings());
         }
 
-        public object Serialize(object input)
+        internal override T DoDeserialize<T>(object serializedObject)
         {
-            try
-            {
-                return JsonConvert.SerializeObject(input, GetSettings());
-            }
-            catch
-            {
-                return string.Empty;
-            }
+            return JsonConvert.DeserializeObject<T>(serializedObject.ToString(), GetSettings());
         }
 
-        public T Deserialize<T>(object input)
+        internal override object DoSerialize(object item)
         {
-            try
-            {
-                return JsonConvert.DeserializeObject<T>(input.ToString(), GetSettings());
-            }
-            catch
-            {
-                return default(T);
-            }
+            return JsonConvert.SerializeObject(item, GetSettings());
         }
 
-        public object Deserialize(object input, System.Type type)
+        internal override SerializationFormat GetSerializationFormat()
         {
-            try
-            {
-                return JsonConvert.DeserializeObject(input.ToString(), GetSettings());
-            }
-            catch
-            {
-                return null;
-            }
+            return SerializationFormat.Json;
         }
 
         private static JsonSerializerSettings GetSettings()
         {
             var settings = new JsonSerializerSettings();
             settings.Converters = new JsonConverter[] { new StringEnumConverter() };
+            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             return settings;
         }
     }

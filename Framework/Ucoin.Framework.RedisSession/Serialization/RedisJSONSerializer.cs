@@ -13,7 +13,7 @@ namespace Ucoin.Framework.RedisSession
         private readonly ISerializer innerSerializer;
         public RedisJsonSerializer()
         {
-            innerSerializer = Serializer.Jil;
+            innerSerializer = SerializationHelper.Jil;
         }
 
         private static ConcurrentDictionary<string, Type> TypeCache = new ConcurrentDictionary<string, Type>();

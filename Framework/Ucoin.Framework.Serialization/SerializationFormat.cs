@@ -30,7 +30,19 @@ namespace Ucoin.Framework.Serialization
 
         /// <summary>
         /// Jil serialization
+        /// https://github.com/kevin-montrose/Jil
         /// </summary>
-        Jil 
+        Jil,
+
+        /// <summary>
+        /// MsgPack serialization
+        /// https://github.com/msgpack/msgpack-cli
+        /// </summary>
+        MsgPack,
+
+        /// <summary>
+        /// ProtoBuf serialization
+        /// </summary>
+        ProtoBuf,
     }
 }

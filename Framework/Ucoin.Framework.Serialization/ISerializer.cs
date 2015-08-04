@@ -9,14 +9,14 @@
 
         object Serialize(object item);
 
-        //Task<object> SerializeAsync(object item);
+        Task<object> SerializeAsync(object item);
 
         T Deserialize<T>(object serializedObject);
 
-        //Task<T> DeserializeAsync<T>(object serializedObject);
+        Task<T> DeserializeAsync<T>(object serializedObject);
 
         object Deserialize(object serializedObject, Type type);
 
-        //Task<object> DeserializeAsync(object serializedObject, Type type);
+        Task<object> DeserializeAsync(object serializedObject, Type type);
     }
 }

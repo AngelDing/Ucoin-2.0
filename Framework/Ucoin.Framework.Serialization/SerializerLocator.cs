@@ -1,5 +1,4 @@
-﻿
-using Ucoin.Framework.Dependency;
+﻿using Ucoin.Framework.Dependency;
 
 namespace Ucoin.Framework.Serialization
 {
@@ -11,6 +10,8 @@ namespace Ucoin.Framework.Serialization
             container.Register<XmlSerializer>(() => new XmlSerializer());
             container.Register<BinarySerializer>(() => new BinarySerializer());
             container.Register<JilSerializer>(() => new JilSerializer());
+            container.Register<MsgPackSerializer>(() => new MsgPackSerializer());
+            container.Register<ProtoBufSerializer>(() => new ProtoBufSerializer());            
         }
     }
 }

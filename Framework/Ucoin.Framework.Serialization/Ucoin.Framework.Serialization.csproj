@@ -33,9 +33,16 @@
     <Reference Include="Jil">
       <HintPath>..\..\DLL\Jil\Jil.dll</HintPath>
     </Reference>
+    <Reference Include="MsgPack, Version=0.5.0.0, Culture=neutral, PublicKeyToken=a2625990d5dc0167, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\MsgPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\DLL\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="Sigil">
       <HintPath>..\..\DLL\Jil\Sigil.dll</HintPath>
@@ -48,16 +55,23 @@
     <Compile Include="ISerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializationFormat.cs" />
-    <Compile Include="Serializer.cs" />
+    <Compile Include="SerializationHelper.cs" />
     <Compile Include="SerializerExtensions.cs" />
     <Compile Include="SerializerLocator.cs" />
+    <Compile Include="Serializers\BaseSerializer.cs" />
     <Compile Include="Serializers\BinarySerializer.cs" />
     <Compile Include="Serializers\JilSerializer.cs" />
     <Compile Include="Serializers\JsonSerializer.cs" />
+    <Compile Include="Serializers\MsgPackSerializer.cs" />
     <Compile Include="Serializers\NullSerializer.cs" />
+    <Compile Include="Serializers\ProtoBufSerializer.cs" />
     <Compile Include="Serializers\XmlSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ucoin.Framework.Log\Ucoin.Framework.Logging.csproj">
+      <Project>{1c70a165-5326-41a9-84fd-2fdb51819401}</Project>
+      <Name>Ucoin.Framework.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ucoin.Framework\Ucoin.Framework.csproj">
       <Project>{536e2ac2-be9c-4cd6-b64c-bf3a719594be}</Project>
       <Name>Ucoin.Framework</Name>

@@ -2,24 +2,24 @@
 
 namespace Ucoin.Framework.Serialization
 {
-    public class NullSerializer : ISerializer
-    {
-        public SerializationFormat Format
+    public class NullSerializer : BaseSerializer<NullSerializer>, ISerializer
+    {       
+        internal override SerializationFormat GetSerializationFormat()
         {
-            get { return SerializationFormat.Null; }
+            return SerializationFormat.Null;
         }
 
-        public object Serialize(object input)
+        internal override object DoSerialize(object item)
         {
-            return null; ;
+            return null;
         }
 
-        public T Deserialize<T>(object input)
+        internal override T DoDeserialize<T>(object serializedObject)
         {
             return default(T);
         }
 
-        public object Deserialize(object input, Type type)
+        internal override object DoDeserialize(object serializedObject, Type type)
         {
             return null;
         }
