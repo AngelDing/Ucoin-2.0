@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Collections.Generic;
 using Ucoin.Conference.Admin.Resolver;
 using Ucoin.Framework.Web;
+using Ucoin.Framework.Web.Resolver;
 
 namespace Ucoin.Conference.Admin
 {
@@ -20,7 +21,7 @@ namespace Ucoin.Conference.Admin
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            DependencyResolver.SetResolver(new UnityResolver(Container.InitUnityContainer()));
+            DependencyResolver.SetResolver(new UnityMvcResolver(Container.InitUnityContainer()));
             ModelBinders.Binders.DefaultBinder = new DefaultModelBinder();
         }
 
