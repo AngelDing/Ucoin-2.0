@@ -16,7 +16,7 @@ namespace Ucoin.Framework.Test
         public EFCustomer GetCustomFullInfo(int id)
         {
             var db = DbContext as EFTestContext;
-            var customer = db.EFCustomer
+            var customer = db.EFCustomer.AsNoTracking()
                 .Where(p => p.Id == id)
                 .Include(p => p.EFNote.Select(c => c.ChildNote))
                 //.IncludeExpand(p => p.EFNote)

@@ -308,6 +308,8 @@ namespace Ucoin.Framework.Test
             using (var repo = new CustomerRepository())
             {
                 cInfo = repo.GetCustomFullInfo(1);
+                var all = repo.GetAll();
+                all.Count().Should().Be(1);
             }
             cInfo.Email.Should().Be("jacky@ucoin.com");
             var address = cInfo.Address;
