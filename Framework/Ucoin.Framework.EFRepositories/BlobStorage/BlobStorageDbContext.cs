@@ -9,7 +9,7 @@ namespace Ucoin.Framework.SqlDb.BlobStorage
         public const string SchemaName = "BlobStorage";
 
         public BlobStorageDbContext()
-            : base("Conference")
+            : base("ConferenceUcoin")
         {
         }
      

@@ -11,7 +11,7 @@ namespace Ucoin.Conference.EfData
         public const string RegistrationProcessesSchemaName = "ConferenceRegistrationProcesses";
 
         public ConferenceContext()
-            : base("Conference")
+            : base("ConferenceUcoin")
         {
         }
 

@@ -11,7 +11,8 @@ namespace Ucoin.Conference.Admin
     {
         public static void Initialize()
         {
-            Database.SetInitializer<ConferenceContext>(null);
+            //Database.SetInitializer<ConferenceContext>(null);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ConferenceContext, Configuration>());
         }
     }
 }

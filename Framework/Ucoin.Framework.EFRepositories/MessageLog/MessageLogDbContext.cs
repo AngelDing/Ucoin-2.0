@@ -7,7 +7,7 @@
         public const string SchemaName = "MessageLog";
 
         public MessageLogDbContext()
-            : base("Conference")
+            : base("ConferenceUcoin")
         {
         }
 

@@ -13,7 +13,7 @@
         public const string SchemaName = "Events";
 
         public EventStoreDbContext()
-            : base("Conference")
+            : base("ConferenceUcoin")
         {
         }
 

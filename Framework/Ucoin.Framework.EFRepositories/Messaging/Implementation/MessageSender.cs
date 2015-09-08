@@ -18,7 +18,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Implementation
 
         public MessageSender(string schemaName, string tableName)
         {
-            this.connectionFactory = new CustomConnectionFactory("localhost", "Conference");
+            this.connectionFactory = new CustomConnectionFactory("localhost", "ConferenceUcoin");
             this.schemaName = schemaName;
             this.insertQuery = string.Format("INSERT INTO {0} (Body, DeliveryDate, CorrelationId) VALUES (@Body, @DeliveryDate, @CorrelationId)", tableName);
         }

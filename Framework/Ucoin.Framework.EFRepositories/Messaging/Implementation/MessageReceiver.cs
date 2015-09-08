@@ -26,7 +26,7 @@ namespace Ucoin.Framework.SqlDb.Messaging.Implementation
 
         public MessageReceiver(string schemaName, string tableName, TimeSpan pollDelay)
         {
-            this.connectionFactory = new CustomConnectionFactory("localhost", "Conference");
+            this.connectionFactory = new CustomConnectionFactory("localhost", "ConferenceUcoin");
             this.schemaName = schemaName;
             this.pollDelay = pollDelay;
 

@@ -11,9 +11,10 @@ namespace Ucoin.Conference.Admin.Controllers
     {
         public ActionResult Index()
         {
-            this.ResetCounts();
+            return View();
+            //this.ResetCounts();
 
-            return View("TestView", this.GetModel());
+            //return View("TestView", this.GetModel());
         }
 
         public ActionResult IncrementCounts()

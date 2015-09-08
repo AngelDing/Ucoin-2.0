@@ -19,7 +19,7 @@
         }
 
         [BsonConstructor]
-        public OrderSeats(Guid assignmentsId, Guid orderId, IEnumerable<OrderSeat> seats)
+        public OrderSeats(Guid assignmentsId, Guid orderId, IList<OrderSeat> seats)
         {
             this.AssignmentsId = assignmentsId;
             this.OrderId = orderId;

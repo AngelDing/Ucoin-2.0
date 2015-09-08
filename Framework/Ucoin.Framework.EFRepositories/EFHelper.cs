@@ -69,17 +69,20 @@ namespace Ucoin.Framework.SqlDb
             where TEntity : BaseEntity
         {
             context.Set(root.GetType()).Add(root);
-            CheckForEntitiesWithoutStateInterface(context);
+            //CheckForEntitiesWithoutStateInterface(context);
 
-            foreach (var entry in context.ChangeTracker.Entries<IObjectWithState>())
-            {
-                var stateInfo = entry.Entity;
-                entry.State = ConvertState(stateInfo.ObjectState);
-            }
+            //foreach (var entry in context.ChangeTracker.Entries<IObjectWithState>())
+            //{
+            //    var stateInfo = entry.Entity;
+            //    entry.State = ConvertState(stateInfo.ObjectState);
+            //}
 
-            foreach (var entry in context.ChangeTracker.Entries<BaseEntity>())
+            var entries = context.ChangeTracker.Entries<BaseEntity>().ToList();
+            foreach (var entry in entries)
             {
                 var entity = entry.Entity;
+                entry.State = ConvertState(entity.ObjectState);
+
                 if (entity.IsPartialUpdate)
                 {
                     var type = entity.GetType();
